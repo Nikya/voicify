@@ -102,7 +102,6 @@ def parle(player):
             tts.save(filenamemp3)
             song = AudioSegment.from_mp3(filenamemp3)
         elif sys.argv[11]== 'voxygen':
-            print 'TEST1'
             mp3file = requests.get('http://www.voxygen.fr/sites/all/modules/voxygen_voices/assets/proxy/index.php?method=redirect&text='+sys.argv[7]+'&voice='+sys.argv[12]+'&ts=14030902642', stream=True)
             output = open(filenamemp3,'wb')
             output.write(mp3file.content)
@@ -115,10 +114,7 @@ def parle(player):
             jinglename=os.path.join(jinglepath,sys.argv[10]+'.mp3')
             jingle= AudioSegment.from_mp3(jinglename)
             songmodified = jingle+song
-        
-        print 'TEST3'
         songmodified.export(filenamemp3, format="mp3", bitrate="128k", tags={'albumartist': 'Jeedom', 'title': 'TTS', 'artist':'Jeedom'}, parameters=["-ar", "44100","-vol", "1200"])
-    print 'TEST4'
     song = AudioSegment.from_mp3(filenamemp3)
     songtime=song.duration_seconds
     urltoplay=sys.argv[8]+'/sandbox/tmp/cache/'+file+'.mp3'
