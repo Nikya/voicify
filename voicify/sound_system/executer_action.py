@@ -167,10 +167,6 @@ def lireplaylist(player):
 def lireurl(player):
     result=p.playlist_play(sys.argv[7])
     return result
-
-def test(player):
-    result=player.playlist_resume('tempplaylist_3085a93fcc20')
-    return result
     
 results={}
 actions = {"play" : lecture,
