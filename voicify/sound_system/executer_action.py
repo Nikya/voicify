@@ -106,7 +106,6 @@ def parle(player):
             output = open(filenamemp3,'wb')
             output.write(mp3file.content)
             output.close()
-            print 'TEST2'
             song = AudioSegment.from_mp3(filenamemp3)
         if sys.argv[10] == 'nojingle':
             songmodified=song
