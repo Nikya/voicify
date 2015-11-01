@@ -1,4 +1,5 @@
 <?php
+if (!extension_loaded('intl')) trigger_error("Internationalization extension not available see http://php.net/manual/fr/intl.installation.php.", E_USER_WARNING);
 require_once('phrase_system/PhraseBuilder.php');
 
 /** To generate a notification speaked sound */
@@ -33,7 +34,7 @@ class Voicify {
 	}
 
 	////////////////////////////////////////////////////////////////////////////
-	/** Chargement des fichier de config et texte */
+	/** Chargement des fichiers de config et texte */
 	private function loadconfig() {
 		$this->confArray = parse_ini_file(SELF::DIR_CONF_GLOBAL, true);
 		$this->textArray = parse_ini_file(SELF::DIR_CONF_TXT, true);
@@ -53,22 +54,25 @@ class Voicify {
 	}
 
 	////////////////////////////////////////////////////////////////////////////
+	/** To get last generated text */
+	public function getLastText() {
+		return $this->tts;
+	}
+
+	////////////////////////////////////////////////////////////////////////////
 	/** To generate the sound */
 	public function process () {
 		$this->tts = PhraseBuilder::generate($this->textArray, $this->voicekey, $this->vars);
 
 		//   ./executer_action.py 192.168.1.2 9090 0 0 94:de:80:72:23:f6  parle "Je suis ton paire. la force soit avec toi coucou bouh" http://192.168.1.2 100 dingdong google fr
+		$cmd = "./voicify/sound_system/executer_action.py 192.168.1.2 9090 0 0 {$this->confArray['squeezplayermac']} parle \"{$this->tts}\" http://192.168.1.2 100 {$this->confArray['jingle']} {$this->confArray['engine']} {$this->confArray['params']}";
+		$cmd .= " 2>&1"; // To get Error also
 
-		$cmd = "./executer_action.py 192.168.1.2 9090 0 0 {$this->confArray['squeezplayermac']} parle \"{$this->tts}\" http://192.168.1.2 100 {$this->confArray['jingle']} {$this->confArray['engine']} {$this->confArray['params']}";
-
-		echo "<p><b>TTS </b>: $this->tts </p>";
-		echo "<p><b>Command to process </b>: $cmd </p>";
-
-		$output;
-		$return_var;
 		$res = exec ($cmd, $output, $return_var);
 
-		echo "<p><b>Response </b>: $res : $return_var</p>";
-		echo print_r($output);
+		if ($return_var!=0) {
+			$foutput = print_r($output, true);
+			throw new Exception("Fail to process the sound commande : $cmd \n $foutput", 1);
+		}
 	}
 }
