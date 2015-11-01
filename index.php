@@ -46,7 +46,7 @@
 	if (!isset($_GET['voicekey']) or empty($_GET['voicekey']))
 		echo 'Nothing to say !';
 	else {
-		require_once('./voicify/Voicify.php');
+		require_once('./voicifyCore/Voicify.php');
 
 		$v = new voicify($_GET['voicekey']);
 		// $v->setEngine();
