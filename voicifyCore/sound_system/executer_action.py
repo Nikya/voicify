@@ -22,11 +22,11 @@ def eteint(player):
 def allume(player):
     result=player.set_power_state(1)
     return result
-    
+
 def lecture(player):
     result=player.play()
     return result
-    
+
 def pause(player):
     result=player.pause()
     return result
@@ -76,7 +76,7 @@ def desync(player):
     if sys.argv[7]=='true':
        player.set_power_state(0)
     return result
- 
+
 def parle(player):
     cachepath=os.path.abspath(os.path.join(os.path.join(os.path.dirname(os.path.dirname(__file__)), 'tmp'), 'cache'))
     tmppath=os.path.abspath(os.path.join(os.path.dirname(os.path.dirname(__file__)), 'tmp'))
@@ -149,7 +149,7 @@ def lireartist(player):
     resultat=s.search(sys.argv[7],'artists')
     result=p.playlist_play_artist(resultat[1][7:])
     return result
-    
+
 def lirealbum(player):
     resultat=s.search(sys.argv[7],'albums')
     result=p.playlist_play_album(resultat[1][6:])
@@ -158,7 +158,7 @@ def lirealbum(player):
 def liregenre(player):
     result=p.playlist_play_genre(sys.argv[7])
     return result
-    
+
 def lireplaylist(player):
     result=p.playlist_play_playlist(sys.argv[7])
     return result
@@ -166,7 +166,7 @@ def lireplaylist(player):
 def lireurl(player):
     result=p.playlist_play(sys.argv[7])
     return result
-    
+
 results={}
 actions = {"play" : lecture,
          "stop" : stop,

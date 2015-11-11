@@ -20,5 +20,5 @@
 <hr/>
 <pre><?php
 	//print_r(json_decode(file_get_contents("voicify/config/global.ini")));
-	print_r(parse_ini_file("voicify/config/global.ini", true));
+	print_r(parse_ini_file("voicifyCore/config/global.ini", true));
 ?></pre>

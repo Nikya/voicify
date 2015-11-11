@@ -11,7 +11,7 @@
 	}
 </style>
 
-<h1>Voicify sample</h1>
+<h1>Home Voicify sample</h1>
 
 <!-- CONFIGURATION --------------------------------------->
 <hr/>
