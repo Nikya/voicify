@@ -11,72 +11,6 @@ import os.path
 from pydub import AudioSegment
 from gtts import gTTS
 
-def stop(player):
-    result=player.stop()
-    return result
-
-def eteint(player):
-    result=player.set_power_state(0)
-    return result
-
-def allume(player):
-    result=player.set_power_state(1)
-    return result
-
-def lecture(player):
-    result=player.play()
-    return result
-
-def pause(player):
-    result=player.pause()
-    return result
-
-def muet(player):
-    result=player.mute()
-    return result
-
-def nomuet(player):
-    result=player.unmute()
-    return result
-
-def suivant(player):
-    result=player.next()
-    return result
-
-def precedent(player):
-    result=player.prev()
-    return result
-
-def avance(player):
-    result=player.forward(seconds=15)
-    return result
-
-def recule(player):
-    result=player.rewind(seconds=15)
-    return result
-
-def setvolume(player):
-    result=player.set_volume(sys.argv[7])
-    return result
-
-def changevolume(player):
-    actual=player.get_volume()
-    new=actual+int(sys.argv[7])
-    result=player.set_volume(new)
-    return result
-
-def sync_depuis(player):
-    if sys.argv[8]=="true":
-       player.set_power_state(1)
-    result=player.sync_to(sys.argv[7])
-    return result
-
-def desync(player):
-    result=player.unsync()
-    if sys.argv[7]=='true':
-       player.set_power_state(0)
-    return result
-
 def parle(player):
     cachepath=os.path.abspath(os.path.join(os.path.join(os.path.dirname(os.path.dirname(__file__)), 'tmp'), 'cache'))
     tmppath=os.path.abspath(os.path.join(os.path.dirname(os.path.dirname(__file__)), 'tmp'))
@@ -143,28 +77,6 @@ def parle(player):
             time.sleep(0.5)
     player.set_volume(actualvolume)
     player.set_playlist_shuffle_state(actualshufflestate)
-    return result
-
-def lireartist(player):
-    resultat=s.search(sys.argv[7],'artists')
-    result=p.playlist_play_artist(resultat[1][7:])
-    return result
-
-def lirealbum(player):
-    resultat=s.search(sys.argv[7],'albums')
-    result=p.playlist_play_album(resultat[1][6:])
-    return result
-
-def liregenre(player):
-    result=p.playlist_play_genre(sys.argv[7])
-    return result
-
-def lireplaylist(player):
-    result=p.playlist_play_playlist(sys.argv[7])
-    return result
-
-def lireurl(player):
-    result=p.playlist_play(sys.argv[7])
     return result
 
 results={}
