@@ -168,28 +168,7 @@ def lireurl(player):
     return result
 
 results={}
-actions = {"play" : lecture,
-         "stop" : stop,
-           "pause" : pause,
-           "mute" : muet,
-           "next" : suivant,
-           "previous" : precedent,
-           "unmute" : nomuet,
-           "off" : eteint,
-           "on" : allume,
-           "setVolume" : setvolume,
-           "changeVolume" : changevolume,
-           "forward" : avance,
-           "rewind" : recule,
-           "sync_depuis" : sync_depuis,
-           "desync" : desync,
-           "parle" : parle,
-           "lireartist" : lireartist,
-           "lirealbum" : lirealbum,
-           "liregenre" : liregenre,
-           "lireplaylist" : lireplaylist,
-           "lireurl" : lireurl,
-           "test": test
+actions = {"parle" : parle
 }
 s = server.Server(hostname=sys.argv[1], port=sys.argv[2], username=sys.argv[3], password=sys.argv[4])
 s.connect()
