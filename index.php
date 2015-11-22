@@ -55,7 +55,7 @@
 		if (isset($_GET['vars']) and !empty($_GET['vars']))
 			$v->setVars($_GET['vars']);
 
-		$v->process();
+		$v->process_tmp();
 
 		echo "<span class=\"voicifyRes\">" . $v->getLastText() ."</span>";
 	}

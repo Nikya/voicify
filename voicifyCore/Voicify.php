@@ -75,4 +75,27 @@ class Voicify {
 			throw new Exception("Fail to process the sound commande : $cmd \n $foutput", 1);
 		}
 	}
+
+	////////////////////////////////////////////////////////////////////////////
+	/** To generate the sound */
+	public function process_tmp () {
+		$this->tts = PhraseBuilder::generate($this->textArray, $this->voicekey, $this->vars);
+
+		$ip = "192.168.1.8";
+		$port = "80";
+		$voice = "margaux";
+
+		$noCache = 1;
+
+		$this->tts = urlencode($this->tts);
+
+		$url = "$ip:$port/cgi-bin/tts?voice=$voice&nocache=$noCache&text={$this->tts}";
+
+		$ch = curl_init($url);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+		$res = curl_exec($ch);
+
+		if ($res===false) 
+			throw new Exception("process_tmp fail to process $url");
+	}
 }
