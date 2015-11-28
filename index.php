@@ -1,63 +1,76 @@
 <?php
-	// Affichage des erreurs
+	// Affichage des erreurs PHP
 	ini_set('display_errors',1);
 	error_reporting(E_ALL);
 ?>
-<style>
-	.voicifyRes {
-		font-style: italic;
-		border: 1px dashed black;
-		padding: 5px;
-	}
-</style>
 
-<h1>Home Voicify sample</h1>
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+	<meta name="description" content="The Home voicify start page">
+	<meta name="author" content="Nikya">
+	<link rel="icon" href="voicifyCore/view/favicon.ico">
 
-<!-- CONFIGURATION --------------------------------------->
-<hr/>
-<h2>Configuration</h2>
-	<li><a href="configGlobal.php">Global</a></li>
-	<li><a href="configText.php">Texts</a></li>
+	<title>Home Voicify</title>
 
-<!-- COMMAND --------------------------------------->
-<hr/>
-<h2>Command</h2>
-<form>
-	Voicekey : <input type="text" value="welcome" name="voicekey"></br>
-	</br>
-	Vars : <input type="text" value="James Raynor" name="vars[]">
-	<input type="text" value="Aide de camp" name="vars[]">
-	<input type="text" value="Tarsonis" name="vars[]">
-	</br>
-	</br>
-	<input type="submit" value="Say it">
-</form>
+	<!-- Bootstrap core CSS -->
+	<link href="voicifyCore/view/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
-<!-- RESULT --------------------------------------->
-<hr/>
-<h2>Result</h2>
+	<!-- Custom styles for this template -->
+	<link href="voicifyCore/view/main.css" rel="stylesheet">
+</head>
+<body>
+	<nav class="navbar navbar-inverse navbar-fixed-top">
+		<div class="container">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="/voicify">Home Voicify</a>
+		</div>
+		<div id="navbar" class="collapse navbar-collapse">
+			<ul class="nav navbar-nav">
+				<li><a href="/voicify?voicekey">Voicekey</a></li>
+				<li><a href="/voicify/?config=text">Config:Text</a></li>
+				<li><a href="/voicify/?config=global">Config:Global</a></li>
+			</ul>
+		</div><!--/.nav-collapse -->
+		</div>
+	</nav>
 
-<pre><?php
+	<div class="starter-template" id="content">
+<!-- Content ------------------------------->
+		<?php if (isset($_GET['voicekey'])) { ?>
+			<h2>Voicekey</h2>
+			<div class="container"><?php include("voicifyCore/view/voicekey.php") ?></div>
 
-	// Affichage des erreurs
-	ini_set('display_errors',1);
-	error_reporting(E_ALL);
+		<?php } elseif (isset($_GET['config']) and $_GET['config']=="text") { ?>
+			<h2>Texts configuration</h2>
+			<div class="container"><?php include("voicifyCore/view/configText.php") ?></div>
 
-	if (!isset($_GET['voicekey']) or empty($_GET['voicekey']))
-		echo 'Nothing to say !';
-	else {
-		require_once('./voicifyCore/Voicify.php');
+		<?php } elseif (isset($_GET['config']) and $_GET['config']=="global") { ?>
+			<h2>Global configuration</h2>
+			<div class="container"><?php include("voicifyCore/view/configGlobal.php") ?></div>
 
-		$v = new voicify($_GET['voicekey']);
-		// $v->setEngine();
-		// $v->setVoice();
+		<?php } else { ?>
+			<h1>Home Voicify</h1>
+			<div class="container"><p class="lead">Your home can talk now!</p></div>
+		<?php } ?>
+<!-- Content ------------------------------->
+	</div>
 
-		if (isset($_GET['vars']) and !empty($_GET['vars']))
-			$v->setVars($_GET['vars']);
-
-		$v->process_tmp();
-
-		echo "<span class=\"voicifyRes\">" . $v->getLastText() ."</span>";
-	}
-
-?></pre>
+	<!-- Bootstrap core JavaScript
+	================================================== -->
+	<!-- Placed at the end of the document so the pages load faster -->
+	<script src="voicifyCore/view/jquery.min.js"></script>
+	<script>window.jQuery || document.write('<script src="voicifyCore/view/jquery.min.js"><\/script>')</script>
+	<script src="voicifyCore/view/bootstrap/js/bootstrap.min.js"></script>
+  </body>
+</html>
