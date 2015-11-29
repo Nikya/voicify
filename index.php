@@ -22,6 +22,11 @@
 
 	<!-- Custom styles for this template -->
 	<link href="voicifyCore/view/main.css" rel="stylesheet">
+
+	<!-- Chargement des scripts -->
+	<script src="voicifyCore/view/jquery.min.js"></script>
+	<script>window.jQuery || document.write('<script src="voicifyCore/view/jquery.min.js"><\/script>')</script>
+	<script src="voicifyCore/view/bootstrap/js/bootstrap.min.js"></script>
 </head>
 <body>
 	<nav class="navbar navbar-inverse navbar-fixed-top">
@@ -47,6 +52,8 @@
 
 	<div class="starter-template" id="content">
 <!-- Content ------------------------------->
+		<pre class="console"><?php require_once('voicifyCore/loader.php') ?></pre>
+
 		<?php if (isset($_GET['voicekey'])) { ?>
 			<h2>Voicekey</h2>
 			<div class="container"><?php include("voicifyCore/view/voicekey.php") ?></div>
@@ -63,14 +70,7 @@
 			<h1>Home Voicify</h1>
 			<div class="container"><p class="lead">Your home can talk now!</p></div>
 		<?php } ?>
-<!-- Content ------------------------------->
+<!-- Fin Content ------------------------------->
 	</div>
-
-	<!-- Bootstrap core JavaScript
-	================================================== -->
-	<!-- Placed at the end of the document so the pages load faster -->
-	<script src="voicifyCore/view/jquery.min.js"></script>
-	<script>window.jQuery || document.write('<script src="voicifyCore/view/jquery.min.js"><\/script>')</script>
-	<script src="voicifyCore/view/bootstrap/js/bootstrap.min.js"></script>
-  </body>
+</body>
 </html>

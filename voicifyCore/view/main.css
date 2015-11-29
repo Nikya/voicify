@@ -22,6 +22,7 @@ h2, h1 {
 }
 
 pre.console,
+#calledUrl,
 blockquote.phrase {
 	margin-top: 15px;
 	margin-bottom: 15px;
@@ -37,13 +38,43 @@ blockquote.phrase {
 	color: #ffa861;
 }
 
+pre.console:empty {
+	display: none;
+}
+
 pre.console {
 	background-color: #404040;
 	color: #c7ffe3;
-	border-color:#c7ffe3;
+	border:3px solid #c7ffe3;
 	text-align: left;
 	font-family: monospace;
 	font-size: 0.8em;
+}
+
+pre.console .error {
+	color: red;
+	border-color: red;
+}
+
+pre.console hr {
+	border:1px solid #c7ffe3;
+}
+
+#calledUrl {
+	margin-top: 0px;
+	width: 100%;
+	font-size: 0.8em;
+	font-family: monospace;
+	border: 2px inset #c7ffe3;
+}
+
+#calledUrl .base {
+	color:pink;
+}
+
+#calledUrl .param {
+	color:red;
+
 }
 
 blockquote.phrase {

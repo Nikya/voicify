@@ -1,470 +1,92 @@
 {
-
-"voicekey": {
-	"welcome": [
-		"Referme bien la porte sil te plé.",
-		"Ferme la porte, j'ai froid !",
-		"Encore les voisins ?",
-		"Encore un livreur ?"
-	],
-"porte": [
-	"Referme bien la porte sil te plé.",
-	"Ferme la porte, j'ai froid !",
-	"Encore les voisins ?",
-	"Encore un livreur ?",
-	"coole ! encore du monde.",
-	"C'est le facteur non ?",
-	"il y a comme un courant d'air",
-	"Qui es-ce ?",
-	"arréte d'ouvrir cette porte !",
-	"tiens la porte s'ouvre.",
-	"Je vais verouiller cette porte a force de trop l'ouvrir !",
-	"Ne laisse pas la porte ouverte!",
-	"j'aime pas les courants d'air.",
-	"Les gens aiment vraiment venir me voir ?!",
-	"une fois, deux fois, trois fois, combien de fois, tu vas ouvrir cette putain de porte ?",
-	"Ohh?! la porte s'ouvre !!",
-	"Et si je compté le nombre de fois que tu ouvre la porte ?",
-	"Une porte ouverte vers un nouveau monde",
-	"Opopope! qui vas la?"
-],
-"portefenetre": [
-	"Par ces {0}°, Toska est partie faire pipi?",
-	"Un petit bain de soleil en terrasse? Il y fait {0}°",
-	"Ouvrez la porte! Pour laissez rentrer les {0}° de soleil !",
-	"Laisson, laisson, entrer le soleil ! et ses {0}°.",
-	"{0}° à l'ombre. Pas mal pour une sortie en terrasse.",
-	"Température en térrasse : {0}°.",
-	"Température en térrasse : {0}°.",
-	"La térrasse est à {0}°.",
-	"Il fait {0}° dehors.",
-	"Il fait {0}° dehors.",
-	"Il fait {0}° Celsius dehors.",
-	"Mon thermomètre m'indique {0}° dehors.",
-	"Il fait actuellement {0}° dehors.",
-	"La température extérieur est de {0}°.",
-	"La température extérieur est de {0}°."
-],
-"yannickback": [
-	"Le maître de ces lieux est de retour !",
-	"Le roi est de retour, à genoux !",
-	"Mon maiter Yannick, est de retour !",
-	"Toska ! Voila ton Papa !"
-],
-"garage_oublie": [
-	"La porte du garage {0}, est restée ouverte.",
-	"Un oublie de la porte du garage {0}.",
-	"Quelqu'un peut aller fermer la porte du garage {0}, s'il vous plaie ?"
-],
-"garage_ouvrir": [
-	"Ouverture demandé, de la porte de garage {0}.",
-	"La porte du garage {0}, est en train de s'ouvrir."
-],
-"garage_fermer": [
-	"Fermeture demandé, de la porte de garage {0}",
-	"La porte du garage {0}, est en train de se fermer"
-],
-"garage_lumiere": [
-	"La lumière du garage {0}, est restée allumé.",
-	"Il semblerait que la lumière du garage {0}, soit encore allumée.",
-	"Encore une fois la lumière du garage {0}, n'est pas éteinte."
-],
-"electempopleines": [
-	"L'électricité viens de passer en heures pleines. Attention ! à la consommation d'énergie !",
-	"L'électricité viens de passer en heures pleines. L'énergie est notre avenir, économisons-la !",
-	"L'électricité viens de passer en heures pleines. Je vais me reposer alors !"
-],
-"electempocreuses": [
-	"C'est le début des heures creuses. Il faut faire une machine à laver de string maintenant !",
-	"C'est le début des heures creuses. C'est lhappy a-hou-heure !",
-	"C'est le début des heures creuses. Fait péter les watts !",
-	"C'est le début des heures creuses. lance un lave vaisselle !"
-],
-"sweethome": [
-	"Wèche gros ! C'est le sweet home.",
-	"On est tellement bien chez sois.",
-	"Regarde toutes ces jolie couleurs ! C'est du coucouning !",
-	"C'est l'heure du sweet home. L'apaisement réside en chacun de nous.",
-	"Le monde semble sombre quand on a les yeux fermés. C'est l'heure du sweet home, ouvre les yeux et regarde toutes c'est belles lumières.",
-	"Un moment de détente dans ce monde de fou. C'est le sweet home.",
-	"La haine obscurcit la vie, l'amour la rend lumineuse",
-	"Après la tempète vient le calme, c'est l'heure du sweet home.",
-	"Après une dure journée de travail un moment de calme"
-],
-"finsweethome": [
-	"Ne pleure pas parce que c’est fini, souris plutôt parce que c’est arrivé.",
-	"C'est la fin du Sweet home. Bonne soirée."
-],
-"nourrirpoissons": [
-	"Hervé, à tu pensé a nourrir les poissons, aujourd'hui?",
-	"Hervé, j'ai l'impression que les poissons ont faim.",
-	"Hervé, tu devrais nourir les poissons."
-],
-"medicamentshp": [
-	"Hervé,tu as pris tes médicaments aujourd'hui?",
-	"Hervé,c'est l'heure de ton traitement.",
-	"Hervé,c'est l'heure d'avaler tes comprimés.",
-	"C'est l'heure des comprimés d'Hervé !"
-],
-"storebanneouvr": [
-	"Ouverture demandé du store banne",
-	"Le store banne est en train de s'ouvrir",
-	"Ouverture du store banne pour protéger du soleil"
-],
-"storebanneferm": [
-	"Fermeture demandé du store banne",
-	"Le store banne est en train de se fermer",
-	"Fermeture du store banne"
-],
-"xbmcstart": [
-	"Démarrage de la vidéo, bon visionnage.",
-	"Je vous souhaite une bonne séance."
-],
-"electromenager": [
-	"Un des électromenagers, a accomplie ça tâche.",
-	"Un esclave de vaisselle, ou de lingerie, a fini sa corvé.",
-	"Le lave vaisselle ou le lave linge, est maintenant terminé"
-],
-"alarmearmement": [
-	"Armement de l'alarme, vous avez 2 minutes pour quitter les lieux",
-	"Activation de l'alarme, merci d'évacuer la maison dans les 2 minutes qui suivent."
-],
-"alarmearmed": [
-	"L'alarme est maintenant active !"
-],
-"alarmedesarmement": [
-	"L'alarme est maintenant désarmée.",
-	"Désactivation de l'alarme, bien venue chez vous.",
-	"Alarme neutralisée, c'est bon de vous revoir !"
-],
-"alarmnoactivouvrantouvert": [
-	"L'alarme n'as pas été activée, un ouvrant est resté ouvert",
-	"Vous avez oubliez de fermé un ouvrant, je n'active pas l'alarme"
-],
-"ambiancegamers": [
-	"Passage de l'ambiance en mode jeux",
-	"c'est cool, on joue!",
-	"On joue à quoi ce soir?",
-	"Je me ferai bien, un league of legende avec vous!",
-	"moi aussi je veux jouer!",
-	"Tu me prête, ton jeux de carte, s'il te plaît?",
-	"Je vais à la taverne, jouer à Hearthstone",
-	"Les bruits de balles, on dirait un jeu de shoot",
-	"Bleu!, ça rime avec jeux!"
-],
-"debutarrosagejardin": [
-	"Début de l'arrosage du jardin",
-	"Arrosage du jardin, pendant 10 minutes",
-	"Le jardin manque d'eau, je déclenche l'arrosage automatique.",
-	"Arrosage du jardin, pour faire pousser les légumes",
-	"Une petite pluie, pour faire pousser de grands légumes",
-	"il est temps de déclencher, l'arrosage du jardin."
-],
-"finarrosagejardin": [
-	"fin de l'arrosage du jardin.",
-	"l'arrosage du jardin, est maintenant terminée.",
-	"Terminé pour l'arrosage du jardin"
-],
-"karotztaichi": [
-	"Allez c'est parti! on bouge les oreilles, a droite, a gauche.",
-	"C'est l'heure pour moi, de faire la girouette avec mes oreilles",
-	"Tu te fais une scéance de sport avec moi?, allez! en haut! en bas!",
-	"Un petit cours de Taï-chi par maître Ruby ? Allez, suivez mes mouvements.",
-	"Hé ? Regarde mes oreilles ! Elles sont belles non ?",
-	"Le taï-chi permet de vider mon esprit... Il éllimine tout les bugs accumulés au long de la journée.",
-	"Mes oreilles, elles sont un peu trop grande, non ?",
-	"Aï Aï Aï ! J'ai une crampe aux oreilles !",
-	"Qui veut bien me masser la tête ? J'ai une migraine."
-],
-"karotzdodo": [
-	"Bonne nuit, je vais me coucher",
-	"il est tard, c'est l'heure pour moi de dormir à demain",
-	"Ne faite pas de bruit, j'ai besoin de dormir",
-	"Allez je vais me coucher, a demain",
-	"Une bonne nuit de sommeil, et tout ira mieux demain",
-	"J'ai besoin d'aller me coucher, bonne nuit",
-	"La journée a été trop fatigante, je vais me coucher",
-	"Dors avec les anges, et rêve de moi, car un jour tu pourras dormir avec moi, et rêver des anges.",
-	"Dormir! Enfin! c'est échapper à tout ce qui vous entoure. Bonne nuit à vous."
-],
-"boiteOlettres": [
-	"Le facteur vient de passer, vous avez du courrier",
-	"Il y a du courrier, le facteur vient de le déposer",
-	"le facteur vient de faire sa tournée, il vous a déposé plein de lettre.",
-	"Il y a des nouvelles du monde exterieur, se trouve actuellement dans la boite aux lettres.",
-	"Tiens! je le reconnais, c'est le facteur avec ses lettres!",
-	"Encore une fois, le facteur, nous a rempli la boite aux lettres!"
-],
-"boiteOcolis": [
-	"Vu la taille a mon avis c'est un colis!",
-	"Un colis vous attend dans la boite aux lettres",
-	"le facteur vient de faire sa tournée, il vous a déposé un colis",
-	"Tiens! je le reconnais, c'est le livreur chronopost",
-	"Chouette! un colis!"
-],
-"Porteatelier": [
-	"Vous avez encore oublié, de fermer la porte de l'atelier",
-	"L'atelier est resté ouvert",
-	"Quelqu'un peu allé fermé, la porte de l'atelier S'il vous plait!",
-	"La porte de l'atelier ne devrais pas être fermée?"
-],
-"chauffageauto": [
-	"Le chauffage est maintenant en mode automatique"
-],
-"chauffagedelestage": [
-	"Attention! la consommation d'énergie atteins un seuil critique, je déleste le chauffage!",
-	"Attention! Vous conssomez trop d'électricité ! Je vous prive de chauffage pour la peine."
-],
-"chauffagestop": [
-	"Le chauffage est maintenant arrêté"
-],
-"chauffageswitch": [
-	"Le chauffage vient de basculer en mode {1} dans {0}. Il y fait actuellement {2} degrés",
-	"Il fait {2} degrés dans {0}. Changement du chauffage vers le mode {1}",
-	"Activation du mode {1} dans {0}, où il y fait {2} degrés.",
-	"{0} proposait {2} degrés, j'active maintenant le mode {1}",
-	"{1}, c'est le mode de chauffage que je viens d'appliquer dans {0}. La température y est de {2} degrés"
-],
-"sortiepoubelle": [
-	"Il faut sortir la poubelle {0}",
-	"Avez-vous pensez à sortir la poubelle {0} ?",
-	"Demain, c'est un jour de collècte {0}. Pensez à sortir la bonne poubelle !",
-	"Il y a une veille odeur de poubelle ! Vous avez encore oublier de sortir la poubelle {0}.",
-	"ça y est je me rappel ! Aujourd'hui, c'est sortie de la poubelle {0}",
-	"Il faut mettre à disposition la poubelle {0}, si tu veux quelle soit collecté !",
-	"Moi j'ai pas de jambes ! Sinon j'irais bien sortir la poubelle {0} moi-même !",
-	"Il y en a pas un qui veut bien se bouger, pour sortir la poubelle {0} ?"
-]
-},
-"chauffageswitchzone": {
-"vie": [
-	"la zone de vie",
-	"les pièces à vivre",
-	"le salon"
-],
-"bain": [
-	"la zone de bain",
-	"la salle de bain",
-	"la pièce d'eau"
-],
-"nuit": [
-	"la zone de nuit",
-	"les chambres",
-	"les pièces à coucher"
-]
-},
-"garage_name": {
-"principal": [
-	"principal",
-	"principal",
-	"principal",
-	"de la Peugeot, 108,",
-	"de Yannick"
-],
-"secondaire": [
-	"secondaire",
-	"secondaire",
-	"secondaire",
-	"de la Peugeot, 208,",
-	"de Hervè",
-	"extérieur",
-	"en bois",
-	"latéral"
-]
-},
-"poubelle": {
-"noir": [
-	"noir",
-	"des ordures ménagères",
-	"classique",
-	"à brûler"
-],
-"jaune": [
-	"Jaune",
-	"du trie sélectif",
-	"recyclable"
-],
-"vert": [
-	"verte",
-	"biodechet",
-	"biodegradable",
-	"compostable"
-]
-},
-"speakingClock": {
-"prefix": [
-	"Digue, dingue, dongue !",
-	"Tic, Tac ! Tic tic tac !",
-	"Dring, dring !",
-	"Coco-rico, Coco-rico !",
-	"Coucou ! Coucou ! Coucou ! ",
-	"Bing, bing ! Bing bing."
-],
-"neutral": [
-	"C'est la {0}eme heures de ce jour.",
-	"{0} heures, le temps passe plus vite à la maison.",
-	"Bienvenue dans cette {0}eme heures.",
-	"{0}. C'est l'heure qu'il était hiers à la même heure !",
-	"{0} fois {0}, + {1}{1}. Sa fait combien ? Vous avez une heure pour répondre.",
-	"Avant l'heure c'est pas l'heure !. Après l'heure c'est plus l'heure !.",
-	"Ah mince !! je suis en retard, mais quelle heure est t'il?",
-	"C'est l'heure !, c'est {0} heure !, mais c'est l'heure de quoi??",
-	"Si je pouvais avancé dans le temps, je voudrais qu'il soit {0} heures.",
-	"Si je pouvais choisir l'heure, j'aimerai qu'il soit {0} heures.",
-	"Les passagè du vol {0}54{1}, de {0} heures, A destination de Marseille. On raté leur avions !",
-	"Il est {0} heures zéro zéro ! Tu as quelque-chose à en redire ?",
-	"Il était une fois, {0} petits cochons. Ils rencontrèrent {1} princesses et ils eurent {1} enfants chacun. Mais {0} méchants loups les dévoras tous. Fin de l'histoire.",
-	"Ici il est {0} heures. Mais à Nouille-York il est quel heure ?",
-	"Le magasin décathlon La pardieu, est heureux de vous offrir l'heure : Il est {0} heures.",
-	"Il est {0} heures !",
-	"Je te garanti qu'il est {0} heures. Mais même une pendule arrêtée a raison deux fois par jour.",
-	"C'est le tic-tac d'une pendule qui fait apprécier le silence. Tic, Tac, Tic, Tac. C'est {0} heures.",
-	"Toute les pendules de france, indiquent {0} heures.",
-	"Notre Dame de Paris, sonne actuellement ses {1} coups.",
-	"Déjà {0} heures. Le temps n'attend personne !",
-	"{0} heures ? Que-faire ??? Que faire.",
-	"Je vais gommer les chiffres, des horloges du quartier, sauf le {1}.",
-	"L’horloge tourne. Elle indique {0} heures",
-	"La petite aiguille, viens d'arriver sur {1}.",
-	"{0} heures, et moi je rêve, de remonter le temps.",
-	"Et c'est le temps qui court. {0} heures.",
-	"{0} heures. Une heure de plus de passé.",
-	"Donne moi ta montre, et je te donnerais l'heure.",
-	"C'est dur de pas perdre le fil ! Il est {0} heures.",
-	"Je pense qu'il est à peu près {0} heures. Mais si j'avais moi aussi une smart-watch, je pourrais être plus précis.",
-	"{0} heures. Il est l'heure de t'acheter une montre.",
-	"Ouverture des portes, pour le {1}eme étage... Et oui j'aurais aussi bien pu, travailler dans un ascenseur !",
-	"{0} heures fois 12 euros, ce sont mes honoraires du jour. Tout travail mérite salaire !",
-	"Hé ? Tu me prête {1}000 euros steuplait ?",
-	"Il est {0} heures ? ou bien il est {1} heures. Je sais plus.",
-	"Il est {1} heures. Mais on est le matin, ou bien l'après-midi ?"
-],
-"7": [
-	"Ils sont pénible ses animaux !! on voudrait dormir tranquille !!",
-	"allez ! direction la douche !! il est sept heures.",
-	"opopop ! allez ! C'est l'heure de sortir de sous la couette!.",
-	"il est sept heures, tartine au beurre"
-],
-"10": [
-	"10 heures ! pose café !"
-],
-"11": [
-	"Il est déjà 11 heures. Qua tu fait de ta matinée ?",
-	"11 heures, c'est l'heure de l'apéro !"
-],
-"12": [
-	"C'est Midi on va bientot manger",
-	"ça sent super bon !! j'ai faim !! il doit être midi ?",
-	"C'est quand qu'on mange !! j'ai FAIM !! je mangerai bien une vache entière."
-],
-"14": [
-	"Il est 14 heures. Fin de la sieste !"
-],
-"15": [
-	"15 heures la semaine, et 15 heures le week-end, c'est pas du tout pareil."
-],
-"16": [
-	"16h ! c'est l'heure du thé ? non ?",
-	"C'est l'heure du goûté !"
-],
-"19": [
-	"19h c'est l'heure de la soupe !"
-],
-"23": [
-	"Il est tard !! Allé hop-pop-pop, au lit !",
-	"Au lit les enfant, ya école demain !"
-]
-},
-"breakingnews": {
-"intro": [
-	"Bonjour à tous ! Nous somme {0, date, full}, et voici vos informations de la journée.",
-	"Bonjour bonjour ! Et voici vos informations personalisé pour cette journée de {0, date, full}.",
-	"Good Morning ! Je vous présente les breaking newses de ce {0, date, full}.",
-	"Bienvenue en ce {0, date, full}, où j'ai l'honneur de vous présentrer votre actualité.",
-	"Messieurs, Bonjour. Permettez-moi de vous lire vote petit journal de ce {0, date, full}",
-	"Messieurs, votre journal est de retour. Il est daté du {0, date, full}"
-],
-"agendaIntro": [
-	"Un coups d'oeil sur les emploies du temps",
-	"Ouvrons les agendas.",
-	"Saint google, donne moi les agendas de ce jours."
-],
-"agendaFirst": [
-	"Commençons par l'emploie du temps de {0}. {1}"
-],
-"agendaThen": [
-	"Maintenant l'agenda de {0}. {1}",
-	"Continuons avec celui de {0}. {1}"
-],
-"agendaLast": [
-	"Enfin l'agenda de {0}. {1}",
-	"En terminant par l'agenda de {0}. {1}",
-	"Enormément de suspense pour le dernier agenda, qui est donc celui de {0}. {1}"
-],
-"agendaNo": [
-	"C'est une page blanche pour l'agenda de {0} !",
-	"{0} sera tranquil aujourd'hui !",
-	"Aucun rendez-vous dans l'agenda de {0}."
-],
-"agendasNo": [
-	"Ce sont des pages blanches pour les agendas de {0} !",
-	"{0} seront tranquil aujourd'hui !",
-	"Aucun rendez-vous dans les agendas de {0}."
-],
-"agendaError": [
-	"Impossible de connaitre l'agenda de {0}."
-],
-"conclusion": [
-	"C'est la fin de cette édition. Je vous souhaite une bonne journée.",
-	"Merci de m'avoir écouté. Bonne journée, à ce soir.",
-	"Il ne me reste plus qu'à vous souhaiter une bonne journée. Merci de votre attention."
-],
-"w_intro": [
-	"Passont à présent à la météo...",
-	"un coups d'oeil maintenant sur la météo...",
-	"Quelle sera votre météo du jour ?..",
-	"Comment devriez-vous vous habiller aujourd'hui ? Voyont la météo..."
-],
-"w_sunrise_f": [
-	"Le soleil se levera dans {0}.",
-	"Le jour commencera dans {0}.",
-	"La lumiére percera dans {0}.",
-	"La nuit cédera ça place au jour dans {0}.",
-	"Il ne reste plus que {0} de nuit sombre."
-],
-"w_sunrise_p": [
-	"Le soleil est levé depuis {0}.",
-	"Le jour a commencé depuis {0}.",
-	"La lumiére a percé l'obscurité depuis {0}.",
-	"La jour a pris la place de la nuit depuis {0}.",
-	"Cela fait déja {0} que le jour à commencé."
-],
-"w_sunset": [
-	"Le soleil se couchera à {0,time, short}.",
-	"La nuit devorera le jour vers {0,time, short}.",
-	"Le soleil disparaitra à {0,time, short}.",
-	"La journé s'achévera à {0,time, short}.",
-	"La nuit reprendra le dessus à {0,time, short}."
-],
-"w_description_mono": [
-	"Les conditions pour cette journée seront : {0}.",
-	"{0}, sont les conditions a attendre de cette journée.",
-	"Une journée placée sous un ciel de : {0}.",
-	"Cette journée nous annonce : {0}."
-],
-"w_description_double": [
-	"Les conditions pour cette matinée seront : {0}. puis {1}, pour cette aprés-midi.",
-	"{0}, sont les conditions a attendre de cette matinée. {1}, pour cette aprés-midi",
-	"Une matinée placée sous un ciel de : {0}. Une aprés-midi sous de : {1}",
-	"La matinée nous annonce : {0}. L'aprés-midi, elle, {1}"
-],
-"w_temperature": [
-	"La température extérieur est de {0}°. Elles oscilleront entre {1} et {2}°.",
-	"Mes sondes m'indique une température extérieur de {0}°. Je devrait mesurer des température entre {1} et {2}° aujourd'hui.",
-	"Actuellement la température extérieur est de {0}°. La températures minimal attendue est de {1}, la maximal {2}°.",
-	"Il fait actuellement {0}° dehors. Le mercure devrait partir de {1} pour aller jusqu'à {2}°.",
-	"Je lis une température extérieur de {0}°. Les termomètres à {1} seront stimulés jusquà {2}°.",
-	"Les température iron de {1} à {2}°. Actuellement celle extérieur est de {0}."
-]
-}
+  "voicekey": {
+    "welcome": [
+      {
+        "text": "Salutation {0}.",
+        "frequency": 5
+      },
+      {
+        "text": "Bien le bonjour {0} ! La température intérieur est de {1}°.",
+        "frequency": 3
+      },
+      {
+        "text": "J'ai régulé la température à {1}°, en anticipation de votre retour {0} !",
+        "frequency": 3
+      },
+      {
+        "text": "Bon retour chez vous {0}, où il y fait {1}°.",
+        "frequency": 2
+      },
+      {
+        "text": "En cette saison de Noêl, j'ai dû maintenir le chauffage à {1}°. J'espére que vous avez était sage {0} ?",
+        "frequency": 0
+      }
+  ],
+    "garage": [
+      {
+        "text": "La porte du garage {0} est restée ouverte.",
+        "frequency": 2
+      },
+      {
+        "text": "Un oublie de la porte du garage {0} ?",
+        "frequency": 2
+      },
+      {
+        "text": "Encore une fois, je suis obligé de vous signaler que pour le garage {0}, la porte a encore été oubliée !",
+        "frequency": 1
+      }
+    ]
+  },
+  "subvoicekey": {
+    "theMaster": [
+      {
+        "text": "Maître",
+        "frequency": 4
+      },
+	  {
+        "text": "Monsieur",
+        "frequency": 4
+      },
+	  {
+        "text": "Monsieur Hollande",
+        "frequency": 2
+      },
+      {
+        "text": "Monsieur Connard",
+        "frequency": 0
+      },
+	  {
+        "text": "Votre majesté",
+        "frequency": 1
+      }
+  ],
+    "garage1": [
+      {
+        "text": "principale",
+        "frequency": 3
+      },
+	  {
+        "text": "de Monsieur",
+        "frequency": 1
+      },
+	  {
+        "text": "de la Mercedes",
+        "frequency": 1
+      }
+  ],
+    "garage2": [
+      {
+        "text": "secondaire",
+        "frequency": 3
+      },
+	  {
+        "text": "de Madame",
+        "frequency": 1
+      },
+	  {
+        "text": "de la Twingo",
+        "frequency": 1
+      }
+    ]
+  }
 }

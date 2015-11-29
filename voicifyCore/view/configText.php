@@ -8,7 +8,9 @@
 </form>
 
 <pre class="console"><?php
-	$fContent = file_get_contents("voicifyCore/config/text.json");
+	echo "<p>File path : ".DIR_CONF_TXT."</p><hr/>";
+
+	$fContent = file_get_contents(DIR_CONF_TXT);
 	$jDecode = json_decode($fContent);
 
 	switch (json_last_error()) {

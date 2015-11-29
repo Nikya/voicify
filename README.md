@@ -1,4 +1,8 @@
 # Home Voicify
- To generate spoken notification
+Systéme de génération de notification vocal pour les maisons domotisées.
 
-In construction ...
+Génération de phrases dynamiques et variables.
+
+# En construction ...
+
+![preview](preview.jpg)
