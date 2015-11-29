@@ -83,7 +83,7 @@ class Voicify {
 
 		// Generate and play the sound
 		//$this->soundSystemProcess_tmp();
-		//$this->soundSystemProcess();
+		$this->soundSystemProcess();
 	}
 
 	////////////////////////////////////////////////////////////////////////////
