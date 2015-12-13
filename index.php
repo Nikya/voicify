@@ -10,6 +10,7 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+
 	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 	<meta name="description" content="The Home voicify start page">
 	<meta name="author" content="Nikya">
@@ -27,6 +28,7 @@
 	<script src="voicifyCore/view/jquery.min.js"></script>
 	<script>window.jQuery || document.write('<script src="voicifyCore/view/jquery.min.js"><\/script>')</script>
 	<script src="voicifyCore/view/bootstrap/js/bootstrap.min.js"></script>
+	<script src="voicifyCore/view/angular.min.js"></script>
 </head>
 <body>
 	<nav class="navbar navbar-inverse navbar-fixed-top">
@@ -42,7 +44,7 @@
 		</div>
 		<div id="navbar" class="collapse navbar-collapse">
 			<ul class="nav navbar-nav">
-				<li><a href="/voicify?voicekey">Voicekey</a></li>
+				<li><a href="/voicify?voicekey">Play</a></li>
 				<li><a href="/voicify/?config=text">Config:Text</a></li>
 				<li><a href="/voicify/?config=global">Config:Global</a></li>
 			</ul>
@@ -55,12 +57,12 @@
 		<pre class="console"><?php require_once('voicifyCore/loader.php') ?></pre>
 
 		<?php if (isset($_GET['voicekey'])) { ?>
-			<h2>Voicekey</h2>
-			<div class="container"><?php include("voicifyCore/view/voicekey.php") ?></div>
+			<h2>Play</h2>
+			<div class="container"><?php include("voicifyCore/view/play.php") ?></div>
 
 		<?php } elseif (isset($_GET['config']) and $_GET['config']=="text") { ?>
 			<h2>Texts configuration</h2>
-			<div class="container"><?php include("voicifyCore/view/configText.php") ?></div>
+			<div class="container"><?php include("voicifyCore/view/configText.html") ?></div>
 
 		<?php } elseif (isset($_GET['config']) and $_GET['config']=="global") { ?>
 			<h2>Global configuration</h2>

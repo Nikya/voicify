@@ -2,12 +2,21 @@
 http://www.sessions.edu/color-calculator
 Triadic
 Color'	: Violet : #a861ff > #e3c7ff
-Color''	: Vert : #61ffa8 > #c7ffe3
+Color''	: Vert : #61ffa8 > #c7ffe3 > #3ea64d
 Color''': Orange : #ffa861 > #ffe3c7
 */
 
 body {
  	padding-top: 50px;
+}
+
+a,
+a:visited {
+	color:#3ea64d;
+}
+
+a:hover {
+	color:#61ffa8;
 }
 
 h2, h1 {
@@ -60,6 +69,9 @@ pre.console hr {
 	border:1px solid #c7ffe3;
 }
 
+/********************
+*** Play page *******
+*********************/
 #calledUrl {
 	margin-top: 0px;
 	width: 100%;
@@ -74,7 +86,6 @@ pre.console hr {
 
 #calledUrl .param {
 	color:red;
-
 }
 
 blockquote.phrase {
@@ -86,3 +97,112 @@ blockquote.phrase {
 	font-style: italic;
 	padding-left: 20px;
 }
+
+
+/************************
+*** Config **************
+*************************/
+.confpav {
+	margin: 10px;
+	border: 1px dotted #ffa861;
+}
+
+.confpav li {
+	border-left: 1px dotted #ffa861;
+}
+
+.confpavcontent {
+	padding: 10px;
+}
+
+ol.confpavcontent {
+	padding-left: 30px;
+}
+
+.confpav li {
+	border-left: 0px dotted #ffa861;
+	padding-left: 3px;
+}
+
+.confpav header {
+	text-align: center;
+	border-bottom: 1px dotted #ffa861;
+	padding-top: 0.8em;
+}
+
+.confpav header h3 {
+	color: #ffa861;
+	margin: 0;
+}
+
+article.confpav header h3::before {
+	content: '\0023';
+}
+
+.confpav blockquote {
+	padding: 0;
+	margin: 0;
+	font-size: 1em;
+	border: none;
+	color: #a861ff;
+	text-align: justify;
+}
+
+.confpav blockquote::before,
+.confpav blockquote::after {
+	color: #a861ff;
+	font-weight: bold;
+	font-size: 1.1em;
+}
+
+.confpav blockquote::before {
+	content: "\201C";
+}
+
+.confpav blockquote::after {
+	content: '\201D';
+}
+
+.confpav .frequency::before {
+	content: '\00D7';
+}
+
+.confpav header aside,
+.confpav aside {
+	font-size: 0.8em;
+}
+
+.confpav li {
+	margin-bottom: 15px;
+}
+
+.confpav .help-block {
+	font-size: 0.8em;
+}
+
+/** >> Hover system */
+.confpav header aside,
+.confpav .actionAdd,
+.confpav ol aside .action {
+	visibility: hidden;
+}
+
+.confpav:hover header aside,
+.confpav ol li:hover aside .action,
+.confpav:hover .actionAdd {
+	visibility: visible;
+}
+
+.confpav:hover {
+	border-style: solid;
+}
+
+.confpav:hover header {
+	border-bottom-style: solid;
+}
+
+.confpav li:hover {
+	border-left-width: 1px;
+	padding-left: 2px;
+}
+/** << Fin hover system */
