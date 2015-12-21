@@ -16,7 +16,7 @@ class Voicify {
 	const DIR_CONF_GLOBAL = 'config/global.ini';
 
 	/** Texts file */
-	const DIR_CONF_TXT = 'voicifyCore/config/text.json';
+	const DIR_CONF_TXT = 'voicifyCore/config/voicekey.json';
 
 	/** Array des config par défaut */
 	private $confArray;

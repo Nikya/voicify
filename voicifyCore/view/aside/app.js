@@ -1,5 +1,5 @@
 (function() {
-  var app = angular.module('configText', []);
+  var app = angular.module('configWording', []);
 /*
   app.controller('StoreController', ['$http', function($http){
     var store = this;

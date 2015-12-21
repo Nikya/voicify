@@ -1,6 +1,6 @@
-<script src="voicifyCore/view/configText/app.js"></script>
+<script src="voicifyCore/view/configWording/app.js"></script>
 
-<section ng-app="configText">
+<section ng-app="configWording">
 
 	<!-- Static navbar -->
 	<nav class="navbar navbar-default">
@@ -154,7 +154,7 @@
 	<div class="col-xs-6 col-lg-4">
 		<form class="confpav">
 			<header>
-				<h3>Modification texte</h3>
+				<h3>Modification wording</h3>
 				<aside>&nbsp;</aside>
 			</header>
 			<div class="confpavcontent">
@@ -164,7 +164,7 @@
 					<p class="help-block" id="helpVoicekey">Le mot clé de ratachement.</p>
 				</div>
 				<div class="form-group">
-					<label for="text">Text</label>
+					<label for="text">Wording</label>
 					<textarea class="form-control" rows="3" placeholder="text" name="text" id="text" aria-describedby="helpText"></textarea>
 					<span class="input-group-btn">
 						<button class="btn btn-default btn-xs" type="button">{0}</button>
