@@ -12,12 +12,6 @@ class Voicify {
 	/** Liste de varaibles à injecter dans le tts */
 	private $vars;
 
-	/** Config file */
-	const DIR_CONF_GLOBAL = 'config/global.ini';
-
-	/** Texts file */
-	const DIR_CONF_TXT = 'voicifyCore/config/voicekey.json';
-
 	/** Array des config par défaut */
 	private $confArray;
 
@@ -34,8 +28,8 @@ class Voicify {
 	////////////////////////////////////////////////////////////////////////////
 	/** Chargement des fichiers de config et texte */
 	private function loadconfig() {
-		$this->confArray = parse_ini_file(SELF::DIR_CONF_GLOBAL, true);
-		$this->textCollection = TextCollection::getInstance(SELF::DIR_CONF_TXT);
+		$this->confArray = parse_ini_file(DIR_CONF_GLOBAL, true);
+		$this->textCollection = TextCollection::getInstance(DIR_CONF_TXT);
 	}
 
 	////////////////////////////////////////////////////////////////////////////

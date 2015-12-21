@@ -62,7 +62,7 @@
 
 		<?php } elseif (isset($_GET['config']) and $_GET['config']=="wording") { ?>
 			<h2>Wordings configuration</h2>
-			<div class="container"><?php include("voicifyCore/view/configWording.php") ?></div>
+			<div class="container"><?php include("voicifyCore/view/configWording.html") ?></div>
 
 		<?php } elseif (isset($_GET['config']) and $_GET['config']=="global") { ?>
 			<h2>Global configuration</h2>

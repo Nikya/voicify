@@ -161,12 +161,18 @@ class TextCollection {
 	* @param inArray Tableau où chercher
 	* @return Une entré choisie en retour
 	*/
-	private static function rand1FromArray($inArray) {
+	private function rand1FromArray($inArray) {
 		if (count($inArray) > 0) {
 			$randKey = array_rand($inArray, 1);
 			$i = $inArray[$randKey];
 			return $i;
 		} else
 			throw new Exception(__FUNCTION__.' Array is empty');
+	}
+
+	////////////////////////////////////////////////////////////////////////////
+	/** Obtenir le contenue complet des voicekey au format Json */
+	public function getAllVoicekeyToJson() {
+		return json_encode($this->collectionVoicekey);
 	}
 }
