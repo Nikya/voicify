@@ -10,15 +10,6 @@ body {
  	padding-top: 50px;
 }
 
-a,
-a:visited {
-	color:#3ea64d;
-}
-
-a:hover {
-	color:#61ffa8;
-}
-
 h2, h1 {
 	color : #ffa861;
 	background-color: #ffe3c7;
@@ -102,6 +93,15 @@ blockquote.phrase {
 /************************
 *** Config **************
 *************************/
+.confpav a,
+.confpav a:visited {
+	color:#3ea64d;
+}
+
+.confpav a:hover {
+	color:#61ffa8;
+}
+
 .confpav {
 	margin: 10px;
 	border: 1px dotted #ffa861;
@@ -195,6 +195,9 @@ article.confpav header h3::before {
 
 .confpav:hover {
 	border-style: solid;
+	/*-webkit-box-shadow: 0px 0px 14px 0px rgba(0,0,0,0.69);
+	-moz-box-shadow: 0px 0px 14px 0px rgba(0,0,0,0.69);*/
+	box-shadow: 0px 0px 20px 0px #ffa861;
 }
 
 .confpav:hover header {

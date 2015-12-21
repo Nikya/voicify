@@ -2,15 +2,46 @@
 
 <section ng-app="configText">
 
-<style>
-	.visual {
-		background-color: pink;
-	}
-</style>
-<div class="btn-group col-md-push-right" role="group">
-	<button type="submit" class="btn btn-success">Apliquer</button>
-	<button type="reset" class="btn btn-danger">Annuler</button>
-</div>
+	<!-- Static navbar -->
+	<nav class="navbar navbar-default">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbarVk" aria-expanded="false" aria-controls="navbarVk">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="#">Voicekey <span class="badge">99</span></a>
+			</div>
+			<div id="navbarVk" class="navbar-collapse collapse">
+				<ul class="nav navbar-nav">
+					<li>
+						<form class="navbar-form navbar-right" role="search">
+							<input type="text" class="form-control" placeholder="Recherche">
+						</form>
+					</li>
+					<li>
+						<form class="navbar-form navbar-right" role="add">
+							<div class="input-group">
+								<span class="input-group-addon" id="basic-addon1">#</span>
+								<input type="text" class="form-control" placeholder="Nouveau voicekey" aria-describedby="basic-addon1">
+								<div class="input-group-btn"><button type="button" class="btn btn-default" aria-label="Add"><span class="glyphicon glyphicon-plus"></span></button></div>
+							</div>
+						</form>
+					</li>
+				</ul>
+				<ul class="nav navbar-nav navbar-right">
+					<li>
+						<button type="button" class="btn btn-default navbar-btn btn-success">Sauvegarder</button>
+					</li>
+					<li>
+						<button type="button" class="btn btn-default navbar-btn btn-danger">Annuler</button>
+					</li>
+				</ul>
+			</div><!--/.nav-collapse -->
+		</div><!--/.container-fluid -->
+	</nav>
 
 <div class="row">
 	<div class="col-xs-6 col-lg-4">
