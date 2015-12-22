@@ -8,7 +8,7 @@
 	set_exception_handler('myErrorException');
 
 	// Return only Json
-	header('Content-type: application/json');
+	header('Content-type: application/json; charset=utf-8');
 
 	////////////////////////////////////////////////////////////////////////////
 	// Controleur

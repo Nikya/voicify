@@ -93,6 +93,11 @@ blockquote.phrase {
 /************************
 *** Config **************
 *************************/
+
+.v-toolbar {
+	background-color: #DEDEDE;
+}
+
 .confpav a,
 .confpav a:visited {
 	color:#3ea64d;

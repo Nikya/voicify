@@ -37,48 +37,9 @@ class TextCollection {
 	}
 
 	////////////////////////////////////////////////////////////////////////////
-	/** Charge un fichier Json en tant que tableau associatif */
-	private function jsonFile2Array() {
-		$fContent = file_get_contents($this->textFilePath);
-		$jDecode = json_decode($fContent, true);
-
-		$jErrorMsg;
-		$jErrorCode=json_last_error();
-
-		switch ($jErrorCode) {
-			case JSON_ERROR_NONE:
-				$jErrorMsg = 'Aucune erreur';
-			break;
-			case JSON_ERROR_DEPTH:
-				$jErrorMsg = 'Profondeur maximale atteinte';
-			break;
-			case JSON_ERROR_STATE_MISMATCH:
-				$jErrorMsg = 'Inadéquation des modes ou underflow';
-			break;
-			case JSON_ERROR_CTRL_CHAR:
-				$jErrorMsg = 'Erreur lors du contrôle des caractères';
-			break;
-			case JSON_ERROR_SYNTAX:
-				$jErrorMsg = 'Erreur de syntaxe ; JSON malformé';
-			break;
-			case JSON_ERROR_UTF8:
-				$jErrorMsg = 'Caractères UTF-8 malformés, probablement une erreur d\'encodage';
-			break;
-			default:
-				$jErrorMsg = 'Erreur inconnue';
-			break;
-		}
-
-		if ($jErrorCode<>JSON_ERROR_NONE)
-			throw new Exception("Json decode error #$jErrorCode  : $jErrorMsg");
-
-		return $jDecode;
-	}
-
-	////////////////////////////////////////////////////////////////////////////
 	/** Charger le fichier des texts dans cette class de collection */
 	private function loadText() {
-		$aAllText = $this->jsonFile2Array();
+		$aAllText = JsonUtils::jFile2Array($this->textFilePath);
 
 		$this->collectionVoicekey = $aAllText['voicekey'];
 		$this->collectionSubvoicekey = $aAllText['subvoicekey'];
@@ -173,6 +134,6 @@ class TextCollection {
 	////////////////////////////////////////////////////////////////////////////
 	/** Obtenir le contenue complet des voicekey au format Json */
 	public function getAllVoicekeyToJson() {
-		return json_encode($this->collectionVoicekey);
+		return JsonUtils::array2JString($this->collectionVoicekey);
 	}
 }

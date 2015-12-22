@@ -26,5 +26,6 @@ if (!file_exists(DIR_CONF_GLOBAL)) {
 
 require_once('voicifyCore/wording_system/TextBuilder.php');
 require_once('voicifyCore/wording_system/TextCollection.php');
+require_once('voicifyCore/common/JsonUtils.php');
 
 ?>
