@@ -39,10 +39,8 @@ class TextCollection {
 	////////////////////////////////////////////////////////////////////////////
 	/** Charger le fichier des texts dans cette class de collection */
 	private function loadText() {
-		$aAllText = JsonUtils::jFile2Array($this->textFilePath);
-
-		$this->collectionVoicekey = $aAllText['voicekey'];
-		$this->collectionSubvoicekey = $aAllText['subvoicekey'];
+		$this->collectionVoicekey = JsonUtils::jFile2Array($this->textFilePath."/voicekey.json");
+		$this->collectionSubvoicekey = JsonUtils::jFile2Array($this->textFilePath."/subvoicekey.json");
 	}
 
 	////////////////////////////////////////////////////////////////////////////

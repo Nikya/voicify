@@ -1,6 +1,6 @@
-<script src="voicifyCore/view/configWording/app.js"></script>
+<script src="voicifyCore/view/aside/appConfigWording.js"></script>
 
-<section ng-app="configWording">
+<section ng-app="appConfigWording" ng-controller="configWordingCtrl as ctrl">
 
 	<!-- Static navbar -->
 	<nav class="navbar navbar-default v-toolbar">
@@ -12,21 +12,21 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="#">Voicekey <span class="badge">99</span></a>
+				<p class="navbar-brand" >Voicekey</p>
 			</div>
 			<div id="navbarVk" class="navbar-collapse collapse">
 				<ul class="nav navbar-nav">
 					<li>
 						<form class="navbar-form navbar-right" role="search">
-							<input type="text" class="form-control" placeholder="Recherche">
+							<input type="text" class="form-control" placeholder="Recherche" ng-model="searchQuery">
 						</form>
 					</li>
 					<li>
 						<form class="navbar-form navbar-right" role="add">
 							<div class="input-group">
 								<span class="input-group-addon" id="basic-addon1">#</span>
-								<input type="text" class="form-control" placeholder="Nouveau voicekey" aria-describedby="basic-addon1">
-								<div class="input-group-btn"><button type="button" class="btn btn-default" aria-label="Add"><span class="glyphicon glyphicon-plus"></span></button></div>
+								<input type="text" class="form-control" placeholder="Nouveau voicekey" aria-describedby="basic-addon1" ng-model="newVoicekey">
+								<div class="input-group-btn"><button type="button" class="btn btn-default" aria-label="Add" ng-click="addVoicekey()"><span class="glyphicon glyphicon-plus"></span></button></div>
 							</div>
 						</form>
 					</li>
@@ -43,170 +43,78 @@
 		</div><!--/.container-fluid -->
 	</nav>
 
-<div class="row">
-	<div class="col-xs-6 col-lg-4">
-		<article class="confpav">
-			<header>
-				<h3>ouvertureGarage</h3>
-				<aside><a href="#">modifier</a> - <a href="#">supprimer</a></aside>
-			</header>
-			<ol class="confpavcontent">
-				<li>
-					<blockquote>mi porta gravida at eget</blockquote>
-					<aside><span class="frequency">8</span><span class="action"> - <a href="#">modifier</a> - <a href="#">supprimer</a></span></aside>
-				</li>
-				<li>
-					<blockquote>ros diam, bibendum sit amet risus sed, rhoncus blandit justo. Etiam sodales facilisis augue vel frin</blockquote>
-					<aside><span class="frequency">8</span><span class="action"> - <a href="#">modifier</a> - <a href="#">supprimer</a></span></aside>
-				</li>
-				<li>
-					<blockquote>Fusce viverra vitae diam quis facilisis.</blockquote>
-					<aside><span class="frequency">8</span><span class="action"> - <a href="#">modifier</a> - <a href="#">supprimer</a></span></aside>
-				</li>
-				<li>
-					<blockquote>Vestibulum consequat tellus ac risus dictum aliquet. Duis varius felis sed diam pharetra placerat ut id elit. Curabitur sollicitudin sem quis imperdiet rutrum. Donec pretium maximus lectus</blockquote>
-					<aside><span class="frequency">8</span><span class="action"> - <a href="#">modifier</a> - <a href="#">supprimer</a></span></aside>
-				</li>
-				<li>
-					<aside class="actionAdd"><span><a href="#">ajouter</a></aside>
-				</li>
-			</ol>
-		</article>
-	</div>
-	<div class="col-xs-6 col-lg-4">
-		<article class="confpav">
-			<header>
-				<h3>ouvertureGarage</h3>
-				<aside><a href="#">modifier</a></aside>
-			</header>
-			<ol class="confpavcontent">
-				<li>
-					<blockquote>mi porta gravida at eget</blockquote>
-					<aside><span class="frequency">8</span><span class="action"> - <a href="#">modifier</a> - <a href="#">supprimer</a></span></aside>
-				</li>
-				<li>
-					<blockquote>ros diam, bibendum sit amet risus sed, rhoncus blandit justo. Etiam sodales facilisis augue vel frin</blockquote>
-					<aside><span class="frequency">8</span><span class="action"> - <a href="#">modifier</a> - <a href="#">supprimer</a></span></aside>
-				</li>
-				<li>
-					<blockquote>Fusce viverra vitae diam quis facilisis.</blockquote>
-					<aside><span class="frequency">8</span><span class="action"> - <a href="#">modifier</a> - <a href="#">supprimer</a></span></aside>
-				</li>
-				<li>
-					<blockquote>Vestibulum consequat tellus ac risus dictum aliquet. Duis varius felis sed diam pharetra placerat ut id elit. Curabitur sollicitudin sem quis imperdiet rutrum. Donec pretium maximus lectus</blockquote>
-					<aside><span class="frequency">8</span><span class="action"> - <a href="#">modifier</a> - <a href="#">supprimer</a></span></aside>
-				</li>
-				<li>
-					<aside><span><a href="#">ajouter</a></aside>
-				</li>
-				<li>
-					<blockquote>mi porta gravida at eget</blockquote>
-					<aside><span class="frequency">8</span><span class="action"> - <a href="#">modifier</a> - <a href="#">supprimer</a></span></aside>
-				</li>
-				<li>
-					<blockquote>ros diam, bibendum sit amet risus sed, rhoncus blandit justo. Etiam sodales facilisis augue vel frin</blockquote>
-					<aside><span class="frequency">8</span><span class="action"> - <a href="#">modifier</a> - <a href="#">supprimer</a></span></aside>
-				</li>
-				<li>
-					<blockquote>Fusce viverra vitae diam quis facilisis.</blockquote>
-					<aside><span class="frequency">8</span><span class="action"> - <a href="#">modifier</a> - <a href="#">supprimer</a></span></aside>
-				</li>
-				<li>
-					<blockquote>Vestibulum consequat tellus ac risus dictum aliquet. Duis varius felis sed diam pharetra placerat ut id elit. Curabitur sollicitudin sem quis imperdiet rutrum. Donec pretium maximus lectus</blockquote>
-					<aside><span class="frequency">8</span><span class="action"> - <a href="#">modifier</a> - <a href="#">supprimer</a></span></aside>
-				</li>
-				<li>
-					<aside class="actionAdd"><span><a href="#">ajouter</a></aside>
-				</li>
-			</ol>
-		</article>
-	</div>
-	<div class="col-xs-6 col-lg-4">
-		<article class="confpav">
-			<header>
-				<h3>ouvertureGarage</h3>
-				<aside><a href="#">modifier</a></aside>
-			</header>
-			<ol class="confpavcontent">
-				<li>
-					<blockquote>mi porta gravida at eget</blockquote>
-					<aside><span class="frequency">8</span><span class="action"> - <a href="#">modifier</a> - <a href="#">supprimer</a></span></aside>
-				</li>
-				<li>
-					<blockquote>ros diam, bibendum sit amet risus sed, rhoncus blandit justo. Etiam sodales facilisis augue vel frin</blockquote>
-					<aside><span class="frequency">8</span><span class="action"> - <a href="#">modifier</a> - <a href="#">supprimer</a></span></aside>
-				</li>
-				<li>
-					<blockquote>Fusce viverra vitae diam quis facilisis.</blockquote>
-					<aside><span class="frequency">8</span><span class="action"> - <a href="#">modifier</a> - <a href="#">supprimer</a></span></aside>
-				</li>
-				<li>
-					<blockquote>Vestibulum consequat tellus ac risus dictum aliquet. Duis varius felis sed diam pharetra placerat ut id elit. Curabitur sollicitudin sem quis imperdiet rutrum. Donec pretium maximus lectus</blockquote>
-					<aside><span class="frequency">8</span><span class="action"> - <a href="#">modifier</a> - <a href="#">supprimer</a></span></aside>
-				</li>
-				<li>
-					<aside class="actionAdd"><span><a href="#">ajouter</a></aside>
-				</li>
-			</ol>
-		</article>
-	</div>
+	<pre class="console">{{console}}</pre>
 
-	<div class="col-xs-6 col-lg-4">
-		<form class="confpav">
-			<header>
-				<h3>Modification wording</h3>
-				<aside>&nbsp;</aside>
-			</header>
-			<div class="confpavcontent">
-				<div class="form-group">
-					<label for="voicekey">Voicekey</label>
-					<input type="text" class="form-control" id="voicekey" readonly aria-describedby="helpVoicekey" value="toto">
-					<p class="help-block" id="helpVoicekey">Le mot clé de ratachement.</p>
+	<div class="row">
+		<div class="col-xs-12 col-md-6 col-lg-4"  ng-repeat="(voicekey, textList) in voicekeyList  ">
+			<article class="confpav">
+				<header>
+					<h3>{{voicekey}} <span class="badge">{{textList.length}}</span></h3>
+					<aside><a href="#">modifier</a> - <a href="#">supprimer</a></aside>
+				</header>
+				<ol class="confpavcontent">
+					<li  ng-repeat="(pTextId, pText) in textList | filter:searchQuery">
+						<blockquote>{{pText.text}}</blockquote>
+						<aside><span class="frequency">{{pText.frequency}}</span><span class="action"> - <a href="#">modifier</a> - <a href="#">supprimer</a></span></aside>
+					</li>
+					<li>
+						<aside class="actionAdd"><span><a href="#">ajouter</a></aside>
+					</li>
+				</ol>
+			</article>
+		</div>
+
+		<div class="col-xs-6 col-lg-4">
+			<form class="confpav">
+				<header>
+					<h3>Modification wording</h3>
+					<aside>&nbsp;</aside>
+				</header>
+				<div class="confpavcontent">
+					<div class="form-group">
+						<label for="voicekey">Voicekey</label>
+						<input type="text" class="form-control" id="voicekey" readonly aria-describedby="helpVoicekey" value="toto">
+						<p class="help-block" id="helpVoicekey">Le mot clé de ratachement.</p>
+					</div>
+					<div class="form-group">
+						<label for="text">Wording</label>
+						<textarea class="form-control" rows="3" placeholder="text" name="text" id="text" aria-describedby="helpText"></textarea>
+						<span class="input-group-btn">
+							<button class="btn btn-default btn-xs" type="button">{0}</button>
+						</span>
+						<p class="help-block" id="helpText">Votre texte avec utilisation possible d'emplacement variable comme : {0}</p>
+					</div>
+					<div class="form-group">
+						<label for="frequency">Fréquence</label>
+						<input type="number" value="1" min="0" max="100" aria-describedby="helpFrenquency" >
+						<p class="help-block" id="helpFrenquency">La fréquence à laquel ce text peut être choisie. Utiliser 0 pour désactiver ce texte.</p>
+					</div>
+					<div class="btn-group" role="group">
+						<button type="submit" class="btn btn-success">Valider</button>
+						<button type="reset" class="btn btn-danger">Annuler</button>
+					</div>
 				</div>
-				<div class="form-group">
-					<label for="text">Wording</label>
-					<textarea class="form-control" rows="3" placeholder="text" name="text" id="text" aria-describedby="helpText"></textarea>
-					<span class="input-group-btn">
-						<button class="btn btn-default btn-xs" type="button">{0}</button>
-					</span>
-					<p class="help-block" id="helpText">Votre texte avec utilisation possible d'emplacement variable comme : {0}</p>
+			</form>
+		</div>
+
+		<div class="col-xs-6 col-lg-4">
+			<form class="confpav">
+				<header>
+					<h3>Modification Voicekey</h3>
+					<aside>&nbsp;</aside>
+				</header>
+				<div class="confpavcontent">
+					<div class="form-group">
+						<label for="voicekey">Voicekey</label>
+						<input type="text" class="form-control" id="voicekey" aria-describedby="helpVoicekey" value="toto">
+						<p class="help-block" id="helpVoicekey">Le mot clé de ratachement.</p>
+					</div>
+					<div class="btn-group" role="group">
+						<button type="submit" class="btn btn-success">Valider</button>
+						<button type="reset" class="btn btn-danger">Annuler</button>
+					</div>
 				</div>
-				<div class="form-group">
-					<label for="frequency">Fréquence</label>
-					<input type="number" value="1" min="0" max="100" aria-describedby="helpFrenquency" >
-					<p class="help-block" id="helpFrenquency">La fréquence à laquel ce text peut être choisie. Utiliser 0 pour désactiver ce texte.</p>
-				</div>
-				<div class="btn-group" role="group">
-					<button type="submit" class="btn btn-success">Valider</button>
-					<button type="reset" class="btn btn-danger">Annuler</button>
-				</div>
-			</div>
-		</form>
+			</form>
+		</div>
 	</div>
-
-	<div class="col-xs-6 col-lg-4">
-		<form class="confpav">
-			<header>
-				<h3>Modification Voicekey</h3>
-				<aside>&nbsp;</aside>
-			</header>
-			<div class="confpavcontent">
-				<div class="form-group">
-					<label for="voicekey">Voicekey</label>
-					<input type="text" class="form-control" id="voicekey" aria-describedby="helpVoicekey" value="toto">
-					<p class="help-block" id="helpVoicekey">Le mot clé de ratachement.</p>
-				</div>
-				<div class="btn-group" role="group">
-					<button type="submit" class="btn btn-success">Valider</button>
-					<button type="reset" class="btn btn-danger">Annuler</button>
-				</div>
-			</div>
-		</form>
-	</div>
-
-</div>
-
-<pre class="console">
-	{{4+5}}
-</pre>
 </section>

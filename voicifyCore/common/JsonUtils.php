@@ -13,7 +13,7 @@ class JsonUtils {
 	*/
 	public static function jFile2Array($jFilePath) {
 		$content = utf8_encode(file_get_contents($jFilePath));
-var_dump($content); exit;
+
 		if ($content === false)
 			throw new Exception("Can't read input file $jFilePath");
 

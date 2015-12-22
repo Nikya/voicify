@@ -4,7 +4,7 @@
 define ('DIR_CONF_GLOBAL', 'voicifyCore/config/global.ini');
 
 // Fichier des textes
-define ('DIR_CONF_TXT', 'voicifyCore/config/voicekey.json');
+define ('DIR_CONF_TXT', 'voicifyCore/config');
 
 if (!extension_loaded('intl')) {
 	$msg = "Internationalization extension not available. Install it. See http://php.net/manual/fr/intl.installation.php.";

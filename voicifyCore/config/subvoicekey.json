@@ -1,0 +1,52 @@
+{
+  "theMaster": [
+    {
+      "text": "Maître",
+      "frequency": 4
+    },
+    {
+      "text": "Monsieur",
+      "frequency": 4
+    },
+    {
+      "text": "Monsieur Hollande",
+      "frequency": 2
+    },
+    {
+      "text": "Monsieur Connard",
+      "frequency": 0
+    },
+    {
+      "text": "Votre majesté",
+      "frequency": 1
+    }
+  ],
+  "garage1": [
+    {
+      "text": "principale",
+      "frequency": 3
+    },
+    {
+      "text": "de Monsieur",
+      "frequency": 1
+    },
+    {
+      "text": "de la Mercedes",
+      "frequency": 1
+    }
+  ],
+  "garage2": [
+    {
+      "text": "secondaire",
+      "frequency": 3
+    },
+    {
+      "text": "de Madame",
+      "frequency": 1
+    },
+    {
+      "text": "de la Twingo",
+      "frequency": 1
+    }
+  ]
+}
