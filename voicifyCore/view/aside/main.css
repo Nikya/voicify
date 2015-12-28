@@ -94,6 +94,12 @@ blockquote.phrase {
 *** Config **************
 *************************/
 
+.placeholder {
+	background-color: #e3c7ff;
+	color:#a861ff;
+	font-family: monospace;
+}
+
 .v-toolbar {
 	background-color: #DEDEDE;
 }

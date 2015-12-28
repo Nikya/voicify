@@ -5,7 +5,7 @@ app.controller('configWordingCtrl', function ($scope, $http) {
 	$scope.consoleDebug = true;
 	$scope.console = "";
 	$scope.voicekeyList;
-	$scope.newVoicekey="TOTO%* 51to to";
+	$scope.newVoicekey="";
 
 	$http({
 		method: 'GET',
@@ -46,4 +46,11 @@ app.controller('configWordingCtrl', function ($scope, $http) {
 		else if (lvl==2)
 			$scope.console = msg;
 	}
+});
+
+app.filter('placeholderize', function($sce) {
+	return function(value) {
+		var fValue = value.replace(/({.+?})/g, "<span class=\"placeholder\">$1</span>");
+		return $sce.trustAsHtml(fValue);
+	};
 });
