@@ -104,8 +104,12 @@ blockquote.phrase {
 	background-color: #DEDEDE;
 }
 
+.miniBtHelper {
+	font-size: 0.7em;
+}
+
 /** Edite Form */
-#editeForm {
+.editeForm {
 	background-color: #DEDEDE;
 	padding:1px 15px;
 }

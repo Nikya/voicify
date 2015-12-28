@@ -1,6 +1,7 @@
 /** L'application de configuration */
 var app = angular.module('appConfigWording', []);
 
+/******************************************/
 /** Controleur Principale */
 app.controller('configWordingCtrl', function ($scope, $http) {
 
@@ -36,6 +37,36 @@ app.controller('configWordingCtrl', function ($scope, $http) {
 		}
 	};
 
+	/** Fonction d'ajout d'un VK */
+	$scope.editVk = function(voicekey, i) {
+		$scope.$broadcast('editVkEvent', {voicekey:voicekey, i:i});
+	};
+
+	/** Fonction de supression d'un Vk complet */
+	$scope.deleteVk = function(voicekey) {
+		delete $scope.voicekeyList[voicekey];
+	};
+
+	/** Fonction d'édition d'un Vk */
+	$scope.editVk = function(voicekey) {
+		$scope.$broadcast('editVkEvent', voicekey);
+	};
+
+	/** Fonction d'edition d'un texte paramétré */
+	$scope.editPtext = function(voicekey, i) {
+		$scope.$broadcast('editPtextEvent', {voicekey:voicekey, i:i});
+	};
+
+	/** Fonction de supression d'un text paramétré */
+	$scope.deletePtext = function(voicekey, i) {
+		$scope.voicekeyList[voicekey].splice(i, 1);
+	};
+
+	/** Fonction de supression d'un text paramétré */
+	$scope.addPtext = function(voicekey, i) {
+		$scope.$broadcast('addPtext', voicekey);
+	};
+
 	/** Tracer un mesage dans la console */
 	$scope.trace = function (lvl, msg) {
 		// Debug
@@ -53,15 +84,119 @@ app.controller('configWordingCtrl', function ($scope, $http) {
 	}
 });
 
+/******************************************/
+/** Controleur Secondaire pour edition de pText*/
+app.controller('editTextCtrl', function ($scope) {
+	/** Formulaire visible ? */
+	$scope.editTextOn = false;
+
+	/** Mode d'edition courant */
+	var editTextMode = "EDIT";
+
+	/** Index du pText en cours d'édition */
+	var pTextIndex;
+
+	/** Point d'entré en provenance du controleur principale pour edition */
+	$scope.$on('editPtextEvent', function (event, args) {
+		pTextIndex = args.i;
+
+		var pText = $scope.voicekeyList[args.voicekey][pTextIndex];
+
+		$scope.edtVoicekey = args.voicekey;
+		$scope.edtText = pText.text;
+		$scope.edtFrequency = pText.frequency;
+		$scope.cntPlaceholder = 0;
+		updateBntPalceholder();
+		$scope.editTextOn = true;
+		editTextMode = "EDIT";
+	});
+
+	/** Point d'entré en provenance du controleur principale pour ajout */
+	$scope.$on('addPtext', function (event, args) {
+		$scope.edtVoicekey = args;
+		$scope.edtText = "";
+		$scope.edtFrequency = 1;
+		$scope.cntPlaceholder = 0;
+		updateBntPalceholder();
+		$scope.editTextOn = true;
+		editTextMode = "ADD";
+	});
+
+	/** Mise à jours du bouton d'ajout des placeholder */
+	function updateBntPalceholder() {
+		$scope.bntPalceholder = "{"+$scope.cntPlaceholder+"}";
+	}
+
+	/** Ajouter un placeholders au texte */
+	$scope.concatPlaceholder = function() {
+		$scope.edtText = $scope.edtText + " " + $scope.bntPalceholder;
+		$scope.cntPlaceholder = $scope.cntPlaceholder+1;
+		updateBntPalceholder();
+	};
+
+	/** Annuler l'edition */
+	$scope.cancel = function() {
+		$scope.editTextOn = false;
+	};
+
+	/** Valider l'edition */
+	$scope.valid = function() {
+		if (editTextMode=="EDIT") {
+			var pText = $scope.voicekeyList[$scope.edtVoicekey][pTextIndex];
+			pText.text=$scope.edtText;
+			pText.frequency=$scope.edtFrequency;
+			$scope.editTextOn = false;
+		} else if (editTextMode=="ADD") {
+			var pText = {
+				text : $scope.edtText,
+				frequency : $scope.edtFrequency
+			};
+
+			$scope.voicekeyList[$scope.edtVoicekey].push(pText);
+
+			$scope.editTextOn = false;
+		}
+	};
+});
+
+
+/******************************************/
+/** Controleur Secondaire pour edition de VK */
+app.controller('editVkCtrl', function ($scope) {
+	/** Formulaire visible ? */
+	$scope.editVkOn = false;
+
+	var oldVoicekey;
+
+	/** Point d'entré en provenance du controleur principale pour edition */
+	$scope.$on('editVkEvent', function (event, voicekey) {
+		oldVoicekey = voicekey;
+		$scope.edtVoicekey = voicekey;
+		$scope.editVkOn = true;
+	});
+
+	/** Annuler l'edition */
+	$scope.cancel = function() {
+		$scope.editVkOn = false;
+	};
+
+	/** Valider l'edition */
+	$scope.valid = function() {
+		if($scope.voicekeyList.hasOwnProperty(oldVoicekey)) {
+			$scope.voicekeyList[$scope.edtVoicekey] = $scope.voicekeyList[oldVoicekey];
+			delete $scope.voicekeyList[oldVoicekey];
+		}
+		$scope.editVkOn = false;
+	};
+});
+
+/******************************************/
+/** Autres */
+
 /** Filtre pour mise en évidence des placeholders des textes */
 app.filter('placeholderize', function($sce) {
 	return function(value) {
 		var fValue = value.replace(/({.+?})/g, "<span class=\"placeholder\">$1</span>");
 		return $sce.trustAsHtml(fValue);
 	};
-});
-
-/** Controleur Secondaire pour edition */
-app.controller('editTextCtrl', function ($scope) {
-alert($scope);
 });

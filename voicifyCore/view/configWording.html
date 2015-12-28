@@ -18,7 +18,10 @@
 				<ul class="nav navbar-nav">
 					<li>
 						<form class="navbar-form navbar-right" role="search">
-							<input type="text" class="form-control" placeholder="Recherche" ng-model="searchQuery">
+							<div class="input-group">
+								<input type="text" class="form-control" placeholder="Recherche" ng-model="searchQuery">
+								<div class="input-group-btn"><button type="button" class="btn btn-default" aria-label="Clear" ng-click="searchQuery=''"><span class="glyphicon glyphicon-remove"></span></button></div>
+							</div>
 						</form>
 					</li>
 					<li>
@@ -33,55 +36,80 @@
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
 					<li>
-						<button type="button" class="btn btn-default navbar-btn btn-success">Sauvegarder tout</button>
+						<button type="button" class="btn btn-default navbar-btn btn-success" title="Sauvegarder tous les changements effectués sur cette pages">Sauvegarder <div class="miniBtHelper">tous les changements</div></button>
 					</li>
 					<li>
-						<button type="button" class="btn btn-default navbar-btn btn-danger">Annuler</button>
+						<button type="button" class="btn btn-default navbar-btn btn-danger" title="Annuler tous les changements effectués sur cette pages" onclick="location.reload();">Annuler <div class="miniBtHelper">tous les changements</div></button>
 					</li>
 				</ul>
 			</div><!--/.nav-collapse -->
 		</div><!--/.container-fluid -->
 	</nav>
 
-	<!-- EDITE FORMS -->
-	<div id="editeForm">
-		<form class="form-horizontal" id="voicekeyEditForm" ng-controller"editTextCtrl">
-			<h3>Modification text</h3>
+	<!-- EDITE pText FORMS -->
+	<form class="form-horizontal editeForm" id="pTextEditForm" name="pTextEditForm" ng-controller="editTextCtrl" ng-show="editTextOn">
+		<h3>Modification de texte</h3>
 
-			<div class="form-group">
-				<label for="voicekey" class="col-sm-2 control-label">Voicekey</label>
-				<div class="col-sm-10">
-					<input type="text" class="form-control" id="voicekey" readonly aria-describedby="helpVoicekey" value="toto1">
-					<p class="help-block" id="helpVoicekey">Le mot clé de ratachement. (Ne peux pas être changé)</p>
+		<div class="form-group" ng-class="{ 'has-error' : pTextEditForm.voicekey.$invalid && !pTextEditForm.voicekey.$pristine }">
+			<label for="voicekey" class="col-sm-2 control-label">Voicekey</label>
+			<div class="col-sm-10">
+				<div class="input-group">
+					<span class="input-group-addon" id="basic-addon1">#</span>
+					<input type="text" class="form-control" id="voicekey" name="voicekey" readonly aria-describedby="helpVoicekey" ng-model="edtVoicekey" required>
 				</div>
+				<p class="help-block" id="helpVoicekey">Le mot-clé de ratachement. (Ne peux pas être changé)</p>
 			</div>
-			<div class="form-group">
-				<label for="text" class="col-sm-2 control-label">Texte</label>
-				<div class="col-sm-10">
-					<div class="input-group">
-						<input type="text" class="form-control" id="text" aria-describedby="helpText" value="toto2">
-						<span class="input-group-btn"><button class="btn btn-default placeholder" type="button">{9}</button></span>
-  					</div>
-					<p class="help-block" id="helpText">Votre texte avec utilisation possible d'emplacement variable comme : <span class="placeholder">{0}</span></p>
-				</div>
-			</div>
-			<div class="form-group">
-				<label for="frequency" class="col-sm-2 control-label">Fréquence</label>
-				<div class="col-sm-10">
-					<input type="number" class="form-control" id="frequency" aria-describedby="helpFrenquency" style="width:auto" value="1" min="0" max="100" >
-					<p class="help-block" id="helpFrenquency">La fréquence à laquelle ce text peut être choisi. Utiliser 0 pour désactiver ce texte.</p>
-				</div>
-			</div>
-			<div class="form-group">
-				<div class="col-sm-offset-2 col-sm-10">
-					<div class="btn-group" role="group">
-						<button type="submit" class="btn btn-success">Valider</button>
-						<button type="reset" class="btn btn-danger">Annuler</button>
+		</div>
+		<div class="form-group" ng-class="{ 'has-error' : pTextEditForm.text.$invalid && !pTextEditForm.text.$pristine }">
+			<label for="text" class="col-sm-2 control-label">Texte</label>
+			<div class="col-sm-10">
+				<div class="input-group">
+					<input type="text" class="form-control" id="text" name="text" aria-describedby="helpText" ng-model="edtText" required>
+					<span class="input-group-btn"><button class="btn btn-default placeholder" type="button" ng-click="concatPlaceholder()">{{bntPalceholder}}</button></span>
 					</div>
+				<p class="help-block" id="helpText">Votre texte avec utilisation possible d'emplacement variable comme <span class="placeholder">{{bntPalceholder}}</span></p>
+			</div>
+		</div>
+		<div class="form-group" ng-class="{ 'has-error' : pTextEditForm.frequency.$invalid && !pTextEditForm.frequency.$pristine }">
+			<label for="frequency" class="col-sm-2 control-label">Fréquence</label>
+			<div class="col-sm-10">
+				<input type="number" class="form-control" id="frequency" name="frequency" aria-describedby="helpFrenquency" style="width:auto" value="1" min="0" max="100" ng-model="edtFrequency" required>
+				<p class="help-block" id="helpFrenquency">La fréquence à laquelle ce texte peut être choisi. Utiliser 0 pour désactiver ce texte.</p>
+			</div>
+		</div>
+		<div class="form-group">
+			<div class="col-sm-offset-2 col-sm-10">
+				<div class="btn-group" role="group">
+					<button type="submit" class="btn btn-success" ng-click="valid()" ng-disabled="pTextEditForm.$invalid">Valider</button>
+					<button class="btn btn-danger" ng-click="cancel()">Annuler</button>
 				</div>
 			</div>
-		</form>
-	</div>
+		</div>
+	</form>
+
+	<!-- EDITE VK FORMS -->
+	<form class="form-horizontal editeForm" id="voicekeyEditForm" name="voicekeyEditForm" ng-controller="editVkCtrl" ng-show="editVkOn">
+		<h3>Modification d'un Voicekey</h3>
+
+		<div class="form-group" ng-class="{ 'has-error' : voicekeyEditForm.voicekey.$invalid && !voicekeyEditForm.voicekey.$pristine }">
+			<label for="voicekey" class="col-sm-2 control-label">Voicekey</label>
+			<div class="col-sm-10">
+				<div class="input-group">
+					<span class="input-group-addon" id="basic-addon1">#</span>
+					<input type="text" class="form-control" id="voicekey" name="voicekey" aria-describedby="helpVoicekey" ng-model="edtVoicekey" required>
+				</div>
+				<p class="help-block" id="helpVoicekey">Le mot-clé de ratachement.</p>
+			</div>
+		</div>
+		<div class="form-group">
+			<div class="col-sm-offset-2 col-sm-10">
+				<div class="btn-group" role="group">
+					<button type="submit" class="btn btn-success" ng-click="valid()" ng-disabled="voicekeyEditForm.$invalid">Valider</button>
+					<button class="btn btn-danger" ng-click="cancel()">Annuler</button>
+				</div>
+			</div>
+		</div>
+	</form>
 
 	<!-- CONSOLE -->
 	<pre class="console">{{console}}</pre>
@@ -92,15 +120,21 @@
 			<article class="confpav">
 				<header>
 					<h3>{{voicekey}} <span class="badge">{{textList.length}}</span></h3>
-					<aside><a href="#">modifier</a> - <a href="#">supprimer</a></aside>
+					<aside>
+						<a href="#" ng-click="editVk(voicekey)">modifier</a> -
+						<a href="#" ng-click="deleteVk(voicekey)">supprimer</a>
+					</aside>
 				</header>
 				<ol class="confpavcontent">
 					<li  ng-repeat="(pTextId, pText) in textList | filter:searchQuery">
 						<blockquote ng-bind-html="pText.text | placeholderize"></blockquote>
-						<aside><span class="frequency">{{pText.frequency}}</span><span class="action"> - <a href="#">modifier</a> - <a href="#">supprimer</a></span></aside>
+						<aside><span class="frequency">{{pText.frequency}}</span><span class="action"> -
+							<a href="#" ng-click="editPtext(voicekey, pTextId)">modifier</a> -
+							<a href="#" ng-click="deletePtext(voicekey, pTextId)">supprimer</a></span>
+						</aside>
 					</li>
 					<li>
-						<aside class="actionAdd"><span><a href="#">ajouter</a></aside>
+						<aside class="actionAdd" ng-click="addPtext(voicekey)"><span><a href="#">ajouter</a></aside>
 					</li>
 				</ol>
 			</article>
