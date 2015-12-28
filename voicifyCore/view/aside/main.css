@@ -104,6 +104,12 @@ blockquote.phrase {
 	background-color: #DEDEDE;
 }
 
+/** Edite Form */
+#editeForm {
+	background-color: #DEDEDE;
+	padding:1px 15px;
+}
+
 .confpav a,
 .confpav a:visited {
 	color:#3ea64d;

@@ -2,7 +2,7 @@
 
 <section ng-app="appConfigWording" ng-controller="configWordingCtrl as ctrl">
 
-	<!-- Static navbar -->
+	<!-- TOOLBAR : VOICEKEY -->
 	<nav class="navbar navbar-default v-toolbar">
 		<div class="container-fluid">
 			<div class="navbar-header">
@@ -33,7 +33,7 @@
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
 					<li>
-						<button type="button" class="btn btn-default navbar-btn btn-success">Sauvegarder</button>
+						<button type="button" class="btn btn-default navbar-btn btn-success">Sauvegarder tout</button>
 					</li>
 					<li>
 						<button type="button" class="btn btn-default navbar-btn btn-danger">Annuler</button>
@@ -43,8 +43,50 @@
 		</div><!--/.container-fluid -->
 	</nav>
 
+	<!-- EDITE FORMS -->
+	<div id="editeForm">
+		<form class="form-horizontal" id="voicekeyEditForm" ng-controller"editTextCtrl">
+			<h3>Modification text</h3>
+
+			<div class="form-group">
+				<label for="voicekey" class="col-sm-2 control-label">Voicekey</label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" id="voicekey" readonly aria-describedby="helpVoicekey" value="toto1">
+					<p class="help-block" id="helpVoicekey">Le mot clé de ratachement. (Ne peux pas être changé)</p>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="text" class="col-sm-2 control-label">Texte</label>
+				<div class="col-sm-10">
+					<div class="input-group">
+						<input type="text" class="form-control" id="text" aria-describedby="helpText" value="toto2">
+						<span class="input-group-btn"><button class="btn btn-default placeholder" type="button">{9}</button></span>
+  					</div>
+					<p class="help-block" id="helpText">Votre texte avec utilisation possible d'emplacement variable comme : <span class="placeholder">{0}</span></p>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="frequency" class="col-sm-2 control-label">Fréquence</label>
+				<div class="col-sm-10">
+					<input type="number" class="form-control" id="frequency" aria-describedby="helpFrenquency" style="width:auto" value="1" min="0" max="100" >
+					<p class="help-block" id="helpFrenquency">La fréquence à laquelle ce text peut être choisi. Utiliser 0 pour désactiver ce texte.</p>
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-offset-2 col-sm-10">
+					<div class="btn-group" role="group">
+						<button type="submit" class="btn btn-success">Valider</button>
+						<button type="reset" class="btn btn-danger">Annuler</button>
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+
+	<!-- CONSOLE -->
 	<pre class="console">{{console}}</pre>
 
+	<!-- LISTING -->
 	<div class="row">
 		<div class="col-xs-12 col-md-6 col-lg-4"  ng-repeat="(voicekey, textList) in voicekeyList  ">
 			<article class="confpav">
@@ -62,59 +104,6 @@
 					</li>
 				</ol>
 			</article>
-		</div>
-
-		<div class="col-xs-6 col-lg-4">
-			<form class="confpav">
-				<header>
-					<h3>Modification wording</h3>
-					<aside>&nbsp;</aside>
-				</header>
-				<div class="confpavcontent">
-					<div class="form-group">
-						<label for="voicekey">Voicekey</label>
-						<input type="text" class="form-control" id="voicekey" readonly aria-describedby="helpVoicekey" value="toto">
-						<p class="help-block" id="helpVoicekey">Le mot clé de ratachement.</p>
-					</div>
-					<div class="form-group">
-						<label for="text">Wording</label>
-						<textarea class="form-control" rows="3" placeholder="text" name="text" id="text" aria-describedby="helpText"></textarea>
-						<span class="input-group-btn">
-							<button class="btn btn-default btn-xs" type="button">{0}</button>
-						</span>
-						<p class="help-block" id="helpText">Votre texte avec utilisation possible d'emplacement variable comme : {0}</p>
-					</div>
-					<div class="form-group">
-						<label for="frequency">Fréquence</label>
-						<input type="number" value="1" min="0" max="100" aria-describedby="helpFrenquency" >
-						<p class="help-block" id="helpFrenquency">La fréquence à laquel ce text peut être choisie. Utiliser 0 pour désactiver ce texte.</p>
-					</div>
-					<div class="btn-group" role="group">
-						<button type="submit" class="btn btn-success">Valider</button>
-						<button type="reset" class="btn btn-danger">Annuler</button>
-					</div>
-				</div>
-			</form>
-		</div>
-
-		<div class="col-xs-6 col-lg-4">
-			<form class="confpav">
-				<header>
-					<h3>Modification Voicekey</h3>
-					<aside>&nbsp;</aside>
-				</header>
-				<div class="confpavcontent">
-					<div class="form-group">
-						<label for="voicekey">Voicekey</label>
-						<input type="text" class="form-control" id="voicekey" aria-describedby="helpVoicekey" value="toto">
-						<p class="help-block" id="helpVoicekey">Le mot clé de ratachement.</p>
-					</div>
-					<div class="btn-group" role="group">
-						<button type="submit" class="btn btn-success">Valider</button>
-						<button type="reset" class="btn btn-danger">Annuler</button>
-					</div>
-				</div>
-			</form>
 		</div>
 	</div>
 </section>
