@@ -21,6 +21,23 @@ class JsonUtils {
 	}
 
 	////////////////////////////////////////////////////////////////////////////
+	/** Sauvegarde une chaine Json dans un fichier
+	*
+	* @param $dataStr Donnée brut au format Json
+	* @param $jFilePath Chemin du fichier dans lequel sauvegarder
+	*/
+	public static function jString2JFile($dataStr, $jFilePath) {
+		// Check Json
+		$jDecode = json_decode($dataStr);
+		JsonUtils::throwLastJsonError("Can't jString2JFile '$dataStr'");
+
+		$dataStr2 = json_encode($jDecode, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
+		JsonUtils::throwLastJsonError("Can't jString2JFile '$dataStr'");
+
+		file_put_contents($jFilePath, $dataStr2);
+	}
+
+	////////////////////////////////////////////////////////////////////////////
 	/** Charge une chaine Json en tant que tableau associatif
 	*
 	* @param $stringContent Contenue Json

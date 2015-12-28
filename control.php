@@ -22,6 +22,9 @@
 			case "get_voicekey":
 				getVoicekey();
 				break;
+			case "post_voicekey":
+				postVoicekey();
+				break;
 			default:
 				throw new Exception("Unknow action to prosess '$action'");
 		}
@@ -32,6 +35,23 @@
 	function getVoicekey() {
 		$textCollection = TextCollection::getInstance(DIR_CONF_TXT);
 		echo $textCollection->getAllVoicekeyToJson();
+	}
+
+	////////////////////////////////////////////////////////////////////////////
+	// Controleur action post Voicekey au format Json
+	function postVoicekey() {
+		if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+			$dataStr = file_get_contents("php://input");
+			$textCollection = TextCollection::getInstance(DIR_CONF_TXT);
+			echo $textCollection->setAllVoicekeyFromJsonStr($dataStr);
+
+			$a = array(
+				"success" => true,
+				"msg" => "ok"
+			);
+			echo json_encode($a);
+		} else
+			throw new Exception("Is not a POST method");
 	}
 
 	////////////////////////////////////////////////////////////////////////////
@@ -46,7 +66,6 @@
 			"success" => false,
 			"error" => $fMessage
 		);
-
 		echo json_encode($a);
 
 		die();

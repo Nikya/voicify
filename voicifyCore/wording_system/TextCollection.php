@@ -134,4 +134,10 @@ class TextCollection {
 	public function getAllVoicekeyToJson() {
 		return JsonUtils::array2JString($this->collectionVoicekey);
 	}
+
+	////////////////////////////////////////////////////////////////////////////
+	/** Obtenir le contenue complet des voicekey au format Json */
+	public function setAllVoicekeyFromJsonStr($dataStr) {
+		JsonUtils::jString2JFile($dataStr, $this->textFilePath."/voicekey.json");
+	}
 }

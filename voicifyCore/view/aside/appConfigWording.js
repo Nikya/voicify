@@ -15,14 +15,35 @@ app.controller('configWordingCtrl', function ($scope, $http) {
 		method: 'GET',
 		url: 'control.php?action=get_voicekey'
 	}).then(function successCallback(response) {
-		$scope.voicekeyList = response.data;
-		//$scope.console = $scope.voicekeyList;
+		if(response.data.success==false)
+			$scope.console = "Fail get Json voicekeyList - "+ response.data.error;
+		else
+			$scope.voicekeyList = response.data;
 	}, function errorCallback(response) {
 		if (response===undefined || response.config===undefined)
 			$scope.console = "Fail get Json voicekeyList";
 		else
 			$scope.console = '#' + response.status + " : " + response.statusText + " >> " + response.config.url;
 	});
+
+	/** Fonction de sauvegarde des modification de voicekey */
+	$scope.saveVoicekey = function() {
+		$http({
+			method: 'POST',
+			url: 'control.php?action=post_voicekey',
+			data: $scope.voicekeyList
+		}).then(function successCallback(response) {
+			if(!response.data.success)
+				$scope.console = "Fail POST Json voicekeyList - "+ response.data.error;
+			else
+				$scope.console = "Sauvegarde réussie";
+		}, function errorCallback(response) {
+			if (response===undefined || response.config===undefined)
+				$scope.console = "Fail post data Json voicekeyList";
+			else
+				$scope.console = '#' + response.status + " : " + response.statusText + " >> " + response.config.url;
+		});
+	};
 
 	/** Fonction d'ajout d'un voicekey */
 	$scope.addVoicekey = function() {
@@ -186,6 +207,7 @@ app.controller('editVkCtrl', function ($scope) {
 
 	/** Valider l'edition */
 	$scope.valid = function() {
+		$scope.edtVoicekey = $scope.edtVoicekey.trim().replace(/[^A-Z0-9]/gi, '');
 		if($scope.voicekeyList.hasOwnProperty(oldVoicekey)) {
 			$scope.voicekeyList[$scope.edtVoicekey] = $scope.voicekeyList[oldVoicekey];
 			delete $scope.voicekeyList[oldVoicekey];
