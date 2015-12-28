@@ -1,5 +1,5 @@
 /** L'application de configuration */
-var app = angular.module('appConfigWording', []);
+var app = angular.module('appConfigWording', ['ngAnimate']);
 
 /******************************************/
 /** Controleur Principale */
@@ -30,8 +30,9 @@ app.controller('configWordingCtrl', function ($scope, $http) {
 			$scope.newVoicekey = $scope.newVoicekey.replace(/[^A-Z0-9]/gi, '');
 			if (!$scope.voicekeyList.hasOwnProperty($scope.newVoicekey)) {
 				$scope.voicekeyList[$scope.newVoicekey] = [];
-				//$scope.newVoicekey = '';
-				$scope.trace(0, $scope.voicekeyList);
+				$scope.newVoicekey = '';
+				//$scope.trace(0, $scope.voicekeyList);
+				location.hash = "rowsfooter";
 			} else
 				$scope.trace(2, $scope.newVoicekey + " existe déja !");
 		}
@@ -137,6 +138,7 @@ app.controller('editTextCtrl', function ($scope) {
 	/** Annuler l'edition */
 	$scope.cancel = function() {
 		$scope.editTextOn = false;
+		location.hash = "vk_"+$scope.edtVoicekey;
 	};
 
 	/** Valider l'edition */
@@ -146,6 +148,7 @@ app.controller('editTextCtrl', function ($scope) {
 			pText.text=$scope.edtText;
 			pText.frequency=$scope.edtFrequency;
 			$scope.editTextOn = false;
+			location.hash = "vk_"+$scope.edtVoicekey;
 		} else if (editTextMode=="ADD") {
 			var pText = {
 				text : $scope.edtText,
@@ -153,8 +156,8 @@ app.controller('editTextCtrl', function ($scope) {
 			};
 
 			$scope.voicekeyList[$scope.edtVoicekey].push(pText);
-
 			$scope.editTextOn = false;
+			location.hash = "vk_"+$scope.edtVoicekey;
 		}
 	};
 });
@@ -178,6 +181,7 @@ app.controller('editVkCtrl', function ($scope) {
 	/** Annuler l'edition */
 	$scope.cancel = function() {
 		$scope.editVkOn = false;
+		location.hash = "vk_"+oldVoicekey;
 	};
 
 	/** Valider l'edition */
@@ -187,6 +191,7 @@ app.controller('editVkCtrl', function ($scope) {
 			delete $scope.voicekeyList[oldVoicekey];
 		}
 		$scope.editVkOn = false;
+		location.hash = "rowsfooter";
 	};
 });
 

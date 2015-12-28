@@ -118,7 +118,7 @@
 	<div class="row">
 		<div class="col-xs-12 col-md-6 col-lg-4"  ng-repeat="(voicekey, textList) in voicekeyList  ">
 			<article class="confpav">
-				<header>
+				<header id="vk_{{voicekey}}">
 					<h3>{{voicekey}} <span class="badge">{{textList.length}}</span></h3>
 					<aside>
 						<a href="#" ng-click="editVk(voicekey)">modifier</a> -
@@ -139,5 +139,6 @@
 				</ol>
 			</article>
 		</div>
+		<div id="rowsfooter"></div>
 	</div>
 </section>

@@ -22,12 +22,14 @@
 
 	<!-- Custom styles for this template -->
 	<link href="voicifyCore/view/aside/main.css" rel="stylesheet">
+	<link href="voicifyCore/view/aside/animations.css" rel="stylesheet">
 
 	<!-- Chargement des scripts -->
 	<script src="voicifyCore/view/aside/jquery.min.js"></script>
 	<script>window.jQuery || document.write('<script src="voicifyCore/view/aside/jquery.min.js"><\/script>')</script>
 	<script src="voicifyCore/view/aside/bootstrap/js/bootstrap.min.js"></script>
 	<script src="voicifyCore/view/aside/angular.min.js"></script>
+	<script src="voicifyCore/view/aside/angular-animate.min.js"></script>
 </head>
 <body>
 	<nav class="navbar navbar-inverse navbar-fixed-top">

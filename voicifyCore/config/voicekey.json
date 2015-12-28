@@ -34,5 +34,41 @@
       "text": "Encore une fois, je suis obligé de vous signaler que pour le garage {0}, la porte a encore été oubliée !",
       "frequency": 1
     }
+],
+  "welcome2": [
+    {
+      "text": "Salutation {0}.",
+      "frequency": 5
+    },
+    {
+      "text": "Bien le bonjour {0} ! La température intérieur est de {1}°.",
+      "frequency": 3
+    },
+    {
+      "text": "J'ai régulé la température à {1}°, en anticipation de votre retour {0} !",
+      "frequency": 3
+    },
+    {
+      "text": "Bon retour chez vous {0}, où il y fait {1}°.",
+      "frequency": 3
+    },
+    {
+      "text": "Bon retour chez vous {0}, où il y fait {1}°.",
+      "frequency": 2
+    }
+  ],
+  "garage2": [
+    {
+      "text": "La porte du garage {0} est restée ouverte.",
+      "frequency": 2
+    },
+    {
+      "text": "Un oublie de la porte du garage {0} ?",
+      "frequency": 2
+    },
+    {
+      "text": "Encore une fois, je suis obligé de vous signaler que pour le garage {0}, la porte a encore été oubliée !",
+      "frequency": 1
+    }
   ]
 }
