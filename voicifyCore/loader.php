@@ -38,7 +38,7 @@ if (!extension_loaded('intl'))
 
 // Folder
 if (!is_writable(CONF_DIR))
-	checkFail ("The configuration FOLDER is not not writable : '$conf_dir' ");
+	checkFail ('The configuration FOLDER is not not writable : "'.CONF_DIR.'" ');
 
 // Files
 checkAndInit(CONF_FILE_DEFAULT_GLOBAL, CONF_FILE_GLOBAL, 'global');
