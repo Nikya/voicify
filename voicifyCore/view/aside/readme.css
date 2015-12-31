@@ -30,6 +30,11 @@ Color''': Orange : #ffa861 > #ffe3c7
 	font-style: normal;
 }
 
+#readme blockquote em {
+	background-color:  #e3c7ff;
+	font-style: normal;
+}
+
 code {
 	color: #7BA1AD;
 	background-color: #EBEBEB;
