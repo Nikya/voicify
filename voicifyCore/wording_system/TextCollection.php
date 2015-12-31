@@ -132,6 +132,6 @@ class TextCollection {
 	////////////////////////////////////////////////////////////////////////////
 	/** Obtenir le contenue complet des voicekey au format Json */
 	public function setAllVoicekeyFromJsonStr($dataStr) {
-		JsonUtils::jString2JFile($dataStr, $this->textFilePath."/voicekey.json");
+		JsonUtils::jString2JFile($dataStr, CONF_FILE_VOICEKEY);
 	}
 }
