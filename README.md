@@ -44,6 +44,8 @@ Auteurs : [sarakha63](https://github.com/sarakha63) & [Nikya](https://github.com
 Cloner le projet sur un serveur PHP.
 
 	git clone https://github.com/Nikya/voicify
+	git submodule init
+	git submodule update
 
 ### Prerequis
 
