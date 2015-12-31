@@ -33,7 +33,7 @@
 	////////////////////////////////////////////////////////////////////////////
 	// Controleur action Get Voicekey au format Json
 	function getVoicekey() {
-		$textCollection = TextCollection::getInstance(DIR_CONF_TXT);
+		$textCollection = TextCollection::getInstance();
 		echo $textCollection->getAllVoicekeyToJson();
 	}
 
@@ -42,7 +42,7 @@
 	function postVoicekey() {
 		if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 			$dataStr = file_get_contents("php://input");
-			$textCollection = TextCollection::getInstance(DIR_CONF_TXT);
+			$textCollection = TextCollection::getInstance();
 			echo $textCollection->setAllVoicekeyFromJsonStr($dataStr);
 
 			$a = array(

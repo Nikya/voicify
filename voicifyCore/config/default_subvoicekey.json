@@ -1,24 +1,20 @@
 {
-  "theMaster": [
+  "tony": [
     {
       "text": "Maître",
-      "frequency": 4
+      "frequency": 1
     },
     {
-      "text": "Monsieur",
-      "frequency": 4
-    },
-    {
-      "text": "Monsieur Hollande",
+      "text": "Monsieur Stark",
       "frequency": 2
     },
     {
-      "text": "Monsieur Connard",
-      "frequency": 0
+      "text": "Tony",
+      "frequency": 5
     },
     {
       "text": "Votre majesté",
-      "frequency": 1
+      "frequency": 0
     }
   ],
   "garage1": [
@@ -46,6 +42,30 @@
     },
     {
       "text": "de la Twingo",
+      "frequency": 1
+    }
+  ],
+  "poubelle1": [
+    {
+      "text": "noir",
+      "frequency": 3
+    },
+    {
+      "text": "déchet ménagé",
+      "frequency": 1
+    }
+  ],
+  "poubelle2": [
+    {
+      "text": "Jaune",
+      "frequency": 3
+    },
+    {
+      "text": "trie selectif",
+      "frequency": 1
+    },
+    {
+      "text": "du recyclable",
       "frequency": 1
     }
   ]

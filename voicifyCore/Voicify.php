@@ -28,8 +28,8 @@ class Voicify {
 	////////////////////////////////////////////////////////////////////////////
 	/** Chargement des fichiers de config et texte */
 	private function loadconfig() {
-		$this->confArray = parse_ini_file(DIR_CONF_GLOBAL, true);
-		$this->textCollection = TextCollection::getInstance(DIR_CONF_TXT);
+		//$this->confArray = JsonUtils (CONF_FILE_GLOBAL);
+		$this->textCollection = TextCollection::getInstance();
 	}
 
 	////////////////////////////////////////////////////////////////////////////
@@ -76,8 +76,8 @@ class Voicify {
 		$this->tts = TextBuilder::process($text, $this->vars);
 
 		// Generate and play the sound
-		//$this->soundSystemProcess_tmp();
-		$this->soundSystemProcess();
+		$this->soundSystemProcess_tmp();
+		//$this->soundSystemProcess();
 	}
 
 	////////////////////////////////////////////////////////////////////////////

@@ -6,9 +6,6 @@
 */
 class TextCollection {
 
-	/** Chemin vers le fichier Json des textes */
-	private $textFilePath;
-
 	/** Instance du singleton */
 	private static $instance = null;
 
@@ -20,18 +17,15 @@ class TextCollection {
 
 	////////////////////////////////////////////////////////////////////////////
 	/** Constructeur du singleton*/
-	private function __construct($textFilePath) {
-		$this->textFilePath = $textFilePath;
+	private function __construct() {
 		$this->loadText();
 	}
 
 	////////////////////////////////////////////////////////////////////////////
 	/** Obtenir le singleton */
-	public static function getInstance($textFilePath) {
+	public static function getInstance() {
 		if(is_null(self::$instance))
-			self::$instance = new TextCollection($textFilePath);
-		elseif (self::$instance->textFilePath != $textFilePath)
-			self::$instance = new TextCollection($textFilePath);
+			self::$instance = new TextCollection();
 
 		return self::$instance;
 	}
@@ -39,8 +33,8 @@ class TextCollection {
 	////////////////////////////////////////////////////////////////////////////
 	/** Charger le fichier des texts dans cette class de collection */
 	private function loadText() {
-		$this->collectionVoicekey = JsonUtils::jFile2Array($this->textFilePath."/voicekey.json");
-		$this->collectionSubvoicekey = JsonUtils::jFile2Array($this->textFilePath."/subvoicekey.json");
+		$this->collectionVoicekey = JsonUtils::jFile2Array(CONF_FILE_VOICEKEY);
+		$this->collectionSubvoicekey = JsonUtils::jFile2Array(CONF_FILE_SUBVOICEKEY);
 	}
 
 	////////////////////////////////////////////////////////////////////////////

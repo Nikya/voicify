@@ -4,9 +4,9 @@
 	$finalPhrase = 'Nothing to say !';
 
 	// Lecture des paramètres
-	$pVoicekey	= (isset($_GET['voicekey']) and !empty($_GET['voicekey']))			? $_GET['voicekey'] : "welcome";
-	$pVar0		= (isset($_GET['vars'][0]) and !empty($_GET['vars'][0]))			? $_GET['vars'][0] : "theMaster";
-	$pVar1		= (isset($_GET['vars'][1]) and !empty($_GET['vars'][1]))			? $_GET['vars'][1] : "22.1";
+	$pVoicekey	= (isset($_GET['voicekey']) and !empty($_GET['voicekey']))			? $_GET['voicekey'] : "";
+	$pVar0		= (isset($_GET['vars'][0]) and !empty($_GET['vars'][0]))			? $_GET['vars'][0] : "";
+	$pVar1		= (isset($_GET['vars'][1]) and !empty($_GET['vars'][1]))			? $_GET['vars'][1] : "";
 	$pVar2		= (isset($_GET['vars'][2]) and !empty($_GET['vars'][2]))			? $_GET['vars'][2] : "";
 	$pVar3		= (isset($_GET['vars'][3]) and !empty($_GET['vars'][3]))			? $_GET['vars'][3] : "";
 	$pVar4		= (isset($_GET['vars'][4]) and !empty($_GET['vars'][4]))			? $_GET['vars'][4] : "";

@@ -1,9 +1,3 @@
-<?php
-	// Affichage des erreurs PHP
-	ini_set('display_errors',1);
-	error_reporting(E_ALL);
-?>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -56,7 +50,13 @@
 
 	<div class="starter-template" id="content">
 <!-- Content ------------------------------->
-		<pre class="console"><?php require_once('voicifyCore/loader.php') ?></pre>
+		<pre class="console"><?php
+			// Affichage des erreurs PHP
+			ini_set('display_errors',1);
+			error_reporting(E_ALL);
+
+			require_once('voicifyCore/loader.php')
+		?></pre>
 
 		<?php if (isset($_GET['voicekey'])) { ?>
 			<h2>Play</h2>

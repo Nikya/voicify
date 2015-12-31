@@ -21,43 +21,7 @@
             "frequency": 2
         }
     ],
-    "garageAbite": [
-        {
-            "text": "La porte du garage {0} est restée ouverte.",
-            "frequency": 2
-        },
-        {
-            "text": "Un oublie de la porte du garage {0} ?",
-            "frequency": 2
-        },
-        {
-            "text": "Encore une fois, je suis obligé de vous signaler que pour le garage {0}, la porte a encore été oubliée !",
-            "frequency": 0
-        }
-    ],
-    "welcome2": [
-        {
-            "text": "Salutation {0}.",
-            "frequency": 5
-        },
-        {
-            "text": "Bien le bonjour {0} ! La température intérieur est de {1}°.",
-            "frequency": 3
-        },
-        {
-            "text": "J'ai régulé la température à {1}°, en anticipation de votre retour {0} !",
-            "frequency": 3
-        },
-        {
-            "text": "Bon retour chez vous {0}, où il y fait {1}°.",
-            "frequency": 3
-        },
-        {
-            "text": "Bon retour chez vous {0}, où il y fait {1}°.",
-            "frequency": 2
-        }
-    ],
-    "garage2": [
+    "garage": [
         {
             "text": "La porte du garage {0} est restée ouverte.",
             "frequency": 2
@@ -69,6 +33,38 @@
         {
             "text": "Encore une fois, je suis obligé de vous signaler que pour le garage {0}, la porte a encore été oubliée !",
             "frequency": 1
+        },
+        {
+            "text": "Suis-je autorisée à fermer la porte du garage {0} ?",
+            "frequency": 1
+        }
+    ],
+    "rappelPoubelle": [
+        {
+            "text": "Pensez à sortir la poubelle {0} pour demain.",
+            "frequency": 1
+        },
+        {
+            "text": "Demain c'est le jour de collecte pour la poubelle {0}.",
+            "frequency": 1
+        },
+        {
+            "text": "Pensez à sortir la poubelle.",
+            "frequency": 5
+        }
+    ],
+    "alarmeOn": [
+        {
+            "text": "Armement de l'alarme, vous avez {0} minutes pour évacuer les lieux.",
+            "frequency": 2
+        },
+        {
+            "text": "J'active l'alarme. Merci de quitter les lieux dans les {0} minutes qui suivent.",
+            "frequency": 2
+        },
+        {
+            "text": "J'active l'alarme.",
+            "frequency": 5
         }
     ]
 }

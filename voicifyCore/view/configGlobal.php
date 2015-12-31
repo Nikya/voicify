@@ -8,8 +8,7 @@
 </form>
 
 <pre class="console"><?php
-	echo "<p>File path : ".DIR_CONF_GLOBAL."</p><hr/>";
+	echo "<p>File path : ".CONF_FILE_GLOBAL."</p><hr/>";
 
-	//print_r(json_decode(file_get_contents("voicify/config/global.ini")));
-	print_r(parse_ini_file("voicifyCore/config/global.ini", true));
+	print_r(json_decode(file_get_contents(CONF_FILE_GLOBAL)));
 ?></pre>
