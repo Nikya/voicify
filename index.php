@@ -23,6 +23,7 @@
 	<!-- Custom styles for this template -->
 	<link href="voicifyCore/view/aside/main.css" rel="stylesheet">
 	<link href="voicifyCore/view/aside/animations.css" rel="stylesheet">
+	<link href="voicifyCore/view/aside/readme.css" rel="stylesheet">
 
 	<!-- Chargement des scripts -->
 	<script src="voicifyCore/view/aside/jquery.min.js"></script>
@@ -70,8 +71,7 @@
 			<div class="container"><?php include("voicifyCore/view/configGlobal.php") ?></div>
 
 		<?php } else { ?>
-			<h1>Home Voicify</h1>
-			<div class="container"><p class="lead">Your home can talk now!</p></div>
+			<div class="container"><?php include("voicifyCore/view/home.php") ?></div>
 		<?php } ?>
 <!-- Fin Content ------------------------------->
 	</div>

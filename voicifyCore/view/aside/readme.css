@@ -1,0 +1,36 @@
+/** COLOR
+http://www.sessions.edu/color-calculator
+Triadic
+Color'	: Violet : #a861ff > #e3c7ff
+Color''	: Vert : #61ffa8 > #c7ffe3 > #3ea64d
+Color''': Orange : #ffa861 > #ffe3c7
+*/
+
+#readme h1, #readme h2,#readme h3,#readme h4,#readme h5,#readme h6 {
+	background-color: transparent;
+	border-width: 0 0 3px 0;
+	text-align: left;
+	font-weight: bold;
+}
+
+#readme h3 {
+	text-decoration: underline;
+}
+#readme h3,#readme h4,#readme h5,#readme h6 {
+	border-width: 0;
+}
+
+#readme blockquote {
+	border-left: 5px solid #a861ff;
+	background-color: transparent;
+	color:#a861ff;
+	padding: 3px;
+	padding-left: 3px;
+	font-size: 0.9em;
+	font-style: normal;
+}
+
+code {
+	color: #7BA1AD;
+	background-color: #EBEBEB;
+}
