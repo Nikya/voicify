@@ -21,6 +21,10 @@ h2, h1 {
 	margin: 20px 0 40px 0;
 }
 
+h2:empty {
+	display: none;
+}
+
 pre.console,
 #calledUrl,
 blockquote.phrase {

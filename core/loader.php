@@ -7,6 +7,7 @@ define ('CONF_FILE_DEFAULT_SUBVOICEKEY',	CONF_DIR.'/default_subvoicekey.json');
 define ('CONF_FILE_GLOBAL',					CONF_DIR.'/global.json');
 define ('CONF_FILE_VOICEKEY',				CONF_DIR.'/voicekey.json');
 define ('CONF_FILE_SUBVOICEKEY',			CONF_DIR.'/subvoicekey.json');
+define ('MODULE_MARKDOWN',					'core/common/php-markdown/Michelf/Markdown.php');
 
 ////////////////////////////////////////////////////////////////////////////////
 // Utils functions
@@ -32,6 +33,10 @@ function checkAndInit($defaultFile, $targetFile, $friendlyName) {
 // CHECK requirement
 if (!extension_loaded('intl'))
 	checkFail ("Internationalization extension not available. Install it. See http://php.net/manual/fr/intl.installation.php.");
+
+// Git submodules
+if (!file_exists(MODULE_MARKDOWN))
+	checkFail ('Git modules are not initialized. Please "git submodule init; git submodule update" to get : "'.MODULE_MARKDOWN.'" ');
 
 ////////////////////////////////////////////////////////////////////////////////
 // CHECK CONF FILES

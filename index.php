@@ -40,7 +40,7 @@
 		</div>
 		<div id="navbar" class="collapse navbar-collapse">
 			<ul class="nav navbar-nav">
-				<li><a href="?voicekey">Play</a></li>
+				<li><a href="?play">Play</a></li>
 				<li><a href="?config=wording">Config:wording</a></li>
 				<li><a href="?config=global">Config:Global</a></li>
 			</ul>
@@ -55,24 +55,26 @@
 			ini_set('display_errors',1);
 			error_reporting(E_ALL);
 
-			require_once('core/loader.php')
+			require_once('core/loader.php');
+
+			$title = '';
+			$target = 'core/view/home.php';
+
+			if (isset($_GET['play'])) {
+				$title = 'Play';
+				$target = 'core/view/play.php';
+			} elseif (isset($_GET['config']) and $_GET['config']=="wording") {
+				$title = 'Wordings configuration';
+				$target = 'core/view/configWording.html';
+			} elseif (isset($_GET['config']) and $_GET['config']=="global") {
+				$title = 'Global configuration';
+				$target = 'core/view/configGlobal.php';
+			}
 		?></pre>
 
-		<?php if (isset($_GET['voicekey'])) { ?>
-			<h2>Play</h2>
-			<div class="container"><?php include("core/view/play.php") ?></div>
+		<h2><?php echo $title ?></h2>
+		<div class="container"><?php include($target) ?></div>
 
-		<?php } elseif (isset($_GET['config']) and $_GET['config']=="wording") { ?>
-			<h2>Wordings configuration</h2>
-			<div class="container"><?php include("core/view/configWording.html") ?></div>
-
-		<?php } elseif (isset($_GET['config']) and $_GET['config']=="global") { ?>
-			<h2>Global configuration</h2>
-			<div class="container"><?php include("core/view/configGlobal.php") ?></div>
-
-		<?php } else { ?>
-			<div class="container"><?php include("core/view/home.php") ?></div>
-		<?php } ?>
 <!-- Fin Content ------------------------------->
 	</div>
 </body>
