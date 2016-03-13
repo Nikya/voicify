@@ -84,7 +84,7 @@ class Voicify {
 	/** Send the text to the sound system */
 	public function soundSystemProcess () {
 		//   ./executer_action.py 192.168.1.2 9090 0 0 94:de:80:72:23:f6  parle "Je suis ton paire. la force soit avec toi coucou bouh" http://192.168.1.2 100 dingdong google fr
-		$cmd = "./voicifyCore/sound_system/executer_action.py 192.168.1.2 9090 0 0 {$this->confArray['squeezplayermac']} parle \"{$this->tts}\" http://192.168.1.2 100 {$this->confArray['jingle']} {$this->confArray['engine']} {$this->confArray['params']}";
+		$cmd = "./core/sound_system/executer_action.py 192.168.1.2 9090 0 0 {$this->confArray['squeezplayermac']} parle \"{$this->tts}\" http://192.168.1.2 100 {$this->confArray['jingle']} {$this->confArray['engine']} {$this->confArray['params']}";
 		$cmd .= " 2>&1"; // To get Error also
 
 		$res = exec ($cmd, $output, $return_var);

@@ -1,6 +1,6 @@
 <?php
 // DEFINE FILE CONSTANTES
-define ('CONF_DIR',		'voicifyCore/config');
+define ('CONF_DIR',		'core/config');
 define ('CONF_FILE_DEFAULT_GLOBAL',			CONF_DIR.'/default_global.json');
 define ('CONF_FILE_DEFAULT_VOICEKEY',		CONF_DIR.'/default_voicekey.json');
 define ('CONF_FILE_DEFAULT_SUBVOICEKEY',	CONF_DIR.'/default_subvoicekey.json');
@@ -47,8 +47,8 @@ checkAndInit(CONF_FILE_DEFAULT_SUBVOICEKEY, CONF_FILE_SUBVOICEKEY, 'SubVoicekey'
 
 ////////////////////////////////////////////////////////////////////////////////
 // Class loader
-require_once('voicifyCore/wording_system/TextBuilder.php');
-require_once('voicifyCore/wording_system/TextCollection.php');
-require_once('voicifyCore/common/JsonUtils.php');
+require_once('core/wording_system/TextBuilder.php');
+require_once('core/wording_system/TextCollection.php');
+require_once('core/common/JsonUtils.php');
 
 ?>

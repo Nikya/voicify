@@ -15,7 +15,7 @@
 	if (!isset($_GET['action']) or empty($_GET['action'])) {
 		throw new Exception("No action to prosess");
 	} else {
-		require_once('voicifyCore/loader.php');
+		require_once('core/loader.php');
 		$action = $_GET['action'];
 
 		switch ($action) {

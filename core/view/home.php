@@ -2,7 +2,7 @@
 
 	# Load Lib
 	spl_autoload_register(function($class){
-		require './voicifyCore/common/php-markdown/'.preg_replace('{\\\\|_(?!.*\\\\)}', DIRECTORY_SEPARATOR, ltrim($class, '\\')).'.php';
+		require './core/common/php-markdown/'.preg_replace('{\\\\|_(?!.*\\\\)}', DIRECTORY_SEPARATOR, ltrim($class, '\\')).'.php';
 	});
 	use \Michelf\Markdown;
 

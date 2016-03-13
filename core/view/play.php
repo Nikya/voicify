@@ -1,6 +1,6 @@
 <pre class="console"><?php
 	// Initialisation
-	require_once('./voicifyCore/Voicify.php');
+	require_once('./core/Voicify.php');
 	$finalPhrase = 'Nothing to say !';
 
 	// Lecture des paramètres

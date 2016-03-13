@@ -58,8 +58,8 @@ Cloner le projet sur un serveur PHP.
 
 Droits suffisants de lecture/ecriture sur les dossiers suivants :
 
-- voicifyCore/tmp
-- voicifyCore/config
+- core/tmp
+- core/config
 
 ## Utilisation
 

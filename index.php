@@ -7,24 +7,24 @@
 	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 	<meta name="description" content="The Home voicify start page">
 	<meta name="author" content="Nikya">
-	<link rel="icon" href="voicifyCore/view/aside/favicon.ico">
+	<link rel="icon" href="core/view/aside/favicon.ico">
 
 	<title>Home Voicify</title>
 
 	<!-- Bootstrap core CSS -->
-	<link href="voicifyCore/view/aside/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	<link href="core/view/aside/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
 	<!-- Custom styles for this template -->
-	<link href="voicifyCore/view/aside/main.css" rel="stylesheet">
-	<link href="voicifyCore/view/aside/animations.css" rel="stylesheet">
-	<link href="voicifyCore/view/aside/readme.css" rel="stylesheet">
+	<link href="core/view/aside/main.css" rel="stylesheet">
+	<link href="core/view/aside/animations.css" rel="stylesheet">
+	<link href="core/view/aside/readme.css" rel="stylesheet">
 
 	<!-- Chargement des scripts -->
-	<script src="voicifyCore/view/aside/jquery.min.js"></script>
-	<script>window.jQuery || document.write('<script src="voicifyCore/view/aside/jquery.min.js"><\/script>')</script>
-	<script src="voicifyCore/view/aside/bootstrap/js/bootstrap.min.js"></script>
-	<script src="voicifyCore/view/aside/angular.min.js"></script>
-	<script src="voicifyCore/view/aside/angular-animate.min.js"></script>
+	<script src="core/view/aside/jquery.min.js"></script>
+	<script>window.jQuery || document.write('<script src="core/view/aside/jquery.min.js"><\/script>')</script>
+	<script src="core/view/aside/bootstrap/js/bootstrap.min.js"></script>
+	<script src="core/view/aside/angular.min.js"></script>
+	<script src="core/view/aside/angular-animate.min.js"></script>
 </head>
 <body>
 	<nav class="navbar navbar-inverse navbar-fixed-top">
@@ -55,23 +55,23 @@
 			ini_set('display_errors',1);
 			error_reporting(E_ALL);
 
-			require_once('voicifyCore/loader.php')
+			require_once('core/loader.php')
 		?></pre>
 
 		<?php if (isset($_GET['voicekey'])) { ?>
 			<h2>Play</h2>
-			<div class="container"><?php include("voicifyCore/view/play.php") ?></div>
+			<div class="container"><?php include("core/view/play.php") ?></div>
 
 		<?php } elseif (isset($_GET['config']) and $_GET['config']=="wording") { ?>
 			<h2>Wordings configuration</h2>
-			<div class="container"><?php include("voicifyCore/view/configWording.html") ?></div>
+			<div class="container"><?php include("core/view/configWording.html") ?></div>
 
 		<?php } elseif (isset($_GET['config']) and $_GET['config']=="global") { ?>
 			<h2>Global configuration</h2>
-			<div class="container"><?php include("voicifyCore/view/configGlobal.php") ?></div>
+			<div class="container"><?php include("core/view/configGlobal.php") ?></div>
 
 		<?php } else { ?>
-			<div class="container"><?php include("voicifyCore/view/home.php") ?></div>
+			<div class="container"><?php include("core/view/home.php") ?></div>
 		<?php } ?>
 <!-- Fin Content ------------------------------->
 	</div>

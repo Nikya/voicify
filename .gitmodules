@@ -1,3 +1,3 @@
-[submodule "voicifyCore/common/php-markdown"]
-	path = voicifyCore/common/php-markdown
+[submodule "core/common/php-markdown"]
+	path = core/common/php-markdown
 	url = https://github.com/michelf/php-markdown
