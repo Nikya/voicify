@@ -29,10 +29,10 @@ class JsonUtils {
 	public static function jString2JFile($dataStr, $jFilePath) {
 		// Check Json
 		$jDecode = json_decode($dataStr);
-		JsonUtils::throwLastJsonError("Can't jString2JFile '$dataStr'");
+		JsonUtils::throwLastJsonError("Can't jString2JFile.", $dataStr);
 
 		$dataStr2 = json_encode($jDecode, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
-		JsonUtils::throwLastJsonError("Can't jString2JFile '$dataStr'");
+		JsonUtils::throwLastJsonError("Can't jString2JFile.", $dataStr);
 
 		file_put_contents($jFilePath, $dataStr2);
 	}
@@ -46,7 +46,7 @@ class JsonUtils {
 	public static function jString2Array($jStringContent) {
 		$jDecode = json_decode($jStringContent, true);
 
-		JsonUtils::throwLastJsonError("Can't decode the Json String '$jStringContent'");
+		JsonUtils::throwLastJsonError("Can't decode the Json String.", $jStringContent);
 
 		return $jDecode;
 	}
@@ -62,7 +62,7 @@ class JsonUtils {
 		$jString = json_encode($array, JSON_UNESCAPED_UNICODE);
 
 		if ($jString === false)
-			JsonUtils::throwLastJsonError("Can't encode array to Json String. $array");
+			JsonUtils::throwLastJsonError("Can't encode array to Json String.", $array);
 
 		return $jString;
 	}
@@ -73,7 +73,7 @@ class JsonUtils {
 	* @param $array tableau à Convertir Json
 	* @return La représentation Json de ce tableau
 	*/
-	public static function throwLastJsonError($failMsg) {
+	public static function throwLastJsonError($failMsg, $mixed) {
 		$jErrorMsg;
 		$jErrorCode=json_last_error();
 
@@ -101,7 +101,8 @@ class JsonUtils {
 			break;
 		}
 
+		$mixedR = print_r($mixed, true);
 		if ($jErrorCode<>JSON_ERROR_NONE)
-			throw new Exception("$failMsg >>> Json error #$jErrorCode  : $jErrorMsg");
+			throw new Exception("$failMsg >>> Json error #$jErrorCode '$jErrorMsg'. Content : $mixedR");
 	}
 }

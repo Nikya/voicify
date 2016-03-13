@@ -40,9 +40,9 @@
 		</div>
 		<div id="navbar" class="collapse navbar-collapse">
 			<ul class="nav navbar-nav">
-				<li><a href="/voicify?voicekey">Play</a></li>
-				<li><a href="/voicify/?config=wording">Config:wording</a></li>
-				<li><a href="/voicify/?config=global">Config:Global</a></li>
+				<li><a href="?voicekey">Play</a></li>
+				<li><a href="?config=wording">Config:wording</a></li>
+				<li><a href="?config=global">Config:Global</a></li>
 			</ul>
 		</div><!--/.nav-collapse -->
 		</div>

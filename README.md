@@ -176,8 +176,8 @@ Et enfin, un aperçu de la phrase finale est visible dans le champs rose.
 Exemple :
 
 * **Voicekey** : ``welcome``  
-* **var1** : ``tony``  
-* **var2** : ``22.4``  
+* **var 0** : ``tony``  
+* **var 1** : ``22.4``  
 
 Peut générer les notifications suivantes :
 
