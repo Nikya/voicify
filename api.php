@@ -4,8 +4,8 @@
 	ini_set('display_errors', 'On');
 
 	// Redirection du système de remonté d'erreur
-	set_error_handler('myError');
-	set_exception_handler('myErrorException');
+	set_error_handler('respondError');
+	set_exception_handler('redirectException');
 
 	// Return only Json
 	header('Content-type: application/json; charset=utf-8');
@@ -15,48 +15,42 @@
 	if (!isset($_GET['action']) or empty($_GET['action'])) {
 		throw new Exception("No action to prosess");
 	} else {
-		require_once('core/loader.php');
+		require_once('core/init.php');
+		require_once('core/playApi.php');
+		require_once('core/wordingApi.php');
+		require_once('core/Voicify.php');
+
 		$action = $_GET['action'];
 
 		switch ($action) {
 			case "get_voicekey":
-				getVoicekey();
+				$apiRes = getVoicekey();
 				break;
 			case "post_voicekey":
-				postVoicekey();
+				$apiRes = postVoicekey();
+				break;
+			case "play_voicekey":
+				$apiRes = playVoicekey();
 				break;
 			default:
 				throw new Exception("Unknow action to prosess '$action'");
 		}
+
+		respond($apiRes);
 	}
 
 	////////////////////////////////////////////////////////////////////////////
-	// Controleur action Get Voicekey au format Json
-	function getVoicekey() {
-		$textCollection = TextCollection::getInstance();
-		echo $textCollection->getAllVoicekeyToJson();
+	// Normal response
+	function respond($resArray) {
+		$resArray ['success'] = true;
+		$resArray ['msg'] = 'ok';
+
+		echo json_encode($resArray);
 	}
 
 	////////////////////////////////////////////////////////////////////////////
-	// Controleur action post Voicekey au format Json
-	function postVoicekey() {
-		if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-			$dataStr = file_get_contents("php://input");
-			$textCollection = TextCollection::getInstance();
-			echo $textCollection->setAllVoicekeyFromJsonStr($dataStr);
-
-			$a = array(
-				"success" => true,
-				"msg" => "ok"
-			);
-			echo json_encode($a);
-		} else
-			throw new Exception("Is not a POST method");
-	}
-
-	////////////////////////////////////////////////////////////////////////////
-	// Error
-	function myError($level, $message, $file, $line, $context) {
+	// Error response
+	function respondError($level, $message, $file, $line, $context) {
 		if (error_reporting() === 0)
 			return;
 
@@ -64,7 +58,7 @@
 
 		$a = array(
 			"success" => false,
-			"error" => $fMessage
+			"msg" => $fMessage
 		);
 		echo json_encode($a);
 
@@ -73,9 +67,9 @@
 
 	////////////////////////////////////////////////////////////////////////////
 	// Exeption
-	function myErrorException($e) {
+	function redirectException($e) {
 		// Redirect to the error Handler
-		myError(
+		respondError(
 			18000,
 			$e->getMessage(),
 			$e->getFile(),

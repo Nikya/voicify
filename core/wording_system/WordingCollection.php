@@ -4,7 +4,7 @@
 * [Singleton]
 * Pour charger/modifier/sauver la collection de text de Voicekey et sous-voicekey
 */
-class TextCollection {
+class WordingCollection {
 
 	/** Instance du singleton */
 	private static $instance = null;
@@ -25,7 +25,7 @@ class TextCollection {
 	/** Obtenir le singleton */
 	public static function getInstance() {
 		if(is_null(self::$instance))
-			self::$instance = new TextCollection();
+			self::$instance = new WordingCollection();
 
 		return self::$instance;
 	}
@@ -68,7 +68,7 @@ class TextCollection {
 			}
 		}
 
-		print_r($newVars);
+		//print_r($newVars);
 
 		return $newVars;
 	}
@@ -102,8 +102,8 @@ class TextCollection {
 			}
 		}
 
-		if (count($simpleArray)>0)
-			print_r($simpleArray);
+		//if (count($simpleArray)>0)
+		//	print_r($simpleArray);
 
 		return $this->rand1FromArray($simpleArray);
 	}

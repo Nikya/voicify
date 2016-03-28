@@ -10,13 +10,13 @@ class Voicify {
 	private $tts;
 
 	/** Liste de varaibles à injecter dans le tts */
-	private $vars;
+	private $vars = array();
 
 	/** Array des config par défaut */
 	private $confArray;
 
 	/** Contient tout les textes */
-	private $textCollection;
+	private $WordingCollection;
 
 	////////////////////////////////////////////////////////////////////////////
 	/** Main contructor */
@@ -29,7 +29,7 @@ class Voicify {
 	/** Chargement des fichiers de config et texte */
 	private function loadconfig() {
 		//$this->confArray = JsonUtils (CONF_FILE_GLOBAL);
-		$this->textCollection = TextCollection::getInstance();
+		$this->WordingCollection = WordingCollection::getInstance();
 	}
 
 	////////////////////////////////////////////////////////////////////////////
@@ -52,28 +52,16 @@ class Voicify {
 	}
 
 	////////////////////////////////////////////////////////////////////////////
-	/** To all available voicekey */
-	public function getVoiceKeyList() {
-		return $this->textCollection->getAllVoicekey();
-	}
-
-	////////////////////////////////////////////////////////////////////////////
-	/** To all available voicekey */
-	public function getSubvoicekeyList() {
-		return $this->textCollection->getAllSubvoicekey();
-	}
-
-	////////////////////////////////////////////////////////////////////////////
 	/** To generate the sound */
 	public function process () {
 		// Get a random text corresponding to the voicekey
-		$text = $this->textCollection->getText($this->voicekey);
+		$text = $this->WordingCollection->getText($this->voicekey);
 
 		// Replace some vars to corresponding sub-voicekey
-		$this->vars = $this->textCollection->replaceSubvoicekey($this->vars);
+		$this->vars = $this->WordingCollection->replaceSubvoicekey($this->vars);
 
 		// Populate the text with vars
-		$this->tts = TextBuilder::process($text, $this->vars);
+		$this->tts = WordingBuilder::process($text, $this->vars);
 
 		// Generate and play the sound
 		$this->soundSystemProcess_tmp();
@@ -110,7 +98,8 @@ class Voicify {
 
 		$ch = curl_init($url);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-		$res = curl_exec($ch);
+//		$res = curl_exec($ch);
+$res = true;
 
 		if ($res===false)
 			throw new Exception("process_tmp fail to process $url");

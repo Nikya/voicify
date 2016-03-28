@@ -25,6 +25,12 @@
 	<script src="core/view/aside/bootstrap/js/bootstrap.min.js"></script>
 	<script src="core/view/aside/angular.min.js"></script>
 	<script src="core/view/aside/angular-animate.min.js"></script>
+	<script src="core/view/aside/api.js"></script>
+
+	<!-- Liaison PHP/Javascript -->
+	<script>
+		var currentUrl = '<?php echo "http://$_SERVER[HTTP_HOST]/voicify" ?>';
+	</script>
 </head>
 <body>
 	<nav class="navbar navbar-inverse navbar-fixed-top">
@@ -55,7 +61,7 @@
 			ini_set('display_errors',1);
 			error_reporting(E_ALL);
 
-			require_once('core/loader.php');
+			require_once('core/init.php');
 
 			$title = '';
 			$target = 'core/view/home.php';

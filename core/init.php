@@ -52,8 +52,8 @@ checkAndInit(CONF_FILE_DEFAULT_SUBVOICEKEY, CONF_FILE_SUBVOICEKEY, 'SubVoicekey'
 
 ////////////////////////////////////////////////////////////////////////////////
 // Class loader
-require_once('core/wording_system/TextBuilder.php');
-require_once('core/wording_system/TextCollection.php');
+require_once('core/wording_system/WordingBuilder.php');
+require_once('core/wording_system/WordingCollection.php');
 require_once('core/common/JsonUtils.php');
 
 ?>

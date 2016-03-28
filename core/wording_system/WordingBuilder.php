@@ -1,7 +1,7 @@
 <?php
 
 /** To build texts with his vars */
-class textBuilder {
+class WordingBuilder {
 
 	////////////////////////////////////////////////////////////////////////////
 	/** Generate the filled text */

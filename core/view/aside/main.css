@@ -23,6 +23,11 @@ h2, h1 {
 
 h2:empty {
 	display: none;
+    font-weight: bold;
+}
+
+h3 {
+	color : #ffa861;
 }
 
 pre.console,
@@ -46,7 +51,7 @@ pre.console:empty {
 	display: none;
 }
 
-pre.console {
+pre.console, #wait {
 	background-color: #404040;
 	color: #c7ffe3;
 	border:3px solid #c7ffe3;
@@ -64,15 +69,27 @@ pre.console hr {
 	border:1px solid #c7ffe3;
 }
 
+#wait {
+    border-bottom: 0;
+    text-align: center;
+}
+
+#wait ~ pre.console {
+	margin-top: 0;
+    border-top: 0;
+}
+
 /********************
 *** Play page *******
 *********************/
 #calledUrl {
-	margin-top: 0px;
+	padding: 1px;
 	width: 100%;
 	font-size: 0.8em;
 	font-family: monospace;
 	border: 2px inset #c7ffe3;
+    margin-bottom: 0;
+    word-wrap:break-word;
 }
 
 #calledUrl .base {
