@@ -52,7 +52,7 @@ class WordingCollection {
 	////////////////////////////////////////////////////////////////////////////
 	/** Obtenir une phrase aléatoire correspondante au voicekey */
 	public function getText($voicekey) {
-		return $this->extract($voicekey, $this->collectionVoicekey);
+			return $this->extract($voicekey, $this->collectionVoicekey);
 	}
 
 	////////////////////////////////////////////////////////////////////////////

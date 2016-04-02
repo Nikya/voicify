@@ -2,6 +2,8 @@
 
 /** To generate a notification speaked sound */
 class Voicify {
+	/** Default voicekey when one it's not found */
+	const DEFAULT_VOICEKEY = 'unknowVoicekey';
 
 	/** Voicekey à traiter */
 	private $voicekey;
@@ -79,7 +81,18 @@ class Voicify {
 	/** To generate the sound */
 	public function process () {
 		// Get a random text corresponding to the voicekey
-		$this->rawText = $this->WordingCollection->getText($this->voicekey);
+		try {
+			$this->rawText = $this->WordingCollection->getText($this->voicekey);
+
+		// OR the default one if it's a unknow voicekey
+		} catch (Exception $e) {
+			try {
+				$this->rawText = $this->WordingCollection->getText(Voicify::DEFAULT_VOICEKEY);
+				array_unshift($this->vars, $this->voicekey);
+			} catch (Exception $e) {
+				throw new Exception("Unknow voicekey '$this->voicekey' and default voicekey '" .Voicify::DEFAULT_VOICEKEY. "' is missing !!! ");
+			}
+		}
 
 		// Replace some vars to corresponding sub-voicekey
 		$this->commuteVars = $this->WordingCollection->replaceSubvoicekey($this->vars);
@@ -116,13 +129,13 @@ class Voicify {
 
 		$noCache = 1;
 
-		$enctext = urlencode($this->text);
+		$enctext = urlencode('ICI Ruby. ' . $this->text);
 
 		$url = "$ip:$port/cgi-bin/tts?voice=$voice&nocache=$noCache&text=$enctext";
 
 		$ch = curl_init($url);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-//		$res = curl_exec($ch);
+		//$res = curl_exec($ch);
 $res = true;
 
 		if ($res===false)

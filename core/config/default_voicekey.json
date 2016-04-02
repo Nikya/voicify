@@ -1,4 +1,10 @@
 {
+    "unknowVoicekey": [
+        {
+            "text": "Désolé, mais je ne sais pas quoi vous dire, à propos de : {0}.",
+            "frequency": 5
+        }
+    ],
     "welcome": [
         {
             "text": "Salutation {0}.",

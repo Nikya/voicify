@@ -10,13 +10,17 @@ function getVoicekeyJson() {
 ////////////////////////////////////////////////////////////////////////////
 /** To all available voicekey into array */
 function getVoiceKeyList() {
-	return WordingCollection::getInstance()->getAllVoicekey();
+	$a = WordingCollection::getInstance()->getAllVoicekey();
+	asort($a);
+	return $a;
 }
 
 ////////////////////////////////////////////////////////////////////////////
 /** To all available voicekey into array */
 function getSubvoicekeyList() {
-	return WordingCollection::getInstance()->getAllSubvoicekey();
+	$a = WordingCollection::getInstance()->getAllSubvoicekey();
+	asort($a);
+	return $a;
 }
 
 ////////////////////////////////////////////////////////////////////////////
