@@ -21,7 +21,7 @@ $(document).ready(function() {
 				var rawUrl = currentUrl+'/'+this.url;
 				$('#consolePlay').html(JSON.stringify(response, null, 2) + "\n\nurl: " + rawUrl);
 				$('#calledUrl').html(hightlightUrl(rawUrl));
-				$('.phrase').html(response.phrase);
+				$('.phrase').html(response.text);
 				$('#wait').hide();
 			},
 			error: function(xhr, ajaxOptions, thrownError){

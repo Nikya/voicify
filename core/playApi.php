@@ -16,5 +16,13 @@ function playVoicekey() {
 		$voicify->setVars($_GET['vars']);
 	$voicify->process();
 
-	return array('phrase' => $voicify->getLastText());
+	if (!isset($_GET['verbose']) or strcasecmp($_GET['verbose'], 'yes')!=0 )
+		return array('text' => $voicify->getText());
+	else
+		return array(
+			'text' => $voicify->getText(),
+			'textRaw' => $voicify->getRawText(),
+			'vars' => $voicify->getVars(),
+			'varsCommute' => $voicify->getCommuteVars()
+		);
 }

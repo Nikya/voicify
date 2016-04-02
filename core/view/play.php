@@ -55,6 +55,11 @@
 					<label for="voicekey">Voicekey</label>
 					<select class="form-control" id="voicekey" name="voicekey"><?php echo $selOption; ?></select>
 				</fieldset>
+				<fieldset class="checkbox">
+					<label for="verbose"><input type="checkbox" name="verbose" value="yes" id="verbose"> Verbose mode</label>
+					<br/>
+					<small class="text-muted">To display more details in the speack result</small>
+				</fieldset>
 				<fieldset class="form-group">
 					<label for="var1">Vars</label>
 					<small class="text-muted" style="display: block; font-size:0.7em;"><?php echo $svkStr ?></small>

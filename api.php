@@ -42,10 +42,12 @@
 	////////////////////////////////////////////////////////////////////////////
 	// Normal response
 	function respond($resArray) {
-		$resArray ['success'] = true;
-		$resArray ['msg'] = 'ok';
+		$preArray = array(
+			'success' => true,
+			'msg' => 'ok'
+		);
 
-		echo json_encode($resArray);
+		echo json_encode(array_merge($preArray, $resArray));
 	}
 
 	////////////////////////////////////////////////////////////////////////////

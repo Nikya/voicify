@@ -6,11 +6,17 @@ class Voicify {
 	/** Voicekey à traiter */
 	private $voicekey;
 
-	/** Text final à prononcer */
-	private $tts;
+	/** Text brut */
+	private $rawText;
 
-	/** Liste de varaibles à injecter dans le tts */
+	/** Text final à prononcer */
+	private $text;
+
+	/** Liste de varaibles brut à injecter dans le text */
 	private $vars = array();
+
+	/** Liste de varaibles commutés à injecter dans le text */
+	private $commuteVars = array();
 
 	/** Array des config par défaut */
 	private $confArray;
@@ -35,7 +41,7 @@ class Voicify {
 	////////////////////////////////////////////////////////////////////////////
 	/** Set vars */
 	public function setVars($vars) {
-		$this->vars = $vars;
+		$this->vars = array_filter($vars);
 	}
 
 	////////////////////////////////////////////////////////////////////////////
@@ -46,22 +52,40 @@ class Voicify {
 	}
 
 	////////////////////////////////////////////////////////////////////////////
-	/** To get last generated text */
-	public function getLastText() {
-		return $this->tts;
+	/** To get generated text */
+	public function getText() {
+		return $this->text;
+	}
+
+	////////////////////////////////////////////////////////////////////////////
+	/** To get generated text */
+	public function getRawText() {
+		return $this->rawText;
+	}
+
+	////////////////////////////////////////////////////////////////////////////
+	/** To get input repalced vars */
+	public function getVars() {
+		return $this->vars;
+	}
+
+	////////////////////////////////////////////////////////////////////////////
+	/** To get input repalced vars */
+	public function getCommuteVars() {
+		return $this->commuteVars;
 	}
 
 	////////////////////////////////////////////////////////////////////////////
 	/** To generate the sound */
 	public function process () {
 		// Get a random text corresponding to the voicekey
-		$text = $this->WordingCollection->getText($this->voicekey);
+		$this->rawText = $this->WordingCollection->getText($this->voicekey);
 
 		// Replace some vars to corresponding sub-voicekey
-		$this->vars = $this->WordingCollection->replaceSubvoicekey($this->vars);
+		$this->commuteVars = $this->WordingCollection->replaceSubvoicekey($this->vars);
 
 		// Populate the text with vars
-		$this->tts = WordingBuilder::process($text, $this->vars);
+		$this->text = WordingBuilder::process($this->rawText, $this->commuteVars);
 
 		// Generate and play the sound
 		$this->soundSystemProcess_tmp();
@@ -72,7 +96,7 @@ class Voicify {
 	/** Send the text to the sound system */
 	public function soundSystemProcess () {
 		//   ./executer_action.py 192.168.1.2 9090 0 0 94:de:80:72:23:f6  parle "Je suis ton paire. la force soit avec toi coucou bouh" http://192.168.1.2 100 dingdong google fr
-		$cmd = "./core/sound_system/executer_action.py 192.168.1.2 9090 0 0 {$this->confArray['squeezplayermac']} parle \"{$this->tts}\" http://192.168.1.2 100 {$this->confArray['jingle']} {$this->confArray['engine']} {$this->confArray['params']}";
+		$cmd = "./core/sound_system/executer_action.py 192.168.1.2 9090 0 0 {$this->confArray['squeezplayermac']} parle \"{$this->text}\" http://192.168.1.2 100 {$this->confArray['jingle']} {$this->confArray['engine']} {$this->confArray['params']}";
 		$cmd .= " 2>&1"; // To get Error also
 
 		$res = exec ($cmd, $output, $return_var);
@@ -92,9 +116,9 @@ class Voicify {
 
 		$noCache = 1;
 
-		$encTts = urlencode($this->tts);
+		$enctext = urlencode($this->text);
 
-		$url = "$ip:$port/cgi-bin/tts?voice=$voice&nocache=$noCache&text=$encTts";
+		$url = "$ip:$port/cgi-bin/tts?voice=$voice&nocache=$noCache&text=$enctext";
 
 		$ch = curl_init($url);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
