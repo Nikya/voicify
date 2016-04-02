@@ -22,12 +22,14 @@
 
 		$action = $_GET['action'];
 
+		$apiRes = null;
+
 		switch ($action) {
 			case "get_voicekey":
-				$apiRes = getVoicekey();
+				$apiRes = array('list' => getVoicekeyfull());
 				break;
 			case "post_voicekey":
-				$apiRes = postVoicekey();
+				postVoicekeyJson();
 				break;
 			case "play_voicekey":
 				$apiRes = playVoicekey();
@@ -47,7 +49,10 @@
 			'msg' => 'ok'
 		);
 
-		echo json_encode(array_merge($preArray, $resArray));
+		if ($resArray != null)
+			echo json_encode(array_merge($preArray, $resArray));
+		else
+			echo json_encode($preArray);
 	}
 
 	////////////////////////////////////////////////////////////////////////////

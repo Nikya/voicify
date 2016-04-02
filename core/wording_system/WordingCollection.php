@@ -38,14 +38,20 @@ class WordingCollection {
 	}
 
 	////////////////////////////////////////////////////////////////////////////
+	/** Obtenir la liste de tout les voicekey existants et leurs données */
+	public function getVoiceKeyFull() {
+		return $this->collectionVoicekey;
+	}
+
+	////////////////////////////////////////////////////////////////////////////
 	/** Obtenir la liste de tout les voicekey existants */
-	public function getAllVoicekey() {
+	public function getVoiceKeyList() {
 		return array_keys($this->collectionVoicekey);
 	}
 
 	////////////////////////////////////////////////////////////////////////////
 	/** Obtenir la liste de tout les voicekey existants */
-	public function getAllSubvoicekey() {
+	public function getSubvoicekeyList() {
 		return array_keys($this->collectionSubvoicekey);
 	}
 
@@ -121,12 +127,6 @@ class WordingCollection {
 			return $i;
 		} else
 			throw new Exception(__FUNCTION__.' Array is empty');
-	}
-
-	////////////////////////////////////////////////////////////////////////////
-	/** Obtenir le contenue complet des voicekey au format Json */
-	public function getAllVoicekeyToJson() {
-		return JsonUtils::array2JString($this->collectionVoicekey);
 	}
 
 	////////////////////////////////////////////////////////////////////////////

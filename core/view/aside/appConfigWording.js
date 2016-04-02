@@ -13,12 +13,12 @@ app.controller('configWordingCtrl', function ($scope, $http) {
 	/** Récupération des données distantes */
 	$http({
 		method: 'GET',
-		url: 'control.php?action=get_voicekey'
+		url: 'api.php?action=get_voicekey'
 	}).then(function successCallback(response) {
 		if(response.data.success==false)
 			$scope.console = "Fail get Json voicekeyList - "+ response.data.error;
 		else
-			$scope.voicekeyList = response.data;
+			$scope.voicekeyList = response.data.list;
 	}, function errorCallback(response) {
 		if (response===undefined || response.config===undefined)
 			$scope.console = "Fail get Json voicekeyList";
@@ -30,7 +30,7 @@ app.controller('configWordingCtrl', function ($scope, $http) {
 	$scope.saveVoicekey = function() {
 		$http({
 			method: 'POST',
-			url: 'control.php?action=post_voicekey',
+			url: 'api.php?action=post_voicekey',
 			data: $scope.voicekeyList
 		}).then(function successCallback(response) {
 			if(!response.data.success)
@@ -38,6 +38,7 @@ app.controller('configWordingCtrl', function ($scope, $http) {
 			else
 				$scope.console = "Sauvegarde réussie";
 		}, function errorCallback(response) {
+			console.log(response);
 			if (response===undefined || response.config===undefined)
 				$scope.console = "Fail post data Json voicekeyList";
 			else
