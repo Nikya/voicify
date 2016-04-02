@@ -58,7 +58,7 @@
 				<fieldset class="checkbox">
 					<label for="verbose"><input type="checkbox" name="verbose" value="yes" id="verbose"> Verbose mode</label>
 					<br/>
-					<small class="text-muted">To display more details in the speack result</small>
+					<small class="text-muted">To display more details in the speak result</small>
 				</fieldset>
 				<fieldset class="form-group">
 					<label for="var1">Vars</label>

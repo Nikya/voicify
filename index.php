@@ -25,7 +25,7 @@
 	<script src="core/view/aside/bootstrap/js/bootstrap.min.js"></script>
 	<script src="core/view/aside/angular.min.js"></script>
 	<script src="core/view/aside/angular-animate.min.js"></script>
-	<script src="core/view/aside/api.js"></script>
+	<script src="core/view/aside/main.js"></script>
 
 	<!-- Liaison PHP/Javascript -->
 	<script>
