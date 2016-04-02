@@ -4,7 +4,7 @@ var apiUrl = 'api.php';
 
 $(document).ready(function() {
 
-	// PLAY VOICEKEY
+	// PLAY VOICEKEY7
 	$('#playVoicekey').on('submit', function(e) {
 		$('#wait').show();
 		$('#consolePlay').html('. . .');
@@ -18,14 +18,16 @@ $(document).ready(function() {
 			data: $this.serialize(),
 			dataType: 'json', // JSON
 			success: function(response, textStatus, jqXHR){
-				$('#consolePlay').html(JSON.stringify(response, null, 2));
-				$('#calledUrl').html( (currentUrl+'/'+this.url).replace(/vars%5B%5D/g, 'vars[]') );
+				var rawUrl = currentUrl+'/'+this.url;
+				$('#consolePlay').html(JSON.stringify(response, null, 2) + "\n\nurl: " + rawUrl);
+				$('#calledUrl').html(hightlightUrl(rawUrl));
 				$('.phrase').html(response.phrase);
 				$('#wait').hide();
 			},
 			error: function(xhr, ajaxOptions, thrownError){
+				var rawUrl = currentUrl+'/'+this.url;
 				$('#consolePlay').html(xhr.status + " : " + thrownError);
-				$('#calledUrl').html( (currentUrl+'/'+this.url).replace(/vars%5B%5D/g, 'vars[]') );
+				$('#calledUrl').html(rawUrl);
 				$('#wait').hide();
 			}
 		});
@@ -33,3 +35,36 @@ $(document).ready(function() {
 
 	$('#wait').hide();
 });
+
+/** Hightlight the differnets parts of the called URL.
+*
+* Available css class in #calledUrl : base, target, param, value
+*/
+function hightlightUrl(rawUrl) {
+	var clearUrl = '';
+	var rawUrl = rawUrl.replace(/%5B%5D/g, '[]');
+	var _urlBase = rawUrl.split(apiUrl+"?")[0];
+	var _urlParam = rawUrl.split(apiUrl+"?")[1];
+
+	// Base
+	clearUrl += '<span class="base">'+_urlBase+'</span>';
+	// Taget
+	clearUrl += '<span class="target">'+apiUrl+'</span>?';
+
+	// Each param-value
+	_urlParam.split("&").forEach(function(paramPair){
+		paramArray = paramPair.split('=');
+		// There is a value ?
+		if (paramArray[1].length>0)
+			clearUrl += '<span class="param">'+paramArray[0]+'</span>=<span class="value">'+paramArray[1]+'</span>&';
+	});
+
+	//var span = document.createElement('span');
+	//span.innerHTML = _urlBase;
+	//span.className = "base";
+	//clearUrl.innerHTML += span;
+
+
+	//( (currentUrl+'/'+this.url).replace(/vars%5B%5D/g, 'vars[]') );
+	return clearUrl;
+}

@@ -92,13 +92,11 @@ pre.console hr {
     word-wrap:break-word;
 }
 
-#calledUrl .base {
-	color:pink;
-}
-
-#calledUrl .param {
-	color:red;
-}
+/* Url hightlight */
+#calledUrl .base {color:#DE93FE;}
+#calledUrl .target {color:#8B01C5;}
+#calledUrl .param {color:#C58B00;}
+#calledUrl .value {color:#00C58B;}
 
 blockquote.phrase {
 	background-color: #e3c7ff;
