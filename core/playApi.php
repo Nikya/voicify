@@ -4,7 +4,6 @@
 ////////////////////////////////////////////////////////////////////////////
 /** Play a voicekey */
 function playVoicekey() {
-	$date = array();
 
 	if (!isset($_GET['voicekey']) or empty($_GET['voicekey']))
 		throw new Exception("No voicekey to process");
