@@ -67,7 +67,7 @@
 					<input type="text" class="form-control" id="text" name="text" aria-describedby="helpText" ng-model="edtText" required>
 					<span class="input-group-btn"><button class="btn btn-default placeholder" type="button" ng-click="concatPlaceholder()">{{bntPalceholder}}</button></span>
 					</div>
-				<p class="help-block" id="helpText">Votre texte avec utilisation possible d'emplacement variable comme <span class="placeholder">{{bntPalceholder}}</span></p>
+				<p class="help-block" id="helpText">Texte avec utilisation possible d'emplacement variable comme <span class="placeholder">{{bntPalceholder}}</span></p>
 			</div>
 		</div>
 		<div class="form-group" ng-class="{ 'has-error' : pTextEditForm.frequency.$invalid && !pTextEditForm.frequency.$pristine }">
@@ -101,6 +101,24 @@
 				<p class="help-block" id="helpVoicekey">Le mot-clé de ratachement.</p>
 			</div>
 		</div>
+		<div class="form-group" ng-class="{ 'has-error' : voicekeyEditForm.prefix.$invalid && !voicekeyEditForm.prefix.$pristine }">
+			<label for="prefix" class="col-sm-2 control-label">Prefixe</label>
+			<div class="col-sm-10">
+				<div class="input-group">
+					<select class="form-control" name="prefix" id="prefix" aria-describedby="helpPrefix" ng-model="edtPrefix" required>
+						<option ng-repeat="(key, value) in prefixList" value="{{key}}">[{{key}}] {{value}}</option>
+					</select>
+				</div>
+				<p class="help-block" id="helpPrefix">Prefixe ajouté avant le texte généré.</p>
+			</div>
+		</div>
+		<div class="form-group" ng-class="{ 'has-error' : voicekeyEditForm.cache.$invalid && !voicekeyEditForm.cache.$pristine }">
+			<label for="cache" class="col-sm-2 control-label">Cache</label>
+			<div class="col-sm-10">
+				<input type="checkbox" class="form-control" id="cache" name="cache" aria-describedby="helpCache" style="width:auto" ng-model="edtCache">
+				<p class="help-block" id="helpCache">Autoriser la mise en cache. A décocher si les phrases à générer par ce voicekey sont trop souvent différentes.</p>
+			</div>
+		</div>
 		<div class="form-group">
 			<div class="col-sm-offset-2 col-sm-10">
 				<div class="btn-group" role="group">
@@ -116,17 +134,19 @@
 
 	<!-- LISTING -->
 	<div class="row">
-		<div class="col-xs-12 col-md-6 col-lg-4"  ng-repeat="(voicekey, textList) in voicekeyList  ">
+		<div class="col-xs-12 col-md-6 col-lg-4"  ng-repeat="(voicekey, voicekeyData) in voicekeyList  ">
 			<article class="confpav">
 				<header id="vk_{{voicekey}}">
-					<h3>{{voicekey}} <span class="badge">{{textList.length}}</span></h3>
+					<h3>{{voicekey}} <span class="badge">{{voicekeyData.textList.length}}</span></h3>
 					<aside>
-						<a href="#" ng-click="editVk(voicekey)">modifier</a> -
+						<span>Prefixe:<strong>{{voicekeyData.prefix}}</strong></span> -
+						<span>Cache:<strong>{{voicekeyData.cache}}</strong></span> -
+						<a href="#" ng-click="editVk(voicekey, voicekeyData)">modifier</a> -
 						<a href="#" ng-click="deleteVk(voicekey)">supprimer</a>
 					</aside>
 				</header>
 				<ol class="confpavcontent">
-					<li  ng-repeat="(pTextId, pText) in textList | filter:searchQuery">
+					<li  ng-repeat="(pTextId, pText) in voicekeyData.textList | filter:searchQuery">
 						<blockquote ng-bind-html="pText.text | placeholderize"></blockquote>
 						<aside><span class="frequency">{{pText.frequency}}</span><span class="action"> -
 							<a href="#" ng-click="editPtext(voicekey, pTextId)">modifier</a> -

@@ -8,9 +8,10 @@ app.controller('configWordingCtrl', function ($scope, $http) {
 	$scope.consoleDebug = true;
 	$scope.console = "";
 	$scope.voicekeyList;
+	$scope.prefixList;
 	$scope.newVoicekey="";
 
-	/** Récupération des données distantes */
+	/** Récupération des voicekey distant */
 	$http({
 		method: 'GET',
 		url: 'api.php?action=get_voicekey'
@@ -26,7 +27,23 @@ app.controller('configWordingCtrl', function ($scope, $http) {
 			$scope.console = '#' + response.status + " : " + response.statusText + " >> " + response.config.url;
 	});
 
-	/** Fonction de sauvegarde des modification de voicekey */
+	/** Récupération de la liste de prefix distant */
+	$http({
+		method: 'GET',
+		url: 'api.php?action=get_config_prefixList'
+	}).then(function successCallback(response) {
+		if(response.data.success==false)
+			$scope.console = "Fail get Json get_config_prefixList - "+ response.data.error;
+		else
+			$scope.prefixList = response.data.list;
+	}, function errorCallback(response) {
+		if (response===undefined || response.config===undefined)
+			$scope.console = "Fail get Json get_config_prefixList";
+		else
+			$scope.console = '#' + response.status + " : " + response.statusText + " >> " + response.config.url;
+	});
+
+	/** Fonction de sauvegarde global des modifications de voicekey */
 	$scope.saveVoicekey = function() {
 		$http({
 			method: 'POST',
@@ -51,18 +68,13 @@ app.controller('configWordingCtrl', function ($scope, $http) {
 		if ($scope.newVoicekey.trim()) {
 			$scope.newVoicekey = $scope.newVoicekey.replace(/[^A-Z0-9]/gi, '');
 			if (!$scope.voicekeyList.hasOwnProperty($scope.newVoicekey)) {
-				$scope.voicekeyList[$scope.newVoicekey] = [];
+				$scope.voicekeyList[$scope.newVoicekey] = {"cache":true, "prefix":"default", "textList":[]};
 				$scope.newVoicekey = '';
 				//$scope.trace(0, $scope.voicekeyList);
-				location.hash = "rowsfooter";
+				location.hash = "vk_"+$scope.newVoicekey;
 			} else
 				$scope.trace(2, $scope.newVoicekey + " existe déja !");
 		}
-	};
-
-	/** Fonction d'ajout d'un VK */
-	$scope.editVk = function(voicekey, i) {
-		$scope.$broadcast('editVkEvent', {voicekey:voicekey, i:i});
 	};
 
 	/** Fonction de supression d'un Vk complet */
@@ -71,8 +83,8 @@ app.controller('configWordingCtrl', function ($scope, $http) {
 	};
 
 	/** Fonction d'édition d'un Vk */
-	$scope.editVk = function(voicekey) {
-		$scope.$broadcast('editVkEvent', voicekey);
+	$scope.editVk = function(voicekey, voicekeyData) {
+		$scope.$broadcast('editVkEvent', voicekey, voicekeyData);
 	};
 
 	/** Fonction d'edition d'un texte paramétré */
@@ -82,7 +94,7 @@ app.controller('configWordingCtrl', function ($scope, $http) {
 
 	/** Fonction de supression d'un text paramétré */
 	$scope.deletePtext = function(voicekey, i) {
-		$scope.voicekeyList[voicekey].splice(i, 1);
+		$scope.voicekeyList[voicekey]['textList'].splice(i, 1);
 	};
 
 	/** Fonction de supression d'un text paramétré */
@@ -123,7 +135,7 @@ app.controller('editTextCtrl', function ($scope) {
 	$scope.$on('editPtextEvent', function (event, args) {
 		pTextIndex = args.i;
 
-		var pText = $scope.voicekeyList[args.voicekey][pTextIndex];
+		var pText = $scope.voicekeyList[args.voicekey]['textList'][pTextIndex];
 
 		$scope.edtVoicekey = args.voicekey;
 		$scope.edtText = pText.text;
@@ -166,7 +178,7 @@ app.controller('editTextCtrl', function ($scope) {
 	/** Valider l'edition */
 	$scope.valid = function() {
 		if (editTextMode=="EDIT") {
-			var pText = $scope.voicekeyList[$scope.edtVoicekey][pTextIndex];
+			var pText = $scope.voicekeyList[$scope.edtVoicekey]['textList'][pTextIndex];
 			pText.text=$scope.edtText;
 			pText.frequency=$scope.edtFrequency;
 			$scope.editTextOn = false;
@@ -177,7 +189,7 @@ app.controller('editTextCtrl', function ($scope) {
 				frequency : $scope.edtFrequency
 			};
 
-			$scope.voicekeyList[$scope.edtVoicekey].push(pText);
+			$scope.voicekeyList[$scope.edtVoicekey]['textList'].push(pText);
 			$scope.editTextOn = false;
 			location.hash = "vk_"+$scope.edtVoicekey;
 		}
@@ -194,9 +206,11 @@ app.controller('editVkCtrl', function ($scope) {
 	var oldVoicekey;
 
 	/** Point d'entré en provenance du controleur principale pour edition */
-	$scope.$on('editVkEvent', function (event, voicekey) {
+	$scope.$on('editVkEvent', function (event, voicekey, voicekeyData) {
 		oldVoicekey = voicekey;
 		$scope.edtVoicekey = voicekey;
+		$scope.edtPrefix = voicekeyData.prefix;
+		$scope.edtCache = voicekeyData.cache;
 		$scope.editVkOn = true;
 	});
 
@@ -210,8 +224,13 @@ app.controller('editVkCtrl', function ($scope) {
 	$scope.valid = function() {
 		$scope.edtVoicekey = $scope.edtVoicekey.trim().replace(/[^A-Z0-9]/gi, '');
 		if($scope.voicekeyList.hasOwnProperty(oldVoicekey)) {
-			$scope.voicekeyList[$scope.edtVoicekey] = $scope.voicekeyList[oldVoicekey];
-			delete $scope.voicekeyList[oldVoicekey];
+			$scope.voicekeyList[oldVoicekey].prefix = $scope.edtPrefix;
+			$scope.voicekeyList[oldVoicekey].cache = $scope.edtCache;
+
+			if(!$scope.voicekeyList.hasOwnProperty($scope.edtVoicekey)) {
+				$scope.voicekeyList[$scope.edtVoicekey] = $scope.voicekeyList[oldVoicekey];
+				delete $scope.voicekeyList[oldVoicekey];
+			}
 		}
 		$scope.editVkOn = false;
 		location.hash = "rowsfooter";

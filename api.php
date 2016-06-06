@@ -18,6 +18,7 @@
 		require_once('core/init.php');
 		require_once('core/playApi.php');
 		require_once('core/wordingApi.php');
+		require_once('core/configApi.php');
 		require_once('core/Voicify.php');
 
 		$action = $_GET['action'];
@@ -30,6 +31,9 @@
 				break;
 			case "post_voicekey":
 				postVoicekeyJson();
+				break;
+			case "get_config_prefixList":
+				$apiRes = array('list' => getPrefixList());
 				break;
 			case "play_voicekey":
 				$apiRes = playVoicekey();
