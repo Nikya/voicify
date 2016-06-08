@@ -4,6 +4,8 @@
 ////////////////////////////////////////////////////////////////////////////
 /** Play a voicekey */
 function playVoicekey() {
+	global $debug;
+	$debug = $debug and (isset($_GET['verbose']) and strcasecmp($_GET['verbose'], 'yes')==0);
 
 	if (!isset($_GET['voicekey']) or empty($_GET['voicekey']))
 		throw new Exception("No voicekey to process");
@@ -15,10 +17,11 @@ function playVoicekey() {
 		$voicify->setVars($_GET['vars']);
 	$voicify->process();
 
-	if (!isset($_GET['verbose']) or strcasecmp($_GET['verbose'], 'yes')!=0 )
+	if (!$debug)
 		return array('text' => $voicify->getText());
 	else
 		return array(
+			'voicekey' => $voicekey,
 			'text' => $voicify->getText(),
 			'textRaw' => $voicify->getRawText(),
 			'vars' => $voicify->getVars(),

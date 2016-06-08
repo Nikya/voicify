@@ -51,9 +51,10 @@ checkAndInit(CONF_FILE_DEFAULT_VOICEKEY, CONF_FILE_VOICEKEY, 'voicekey');
 checkAndInit(CONF_FILE_DEFAULT_SUBVOICEKEY, CONF_FILE_SUBVOICEKEY, 'SubVoicekey');
 
 ////////////////////////////////////////////////////////////////////////////////
-// Class loader
+// Class loading
 require_once('core/wording_system/WordingBuilder.php');
 require_once('core/wording_system/WordingCollection.php');
+require_once('core/sound_system/OpenKarotz.php'); // TODO replace by dynamic loader
 require_once('core/common/JsonUtils.php');
 
 ?>

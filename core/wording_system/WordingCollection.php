@@ -16,13 +16,15 @@ class WordingCollection {
 	private $collectionSubvoicekey;
 
 	////////////////////////////////////////////////////////////////////////////
-	/** Constructeur du singleton*/
+	/** Constructeur du singleton
+	*/
 	private function __construct() {
 		$this->loadText();
 	}
 
 	////////////////////////////////////////////////////////////////////////////
-	/** Obtenir le singleton */
+	/** Obtenir le singleton
+	*/
 	public static function getInstance() {
 		if(is_null(self::$instance))
 			self::$instance = new WordingCollection();
@@ -31,26 +33,30 @@ class WordingCollection {
 	}
 
 	////////////////////////////////////////////////////////////////////////////
-	/** Charger le fichier des texts dans cette class de collection */
+	/** Charger le fichier des texts dans cette class de collection
+	*/
 	private function loadText() {
 		$this->collectionVoicekey = JsonUtils::jFile2Array(CONF_FILE_VOICEKEY);
 		$this->collectionSubvoicekey = JsonUtils::jFile2Array(CONF_FILE_SUBVOICEKEY);
 	}
 
 	////////////////////////////////////////////////////////////////////////////
-	/** Obtenir la liste de tout les voicekey existants et leurs données */
+	/** Obtenir la liste de tout les voicekey existants et leurs données
+	*/
 	public function getVoiceKeyFull() {
 		return $this->collectionVoicekey;
 	}
 
 	////////////////////////////////////////////////////////////////////////////
-	/** Obtenir la liste de tout les voicekey existants */
+	/** Obtenir la liste de tout les voicekey existants
+	*/
 	public function getVoiceKeyList() {
 		return array_keys($this->collectionVoicekey);
 	}
 
 	////////////////////////////////////////////////////////////////////////////
-	/** Obtenir la liste de tout les voicekey existants */
+	/** Obtenir la liste de tout les voicekey existants
+	*/
 	public function getSubvoicekeyList() {
 		return array_keys($this->collectionSubvoicekey);
 	}
@@ -58,60 +64,87 @@ class WordingCollection {
 	////////////////////////////////////////////////////////////////////////////
 	/** Obtenir une phrase aléatoire correspondante au voicekey */
 	public function getText($voicekey) {
-			return $this->extract($voicekey, $this->collectionVoicekey);
+			return $this->extractVkText($voicekey);
 	}
 
 	////////////////////////////////////////////////////////////////////////////
-	/** Obtenir une phrase aléatoire correspondante au sous-voicekey */
+	/** Obtenir une phrase aléatoire correspondante au sous-voicekey
+	*/
 	public function replaceSubvoicekey($vars) {
 		$newVars = array();
 		foreach ($vars as $var) {
 			if (array_key_exists($var, $this->collectionSubvoicekey)) {
-				$nVar = $this->extract($var, $this->collectionSubvoicekey);
+				$nVar = $this->extractSubvkText($var);
 				array_push($newVars, $nVar);
 			} else {
 				array_push($newVars, $var);
 			}
 		}
 
-		//print_r($newVars);
-
 		return $newVars;
 	}
 
 	////////////////////////////////////////////////////////////////////////////
-	/** Obtenir une text aléatoire correspondante au voicekey ou subvoicekey */
-	public function extract($key, $arrayCollection) {
-		$simpleArray = array();
-
+	/** Obtenir l'indicateur de prefix correspondante au voicekey
+	*/
+	public function getPrefix($voicekey) {
 		// Ce voicekey est-il inconnue
-		if (!array_key_exists($key, $arrayCollection))
+		if (!array_key_exists($voicekey, $this->collectionVoicekey))
 			throw new Exception("Unknow voicekey '$key'");
-		else {
-			// Pour chaque contenue de ce voicekey
-			foreach ($arrayCollection[$key] as $value) {
-				// Si ce n'est pas un tableau, c'est directement un text
-				if (!is_array($value))
-					array_push($simpleArray, $value);
-				else {
-					// Un text est présent
-					if (array_key_exists('text', $value)) {
-						// La fréquence est-elle spécifiée
-						if (array_key_exists('frequency', $value)) {
-							$freq = $value['frequency'];
-							for($i=0; $i<$freq; $i++)
-								array_push($simpleArray, $value['text']);
-						} else
-							array_push($simpleArray, $value['text']);
-					}
-				}
-			}
+		else
+			return $this->collectionVoicekey[$voicekey]['prefix'];
+	}
+
+	////////////////////////////////////////////////////////////////////////////
+	/** Obtenir l'indicateur de mise en cache correspondante au voicekey
+	*/
+	public function getCache($voicekey) {
+		// Ce voicekey est-il inconnue
+		if (!array_key_exists($voicekey, $this->collectionVoicekey))
+			throw new Exception("Unknow voicekey '$key'");
+		else
+			return $this->collectionVoicekey[$voicekey]['cache']=='1' ? true : false;
+	}
+
+	////////////////////////////////////////////////////////////////////////////
+	/** Obtenir une text aléatoire correspondante au voicekey
+	*/
+	private function extractSubvkText($subvoicekey) {
+		// Ce subvoicekey est-il inconnue
+		if (!array_key_exists($subvoicekey, $this->collectionSubvoicekey))
+			throw new Exception("Unknow subvoicekey '$key'");
+		else
+			return $this->extractFrequencedText($this->collectionSubvoicekey[$subvoicekey]);
+	}
+
+	////////////////////////////////////////////////////////////////////////////
+	/** Obtenir une text aléatoire correspondante au voicekey
+	*/
+	private function extractVkText($voicekey) {
+		// Ce voicekey est-il inconnue
+		if (!array_key_exists($voicekey, $this->collectionVoicekey))
+			throw new Exception("Unknow voicekey '$key'");
+		else
+			return $this->extractFrequencedText($this->collectionVoicekey[$voicekey]['textList']);
+	}
+
+	////////////////////////////////////////////////////////////////////////////
+	/** Obtenir un texte extrait de la collection en fonction de sa fréquence
+	*/
+	private function extractFrequencedText($textList) {
+		$frequencedTextList = array();
+
+		foreach ($textList as $textElement) {
+			// La fréquence est-elle spécifiée
+			if (array_key_exists('frequency', $textElement)) {
+				$freq = $textElement['frequency'];
+				for($i=0; $i<$freq; $i++)
+					array_push($frequencedTextList, $textElement['text']);
+			} else
+				array_push($frequencedTextList, $textElement['text']);
 		}
 
-		//if (count($simpleArray)>0)
-		//	print_r($simpleArray);
-
-		return $this->rand1FromArray($simpleArray);
+		return $this->rand1FromArray($frequencedTextList);
 	}
 
 	////////////////////////////////////////////////////////////////////////////
