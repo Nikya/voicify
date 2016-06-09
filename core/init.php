@@ -1,6 +1,6 @@
 <?php
 // DEFINE FILE CONSTANTES
-define ('CONF_DIR',		'core/config');
+define ('CONF_DIR',		'config');
 define ('CONF_FILE_DEFAULT_GLOBAL',			CONF_DIR.'/default_global.json');
 define ('CONF_FILE_DEFAULT_VOICEKEY',		CONF_DIR.'/default_voicekey.json');
 define ('CONF_FILE_DEFAULT_SUBVOICEKEY',	CONF_DIR.'/default_subvoicekey.json');

@@ -59,7 +59,7 @@ Cloner le projet sur un serveur PHP.
 Droits suffisants de lecture/ecriture sur les dossiers suivants :
 
 - core/tmp
-- core/config
+- config/
 
 ## Utilisation
 
