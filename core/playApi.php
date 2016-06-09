@@ -4,8 +4,7 @@
 ////////////////////////////////////////////////////////////////////////////
 /** Play a voicekey */
 function playVoicekey() {
-	global $debug;
-	$debug = $debug and (isset($_GET['verbose']) and strcasecmp($_GET['verbose'], 'yes')==0);
+	$debug = isset($_GET['verbose']) and strcasecmp($_GET['verbose'], 'yes')==0;
 
 	if (!isset($_GET['voicekey']) or empty($_GET['voicekey']))
 		throw new Exception("No voicekey to process");

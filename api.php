@@ -10,8 +10,6 @@
 	// Return only Json
 	header('Content-type: application/json; charset=utf-8');
 
-	$debug = true;
-
 	////////////////////////////////////////////////////////////////////////////
 	// Controleur
 	if (!isset($_GET['action']) or empty($_GET['action'])) {
