@@ -1,231 +1,306 @@
 {
-    "neutral": [
-        {
-            "text": "C'est la {0}eme heures de ce jour.",
-            "frequency": 1
-        },
-        {
-            "text": "{0} heures, le temps passe plus vite à la maison.",
-            "frequency": 1
-        },
-        {
-            "text": "Bienvenue dans cette {0}eme heures.",
-            "frequency": 1
-        },
-        {
-            "text": "{0}. C'est l'heure qu'il était hiers à la même heure !",
-            "frequency": 1
-        },
-        {
-            "text": "{0} fois {0}, + {1}{1}. Sa fait combien ? Vous avez une heure pour répondre.",
-            "frequency": 1
-        },
-        {
-            "text": "Avant l'heure c'est pas l'heure !. Après l'heure c'est plus l'heure !.",
-            "frequency": 1
-        },
-        {
-            "text": "Ah mince !! je suis en retard, mais quelle heure est t'il?",
-            "frequency": 1
-        },
-        {
-            "text": "C'est l'heure !, c'est {0} heure !, mais c'est l'heure de quoi??",
-            "frequency": 1
-        },
-        {
-            "text": "Si je pouvais avancé dans le temps, je voudrais qu'il soit {0} heures.",
-            "frequency": 1
-        },
-        {
-            "text": "Si je pouvais choisir l'heure, j'aimerai qu'il soit {0} heures.",
-            "frequency": 1
-        },
-        {
-            "text": "Les passagè du vol {0}54{1}, de {0} heures, A destination de Marseille. On raté leur avions !",
-            "frequency": 1
-        },
-        {
-            "text": "Il est {0} heures zéro zéro ! Tu as quelque-chose à en redire ?",
-            "frequency": 1
-        },
-        {
-            "text": "Il était une fois, {0} petits cochons. Ils rencontrèrent {1} princesses et ils eurent {1} enfants chacun. Mais {0} méchants loups les dévoras tous. Fin de l'histoire.",
-            "frequency": 1
-        },
-        {
-            "text": "A Nouille-York il est {18} heures, ici il est {0} heures",
-            "frequency": 1
-        },
-        {
-            "text": "Les petits chinois font-ils dodo à cette heure-ci ? Il est {8} à Hong-Kong.",
------------------------------------------------ ICICICICI
-            "frequency": 1
-        },
-        {
-            "text": "Les magasins Décathlon, sont heureux de vous offrir l'heure : Il est {0} heures, à fond la forme !",
-            "frequency": 1
-        },
-        {
-            "text": "Il est {0} heures !",
-            "frequency": 4
-        },
-        {
-            "text": "Je te garanti qu'il est {0} heures. Mais même une pendule arrêtée a raison deux fois par jour.",
-            "frequency": 1
-        },
-        {
-            "text": "C'est le tic-tac d'une pendule qui fait apprécier le silence. Tic, Tac, Tic, Tac. C'est {0} heures.",
-            "frequency": 1
-        },
-        {
-            "text": "Toute les pendules de france, indiquent {0} heures.",
-            "frequency": 1
-        },
-        {
-            "text": "Notre Dame de Paris, sonne actuellement ses {24} coups.",
-            "frequency": 1
-        },
-        {
-            "text": "{0} heures. Le temps n'attend personne !",
-            "frequency": 2
-        },
-        {
-            "text": "{0} heures ? Que-faire ??? Que faire !",
-            "frequency": 1
-        },
-        {
-            "text": "Je vais gommer les chiffres, des horloges du quartier, sauf le {24}.",
-            "frequency": 2
-        },
-        {
-            "text": "L’horloge tourne. Elle indique {0} heures",
-            "frequency": 2
-        },
-        {
-            "text": "La petite aiguille, viens d'arriver sur {24}.",
-            "frequency": 2
-        },
-        {
-            "text": "{0} heures, et moi je rêve, de remonter le temps.",
-            "frequency": 2
-        },
-        {
-            "text": "Et c'est le temps qui court. {0} heures.",
-            "frequency": 2
-        },
-        {
-            "text": "{0} heures. Une heure de plus de passé.",
-            "frequency": 2
-        },
-        {
-            "text": "Donne moi ta montre, et je te donnerais l'heure.",
-            "frequency": 1
-        },
-        {
-            "text": "C'est dur de pas perdre le fil ! Il est {0} heures.",
-            "frequency": 1
-        },
-        {
-            "text": "Je pense qu'il est à peu près {0} heures. Mais si j'avais moi aussi une smart-watch, je pourrais être plus précis.",
-            "frequency": 1
-        },
-        {
-            "text": "{0} heures, il est l'heure de t'acheter une montre.",
-            "frequency": 2
-        },
-        {
-            "text": "Ouverture des portes, pour le {24}eme étage... Et oui j'aurais aussi bien pu, travailler dans un ascenseur !",
-            "frequency": 1
-        },
-        {
-            "text": "{0} heures fois 12 euros, ce sont mes honoraires du jour. Tout travail mérite salaire !",
-            "frequency": 1
-        },
-        {
-            "text": "Hé ? Tu me prête {1}000 euros steuplait ?",
-            "frequency": 1
-        },
-        {
-            "text": "Il est {0} heures ou {12} heures.",
-            "frequency": 2
-        },
-        {
-            "text": "Il est {24} heures du matin ou de l'après-midi ?",
-            "frequency": 2
-        }
+  "neutral": [
+    {
+      "text": "C'est la {0}eme heures de ce jour.",
+      "frequency": 1
+    },
+    {
+      "text": "{0} heures, le temps passe plus vite à la maison.",
+      "frequency": 1
+    },
+    {
+      "text": "Bienvenue dans cette {0}eme heures.",
+      "frequency": 1
+    },
+    {
+      "text": "{0}. C'est l'heure qu'il était hiers à la même heure !",
+      "frequency": 1
+    },
+    {
+      "text": "{0} fois {0}. Sa fait combien ? Vous avez une heure pour répondre.",
+      "frequency": 1
+    },
+    {
+      "text": "Avant l'heure c'est pas l'heure ! Après l'heure c'est plus l'heure !.",
+      "frequency": 1
+    },
+    {
+      "text": "Ah mince, je suis en retard ! Mais quelle heure est t'il ?",
+      "frequency": 1
+    },
+    {
+      "text": "C'est l'heure !, c'est {0} heure !, mais c'est l'heure de quoi??",
+      "frequency": 1
+    },
+    {
+      "text": "Les passagè du vol {24}054, de {0} heures, A destination de Marseille. On raté leur avions !",
+      "frequency": 1
+    },
+    {
+      "text": "Il est {0} heures zéro zéro ! Tu as quelque-chose à en redire ?",
+      "frequency": 1
+    },
+    {
+      "text": "A Nouille-York il est {18} heures. Ici, il est {0} heures",
+      "frequency": 1
+    },
+    {
+      "text": "Les petits Chinois font-ils dodo à cette heure-ci ? Il est {8} à Hong-Kong. Ici, il est {0} heures",
+      "frequency": 1
+    },
+    {
+      "text": "Les magasins Décathlon, sont heureux de vous offrir l'heure : Il est {0} heures !",
+      "frequency": 1
+    },
+    {
+      "text": "Il est {0} heures !",
+      "frequency": 1
+    },
+    {
+      "text": "Je te garanti qu'il est {0} heures. Mais même une pendule arrêtée a raison deux fois par jour.",
+      "frequency": 1
+    },
+    {
+      "text": "C'est le tic-tac d'une pendule qui fait apprécier le silence. Tic, Tac, Tic, Tac. C'est {0} heures.",
+      "frequency": 1
+    },
+    {
+      "text": "Toute les pendules de france, indiquent {0} heures.",
+      "frequency": 1
+    },
+    {
+      "text": "Notre Dame de Paris, sonne actuellement ses {24} coups.",
+      "frequency": 1
+    },
+    {
+      "text": "{0} heures. Le temps n'attend personne !",
+      "frequency": 2
+    },
+    {
+      "text": "{0} heures ? Que-faire ??? Que faire !",
+      "frequency": 1
+    },
+    {
+      "frequency": 1,
+      "text": "Nous avons peu de temps ! Il est {0} heures."
+    },
+    {
+      "frequency": 1,
+      "text": "Le temps passe rapidement ! Il est {0} heures."
+    },
+    {
+      "frequency": 1,
+      "text": "Le temps lui, n’attend personne ! Il est {0} heures."
+    },
+    {
+      "text": "Je vais gommer les chiffres, des horloges du quartier, sauf le {24}.",
+      "frequency": 1
+    },
+    {
+      "text": "L’horloge tourne. Elle indique {0} heures",
+      "frequency": 1
+    },
+    {
+      "text": "La petite aiguille, viens d'arriver sur {24}.",
+      "frequency": 1
+    },
+    {
+      "text": "{0} heures, et moi je rêve, de remonter le temps.",
+      "frequency": 1
+    },
+    {
+      "text": "Et c'est le temps qui court. {0} heures.",
+      "frequency": 1
+    },
+    {
+      "text": "{0} heures. Une heure de plus de passé.",
+      "frequency": 1
+    },
+    {
+      "text": "Donne moi ta montre, et je te donnerais l'heure.",
+      "frequency": 1
+    },
+    {
+      "text": "C'est dur de pas perdre le fil ! Il est {0} heures.",
+      "frequency": 1
+    },
+    {
+      "text": "Je pense qu'il est à peu près {0} heures. Mais si j'avais moi aussi une smart-watch, je pourrais être plus fiable.",
+      "frequency": 1
+    },
+    {
+      "text": "{0} heures, il est l'heure de t'acheter une montre.",
+      "frequency": 1
+    },
+    {
+      "text": "Ouverture des portes, pour le {24}eme étage... J'aurais tout aussi bien pu, travailler dans un ascenseur !",
+      "frequency": 1
+    },
+    {
+      "text": "{0} heures fois 12 euros, ce sont mes honoraires du jour. Tout travail mérite salaire !",
+      "frequency": 1
+    },
+    {
+      "text": "Hé ? Tu me prête {24}000 euros steuplait ?",
+      "frequency": 1
+    },
+    {
+      "text": "Il est {0} heures ou {12} heures.",
+      "frequency": 1
+    },
+    {
+      "text": "Il est {24} heures du matin ou de l'après-midi ?",
+      "frequency": 1
+    },
+    {
+      "frequency": 1,
+      "text": "Le fleuve du temps continue de s'écouler. Il est {0} heures."
+    },
+    {
+      "frequency": 1,
+      "text": "{0} heures. Ce n'est pas le temps qui manque, c'est nous qui lui manquons."
+    },
+    {
+      "frequency": 1,
+      "text": "Au moment où je parle, la {23}eme heure est déjà loin de moi. Il est {0} heures."
+    },
+    {
+      "frequency": 1,
+      "text": "Hâtons-nous ! Il est {0} heures. Le temps fuit, et nous entraîne avec lui."
+    },
+    {
+      "frequency": 1,
+      "text": "Je passe mon temps, à écouter ce que je ne devrais pas entendre. Il est {0} heures."
+    },
+    {
+      "frequency": 1,
+      "text": "Le moment est venu, l'heure {0} est arrivée."
+    },
+    {
+      "frequency": 1,
+      "text": "Trop tard pour cette {23}eme heure ? L'avenir sera ce que vous en ferez dans cette {0}eme heure."
+    },
+    {
+      "frequency": 1,
+      "text": "A la recherche temps perdu. Le {23} disparait pour laisser sa place au {0} retrouvé."
+    },
+    {
+      "frequency": 1,
+      "text": "Il est temps de siffler la fin de la récréation de {0} heure."
+    },
+    {
+      "frequency": 1,
+      "text": "Le temps qui passe passe passe. Avec sa corde fait des noeuds autour du chiffre {24}."
+    },
+    {
+      "frequency": 1,
+      "text": "profitez de chaque instant de l'heure {0}, la vie n'est qu'un moment."
+    },
+    {
+      "frequency": 1,
+      "text": "Le temps entraîne tout dans sa course, et l'heure {0} s'avance."
+    },
+    {
+      "frequency": 1,
+      "text": "Heure après heure, passe le temps, et le temps passé, demeure en ton coeur. Il est {0} heures."
+    },
+    {
+      "frequency": 1,
+      "text": "{23} est une page déjà tournée. {0}, un futur prêt à être créé."
+    },
+    {
+      "frequency": 1,
+      "text": "La porte {0} de l’avenir, est ouverte à ceux qui savent la pousser."
+    },
+    {
+      "frequency": 1,
+      "text": "{21}. {22}. {23}. {0}. Il est {0} heures."
+    }
     ],
     "7": [
-        {
-            "text": "allez ! direction la douche !! il est sept heures.",
-            "frequency": 1
-        },
-        {
-            "text": "opopop ! allez ! C'est l'heure de sortir de sous la couette!.",
-            "frequency": 1
-        },
-        {
-            "text": "Sept heures, tartine au beurre",
-            "frequency": 1
-        }
-    ],
-    "10": [
-        {
-            "text": "10 heures ! pose café !",
-            "frequency": 1
-        }
-    ],
-    "11": [
-        {
-            "text": "Il est déjà 11 heures. Qua tu fait de ta matinée ?",
-            "frequency": 1
-        },
-        {
-            "text": "11 heures, c'est l'heure de l'apéro !",
-            "frequency": 1
-        }
-    ],
-    "12": [
-        {
-            "text": "C'est Midi on va bientot manger",
-            "frequency": 1
-        },
-        {
-            "text": "Il est midi. A table !",
-            "frequency": 1
-        }
-    ],
-    "14": [
-        {
-            "text": "Il est 14 heures. Fin de la sieste !",
-            "frequency": 1
-        }
-    ],
-    "15": [
-        {
-            "text": "15 heures la semaine, et 15 heures le week-end, c'est pas du tout pareil.",
-            "frequency": 1
-        }
-    ],
-    "16": [
-        {
-            "text": "16h ! c'est l'heure du thé ? non ?",
-            "frequency": 1
-        },
-        {
-            "text": "C'est l'heure du goûté !",
-            "frequency": 1
-        }
-    ],
-    "19": [
-        {
-            "text": "19h c'est l'heure de la soupe !",
-            "frequency": 1
-        }
-    ],
-    "23": [
-        {
-            "text": "Il est tard car il est déja 11 heure !",
-            "frequency": 1
-        }
-    ]
+    {
+      "text": "allez ! direction la douche !! il est sept heures.",
+      "frequency": 1
+    },
+    {
+      "text": "opopop ! allez ! C'est l'heure de sortir de sous la couette!.",
+      "frequency": 1
+    },
+    {
+      "text": "Sept heures, tartine au beurre ! ",
+      "frequency": 1
+    },
+    {
+      "frequency": 1,
+      "text": "Il est déja 7 heures, tu dois faire un choix maintenant ! Rester au lit, ou aller travailler ?"
+    },
+    {
+      "frequency": 1,
+      "text": "Tu dois vite te décider, il est 7 heures ! Boulot ou encore dodo ?"
+    }
+  ],
+  "10": [
+    {
+      "text": "10 heures ! pose café !",
+      "frequency": 1
+    }
+  ],
+  "11": [
+    {
+      "text": "Il est déjà 11 heures. Qua tu fait de ta matinée ?",
+      "frequency": 1
+    },
+    {
+      "text": "11 heures, c'est l'heure de l'apéro !",
+      "frequency": 1
+    }
+  ],
+  "12": [
+    {
+      "text": "C'est Midi on va bientot manger",
+      "frequency": 1
+    },
+    {
+      "text": "On viens d'atteindre, le milieu de cette journée.",
+      "frequency": 1
+    },
+    {
+      "text": "Il est midi. A table !",
+      "frequency": 1
+    }
+  ],
+  "14": [
+    {
+      "text": "Il est 14 heures. Fin de la sieste !",
+      "frequency": 1
+    }
+  ],
+  "15": [
+    {
+      "text": "15 heures la semaine, et 15 heures le week-end, c'est pas du tout pareil.",
+      "frequency": 1
+    }
+  ],
+  "16": [
+    {
+      "text": "16h ! c'est l'heure du thé ? non ?",
+      "frequency": 1
+    },
+    {
+      "text": "C'est l'heure du goûté !",
+      "frequency": 1
+    }
+  ],
+  "19": [
+    {
+      "text": "19h c'est l'heure de la soupe !",
+      "frequency": 1
+    }
+  ],
+  "23": [
+    {
+      "text": "Il est tard car il est déja 11 heure !",
+      "frequency": 1
+    }
+  ]
 }
