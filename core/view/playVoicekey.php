@@ -49,7 +49,7 @@
 <!-- PLAY VOICEKEY -------------------------------------------------------------->
 		<div class="col-xs-6">
 			<h3>Play voicekey</h3>
-			<form id="playVoicekey">
+			<form id="ajaxPlayForm">
 				<input type="hidden" name="action" value="play_voicekey">
 				<fieldset class="form-group">
 					<label for="voicekey">Voicekey</label>

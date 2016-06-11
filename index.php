@@ -46,9 +46,22 @@
 		</div>
 		<div id="navbar" class="collapse navbar-collapse">
 			<ul class="nav navbar-nav">
-				<li><a href="?play">Play</a></li>
-				<li><a href="?config=wording">Config:wording</a></li>
-				<li><a href="?config=global">Config:Global</a></li>
+				<li class="dropdown">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+						Play<span class="caret"></span></a>
+					<ul class="dropdown-menu">
+						<li><a href="?play=voicekey">Voicekey</a></li>
+						<li><a href="?play=clock">Clock</a></li>
+					</ul>
+				</li>
+				<li class="dropdown">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+						Config<span class="caret"></span></a>
+					<ul class="dropdown-menu">
+						<li><a href="?config=wording">Config:wording</a></li>
+						<li><a href="?config=global">Config:Global</a></li>
+					</ul>
+				</li>
 			</ul>
 		</div><!--/.nav-collapse -->
 		</div>
@@ -66,9 +79,12 @@
 			$title = '';
 			$target = 'core/view/home.php';
 
-			if (isset($_GET['play'])) {
-				$title = 'Play';
-				$target = 'core/view/play.php';
+			if ( (isset($_GET['play']) and $_GET['play']=="voicekey") ) {
+				$title = 'Play Voicekey';
+				$target = 'core/view/playVoicekey.php';
+			} elseif ( (isset($_GET['play']) and $_GET['play']=="clock") ) {
+				$title = 'Play the Speaking Clock';
+				$target = 'core/view/playClock.php';
 			} elseif (isset($_GET['config']) and $_GET['config']=="wording") {
 				$title = 'Wordings configuration';
 				$target = 'core/view/configWording.html';

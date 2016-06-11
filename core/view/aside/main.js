@@ -8,9 +8,9 @@ var apiUrl = 'api.php';
 $(document).ready(function() {
 
 	/***************************************************************************
-	* PLAY VOICEKEY
+	* Ajax Pay form
 	*/
-	$('#playVoicekey').on('submit', function(e) {
+	$('#ajaxPlayForm').on('submit', function(e) {
 		$('#wait').show();
 		$('#consolePlay').html('. . .');
 

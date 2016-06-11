@@ -38,6 +38,9 @@
 			case "play_voicekey":
 				$apiRes = playVoicekey();
 				break;
+			case "play_clock":
+				$apiRes = playClock();
+				break;
 			default:
 				throw new Exception("Unknow action to prosess '$action'");
 		}
