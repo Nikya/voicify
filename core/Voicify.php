@@ -86,6 +86,8 @@ class Voicify {
 	////////////////////////////////////////////////////////////////////////////
 	/** To generate the sound */
 	public function process () {
+		$failButSpeaked = false;
+
 		// Get a random text corresponding to the voicekey
 		try {
 			$this->rawText = $this->wordingCollection->getText($this->voicekey);
@@ -97,6 +99,7 @@ class Voicify {
 			try {
 				$this->rawText = $this->wordingCollection->getText(Voicify::DEFAULT_VOICEKEY);
 				array_unshift($this->vars, $this->voicekey);
+				$failButSpeaked = true;
 			} catch (Exception $e) {
 				throw new Exception("Unknow voicekey '$this->voicekey' and default voicekey '" .Voicify::DEFAULT_VOICEKEY. "' is missing !!! ");
 			}
@@ -110,6 +113,9 @@ class Voicify {
 
 		// Generate and play the sound
 		$this->soundSystemProcess();
+
+		if ($failButSpeaked)
+			throw new Exception("Unknow voicekey '$this->voicekey'");
 	}
 
 	////////////////////////////////////////////////////////////////////////////

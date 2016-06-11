@@ -123,7 +123,7 @@ class WordingCollection {
 	private function extractVkText($voicekey) {
 		// Ce voicekey est-il inconnue
 		if (!array_key_exists($voicekey, $this->collectionVoicekey))
-			throw new Exception("Unknow voicekey '$key'");
+			throw new Exception("Unknow voicekey '$voicekey'");
 		else
 			return $this->extractFrequencedText($this->collectionVoicekey[$voicekey]['textList']);
 	}
