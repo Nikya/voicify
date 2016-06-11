@@ -20,6 +20,7 @@
 		require_once('core/wordingApi.php');
 		require_once('core/configApi.php');
 		require_once('core/Voicify.php');
+		require_once('core/VoicifyClock.php');
 
 		$action = $_GET['action'];
 
