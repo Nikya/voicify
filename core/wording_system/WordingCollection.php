@@ -144,26 +144,12 @@ class WordingCollection {
 				array_push($frequencedTextList, $textElement['text']);
 		}
 
-		return $this->rand1FromArray($frequencedTextList);
+		return Utils::rand1FromArray($frequencedTextList);
 	}
 
 	////////////////////////////////////////////////////////////////////////////
-	/** Obtenir une entré aléatoire à partir d'un array
-	*
-	* @param inArray Tableau où chercher
-	* @return Une entré choisie en retour
+	/** Enregistrer le contenue complet des voicekey au format Json dans le fichier dédié
 	*/
-	private function rand1FromArray($inArray) {
-		if (count($inArray) > 0) {
-			$randKey = array_rand($inArray, 1);
-			$i = $inArray[$randKey];
-			return $i;
-		} else
-			throw new Exception(__FUNCTION__.' Array is empty');
-	}
-
-	////////////////////////////////////////////////////////////////////////////
-	/** Obtenir le contenue complet des voicekey au format Json */
 	public function setAllVoicekeyFromJsonStr($dataStr) {
 		JsonUtils::jString2JFile($dataStr, CONF_FILE_VOICEKEY);
 	}

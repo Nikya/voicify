@@ -20,6 +20,7 @@
 		require_once('core/wordingApi.php');
 		require_once('core/configApi.php');
 		require_once('core/Voicify.php');
+		require_once('core/VoicifyClock.php');
 
 		$action = $_GET['action'];
 
@@ -37,6 +38,9 @@
 				break;
 			case "play_voicekey":
 				$apiRes = playVoicekey();
+				break;
+			case "play_clock":
+				$apiRes = playClock();
 				break;
 			default:
 				throw new Exception("Unknow action to prosess '$action'");
