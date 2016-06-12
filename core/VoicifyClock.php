@@ -16,7 +16,7 @@ class VoicifyClock {
 	private $hourList = array();
 
 	/** Prefix au texte */
-	//const PREFIX = 'Tic. Tac. ';
+	const PREFIX = 'Tic. Tac. ';
 
 	/** Mettre en cache la phrase générée ou non */
 	private $cache = true;
@@ -51,8 +51,6 @@ class VoicifyClock {
 		}
 
 		$this->hourList[24] = $this->hour12();
-
-		///////////// TODO COntinuer ciciciicicicicici
 	}
 
 	////////////////////////////////////////////////////////////////////////////
@@ -82,7 +80,6 @@ class VoicifyClock {
 	////////////////////////////////////////////////////////////////////////////
 	/** Chargement des fichiers de config et texte */
 	private function loadconfig() {
-		//$this->confArray = JsonUtils (CONF_FILE_GLOBAL);
 		$this->wordingCollection = WordingCollection::getInstance();
 	}
 
