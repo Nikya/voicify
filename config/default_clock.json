@@ -97,7 +97,7 @@
       "frequency": 2
     },
     {
-      "text": "L’horloge tourne. Elle indique {0} heures",
+      "text": "L’horloge tourne. Elle indique {24} heures",
       "frequency": 2
     },
     {
@@ -149,7 +149,7 @@
       "frequency": 2
     },
     {
-      "text": "Il est {24} heures, du matin ou de l'après-midi ?",
+      "text": "Il est {24} heures du matin, ou de l'après-midi ?",
       "frequency": 2
     },
     {
@@ -182,7 +182,7 @@
     },
     {
       "frequency": 2,
-      "text": "A la recherche temps perdu. Le {23} disparait, pour laisser sa place au {0} retrouvé."
+      "text": "A la recherche temps perdu. Le {23} disparait, pour laisser sa place, au {0} retrouvé."
     },
     {
       "frequency": 2,

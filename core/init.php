@@ -57,7 +57,9 @@ checkAndInit(CONF_FILE_DEFAULT_CLOCK, CONF_FILE_CLOCK, 'Clock');
 // Class loading
 require_once('core/wording_system/WordingBuilder.php');
 require_once('core/wording_system/WordingCollection.php');
+require_once('core/wording_system/ClockCollection.php');
 require_once('core/sound_system/OpenKarotz.php'); // TODO replace by dynamic loader
 require_once('core/common/JsonUtils.php');
+require_once('core/common/Utils.php');
 
 ?>

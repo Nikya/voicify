@@ -3,6 +3,13 @@
 /** To generate a notification speaked sound */
 class OpenKarotz {
 
+	/** Conversion des prefix */
+	const PREFIX_MAP = array (
+			'no' => '',
+			'default' => 'ICI Ruby ! ',
+			'clock' => 'Tic. Tac. '
+		);
+
 	////////////////////////////////////////////////////////////////////////////////
 	/** Send the text to the sound system */
 	public function play($tts, $prefix, $cache) {
@@ -11,7 +18,7 @@ class OpenKarotz {
 		$voice = "margaux";
 
 		$noCache = $cache ? '0' : '1';
-		$prefixTxt = $prefix=='no' ? '' : 'ICI Ruby ! ';
+		$prefixTxt = SELF::PREFIX_MAP[$prefix];
 
 		$enctext = urlencode($prefixTxt . $tts);
 

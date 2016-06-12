@@ -13,26 +13,28 @@ class VoicifyClock {
 	private $text;
 
 	/** Liste de varaibles brut à injecter dans le text */
-	private $hourList = array();
+	private $hourList;
 
 	/** Prefix au texte */
-	const PREFIX = 'Tic. Tac. ';
+	const PREFIX = 'clock';
 
 	/** Mettre en cache la phrase générée ou non */
-	private $cache = true;
+	const CACHE = true;
 
 	/** Contient tout les textes */
-	private $WordingCollection;
+	private $clockCollection;
 
-	////////////////////////////////////////////////////////////////////////////
-	/** Main contructor */
+	/***************************************************************************
+	* Main contructor
+	*/
 	public function __construct ($targetHour) {
 		$this->computeHours($targetHour);
 		$this->loadconfig();
 	}
 
-	////////////////////////////////////////////////////////////////////////////
-	/** Chargement des fichiers de config et texte */
+	/***************************************************************************
+	* Construction de la listes des heures
+	*/
 	private function computeHours($targetHour) {
 
 		if ($targetHour != null)
@@ -53,8 +55,8 @@ class VoicifyClock {
 		$this->hourList[24] = $this->hour12();
 	}
 
-	////////////////////////////////////////////////////////////////////////////
-	/** Obtenir l'heure actuel (Décalée de 2 minutes pour palier au manque de précisions)
+	/***************************************************************************
+	* Obtenir l'heure actuel (Décalée de 2 minutes pour palier au manque de précisions)
 	*/
 	private function currentHour() {
 		$datetime = new DateTime();
@@ -62,8 +64,8 @@ class VoicifyClock {
 		return intval($datetime->format('G'));
 	}
 
-	////////////////////////////////////////////////////////////////////////////
-	/** Donne l'heure actuel au format 12 heures
+	/***************************************************************************
+	* Donne l'heure actuel au format 12 heures
 	*
 	* @return Juste le chiffre de l'heure
 	*/
@@ -77,77 +79,73 @@ class VoicifyClock {
 		return $hour;
 	}
 
-	////////////////////////////////////////////////////////////////////////////
-	/** Chargement des fichiers de config et texte */
+	/***************************************************************************
+	* Chargement des fichiers de config et texte
+	*/
 	private function loadconfig() {
-		$this->wordingCollection = WordingCollection::getInstance();
+		$this->clockCollection = ClockCollection::getInstance();
 	}
 
-	////////////////////////////////////////////////////////////////////////////
-	/** Changer le moteur de génération */
+	/***************************************************************************
+	* Changer le moteur de génération
+	*/
 	// TODO : Methode générique pour gérer tout les type de paramètre possible : Setter magic
 	private function setEngine($engine) {
 		$this->confArray['engine'] = $engine;
 	}
 
-	////////////////////////////////////////////////////////////////////////////
-	/** To get generated text */
+	/***************************************************************************
+	* To get generated text
+	*/
 	public function getHour() {
 		return $this->targetHour;
 	}
 
-	////////////////////////////////////////////////////////////////////////////
-	/** To get generated text */
+	/***************************************************************************
+	* To get generated text
+	*/
 	public function getText() {
 		return $this->text;
 	}
 
-	////////////////////////////////////////////////////////////////////////////
-	/** To get generated text */
+	/***************************************************************************
+	* To get generated text */
 	public function getRawText() {
 		return $this->rawText;
 	}
 
-	////////////////////////////////////////////////////////////////////////////
-	/** To get input repalced vars */
+	/***************************************************************************
+	* To get input repalced vars
+	*/
 	public function getHourList() {
 		return $this->hourList;
 	}
 
-	////////////////////////////////////////////////////////////////////////////
-	/** To generate the sound */
+	/***************************************************************************
+	* To generate the sound
+	*/
 	public function process () {
-		// Get a random text corresponding to the voicekey
-		/*try {
-			$this->rawText = $this->wordingCollection->getText($this->targetHour);
-			$this->prefix = $this->wordingCollection->getPrefix($this->targetHour);
-			$this->cache = $this->wordingCollection->getCache($this->targetHour);
+		try {
+			// Get a random text corresponding to target Hour
+			$this->rawText = $this->clockCollection->getText($this->targetHour);
 
-		// OR the default one if it's a unknow voicekey
+			// Populate the text with vars
+			$this->text = WordingBuilder::process($this->rawText, $this->hourList);
+
+			// Generate and play the sound
+			$this->soundSystemProcess();
+
 		} catch (Exception $e) {
-			try {
-				$this->rawText = $this->wordingCollection->getText(Voicify::DEFAULT_VOICEKEY);
-				array_unshift($this->hourList, $this->targetHour);
-			} catch (Exception $e) {
-				throw new Exception("Unknow voicekey '$this->targetHour' and default voicekey '" .Voicify::DEFAULT_VOICEKEY. "' is missing !!! ");
-			}
+			throw new Exception("Unable to Speak the clock for hour '$this->targetHour' ! {$e->getMessage()}");
 		}
-
-		// Replace some vars to corresponding sub-voicekey
-		$this->commuteVars = $this->wordingCollection->replaceSubvoicekey($this->hourList);
-
-		// Populate the text with vars
-		$this->text = WordingBuilder::process($this->rawText, $this->commuteVars);
-
-		// Generate and play the sound
-		$this->soundSystemProcess();*/
 	}
 
-	////////////////////////////////////////////////////////////////////////////
-	/** Send the text to the sound system */
+	/***************************************************************************
+	* Send the text to the sound system
+	*/
 	public function soundSystemProcess () {
 		// TODO dynamque engine switch
 		$oKarotz = new OpenKarotz();
-		$oKarotz->play($this->text, $this->prefix, $this->cache);
+		$oKarotz->play($this->text, SELF::PREFIX, SELF::CACHE);
 	}
 }
