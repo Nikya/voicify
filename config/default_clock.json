@@ -33,7 +33,7 @@
       "frequency": 2
     },
     {
-      "text": "Les passagè du vol {24}054, de {0} heures, A destination de Marseille. On raté leur avions !",
+      "text": "Les passagè du vol {24}054, de {0} heures, A destination de Marseille. Ont ratés leur avions !",
       "frequency": 2
     },
     {
@@ -206,7 +206,7 @@
     },
     {
       "frequency": 2,
-      "text": "{23} est une page déjà tournée. {0}, un futur prêt à être créé."
+      "text": "{23}, est une page déjà tournée. {0}, un futur prêt à être créé."
     },
     {
       "frequency": 2,
