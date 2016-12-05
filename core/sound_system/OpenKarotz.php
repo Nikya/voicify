@@ -12,8 +12,8 @@ class OpenKarotz {
 	/** Conversion des prefix */
 	const PREFIX_MAP = array (
 			'no' => '',
-			'default' => 'ICI Ruby ! ',
-			'clock' => 'Tic. Tac. '
+			'default' => 'Ici Ruby ! ',
+			'clock' => 'Tic, Tac. '
 		);
 
 	/***************************************************************************
