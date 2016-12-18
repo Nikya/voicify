@@ -3,7 +3,7 @@
 /** To generate a notification speaked sound */
 class Imperihome {
 
-	private $ip = '192.168.1.24';
+	private $ip = '192.168.1.221';
 
 	private $port = 8080;
 

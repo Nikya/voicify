@@ -144,10 +144,10 @@ class VoicifyClock {
 	* Send the text to the sound system
 	*/
 	public function soundSystemProcess () {
-		// TODO dynamque engine switch
-		// $oKarotz = new OpenKarotz();
-		// $oKarotz->play($this->text, SELF::PREFIX, SELF::CACHE);
-		$ih = new Imperihome();
-		$ih->play($this->text, SELF::PREFIX, SELF::CACHE);
+		 //TODO dynamque engine switch
+		 $oKarotz = new OpenKarotz();
+		 $oKarotz->play($this->text, SELF::PREFIX, SELF::CACHE);
+		//$ih = new Imperihome();
+		//$ih->play($this->text, SELF::PREFIX, SELF::CACHE);
 	}
 }

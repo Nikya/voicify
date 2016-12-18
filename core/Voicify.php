@@ -122,9 +122,9 @@ class Voicify {
 	/** Send the text to the sound system */
 	public function soundSystemProcess () {
 		// TODO dynamque engine switch
-		// $oKarotz = new OpenKarotz();
-		// $oKarotz->play($this->text, $this->prefix, $this->cache);
-		$ih = new Imperihome();
-		$ih->play($this->text, $this->prefix, $this->cache);
+		 $oKarotz = new OpenKarotz();
+		 $oKarotz->play($this->text, $this->prefix, $this->cache);
+		//$ih = new Imperihome();
+		//$ih->play($this->text, $this->prefix, $this->cache);
 	}
 }
