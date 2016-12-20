@@ -1,6 +1,2 @@
-*.mp3
-sandbox.php
-global.json
-subvoicekey.json
-voicekey.json
-clock.json
+config/*
+tmp/*

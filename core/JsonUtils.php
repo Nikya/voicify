@@ -1,0 +1,120 @@
+<?php
+
+/**
+* Utilitaire de manipulation du format Json en PHP
+*/
+class JsonUtils {
+
+	////////////////////////////////////////////////////////////////////////////
+	/** Charge un fichier Json en tant que tableau associatif
+	*
+	* @param $filePath Chemin vers le fichier à lire
+	* @return Le contenue au dans un tableau associatif
+	*/
+	public static function jFile2Array($jFilePath) {
+		$content = file_get_contents($jFilePath);
+
+		if ($content === false)
+			throw new Exception("Can't read input file $jFilePath");
+
+		return JsonUtils::jString2Array($content);
+	}
+
+	////////////////////////////////////////////////////////////////////////////
+	/** Sauvegarde une chaine Json dans un fichier
+	*
+	* @param $dataStr Donnée brut au format Json
+	* @param $jFilePath Chemin du fichier dans lequel sauvegarder
+	*/
+	public static function jString2JFile($dataStr, $jFilePath) {
+		// Check Json
+		$jDecode = json_decode($dataStr);
+		JsonUtils::throwLastJsonError("Can't jString2JFile.", $dataStr);
+
+		$dataStr2 = json_encode($jDecode, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
+		JsonUtils::throwLastJsonError("Can't jString2JFile.", $dataStr);
+
+		if (file_put_contents($jFilePath, $dataStr2)===false)
+			throw new Exception("Can't write the Json file $jFilePath");
+	}
+
+	////////////////////////////////////////////////////////////////////////////
+	/** Charge une chaine Json en tant que tableau associatif
+	*
+	* @param $stringContent Contenue Json
+	* @return Le contenue au dans un tableau associatif
+	*/
+	public static function jString2Array($jStringContent) {
+		$jDecode = json_decode($jStringContent, true);
+
+		JsonUtils::throwLastJsonError("Can't decode the Json String.", $jStringContent);
+
+		return $jDecode;
+	}
+
+	////////////////////////////////////////////////////////////////////////////
+	/** Convertit un tableau en chaine Json
+	*
+	* @param $array tableau à Convertir Json
+	* @return La représentation Json de ce tableau
+	*/
+	public static function array2JString($array) {
+
+		$jString = json_encode($array, JSON_UNESCAPED_UNICODE);
+
+		if ($jString === false)
+			JsonUtils::throwLastJsonError("Can't encode array to Json String.", $array);
+
+		return $jString;
+	}
+
+	/***************************************************************************
+	* Sauvegarde un tableau dans un fichier Json
+	*
+	* @param $dataArray Tableau de données
+	* @param $jFilePath Chemin du fichier dans lequel sauvegarder
+	*/
+	public static function array2JFile($dataArray, $jFilePath) {
+		$dataStr = self::array2JString($dataArray);
+		self::jString2JFile($dataStr, $jFilePath);
+	}
+
+	////////////////////////////////////////////////////////////////////////////
+	/** Convertit un tableau en chaine Json
+	*
+	* @param $array tableau à Convertir Json
+	* @return La représentation Json de ce tableau
+	*/
+	public static function throwLastJsonError($failMsg, $mixed) {
+		$jErrorMsg;
+		$jErrorCode=json_last_error();
+
+		switch ($jErrorCode) {
+			case JSON_ERROR_NONE:
+				$jErrorMsg = 'Aucune erreur';
+			break;
+			case JSON_ERROR_DEPTH:
+				$jErrorMsg = 'Profondeur maximale atteinte';
+			break;
+			case JSON_ERROR_STATE_MISMATCH:
+				$jErrorMsg = 'Inadéquation des modes ou underflow';
+			break;
+			case JSON_ERROR_CTRL_CHAR:
+				$jErrorMsg = 'Erreur lors du contrôle des caractères';
+			break;
+			case JSON_ERROR_SYNTAX:
+				$jErrorMsg = 'Erreur de syntaxe ; JSON malformé';
+			break;
+			case JSON_ERROR_UTF8:
+				$jErrorMsg = 'Caractères UTF-8 malformés, probablement une erreur d\'encodage';
+			break;
+			default:
+				$jErrorMsg = 'Erreur inconnue';
+			break;
+		}
+
+		$mixedR = print_r($mixed, true);
+		if ($jErrorCode<>JSON_ERROR_NONE)
+			throw new Exception("$failMsg >>> Json error #$jErrorCode '$jErrorMsg'. Content : $mixedR");
+	}
+}

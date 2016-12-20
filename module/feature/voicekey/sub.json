@@ -1,0 +1,72 @@
+{
+  "tony": [
+    {
+      "text": "Maître",
+      "frequency": 1
+    },
+    {
+      "text": "Monsieur Stark",
+      "frequency": 2
+    },
+    {
+      "text": "Tony",
+      "frequency": 5
+    },
+    {
+      "text": "Votre majesté",
+      "frequency": 0
+    }
+  ],
+  "garage1": [
+    {
+      "text": "principale",
+      "frequency": 3
+    },
+    {
+      "text": "de Monsieur",
+      "frequency": 1
+    },
+    {
+      "text": "de la Mercedes",
+      "frequency": 1
+    }
+  ],
+  "garage2": [
+    {
+      "text": "secondaire",
+      "frequency": 3
+    },
+    {
+      "text": "de Madame",
+      "frequency": 1
+    },
+    {
+      "text": "de la Twingo",
+      "frequency": 1
+    }
+  ],
+  "poubelle1": [
+    {
+      "text": "noir",
+      "frequency": 3
+    },
+    {
+      "text": "déchet ménagé",
+      "frequency": 1
+    }
+  ],
+  "poubelle2": [
+    {
+      "text": "Jaune",
+      "frequency": 3
+    },
+    {
+      "text": "trie selectif",
+      "frequency": 1
+    },
+    {
+      "text": "du recyclable",
+      "frequency": 1
+    }
+  ]
+}

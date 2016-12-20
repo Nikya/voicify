@@ -35,9 +35,11 @@ Certaines actions de votre domotique méritent une notification vocal :
 
 ### Origines
 
-Github : [https://github.com/Nikya/voicify](https://github.com/Nikya/voicify)
+* Auteur : [Nikya](https://github.com/Nikya)
+* GitHub du projet : [Voicify : https://github.com/Nikya/voicify](https://github.com/Nikya/voicify)
 
-Auteurs : [sarakha63](https://github.com/sarakha63) & [Nikya](https://github.com/Nikya)
+
+
 
 ## Installation
 
