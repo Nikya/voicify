@@ -1,0 +1,15 @@
+{
+	"name" : "Voicekey",
+	"desc" : "Notification triggered by a specific keyword",
+	"play" : [
+		"play"
+	],
+	"configurator" : [
+		"configVoicekey",
+		"configSubvoicekey"
+	],
+	"configfile" : [
+		"voicekey",
+		"subvoicekey"
+	]
+}

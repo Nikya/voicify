@@ -28,11 +28,7 @@ class Setup {
 		'ttsengine' => array(),
 	);
 
-	/** Setup repporting state */
-	private static $repport = array(
-		'ok' => array(),
-		'ko' => array()
-	);
+	private static $ok = true;
 
 	/***************************************************************************
 	* To check if the full modules already exits
@@ -42,16 +38,14 @@ class Setup {
 	}
 
 	/***************************************************************************
-	* To check if there is a setup error recorded
-	*/
-	private static function isNoError() {
-		return count(self::$repport['ko'])==0 and count(self::$repport['ok'])>0;
-	}
-
-	/***************************************************************************
 	* To create the full Modules file
 	*/
 	public static function exec() {
+		if (!is_dir(self::PATH_CONFIG))
+			throw new Exception("Config folder not exists : " . self::PATH_CONFIG);
+
+		if (!is_writable(self::PATH_CONFIG))
+			throw new Exception("Config folder is not writable : " . self::PATH_CONFIG);
 
 		@$featureDirContent = scandir(self::PATH_FEATURE_MODULE);
 		@$ttsengineDirContent  = scandir(self::PATH_TTSENGINE_MODULE);
@@ -64,118 +58,135 @@ class Setup {
 
 		foreach ($featureDirContent as $c) {
 			if (!in_array($c, self::EXEPTION_PATH))
-				self::readFeatureModule($c);
+				self::readModule($c, 'FEATURE');
 		}
 
 		foreach ($ttsengineDirContent as $c) {
 			if (!in_array($c, self::EXEPTION_PATH))
-				self::readTtsengineModule($c);
+				self::readModule($c, 'TTSENGINE');
 		}
 
-		if (self::isNoError())
+		if (self::$ok and count(self::$modules['FEATURE'])>0 and count(self::$modules['TTSENGINE'])>0) {
 			self::save();
-
-		return self::$repport;
-	}
-
-	/***************************************************************************
-	* To read and check one module
-	*/
-	private static function readFeatureModule($id) {
-		try {
-			if (!is_dir(self::PATH_FEATURE_MODULE.$id))
-				throw new Exception("Is not a directory");
-			if (!file_exists(self::PATH_FEATURE_MODULE.$id.'/README.md'))
-				throw new Exception("No 'Readme' found");
-
-			$module = self::readhim(self::PATH_FEATURE_MODULE.$id.'/README.md');
-
-			if (self::isNoError())
-				self::loadDefaultConfig($id, self::PATH_FEATURE_MODULE.$id);
-
-			self::$modules['feature'][$id] = $module;
-
-			array_push(self::$repport['ok'], "Feature module '$id' loaded : ${module['title']} - ${module['desc']}");
-		} catch (Exception $e) {
-			array_push(self::$repport['ko'], "Fail to load the feature Module '$id' : " . $e->getMessage());
+			CoreUtils::consoleI('setup', 'Setup sucessful ! Feature Modules x' . count(self::$modules['FEATURE']) . ', TTS engine Modules x' . count(self::$modules['TTSENGINE']));
 		}
+		else
+			CoreUtils::consoleE('setup', "Setup fail, correct problems and run it again");
 	}
 
 	/***************************************************************************
 	* To read and check one module
 	*/
-	private static function readTtsengineModule($id) {
+	private static function readModule($id, $type) {
+		$path = "/??/";
+
+		if ($type == "FEATURE")
+			$path = self::PATH_FEATURE_MODULE;
+		else if ($type == "TTSENGINE")
+			$path = self::PATH_TTSENGINE_MODULE;
+
 		try {
-			if (!is_dir(self::PATH_TTSENGINE_MODULE.$id))
+			if (!is_dir($path.$id))
 				throw new Exception("Is not a directory");
-			if (!file_exists(self::PATH_TTSENGINE_MODULE.$id.'/README.md'))
+
+			if (!file_exists($path.$id.'/README.md'))
 				throw new Exception("No 'Readme' found");
 
-			$module = self::readhim(self::PATH_TTSENGINE_MODULE.$id.'/README.md');
-			self::loadDefaultConfig($id, self::PATH_TTSENGINE_MODULE.$id);
+			if (!file_exists($path.$id.'/manifest.json'))
+				throw new Exception("No 'Manifest' found");
 
-			self::$modules['ttsengine'][$id] = $module;
+			$module = self::readManifest($id, $path);
 
-			array_push(self::$repport['ok'], "Ttsengine module '$id' loaded : ${module['title']} - ${module['desc']}");
+			self::$modules[$type][$id] = $module;
+
+			CoreUtils::consoleI('setup.readModule', "$type module '$id' loaded : {$module['name']} - {$module['desc']}");
 		} catch (Exception $e) {
-			array_push(self::$repport['ko'], "Fail to load the TTS engine Module '$id' : " . $e->getMessage());
+			self::$ok = false;
+			CoreUtils::consoleW('setup.readModule', "Fail to load the $type module '$id' : {$e->getMessage()} - in '$path$id' ", $e);
 		}
 	}
 
 	/***************************************************************************
 	* To extract a name and a description from the README file
 	*/
-	private static function readhim($path) {
-		$module = array(
-			'title' => array(),
-			'desc' => array(),
-		);
-		$c = file_get_contents($path);
+	private static function readManifest($id, $path) {
+		try {
+			$module = array(
+				'name' => array(),
+				'desc' => array(),
+				'play' => array(),
+				'configurator' => array(),
+				'configfile' => array()
+			);
 
-		if ($c===false)
-			throw new Exception("Fail to read the file $path");
+			$jManifest = JsonUtils::jFile2Array("$path/$id/manifest.json");
 
-		// TITLE
-		$matches = array();
-		$res = preg_match (':#{1}(.*):', $c, $matches);
-		if ($res !== false and $res==1)
-			$module['title'] = trim($matches[1]);
-		else
-			throw new Exception("No title found in the readme ! (# My title) PREG#".preg_last_error());
+			// title
+			if (array_key_exists('name', $jManifest))
+				$module['name'] = trim($jManifest['name']);
+			else
+				throw new Exception("No name found");
 
-		// description
-		$matches = array();
-		$res = preg_match (':_{1}(.*)_{1}:', $c, $matches);
-		if ($res !== false and $res==1)
-			$module['desc'] = trim($matches[1]);
-		else
-			throw new Exception("No description found in the readme ! (_ My description_) PREG#".preg_last_error());
+			// description
+			if (array_key_exists('desc', $jManifest))
+				$module['desc'] = trim($jManifest['desc']);
+			else
+				throw new Exception("No description found");
 
-		return $module;
+			// play
+			if (array_key_exists('play', $jManifest)) {
+				foreach ($jManifest['play'] as $play) {
+					$playFile = "$path$id/$play.php";
+					$playApiFile = "$path$id/${play}Api.php";
+					if (file_exists($playFile) and file_exists($playApiFile))
+						array_push($module['play'], $play);
+					else
+						throw new Exception("Invalid PLAY. A file is missing '$playFile', '$playApiFile'");
+				}
+			}
+
+			// configurator
+			if (array_key_exists('configurator', $jManifest)) {
+				foreach ($jManifest['configurator'] as $configurator) {
+					$configuratorFile = "$path$id/$configurator.php";
+					$configuratorApiFile = "$path$id/${configurator}Api.php";
+					if (file_exists($configuratorFile) and file_exists($configuratorApiFile))
+						array_push($module['configurator'], $configurator);
+					else
+						throw new Exception("Invalid CONFIGURATOR. A file is missing '$configuratorFile', '$configuratorApiFile'");
+				}
+			}
+
+			// configfile
+			if (array_key_exists('configfile', $jManifest)) {
+				foreach ($jManifest['configfile'] as $configfileName) {
+					$configFile = "$path$id/$configfileName.json";
+					if (file_exists($configFile)){
+						self::loadDefaultConfig($id, $configFile, $configfileName);
+						array_push($module['configfile'], $configfileName);
+					}
+					else
+						throw new Exception("Invalid CONFIG FILE. File missing '$configFile'");
+				}
+			}
+
+			return $module;
+		} catch (Exception $e) {
+			throw new Exception("Fail to read Manifest - " . $e->getMessage(), -1, $e);
+		}
 	}
 
 	/***************************************************************************
 	* To read and check one module
 	*/
-	private static function loadDefaultConfig($id, $path) {
-		@$dirContent = scandir($path);
+	private static function loadDefaultConfig($id, $path, $configfile) {
+		$cFrom = $path;
+		$cTo = self::PATH_CONFIG.$id.'_'.$configfile.'.json';
 
-		if ($dirContent===false)
-			throw new Exception("Fail to scan the directory");
-
-		foreach ($dirContent as $c) {
-			if (strcasecmp(substr($c, -5, 5), '.json')==0) {
-				$cFrom = $path.'/'.$c;
-				$cTo = self::PATH_CONFIG.$id.'_'.$c;
-
-				if(!file_exists($cTo)) {
-					@$res = copy($cFrom, $cTo);
-					if ($res===TRUE)
-						array_push(self::$repport['ok'], "Default config file loaded '$cTo'");
-					else
-						throw new Exception("Fail to load default config file FROM '$cFrom' TO '$cTo' ");
-				}
-			}
+		if(!file_exists($cTo)) {
+			@$res = copy($cFrom, $cTo);
+			if ($res===FALSE)
+				throw new Exception("Fail to load default config file FROM '$cFrom' TO '$cTo' ");
 		}
 	}
 

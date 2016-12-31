@@ -15,8 +15,8 @@
 	<link href="core/view/aside/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
 	<!-- Custom styles for this template -->
-	<link href="core/view/aside/main.css" rel="stylesheet">
 	<link href="core/view/aside/readme.css" rel="stylesheet">
+	<link href="core/view/aside/main.css" rel="stylesheet">
 
 	<!-- Chargement des scripts -->
 	<script src="core/view/js/jquery.min.js"></script>
@@ -66,14 +66,53 @@
 		</div>
 	</nav>
 
-	<div class="starter-template" id="content">
+	<div class="starter-template">
 <!-- Content ------------------------------->
-		<pre class="console"><?php $coreUtils->consolePrint(); ?></pre>
+		<h2>
+			<?php echo $title ?>
+			<em><?php echo $desc ?></em>
+		</h2>
 
-		<h2>Title</h2>
-		<div class="container">Content <?php echo $target . ' &gt; ' . $module ?></div>
+		<div class="row" style="padding:2%;">
+			<!-- LEFT -->
+			<div class="col-sm-6">
+				<!-- CONSOLE -->
+				<div class="ccc">
+					<h3>Console</h3>
+					<input type=text id="calledUrl" value="<?php echo urldecode("http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]"); ?>"/>
+					<div id="indicator" class="ok">&nbsp;</div>
+					<pre class="console"><?php CoreUtils::consolePrint(); ?></pre>
+				</div>
 
-		<pre class="console"><?php $coreUtils->consolePrint(); ?></pre>
+				<!-- Say -->
+				<div class="ccc">
+					<h3>Saying</h3>
+					<blockquote class="content" id="Saying">
+						I have nothing to say !
+					</blockquote >
+				</div>
+
+				<!-- README -->
+				<div class="ccc">
+					<h3>Read Me</h3>
+					<div class="content markdown-body">
+						<?php echo $readme ?>
+					</div>
+				</div>
+			</div>
+
+			<!-- RIGHT -->
+			<div class="col-sm-6">
+				<!-- ACTION -->
+				<div class="ccc">
+					<h3><?php echo $target ?></h3>
+					<div class="content">
+						Content <?php echo $target . ' &gt; ' . $module ?>
+					</div>
+				</div>
+			</div>
+		</div>
+
 
 
 <!-- Fin Content ------------------------------->

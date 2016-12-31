@@ -1,0 +1,14 @@
+{
+	"name" : "Speaking clock",
+	"desc" : "To give the current hour",
+	"play" : [
+		"play"
+	],
+	"configurator" : [
+		"config"
+	],
+	"configfile" : [
+		"neutral",
+		"hour"
+	]
+}

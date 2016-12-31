@@ -1,0 +1,13 @@
+{
+	"name" : "Open Karotz",
+	"desc" : "Send the TTS to Open Karotz",
+	"play" : [
+		"play"
+	],
+	"configurator" : [
+		"config"
+	],
+	"configfile" : [
+		"global"
+	]
+}

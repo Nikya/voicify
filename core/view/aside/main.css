@@ -6,36 +6,40 @@ Color''	: Vert : #61ffa8 > #c7ffe3 > #3ea64d
 Color''': Orange : #ffa861 > #ffe3c7
 */
 
+/*******************************************************************************
+* Header
+*/
 body {
- 	padding-top: 50px;
+	padding-top: 50px;
+	background: url(background.jpg) no-repeat center center fixed;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+	background-color: #DDDDDD;
+
 }
 
-h2, h1 {
+h2 {
 	color : #ffa861;
-	background-color: #ffe3c7;
-	border: 0px solid #ffa861;
-	border-width: 3px 0;
+	background-color: #222;
 	width: 100%;
+	padding: 2%;
+	margin-top: 0;
+	margin-bottom: : 40px;
 	text-align: center;
-	padding: 5px;
-	margin: 20px 0 40px 0;
 }
 
-h2:empty {
-	display: none;
-    font-weight: bold;
+h2 > em  {
+	margin-top: 1%;
+	display: block;
+	font-size: 0.5em;
+	color: #ffe3c7;
 }
 
-h3 {
-	color : #ffa861;
-}
-
-pre.console,
-blockquote.phrase {
-	margin-top: 15px;
-	margin-bottom: 15px;
-}
-
+/*******************************************************************************
+* Nav
+*/
 .navbar-inverse .navbar-nav>li>a,
 .navbar-inverse .navbar-brand {
 	color: #ffe3c7;
@@ -46,66 +50,138 @@ blockquote.phrase {
 	color: #ffa861;
 }
 
-pre.console:empty {
-	display: none;
+/*******************************************************************************
+* Content div : ccc
+*/
+.ccc {
+	background-color: #FFFFFF;
+	margin-bottom: 40px;
+	border: 2px solid #FFF;
 }
 
-pre.console, #wait {
-	background-color: #404040;
-	color: #c7ffe3;
-	border:3px solid #c7ffe3;
-	text-align: left;
-	font-family: monospace;
-	font-size: 0.8em;
+.ccc > h3 {
+	color : #ffa861;
+	padding: 2%;
+	border-bottom: 1px solid #ffa861;
+	margin: 0;
 }
 
-pre.console .error {
+.ccc > .content {
+	margin-top: 3%;
+	padding: 2%;
+}
+
+/*******************************************************************************
+* Console
+*/
+#indicator {
+	border: 7px solid #000;
+	line-height: 14px;
 	color: red;
-	border-color: red;
+	background-color: #000;
+	border-left: 75%;
 }
 
-pre.console hr {
-	border:1px solid #c7ffe3;
+#indicator.ok,
+.lvlok {
+	background-color: #9fff82;
 }
 
-#wait {
-    border-bottom: 0;
-    text-align: center;
+#indicator.ko,
+.lvlko {
+	background-color: #ff829f;
 }
 
-#wait ~ pre.console {
-	margin-top: 0;
-    border-top: 0;
+#indicator.warn,
+.lvlwarn {
+	background-color: #ffb282;
 }
 
-/********************
-*** Play page *******
-*********************/
+#indicator.wait {
+	background-color: #0FF;
+	-webkit-animation: colorwait 1s;
+	animation-direction: alternate;
+	animation-iteration-count:infinite;
+}
+@keyframes colorwait {
+	0%   {background: #F0F;}
+	50%   {background: #FF0;}
+	100%  {background: #0FF;}
+}
+
+.lvl {
+	color: black;
+	padding: 1px;
+}
+
 #calledUrl {
 	padding: 1px;
 	width: 100%;
 	font-size: 0.8em;
 	font-family: monospace;
-	border: 2px inset #c7ffe3;
-    margin-bottom: 0;
-    word-wrap:break-word;
+	border: 3px inset #ffa861;
+	margin-bottom: 0;
+	word-wrap:break-word;
 }
-
 /* Url hightlight */
 #calledUrl .base {color:#DE93FE;}
 #calledUrl .target {color:#8B01C5;}
 #calledUrl .param {color:#C58B00;}
 #calledUrl .value {color:#00C58B;}
 
-blockquote.phrase {
-	background-color: #e3c7ff;
-	border-left: 5px solid #a861ff;
-	color:#a861ff;
-	padding: 5px;
-	text-align: left;
-	font-style: italic;
-	padding-left: 20px;
+.console {
+	overflow: auto;
+	background-color: #000;
+	color: #c7ffe3;
+	font-family: monospace;
+	font-size: 0.8em;
+	list-style: none;
+	padding: 1%;
 }
+
+.console li {
+	margin-top:10px;
+}
+
+.console p {
+	margin: 0;
+}
+
+.console pre {
+	background-color: #000;
+
+	border: none;
+	overflow: visible;
+	font-size: 0.8em;
+	color: #DDD;
+	padding: 0;
+	margin: 0;
+	margin-left: 20px;
+}
+
+/*******************************************************************************
+* Say
+*/
+blockquote {
+	border-left: 3px solid #a861ff;
+	color:#a861ff;
+	font-style: italic;
+	font-family: cursive;
+}
+
+blockquote.content {
+	border: none;
+	text-align: center;
+}
+
+
+
+/** TODO Css non revue aprés cette ligne */
+
+/********************
+*** Play page *******
+*********************/
+
 
 
 /************************

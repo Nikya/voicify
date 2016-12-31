@@ -12,6 +12,11 @@ Version : **0.0.01.02**
 - audio_system : 01
 - wording_system : 02
 
+## TODO
+* [ ] Chaque module peut etre jouable et/ou configurable
+* [ ] Avoir un module PLAY tout simple pour tester du text simple te les différents moteurs
+* [x] Extraire pour mutualiser des composants de vue : Console, saying, README, ... : Créer des ccc (trouver un meilleur nom)
+
 ### Présentation
 
 *Donner de la voix à votre maison domotisée !*
@@ -30,7 +35,7 @@ Certaines actions de votre domotique méritent une notification vocal :
 **Avantages de ce système**
 
 * Contient plusieurs moteurs de synthèse vocale (PicoTTS, Google, ...)
-* Peut émettre la notification vers plusieurs types de cible (OpenKarotz, Squeezebox, ...)
+* Peut émettre la notification vers plusieurs types de cible (OpenKarotz, Squeezccc, ...)
 * Pour une même notificaiton, peut générer plusieurs phrases différentes, paramétrable pour éviter la lassitude.
 
 ### Origines

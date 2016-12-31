@@ -12,7 +12,7 @@ class JsonUtils {
 	* @return Le contenue au dans un tableau associatif
 	*/
 	public static function jFile2Array($jFilePath) {
-		$content = file_get_contents($jFilePath);
+		@$content = file_get_contents($jFilePath);
 
 		if ($content === false)
 			throw new Exception("Can't read input file $jFilePath");
