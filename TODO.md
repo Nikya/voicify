@@ -1,7 +1,8 @@
 ## Build TO-DO list
-* [ ] Page Home et constrution du menu
-* [ ] Comment contruire les pages en fonciton des pages déclarés dans les manifest : Construction du menu
-* [ ] Avoir un module PLAY tout simple pour tester du text simple te les différents moteurs
+* [ ] Naviguer vers les pages du module
+* [ ] Avoir un module PLAY tout simple pour tester du text simple des différents moteurs
+* [x] Comment contruire les pages en fonciton des pages déclarés dans les manifest : Construction du menu
+* [x] Page Home et constrution du menu
 * [x] Page de Setup pour déclancher l'installation et voir les modules instalés
 * [x] Chaque module peut etre jouable et/ou configurable
 * [x] Un seul genre de module typé FEATURE ou TTS engine dans les manifest

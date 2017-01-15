@@ -22,14 +22,14 @@
 		<div class="ccc">
 			<h3>Feature Modules</h3>
 			<div class="content markdown-body moduleDesc">
-				<?php printModule(Setup::MODULE_T_FEATURE); ?>
+				<?php printModule(CoreUtils::MODULE_T_FEATURE); ?>
 			</div>
 		</div>
 
 		<div class="ccc">
 			<h3>TTS Engine Modules</h3>
 			<div class="content markdown-body moduleDesc">
-				<?php printModule(Setup::MODULE_T_TTSENGINE); ?>
+				<?php printModule(CoreUtils::MODULE_T_TTSENGINE); ?>
 			</div>
 		</div>
 		<?php } ?>
@@ -41,8 +41,8 @@
 /***************************************************************************
 * To read and display all modules from a type
 */
-function printModule($ModuleT) {
-	$aModules = CoreUtils::getManifestMain()[$ModuleT];
+function printModule($moduleT) {
+	$aModules = CoreUtils::getManifestMain()[$moduleT];
 
 	foreach ($aModules as $mId => $m) {
 		echo <<<EOM

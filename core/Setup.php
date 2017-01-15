@@ -17,16 +17,10 @@ class Setup {
 	/** Exluding path not a valid Module */
 	const EXEPTION_PATH = array(".", ".."/*, "_template"*/);
 
-	/** Module type */
-	const MODULE_T_FEATURE = 'FEATURE';
-
-	/** Module type */
-	const MODULE_T_TTSENGINE = 'TTSENGINE';
-
 	/** All Know Modules */
 	private static $manifestMain = array(
-		self::MODULE_T_FEATURE => array(),
-		self::MODULE_T_TTSENGINE => array(),
+		CoreUtils::MODULE_T_FEATURE => array(),
+		CoreUtils::MODULE_T_TTSENGINE => array(),
 	);
 
 	/** Global Setup status */
@@ -99,7 +93,7 @@ class Setup {
 
 			self::$manifestMain[$type][$id] = $module;
 
-			CoreUtils::consoleI('setup.readModule', "The $type module '$id' is loaded : {$module['name']} : {$module['desc']}");
+			CoreUtils::consoleI('setup.readModule', "The $type module '$id' is loaded");
 		} catch (Exception $e) {
 			self::$runOk = false;
 			CoreUtils::consoleW('setup.readModule', "Fail to load the module '$id' : {$e->getMessage()} - in '$path$id' ", $e);
@@ -172,7 +166,7 @@ class Setup {
 				if (!file_exists($targetFile) or !file_exists($targetApiFile))
 					throw new Exception("Invalid $tId. A file is missing '$targetFile', '$targetApiFile'");
 
-				array_push($module[$tId], $targetInfo);
+				$module[$tId][$targetId] = $targetInfo;
 			}
 		}
 	}

@@ -3,9 +3,9 @@
 	require_once('./core/ViewUtils.php');
 
 	try {
-		/***********************************************************************
-		* Read target
-		*/
+/*******************************************************************************
+* Read target
+*/
 
 		// Mandatory vars
 		$target = 'home';
@@ -32,9 +32,9 @@
 			}
 		}
 
-		/***********************************************************************
-		* Load target
-		*/
+/*******************************************************************************
+* Load target
+*/
 		switch ($target) {
 			/** PLAY ***********************************************************/
 			case 'play':
@@ -69,10 +69,44 @@
 	}
 
 /*******************************************************************************
+* Build Menus
+*/
+	$playMenuHtml = '';
+	$playMenuHtml .= buildMenu(CoreUtils::MENU_T_PLAYER, CoreUtils::MODULE_T_FEATURE);
+	$playMenuHtml .= buildMenuSep();
+	$playMenuHtml .= buildMenu(CoreUtils::MENU_T_PLAYER, CoreUtils::MODULE_T_TTSENGINE);
+
+	$configMenuHtml = '<li><a href="?setup" title="Execute the setup">Setup</a></li><li role="separator" class="divider"></li>';
+	$configMenuHtml .= buildMenu(CoreUtils::MENU_T_CONFIGURATOR, CoreUtils::MODULE_T_FEATURE);
+	$configMenuHtml .= buildMenuSep();
+	$configMenuHtml .= buildMenu(CoreUtils::MENU_T_CONFIGURATOR, CoreUtils::MODULE_T_TTSENGINE);
+
+	function buildMenu($menuT, $moduleT) {
+		if (!Setup::isOk()) return '';
+		
+		$aModules = CoreUtils::getManifestMain()[$moduleT];
+		$out = '';
+
+		$target = $menuT==CoreUtils::MENU_T_PLAYER ? 'play' : 'config';
+
+		foreach ($aModules as $mId => $m) {
+			if (count($m[$menuT]) == 1) {
+				$out .= "<li><a href=\"?$target=$mId\" title=\"{$m['desc']}\">{$m['name']}</a></li>";
+			} else {
+				foreach ($m[$menuT] as $eId => $entry) {
+					$out .= "<li><a href=\"?$target={$mId}_$eId\" title=\"{$m['desc']} : {$entry['desc']}\">{$m['name']} : {$entry['name']}</a></li>";
+				}
+			}
+		}
+
+		return $out;
+	}
+
+	function buildMenuSep() {
+		return '<li role="separator" class="divider"></li>';
+	}
+
+/*******************************************************************************
 * DISPLAY
 */
-
-	//$playMenuHtml = buildPlayMenu();
-	//$configMenuHtml = buildConfigMenu();
-
 	include('./core/view/main.php');

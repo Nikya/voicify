@@ -9,6 +9,18 @@
 */
 class CoreUtils {
 
+	/** Module type */
+	const MODULE_T_FEATURE = 'FEATURE';
+
+	/** Module type */
+	const MODULE_T_TTSENGINE = 'TTSENGINE';
+
+	/** Menu type */
+	const MENU_T_PLAYER = 'player';
+
+	/** Menu type */
+	const MENU_T_CONFIGURATOR= 'configurator';
+
 	/** To store console messages */
 	private static $aConsole = array();
 
@@ -29,10 +41,10 @@ class CoreUtils {
 			'mixed' => $mixed
 		));
 	}
-	public function consoleD ($tag, $msg, $mixed=null) {	self::console('D', $tag, $msg, $mixed); }
-	public function consoleI ($tag, $msg, $mixed=null) {	self::console('I', $tag, $msg, $mixed); }
-	public function consoleW ($tag, $msg, $mixed=null) {	self::console('W', $tag, $msg, $mixed); }
-	public function consoleE ($tag, $msg, $mixed=null) {	self::console('E', $tag, $msg, $mixed); }
+	public static function consoleD ($tag, $msg, $mixed=null) {	self::console('D', $tag, $msg, $mixed); }
+	public static function consoleI ($tag, $msg, $mixed=null) {	self::console('I', $tag, $msg, $mixed); }
+	public static function consoleW ($tag, $msg, $mixed=null) {	self::console('W', $tag, $msg, $mixed); }
+	public static function consoleE ($tag, $msg, $mixed=null) {	self::console('E', $tag, $msg, $mixed); }
 
 	/***************************************************************************
 	* To print the console into HTML LI
@@ -146,5 +158,36 @@ EOE;
 	*/
 	public static function getFeatureModules() {
 		return array_key_exists($id, $modules['ttsengine']);
+	}
+}
+
+
+/*******************************************************************************
+* Redirect Error handler
+*/
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+set_error_handler('errorToException', E_ALL);
+
+function errorToException($level, $message, $file, $line, $context) {
+	if (error_reporting() === 0)
+		return;
+
+	$fMessage = "$message. In line $line of file $file";
+
+	switch ($level) {
+		// Warning
+		case 'E_USER_NOTICE':
+		case 'E_USER_WARNING':
+		case 'E_COMPILE_WARNING':
+		case 'E_CORE_WARNING':
+		case 'E_WARNING':
+			CoreUtils::consoleW("UNEXPECTED_WARNING_LEVEL_$level", $fMessage);
+			break;
+
+		// Errors and others
+		default:
+			CoreUtils::consoleE("UNEXPECTED_ERROR_LEVEL_$level", $fMessage);
+			break;
 	}
 }
