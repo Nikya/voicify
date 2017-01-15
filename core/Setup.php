@@ -9,66 +9,69 @@ class Setup {
 	const PATH_CONFIG = './config/';
 
 	/** Path to the full Modules */
-	const PATH_MODULES = self::PATH_CONFIG . 'modules.json';
+	const PATH_MANIFEST_MAIN = self::PATH_CONFIG . 'manifest_main.json';
 
 	/** Path to modules */
 	const PATH_MODULE = './module/';
 
-	/** Path to a feature modules */
-	const PATH_FEATURE_MODULE = self::PATH_MODULE.'feature/';
+	/** Exluding path not a valid Module */
+	const EXEPTION_PATH = array(".", ".."/*, "_template"*/);
 
-	/** Path to a TTS engine modules */
-	const PATH_TTSENGINE_MODULE = self::PATH_MODULE.'ttsengine/';
+	/** Module type */
+	const MODULE_T_FEATURE = 'FEATURE';
 
-	const EXEPTION_PATH = array(".", "..");
+	/** Module type */
+	const MODULE_T_TTSENGINE = 'TTSENGINE';
 
 	/** All Know Modules */
-	private static $modules = array(
-		'feature' => array(),
-		'ttsengine' => array(),
+	private static $manifestMain = array(
+		self::MODULE_T_FEATURE => array(),
+		self::MODULE_T_TTSENGINE => array(),
 	);
 
-	private static $ok = true;
+	/** Global Setup status */
+	private static $runOk = true;
 
 	/***************************************************************************
-	* To check if the full modules already exits
+	* To check if the full modules already exits : Setup already done
 	*/
-	public static function check() {
-		return file_exists(self::PATH_MODULES);
+	public static function isOk() {
+		return file_exists(self::PATH_MANIFEST_MAIN);
 	}
 
 	/***************************************************************************
-	* To create the full Modules file
+	* Execute the full setup (create the full Modules file)
 	*/
 	public static function exec() {
+		// Delete file
+		@unlink(self::PATH_MANIFEST_MAIN);
+
+		if (!extension_loaded('intl'))
+			throw new Exception("Mandatory internationalization extension is not available. Install it. See http://php.net/manual/fr/intl.installation.php");
+
 		if (!is_dir(self::PATH_CONFIG))
 			throw new Exception("Config folder not exists : " . self::PATH_CONFIG);
 
 		if (!is_writable(self::PATH_CONFIG))
 			throw new Exception("Config folder is not writable : " . self::PATH_CONFIG);
 
-		@$featureDirContent = scandir(self::PATH_FEATURE_MODULE);
-		@$ttsengineDirContent  = scandir(self::PATH_TTSENGINE_MODULE);
+		@$dirContent = scandir(self::PATH_MODULE);
 
-		if ($featureDirContent===false)
-			throw new Exception("Module feature folder not found : " . self::PATH_FEATURE_MODULE);
+		if ($dirContent===false)
+			throw new Exception("Module folder not found : " . self::PATH_MODULE);
 
-		if ($ttsengineDirContent===false)
-			throw new Exception("Module TTS engine folder not found : " . self::PATH_TTSENGINE_MODULE);
-
-		foreach ($featureDirContent as $c) {
+		foreach ($dirContent as $c) {
 			if (!in_array($c, self::EXEPTION_PATH))
 				self::readModule($c, 'FEATURE');
 		}
 
-		foreach ($ttsengineDirContent as $c) {
-			if (!in_array($c, self::EXEPTION_PATH))
-				self::readModule($c, 'TTSENGINE');
-		}
+		//CoreUtils::consoleD('setup', 'Final main manifest', self::$manifestMain);
+		$cntFeature = count(self::$manifestMain['FEATURE']);
+		$cntTtsengine = count(self::$manifestMain['TTSENGINE']);
 
-		if (self::$ok and count(self::$modules['FEATURE'])>0 and count(self::$modules['TTSENGINE'])>0) {
+		if (self::$runOk and count(self::$manifestMain['FEATURE'])>0 and count(self::$manifestMain['TTSENGINE'])>0) {
 			self::save();
-			CoreUtils::consoleI('setup', 'Setup sucessful ! Feature Modules x' . count(self::$modules['FEATURE']) . ', TTS engine Modules x' . count(self::$modules['TTSENGINE']));
+			CoreUtils::consoleI('setup', "Setup sucessful ! Feature Modules x$cntFeature, TTS engine Modules x$cntTtsengine.");
 		}
 		else
 			CoreUtils::consoleE('setup', "Setup fail, correct problems and run it again");
@@ -77,32 +80,29 @@ class Setup {
 	/***************************************************************************
 	* To read and check one module
 	*/
-	private static function readModule($id, $type) {
-		$path = "/??/";
-
-		if ($type == "FEATURE")
-			$path = self::PATH_FEATURE_MODULE;
-		else if ($type == "TTSENGINE")
-			$path = self::PATH_TTSENGINE_MODULE;
+	private static function readModule($id) {
+		$path = self::PATH_MODULE.$id;
+		$type = 'UNKNOW_TYPE';
 
 		try {
-			if (!is_dir($path.$id))
+			if (!is_dir($path))
 				throw new Exception("Is not a directory");
 
-			if (!file_exists($path.$id.'/README.md'))
+			if (!file_exists("$path/README.md"))
 				throw new Exception("No 'Readme' found");
 
-			if (!file_exists($path.$id.'/manifest.json'))
+			if (!file_exists("$path/manifest.json"))
 				throw new Exception("No 'Manifest' found");
 
 			$module = self::readManifest($id, $path);
+			$type = $module['type'];
 
-			self::$modules[$type][$id] = $module;
+			self::$manifestMain[$type][$id] = $module;
 
-			CoreUtils::consoleI('setup.readModule', "$type module '$id' loaded : {$module['name']} - {$module['desc']}");
+			CoreUtils::consoleI('setup.readModule', "The $type module '$id' is loaded : {$module['name']} : {$module['desc']}");
 		} catch (Exception $e) {
-			self::$ok = false;
-			CoreUtils::consoleW('setup.readModule', "Fail to load the $type module '$id' : {$e->getMessage()} - in '$path$id' ", $e);
+			self::$runOk = false;
+			CoreUtils::consoleW('setup.readModule', "Fail to load the module '$id' : {$e->getMessage()} - in '$path$id' ", $e);
 		}
 	}
 
@@ -112,67 +112,85 @@ class Setup {
 	private static function readManifest($id, $path) {
 		try {
 			$module = array(
-				'name' => array(),
-				'desc' => array(),
-				'play' => array(),
+				'player' => array(),
 				'configurator' => array(),
 				'configfile' => array()
 			);
 
-			$jManifest = JsonUtils::jFile2Array("$path/$id/manifest.json");
+			$inManifest = JsonUtils::jFile2Array("$path/manifest.json");
 
-			// title
-			if (array_key_exists('name', $jManifest))
-				$module['name'] = trim($jManifest['name']);
-			else
-				throw new Exception("No name found");
+			self::readManifestValue('type', $module, $inManifest);
+			self::readManifestValue('name', $module, $inManifest);
+			self::readManifestValue('desc', $module, $inManifest);
+			self::readManifestValue('version', $module, $inManifest);
+			self::readManifestValue('author', $module, $inManifest);
+			self::readManifestValue('sourcelink', $module, $inManifest);
 
-			// description
-			if (array_key_exists('desc', $jManifest))
-				$module['desc'] = trim($jManifest['desc']);
-			else
-				throw new Exception("No description found");
+			// type
+			if (!array_key_exists($module['type'], self::$manifestMain))
+				throw new Exception("Invalid module type {$module['type']}");
 
-			// play
-			if (array_key_exists('play', $jManifest)) {
-				foreach ($jManifest['play'] as $play) {
-					$playFile = "$path$id/$play.php";
-					$playApiFile = "$path$id/${play}Api.php";
-					if (file_exists($playFile) and file_exists($playApiFile))
-						array_push($module['play'], $play);
-					else
-						throw new Exception("Invalid PLAY. A file is missing '$playFile', '$playApiFile'");
-				}
-			}
-
-			// configurator
-			if (array_key_exists('configurator', $jManifest)) {
-				foreach ($jManifest['configurator'] as $configurator) {
-					$configuratorFile = "$path$id/$configurator.php";
-					$configuratorApiFile = "$path$id/${configurator}Api.php";
-					if (file_exists($configuratorFile) and file_exists($configuratorApiFile))
-						array_push($module['configurator'], $configurator);
-					else
-						throw new Exception("Invalid CONFIGURATOR. A file is missing '$configuratorFile', '$configuratorApiFile'");
-				}
-			}
-
-			// configfile
-			if (array_key_exists('configfile', $jManifest)) {
-				foreach ($jManifest['configfile'] as $configfileName) {
-					$configFile = "$path$id/$configfileName.json";
-					if (file_exists($configFile)){
-						self::loadDefaultConfig($id, $configFile, $configfileName);
-						array_push($module['configfile'], $configfileName);
-					}
-					else
-						throw new Exception("Invalid CONFIG FILE. File missing '$configFile'");
-				}
-			}
+			self::readManifestTarget('player', $path, $module, $inManifest);
+			self::readManifestTarget('configurator', $path, $module, $inManifest);
+			self::readManifestConfigfiles($id, $path, $module, $inManifest);
 
 			return $module;
 		} catch (Exception $e) {
 			throw new Exception("Fail to read Manifest - " . $e->getMessage(), -1, $e);
+		}
+	}
+
+	/***************************************************************************
+	* To extract a value from the manifest
+	*/
+	private static function readManifestValue($vId, &$module, $inManifest) {
+		if (array_key_exists($vId, $inManifest))
+			$module[$vId] = trim($inManifest[$vId]);
+		else
+			throw new Exception("No $vId found");
+	}
+
+	/***************************************************************************
+	* To extract targets from the manifest
+	*/
+	private static function readManifestTarget($tId, $path, &$module, $inManifest) {
+		if (array_key_exists($tId, $inManifest)) {
+			foreach ($inManifest[$tId] as $targetId => $targetInInfo) {
+				// Name
+				if (!array_key_exists('name', $targetInInfo))
+					throw new Exception("No $tId name found");
+
+				// desc
+				if (!array_key_exists('desc', $inManifest))
+					throw new Exception("No $tId desc found");
+
+				$targetInfo = array('name'=>$targetInInfo['name'], 'desc'=>$targetInInfo['desc']);
+
+				// Files
+				$targetFile = "$path/$targetId.php";
+				$targetApiFile = "$path/{$targetId}Api.php";
+				if (!file_exists($targetFile) or !file_exists($targetApiFile))
+					throw new Exception("Invalid $tId. A file is missing '$targetFile', '$targetApiFile'");
+
+				array_push($module[$tId], $targetInfo);
+			}
+		}
+	}
+
+	/***************************************************************************
+	* To extract config files from the manifest
+	*/
+	private static function readManifestConfigfiles($id, $path, &$module, $inManifest) {
+		if (array_key_exists('configfile', $inManifest)) {
+			foreach ($inManifest['configfile'] as $configfileName) {
+				$configFile = "$path/$configfileName.json";
+				if (file_exists($configFile)){
+					self::loadDefaultConfig($id, $configFile, $configfileName);
+					array_push($module['configfile'], $configfileName);
+				}
+				else
+					throw new Exception("Invalid CONFIG FILE. File missing '$configFile'");
+			}
 		}
 	}
 
@@ -194,6 +212,6 @@ class Setup {
 	* To save the full modules into the file
 	*/
 	private static function save() {
-		JsonUtils::array2JFile(self::$modules, self::PATH_MODULES);
+		JsonUtils::array2JFile(self::$manifestMain, self::PATH_MANIFEST_MAIN);
 	}
 }

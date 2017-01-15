@@ -1,0 +1,28 @@
+{
+	"type" : "FEATURE",
+	"name": "Voicekey",
+	"desc": "Say a notification for a specific Keyword",
+	"version": "3.0",
+	"author": "Nikya",
+	"sourcelink": "https://github.com/Nikya/voicify",
+	"player": {
+		"pMain": {
+			"name": "Voicekey",
+			"desc": "To play with voicekey and subvoicekey"
+		}
+	},
+	"configurator": {
+		"cVoicekey": {
+			"name": "Voicekey",
+			"desc": "Register voicekey"
+		},
+		"cSubvoicekey": {
+			"name": "Subvoicekey",
+			"desc": "Register Sub-voicekey"
+		}
+	},
+	"configfile": [
+		"voicekey",
+		"subvoicekey"
+	]
+}

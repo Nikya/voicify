@@ -50,6 +50,15 @@ h2 > em  {
 	color: #ffa861;
 }
 
+
+ul.dropdown-menu > li > a > em {
+	background-color: #DDD;
+	font-size: 0.7em;
+	padding: 3px;
+	border-radius: 5px;
+	font-family: monospace;
+}
+
 /*******************************************************************************
 * Content div : ccc
 */
@@ -75,7 +84,7 @@ h2 > em  {
 * Console
 */
 #indicator {
-	border: 7px solid #000;
+	border: 4px solid #ffa861;
 	line-height: 14px;
 	color: red;
 	background-color: #000;
@@ -119,7 +128,7 @@ h2 > em  {
 	width: 100%;
 	font-size: 0.8em;
 	font-family: monospace;
-	border: 3px inset #ffa861;
+	border: 3px solid #ffa861;
 	margin-bottom: 0;
 	word-wrap:break-word;
 }
@@ -174,7 +183,16 @@ blockquote.content {
 	text-align: center;
 }
 
+/*******************************************************************************
+* Setup
+*/
+.moduleDesc {
+	font-size: 1em;
+}
 
+.moduleDesc article {
+	border-bottom: 1px solid black;
+}
 
 /** TODO Css non revue aprés cette ligne */
 

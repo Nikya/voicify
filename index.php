@@ -1,47 +1,78 @@
 <?php
 	require_once('./core/CoreUtils.php');
+	require_once('./core/ViewUtils.php');
 
 	try {
+		/***********************************************************************
+		* Read target
+		*/
 
-		// Run Setup if needed
-		if (!Setup::check()) {
-			CoreUtils::consoleW('CoreUtils.constructor', 'Need to execute Setup');
-			Setup::exec();
-		}
+		// Mandatory vars
+		$target = 'home';
+		$module = null;
+		$title = 'Home';
+		$desc = 'Welcome';
+		$readme = null;
 
-		try {
-			// Define target
-			$target = 'home';
-			$module = null;
-			$title = 'Home Voicify';
-			$desc = "Welcome";
-			$readme = null;
-
-			CoreUtils::consoleD('index', 'Starting. $title', array($target, $module));
-
-			if (!empty($_GET)) {
-				if (isset($_GET['play'])) {
-					$target = 'play';
-					$module = $_GET['play'];
-
-					$title = 'Home Voicify';
-					$desc = "Welcome";
-					$readme = null;
-				}
-				else if (isset($_GET['config'])) {
-					$target = 'config';
-					$module = $_GET['config'];
-				}
-				else {
-					CoreUtils::consoleW('index', 'Unknow target or module : ' . print_r($_GET, true));
-				}
+		if (!empty($_GET)) {
+			if (isset($_GET['play'])) {
+				$target = 'play';
+				$module = $_GET['play'];
 			}
-
-		} catch (Exception $e) {
-			CoreUtils::consoleD('index.exception', $e->getMessage() .  print_r($_GET, true), $e);
+			else if (isset($_GET['config'])) {
+				$target = 'config';
+				$module = $_GET['config'];
+			}
+			else if (isset($_GET['setup'])) {
+				$target = 'setup';
+				$module = $_GET['setup'];
+			}
+			else {
+				CoreUtils::consoleW('index', 'Unknow target or module : ' . print_r($_GET, true));
+			}
 		}
 
-		include('./core/view/main.php');
+		/***********************************************************************
+		* Load target
+		*/
+		switch ($target) {
+			/** PLAY ***********************************************************/
+			case 'play':
+				// TODO impl Play
+				break;
+
+			/** CONFIG *********************************************************/
+			case 'config':
+				// TODO impl Config
+				break;
+
+			/** SETUP *********************************************************/
+			case 'setup':
+				if (!empty($module) and strcasecmp($module, 'run')==0)
+					Setup::exec();
+				$title = 'Setup';
+				$desc = 'Check and initialize the system';
+				break;
+
+			case 'home':
+			default:
+				// TODO impl home normal et fail et SEtup
+				break;
+		}
 	} catch (Exception $e) {
-		echo 'Fail to initilise : ' . $e->getMessage() . '<pre>' . $e->getTraceAsString() . '</pre>';
+		CoreUtils::consoleW('index', 'target' , $_GET);
+		CoreUtils::consoleE('index.exception', $e->getMessage(), $e);
 	}
+
+	if (!Setup::isOk()) {
+		CoreUtils::consoleE('CoreUtils.constructor', 'Please run the Setup in config/setup Menu');
+	}
+
+/*******************************************************************************
+* DISPLAY
+*/
+
+	//$playMenuHtml = buildPlayMenu();
+	//$configMenuHtml = buildConfigMenu();
+
+	include('./core/view/main.php');

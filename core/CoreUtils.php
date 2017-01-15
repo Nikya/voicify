@@ -12,6 +12,12 @@ class CoreUtils {
 	/** To store console messages */
 	private static $aConsole = array();
 
+	/** To store already read module config */
+	private static $moduleConfig = array();
+
+	/** To store the main manifest */
+	private static $manifestMain = null;
+
 	/***************************************************************************
 	* To add a message into the console output
 	*/
@@ -29,7 +35,7 @@ class CoreUtils {
 	public function consoleE ($tag, $msg, $mixed=null) {	self::console('E', $tag, $msg, $mixed); }
 
 	/***************************************************************************
-	* Common Core utiliy functions
+	* To print the console into HTML LI
 	*/
 	public static function consolePrint() {
 		$out = '';
@@ -39,6 +45,9 @@ class CoreUtils {
 			'W' => 'warn',
 			'E' => 'ko'
 		);
+
+		if (empty(self::$aConsole))
+			self::consoleI('OK', 'Ok, everything is fine.');
 
 		foreach (self::$aConsole as $entry) {
 			$mixed = $entry['mixed'];
@@ -64,7 +73,7 @@ EOE;
 	}
 
 	/***************************************************************************
-	* Common Core utiliy functions
+	* Get the global console indicator
 	*/
 	public static function consoleIndicator() {
 		$cptW = 0;
@@ -80,7 +89,7 @@ EOE;
 	}
 
 	/***************************************************************************
-	* Parse a Mardown file into a formated text
+	* Parse a Mardown file into a formated HTML
 	*/
 	public static function mdParse($path) {
 		$c = file_get_contents($path);
@@ -92,18 +101,26 @@ EOE;
 	}
 
 	/***************************************************************************
-	* To store already read config */
-	private static $configs = array();
+	* Return already readed module config file or load it
+	*/
+	public static function getManifestMain() {
+		if (self::$manifestMain == null)
+			self::$manifestMain = JsonUtils::jFile2Array(Setup::PATH_MANIFEST_MAIN);
 
-	/* Load a config Json file into an array */
+		return self::$manifestMain;
+	}
+
+	/***************************************************************************
+	* Return already readed module config file or load it
+	*/
 	public static function getConfig($module, $confName='main') {
 		$key = $module . ($confName!=null ? '_'.$confName : '');
 
-		if (!array_key_exists($key, $configs)) {
-			$configs[$key] = JsonUtils::jFile2Array("./config/$key.json");
+		if (!array_key_exists($key, $moduleConfig)) {
+			$moduleConfig[$key] = JsonUtils::jFile2Array("./config/$key.json");
 		}
 
-		return $configs[$key];
+		return $moduleConfig[$key];
 	}
 
 	/***************************************************************************

@@ -1,0 +1,28 @@
+{
+	"type" : "FEATURE",
+	"name": "Speaking Clock",
+	"desc": "Say the current hour",
+	"version": "1.0",
+	"author": "Nikya",
+	"sourcelink": "https://github.com/Nikya/voicify",
+	"player": {
+		"pMain": {
+			"name": "My player",
+			"desc": "A description of my PLAY function"
+		}
+	},
+	"configurator": {
+		"cHour": {
+			"name": "Hour",
+			"desc": "Register specific hour"
+		},
+		"cNeutral": {
+			"name": "Neutral",
+			"desc": "Register neutral hour"
+		}
+	},
+	"configfile": [
+		"hour",
+		"neutral"
+	]
+}

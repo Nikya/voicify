@@ -5,11 +5,11 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
 	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-	<meta name="description" content="The Home voicify start page">
+	<meta name="description" content="<?php echo $desc ?>">
 	<meta name="author" content="Nikya">
-	<link rel="icon" href="core/view/aside/favicon.svg">
+	<link rel="icon" href="core/view/aside/favicon.png">
 
-	<title>Home Voicify</title>
+	<title><?php echo $title ?></title>
 
 	<!-- Bootstrap core CSS -->
 	<link href="core/view/aside/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -41,24 +41,21 @@
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href=".">Home Voicify</a>
-		</div>
+			<a class="navbar-brand" href=".">Home Voicify</div>
 		<div id="navbar" class="collapse navbar-collapse">
 			<ul class="nav navbar-nav">
 				<li class="dropdown">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
 						Play<span class="caret"></span></a>
 					<ul class="dropdown-menu">
-						<li><a href="?play=voicekey">Voicekey</a></li>
-						<li><a href="?play=clock">Clock</a></li>
+						<?php echo $playMenuHtml ?>
 					</ul>
 				</li>
 				<li class="dropdown">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
 						Config<span class="caret"></span></a>
 					<ul class="dropdown-menu">
-						<li><a href="?config=wording">Config:wording</a></li>
-						<li><a href="?config=global">Config:Global</a></li>
+						<?php echo $configMenuHtml ?>
 					</ul>
 				</li>
 			</ul>

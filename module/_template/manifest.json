@@ -1,0 +1,28 @@
+{
+	"type" : "FEATURE",
+	"name": "My name",
+	"desc": "A description of my function",
+	"version": "1.0",
+	"author": "It's Me",
+	"sourcelink": "https://github.com/Nikya/voicify",
+	"player": {
+		"pMain": {
+			"name": "My player",
+			"desc": "A description of my PLAY function"
+		}
+	},
+	"configurator": {
+		"cMain": {
+			"name": "My config name",
+			"desc": "A description of my CONFIG function"
+		},
+		"cSpecial": {
+			"name": "My special config name",
+			"desc": "A description of my SPECIAL CONFIG function"
+		}
+	},
+	"configfile": [
+		"main",
+		"special"
+	]
+}
