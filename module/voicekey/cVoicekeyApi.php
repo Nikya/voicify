@@ -1,1 +1,1 @@
-<p>The main configurator API</p>
+<p>The main config API</p>

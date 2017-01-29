@@ -1,5 +1,5 @@
 <?php
-	$readmeHtml = CoreUtils::mdParse('README.md');
+
 ?>
 
 <div class="row" style="padding:2%;">

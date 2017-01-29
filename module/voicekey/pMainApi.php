@@ -1,1 +1,1 @@
-<p>The main player API</p>
+<p>The main play API</p>

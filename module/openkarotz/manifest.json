@@ -5,7 +5,7 @@
 	"version": "1.0",
 	"author": "Nikya",
 	"sourcelink": "https://github.com/Nikya/voicify",
-	"configurator": {
+	"config": {
 		"cMain": {
 			"name": "Main",
 			"desc": "The main configuration"

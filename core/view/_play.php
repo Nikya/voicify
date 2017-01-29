@@ -1,5 +1,5 @@
 <?php
-	$readmeHtml = CoreUtils::mdParse('README.md');
+	$incPath = CoreUtils::PATH_MODULE.$module.'/'.$subModule.'.php';
 ?>
 
 <div class="row" style="padding:2%;">
@@ -19,9 +19,12 @@
 	<div class="col-sm-6">
 		<!-- PLAY ACTION -->
 		<div class="ccc">
-			<h3><?php echo $target ?></h3>
+			<h3>
+				<?php echo $subTitle . ' ' . $target ?>
+				<em><?php echo $subDesc ?></em>
+			</h3>
 			<div class="content">
-				Content <?php echo $target . ' &gt; ' . $module ?>
+				<?php include($incPath) ?>
 			</div>
 		</div>
 	</div>

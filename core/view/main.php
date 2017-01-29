@@ -5,11 +5,11 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
 	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-	<meta name="description" content="<?php echo $desc ?>">
+	<meta name="description" content="<?php echo $desc . ' ' . $subDesc ?>">
 	<meta name="author" content="Nikya">
 	<link rel="icon" href="core/view/aside/favicon.png">
 
-	<title><?php echo $title ?></title>
+	<title>Voicify : <?php echo $title ?></title>
 
 	<!-- Bootstrap core CSS -->
 	<link href="core/view/aside/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -41,7 +41,7 @@
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href=".">Home Voicify</div>
+			<a class="navbar-brand" href=".">Voicify</div>
 		<div id="navbar" class="collapse navbar-collapse">
 			<ul class="nav navbar-nav">
 				<li class="dropdown">

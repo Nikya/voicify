@@ -1,3 +1,7 @@
+<?php
+	$aHtml = modulesToHtml();
+?>
+
 <div class="row" style="padding:2%;">
 	<!-- LEFT -->
 	<div class="col-sm-6">
@@ -22,14 +26,14 @@
 		<div class="ccc">
 			<h3>Feature Modules</h3>
 			<div class="content markdown-body moduleDesc">
-				<?php printModule(CoreUtils::MODULE_T_FEATURE); ?>
+				<?php echo $aHtml[CoreUtils::MODULE_T_FEATURE]; ?>
 			</div>
 		</div>
 
 		<div class="ccc">
 			<h3>TTS Engine Modules</h3>
 			<div class="content markdown-body moduleDesc">
-				<?php printModule(CoreUtils::MODULE_T_TTSENGINE); ?>
+				<?php echo $aHtml[CoreUtils::MODULE_T_TTSENGINE]; ?>
 			</div>
 		</div>
 		<?php } ?>
@@ -39,13 +43,17 @@
 
 <?php
 /***************************************************************************
-* To read and display all modules from a type
+* To read modules information and format it to HTML
 */
-function printModule($moduleT) {
-	$aModules = CoreUtils::getManifestMain()[$moduleT];
+function modulesToHtml() {
+	$aModules = Config::getInstance()->getManifestMain();
+	$aHtml = array(
+		CoreUtils::MODULE_T_TTSENGINE => '',
+		CoreUtils::MODULE_T_FEATURE => ''
+	);
 
 	foreach ($aModules as $mId => $m) {
-		echo <<<EOM
+		$aHtml[$m['type']] .= <<<EOM
 			<strong>{$m['name']}</strong>
 			<br/>
 			<em>{$m['desc']}</em>
@@ -58,4 +66,6 @@ function printModule($moduleT) {
 			<hr/>
 EOM;
 	}
+
+	return $aHtml;
 }

@@ -5,13 +5,13 @@
 	"version": "1.0",
 	"author": "Nikya",
 	"sourcelink": "https://github.com/Nikya/voicify",
-	"player": {
+	"play": {
 		"pMain": {
-			"name": "My player",
+			"name": "My play",
 			"desc": "A description of my PLAY function"
 		}
 	},
-	"configurator": {
+	"config": {
 		"cHour": {
 			"name": "Hour",
 			"desc": "Register specific hour"

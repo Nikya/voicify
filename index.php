@@ -1,52 +1,61 @@
 <?php
-	require_once('./core/CoreUtils.php');
+	require_once('./core/coreLoader.php');
 	require_once('./core/ViewUtils.php');
 
 	try {
 /*******************************************************************************
-* Read target
+* Check the TARGET
 */
 
 		// Mandatory vars
-		$target = 'home';
+		$target = CoreUtils::TARGET_T_HOME;
 		$module = null;
+		$subModule = null;
 		$title = 'Home';
 		$desc = 'Welcome';
-		$readme = null;
+		$subTitle = null;
+		$subDesc = null;
+		$readmeHtml = null;
 
 		if (!empty($_GET)) {
-			if (isset($_GET['play'])) {
-				$target = 'play';
-				$module = $_GET['play'];
+			if (isset($_GET[CoreUtils::TARGET_T_PLAY])) {
+				$target = CoreUtils::TARGET_T_PLAY;
 			}
-			else if (isset($_GET['config'])) {
-				$target = 'config';
-				$module = $_GET['config'];
+			else if (isset($_GET[CoreUtils::TARGET_T_CONFIG])) {
+				$target = CoreUtils::TARGET_T_CONFIG;
 			}
-			else if (isset($_GET['setup'])) {
-				$target = 'setup';
-				$module = $_GET['setup'];
+			else if (isset($_GET[CoreUtils::TARGET_T_SETUP])) {
+				$target = CoreUtils::TARGET_T_SETUP;
 			}
 			else {
-				CoreUtils::consoleW('index', 'Unknow target or module : ' . print_r($_GET, true));
+				throw new Exception('Unknow target');
 			}
+
+			$exTargetV = explode('_', $_GET[$target]);
+			$module = $exTargetV[0];
+			$subModule = count($exTargetV) > 1 ? $exTargetV[1] : substr($target, 0, 1) . 'Main';
 		}
 
 /*******************************************************************************
-* Load target
+* * Check the MODULE + SUB MODULE
 */
+
 		switch ($target) {
-			/** PLAY ***********************************************************/
-			case 'play':
-				// TODO impl Play
+			case CoreUtils::TARGET_T_PLAY:
+			case CoreUtils::TARGET_T_CONFIG:
+				if (!Config::getInstance()->isValidModule($target, $module, $subModule))
+					throw new Exception('Unknow module or submodule');
+				else {
+					$manifest = Config::getInstance()->getModuleManifest($module);
+					$title = $manifest['name'];
+					$desc = $manifest['desc'];
+					$subTitle = $manifest[$target][$subModule]['name'];
+					$subDesc =  $manifest[$target][$subModule]['desc'];
+					$readmeHtml = CoreUtils::getModuleReadme($module);
+				}
 				break;
 
-			/** CONFIG *********************************************************/
-			case 'config':
-				// TODO impl Config
-				break;
-
-			/** SETUP *********************************************************/
+			// SETUP
 			case 'setup':
 				if (!empty($module) and strcasecmp($module, 'run')==0)
 					Setup::exec();
@@ -56,44 +65,47 @@
 
 			case 'home':
 			default:
-				// TODO impl home normal et fail et SEtup
+				$readmeHtml = CoreUtils::mdParse('README.md');
 				break;
 		}
 	} catch (Exception $e) {
-		CoreUtils::consoleW('index', 'target' , $_GET);
-		CoreUtils::consoleE('index.exception', $e->getMessage(), $e);
+		Console::w('index.target', 'target' , $_GET);
+		Console::w('index.module', 'module' , $module);
+		Console::w('index.subModule', 'subModule' , $subModule);
+		Console::e('index.exception', $e->getMessage(), $e);
+		$target = CoreUtils::TARGET_T_HOME;
 	}
 
 	if (!Setup::isOk()) {
-		CoreUtils::consoleE('CoreUtils.constructor', 'Please run the Setup in config/setup Menu');
+		Console::e('CoreUtils.constructor', 'Please run the Setup in config/setup Menu');
 	}
 
 /*******************************************************************************
 * Build Menus
 */
 	$playMenuHtml = '';
-	$playMenuHtml .= buildMenu(CoreUtils::MENU_T_PLAYER, CoreUtils::MODULE_T_FEATURE);
+	$playMenuHtml .= buildMenu(CoreUtils::TARGET_T_PLAY, CoreUtils::MODULE_T_FEATURE);
 	$playMenuHtml .= buildMenuSep();
-	$playMenuHtml .= buildMenu(CoreUtils::MENU_T_PLAYER, CoreUtils::MODULE_T_TTSENGINE);
+	$playMenuHtml .= buildMenu(CoreUtils::TARGET_T_PLAY, CoreUtils::MODULE_T_TTSENGINE);
 
 	$configMenuHtml = '<li><a href="?setup" title="Execute the setup">Setup</a></li><li role="separator" class="divider"></li>';
-	$configMenuHtml .= buildMenu(CoreUtils::MENU_T_CONFIGURATOR, CoreUtils::MODULE_T_FEATURE);
+	$configMenuHtml .= buildMenu(CoreUtils::TARGET_T_CONFIG, CoreUtils::MODULE_T_FEATURE);
 	$configMenuHtml .= buildMenuSep();
-	$configMenuHtml .= buildMenu(CoreUtils::MENU_T_CONFIGURATOR, CoreUtils::MODULE_T_TTSENGINE);
+	$configMenuHtml .= buildMenu(CoreUtils::TARGET_T_CONFIG, CoreUtils::MODULE_T_TTSENGINE);
 
-	function buildMenu($menuT, $moduleT) {
+	function buildMenu($targetT, $moduleT) {
 		if (!Setup::isOk()) return '';
-		
-		$aModules = CoreUtils::getManifestMain()[$moduleT];
+
+		$subManifest = Config::getInstance()->getSubManifestTT_MT($targetT, $moduleT);
 		$out = '';
 
-		$target = $menuT==CoreUtils::MENU_T_PLAYER ? 'play' : 'config';
+		$target = $targetT==CoreUtils::TARGET_T_PLAY ? 'play' : 'config';
 
-		foreach ($aModules as $mId => $m) {
-			if (count($m[$menuT]) == 1) {
+		foreach ($subManifest as $mId => $m) {
+			if (count($m[$targetT]) == 1) {
 				$out .= "<li><a href=\"?$target=$mId\" title=\"{$m['desc']}\">{$m['name']}</a></li>";
 			} else {
-				foreach ($m[$menuT] as $eId => $entry) {
+				foreach ($m[$targetT] as $eId => $entry) {
 					$out .= "<li><a href=\"?$target={$mId}_$eId\" title=\"{$m['desc']} : {$entry['desc']}\">{$m['name']} : {$entry['name']}</a></li>";
 				}
 			}

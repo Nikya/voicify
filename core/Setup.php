@@ -5,23 +5,11 @@
 */
 class Setup {
 
-	/** Path to the config Dir */
-	const PATH_CONFIG = './config/';
-
-	/** Path to the full Modules */
-	const PATH_MANIFEST_MAIN = self::PATH_CONFIG . 'manifest_main.json';
-
-	/** Path to modules */
-	const PATH_MODULE = './module/';
-
 	/** Exluding path not a valid Module */
 	const EXEPTION_PATH = array(".", ".."/*, "_template"*/);
 
 	/** All Know Modules */
-	private static $manifestMain = array(
-		CoreUtils::MODULE_T_FEATURE => array(),
-		CoreUtils::MODULE_T_TTSENGINE => array(),
-	);
+	private static $manifestMain = array();
 
 	/** Global Setup status */
 	private static $runOk = true;
@@ -30,7 +18,7 @@ class Setup {
 	* To check if the full modules already exits : Setup already done
 	*/
 	public static function isOk() {
-		return file_exists(self::PATH_MANIFEST_MAIN);
+		return file_exists(CoreUtils::PATH_MANIFEST_MAIN);
 	}
 
 	/***************************************************************************
@@ -38,44 +26,43 @@ class Setup {
 	*/
 	public static function exec() {
 		// Delete file
-		@unlink(self::PATH_MANIFEST_MAIN);
+		@unlink(CoreUtils::PATH_MANIFEST_MAIN);
 
 		if (!extension_loaded('intl'))
 			throw new Exception("Mandatory internationalization extension is not available. Install it. See http://php.net/manual/fr/intl.installation.php");
 
-		if (!is_dir(self::PATH_CONFIG))
-			throw new Exception("Config folder not exists : " . self::PATH_CONFIG);
+		if (!is_dir(CoreUtils::PATH_CONFIG))
+			throw new Exception("Config folder not exists : " . CoreUtils::PATH_CONFIG);
 
-		if (!is_writable(self::PATH_CONFIG))
-			throw new Exception("Config folder is not writable : " . self::PATH_CONFIG);
+		if (!is_writable(CoreUtils::PATH_CONFIG))
+			throw new Exception("Config folder is not writable : " . CoreUtils::PATH_CONFIG);
 
-		@$dirContent = scandir(self::PATH_MODULE);
+		@$dirContent = scandir(CoreUtils::PATH_MODULE);
 
 		if ($dirContent===false)
-			throw new Exception("Module folder not found : " . self::PATH_MODULE);
+			throw new Exception("Module folder not found : " . CoreUtils::PATH_MODULE);
 
 		foreach ($dirContent as $c) {
 			if (!in_array($c, self::EXEPTION_PATH))
 				self::readModule($c, 'FEATURE');
 		}
 
-		//CoreUtils::consoleD('setup', 'Final main manifest', self::$manifestMain);
-		$cntFeature = count(self::$manifestMain['FEATURE']);
-		$cntTtsengine = count(self::$manifestMain['TTSENGINE']);
+		//Console.d('setup', 'Final main manifest', self::$manifestMain);
+		$cntTotal = count(self::$manifestMain);
 
-		if (self::$runOk and count(self::$manifestMain['FEATURE'])>0 and count(self::$manifestMain['TTSENGINE'])>0) {
+		if (self::$runOk and $cntTotal>0) {
 			self::save();
-			CoreUtils::consoleI('setup', "Setup sucessful ! Feature Modules x$cntFeature, TTS engine Modules x$cntTtsengine.");
+			Console::i('setup', "Setup sucessful ! x$cntTotal modules found and loaded.");
 		}
 		else
-			CoreUtils::consoleE('setup', "Setup fail, correct problems and run it again");
+			Console::e('setup', "Setup fail, correct problems and run it again");
 	}
 
 	/***************************************************************************
 	* To read and check one module
 	*/
 	private static function readModule($id) {
-		$path = self::PATH_MODULE.$id;
+		$path = CoreUtils::PATH_MODULE.$id;
 		$type = 'UNKNOW_TYPE';
 
 		try {
@@ -91,12 +78,12 @@ class Setup {
 			$module = self::readManifest($id, $path);
 			$type = $module['type'];
 
-			self::$manifestMain[$type][$id] = $module;
+			self::$manifestMain[$id] = $module;
 
-			CoreUtils::consoleI('setup.readModule', "The $type module '$id' is loaded");
+			Console::i('setup.readModule', "The $type module '$id' is loaded");
 		} catch (Exception $e) {
 			self::$runOk = false;
-			CoreUtils::consoleW('setup.readModule', "Fail to load the module '$id' : {$e->getMessage()} - in '$path$id' ", $e);
+			Console::w('setup.readModule', "Fail to load the module '$id' : {$e->getMessage()} - in '$path$id' ", $e);
 		}
 	}
 
@@ -106,8 +93,8 @@ class Setup {
 	private static function readManifest($id, $path) {
 		try {
 			$module = array(
-				'player' => array(),
-				'configurator' => array(),
+				'play' => array(),
+				'config' => array(),
 				'configfile' => array()
 			);
 
@@ -121,11 +108,12 @@ class Setup {
 			self::readManifestValue('sourcelink', $module, $inManifest);
 
 			// type
-			if (!array_key_exists($module['type'], self::$manifestMain))
+			//var_dump(CoreUtils::MODULE_T_FEATURE); exit;
+			if (strcmp($module['type'], CoreUtils::MODULE_T_FEATURE)!=0 and strcmp($module['type'], CoreUtils::MODULE_T_TTSENGINE)!=0)
 				throw new Exception("Invalid module type {$module['type']}");
 
-			self::readManifestTarget('player', $path, $module, $inManifest);
-			self::readManifestTarget('configurator', $path, $module, $inManifest);
+			self::readManifestTarget('play', $path, $module, $inManifest);
+			self::readManifestTarget('config', $path, $module, $inManifest);
 			self::readManifestConfigfiles($id, $path, $module, $inManifest);
 
 			return $module;
@@ -193,7 +181,7 @@ class Setup {
 	*/
 	private static function loadDefaultConfig($id, $path, $configfile) {
 		$cFrom = $path;
-		$cTo = self::PATH_CONFIG.$id.'_'.$configfile.'.json';
+		$cTo = CoreUtils::PATH_CONFIG.$id.'_'.$configfile.'.json';
 
 		if(!file_exists($cTo)) {
 			@$res = copy($cFrom, $cTo);
@@ -206,6 +194,6 @@ class Setup {
 	* To save the full modules into the file
 	*/
 	private static function save() {
-		JsonUtils::array2JFile(self::$manifestMain, self::PATH_MANIFEST_MAIN);
+		JsonUtils::array2JFile(self::$manifestMain, CoreUtils::PATH_MANIFEST_MAIN);
 	}
 }

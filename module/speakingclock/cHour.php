@@ -1,1 +1,1 @@
-<p>The main configurator</p>
+<p>The main config</p>

@@ -5,13 +5,13 @@
 	"version": "1.0",
 	"author": "It's Me",
 	"sourcelink": "https://github.com/Nikya/voicify",
-	"player": {
+	"play": {
 		"pMain": {
-			"name": "My player",
+			"name": "My play",
 			"desc": "A description of my PLAY function"
 		}
 	},
-	"configurator": {
+	"config": {
 		"cMain": {
 			"name": "My config name",
 			"desc": "A description of my CONFIG function"

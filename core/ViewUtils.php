@@ -44,7 +44,7 @@ EOLI;
 
 		$menu = '<li><a href="?config=setup" title="Recharger tous les modules">Recharger <em>setup</em></a></li><li role="separator" class="divider"></li>';
 		foreach ($manifestMain['FEATURE'] as $id => $manifest) {
-			foreach ($manifest['configurator'] as $configName) {
+			foreach ($manifest['config'] as $configName) {
 				$configId = $id . ($configName != 'config' ? "_$configName" : '');
 				$menu .= <<<EOLI
 					<li><a href="?config=$configId" title="{$manifest['desc']}">{$manifest['name']} <em>$configId</em></a></li>
@@ -55,7 +55,7 @@ EOLI;
 		$menu .= '<li role="separator" class="divider"></li>';
 
 		foreach ($manifestMain['TTSENGINE'] as $id => $manifest) {
-			foreach ($manifest['configurator'] as $configName) {
+			foreach ($manifest['config'] as $configName) {
 				$configId = $id . ($configName != 'config' ? "_$configName" : '');
 				$menu .= <<<EOLI
 					<li><a href="?config=$configId" title="{$manifest['desc']}">{$manifest['name']} <em>$configId</em></a></li>

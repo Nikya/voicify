@@ -5,7 +5,7 @@ var app = angular.module('appConfigWording', ['ngAnimate']);
 /** Controleur Principale */
 app.controller('configWordingCtrl', function ($scope, $http) {
 
-	$scope.consoleDebug = true;
+	$scope.Console.debug = true;
 	$scope.console = "";
 	$scope.voicekeyList;
 	$scope.prefixList;
@@ -105,7 +105,7 @@ app.controller('configWordingCtrl', function ($scope, $http) {
 	/** Tracer un mesage dans la console */
 	$scope.trace = function (lvl, msg) {
 		// Debug
-		if (lvl==0 && $scope.consoleDebug)
+		if (lvl==0 && $scope.Console.debug)
 			$scope.console =  msg;
 		// User Info
 		else if (lvl==1)

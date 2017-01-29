@@ -1,1 +1,1 @@
-<p>The main player</p>
+<p>The main player of Voicekey module</p>
