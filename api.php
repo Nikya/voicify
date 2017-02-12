@@ -1,94 +1,84 @@
 <?php
-	// Affichage des erreurs PHP
-	error_reporting(E_ALL);
-	ini_set('display_errors', 'On');
 
-	// Redirection du système de remonté d'erreur
-	set_error_handler('respondError');
-	set_exception_handler('redirectException');
+// The output return
+$output = array(
+	'status'=>null,
+	'say'=>null,
+	'console'=>null,
+	'htmlConsole'=>null
+);
 
-	// Return only Json
-	header('Content-type: application/json; charset=utf-8');
+try {
+	require_once('./core/coreLoader.php');
 
-	////////////////////////////////////////////////////////////////////////////
-	// Controleur
-	if (!isset($_GET['action']) or empty($_GET['action'])) {
-		throw new Exception("No action to prosess");
-	} else {
-		require_once('core/init.php');
-		require_once('core/playApi.php');
-		require_once('core/wordingApi.php');
-		require_once('core/configApi.php');
-		require_once('core/Voicify.php');
-		require_once('core/VoicifyClock.php');
+/*******************************************************************************
+* Check the TARGET
+*/
+	// Mandatory vars
+	$target = CoreUtils::TARGET_T_HOME;
+	$fullModule = null;
+	$module = null;
+	$subModule = null;
+	$say = null;
 
-		$action = $_GET['action'];
+	Console::setDebug(isset($_GET['debugMode']));
+	Console::d('Debug status', Console::isDebug() ? 'enable' : 'disable');
 
-		$apiRes = null;
+	if (!Setup::isOk())
+		throw new Exception('Please run the Setup in config/setup Menu');
 
-		switch ($action) {
-			case "get_voicekey":
-				$apiRes = array('list' => getVoicekeyfull());
-				break;
-			case "post_voicekey":
-				postVoicekeyJson();
-				break;
-			case "get_config_prefixList":
-				$apiRes = array('list' => getPrefixList());
-				break;
-			case "play_voicekey":
-				$apiRes = playVoicekey();
-				break;
-			case "play_clock":
-				$apiRes = playClock();
-				break;
-			default:
-				throw new Exception("Unknow action to prosess '$action'");
+	if (!empty($_GET)) {
+		if (isset($_GET[CoreUtils::TARGET_T_PLAY])) {
+			$target = CoreUtils::TARGET_T_PLAY;
+		}
+		else if (isset($_GET[CoreUtils::TARGET_T_CONFIG])) {
+			$target = CoreUtils::TARGET_T_CONFIG;
+		}
+		else {
+			throw new Exception('Unknow target');
 		}
 
-		respond($apiRes);
+		$fullModule = $_GET[$target];
+		$exTargetV = explode('_', $fullModule);
+		$module = $exTargetV[0];
+		$subModule = count($exTargetV) > 1 ? $exTargetV[1] : substr($target, 0, 1) . 'Main';
 	}
 
-	////////////////////////////////////////////////////////////////////////////
-	// Normal response
-	function respond($resArray) {
-		$preArray = array(
-			'success' => true,
-			'msg' => 'ok'
-		);
+/*******************************************************************************
+* Check the MODULE + SUB MODULE
+*/
+	if (!Config::getInstance()->isValidModule($target, $module, $subModule))
+		throw new Exception('Unknow module or submodule');
 
-		if ($resArray != null)
-			echo json_encode(array_merge($preArray, $resArray));
-		else
-			echo json_encode($preArray);
+	if (!Setup::isOk()) {
+		throw new Exception('Please run the Setup in config/setup Menu');
 	}
 
-	////////////////////////////////////////////////////////////////////////////
-	// Error response
-	function respondError($level, $message, $file, $line, $context) {
-		if (error_reporting() === 0)
-			return;
+/*******************************************************************************
+* Run API
+*/
+	include("./core/{$target}API.php");
 
-		$fMessage = "#$level line $line of $file. $message";
 
-		$a = array(
-			"success" => false,
-			"msg" => $fMessage
-		);
-		echo json_encode($a);
+/*******************************************************************************
+* Global Catch
+*/
+} catch (Exception $e) {
+	Console::w('api.target', 'target' , $_GET);
+	Console::w('api.module', 'module' , $module);
+	Console::w('api.subModule', 'subModule' , $subModule);
+	Console::e('api.exception', $e->getMessage(), $e);
+}
 
-		die();
-	}
 
-	////////////////////////////////////////////////////////////////////////////
-	// Exeption
-	function redirectException($e) {
-		// Redirect to the error Handler
-		respondError(
-			18000,
-			$e->getMessage(),
-			$e->getFile(),
-			$e->getLine(),
-			$e->getTrace()
-		);
-	}
+/*******************************************************************************
+* Respond with Json
+*/
+header('Content-type: application/json; charset=utf-8');
+
+$output['status'] = Console::indicator();
+$output['say'] = $say;
+$output['console'] = Console::getArrayConsole();
+$output['htmlConsole'] = Console::toHtml();
+
+echo json_encode($output, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);

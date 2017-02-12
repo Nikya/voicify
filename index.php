@@ -6,9 +6,9 @@
 /*******************************************************************************
 * Check the TARGET
 */
-
 		// Mandatory vars
 		$target = CoreUtils::TARGET_T_HOME;
+		$fullModule = null;
 		$module = null;
 		$subModule = null;
 		$title = 'Home';
@@ -16,6 +16,9 @@
 		$subTitle = null;
 		$subDesc = null;
 		$readmeHtml = null;
+
+		Console::setDebug(false);
+		Console::d('Debug status', Console::isDebug() ? 'enable' : 'disable');
 
 		if (!empty($_GET)) {
 			if (isset($_GET[CoreUtils::TARGET_T_PLAY])) {
@@ -31,13 +34,14 @@
 				throw new Exception('Unknow target');
 			}
 
-			$exTargetV = explode('_', $_GET[$target]);
+			$fullModule = $_GET[$target];
+			$exTargetV = explode('_', $fullModule);
 			$module = $exTargetV[0];
 			$subModule = count($exTargetV) > 1 ? $exTargetV[1] : substr($target, 0, 1) . 'Main';
 		}
 
 /*******************************************************************************
-* * Check the MODULE + SUB MODULE
+* Check the MODULE + SUB MODULE
 */
 
 		switch ($target) {
@@ -57,8 +61,13 @@
 
 			// SETUP
 			case 'setup':
-				if (!empty($module) and strcasecmp($module, 'run')==0)
-					Setup::exec();
+				if (!empty($module) and strcasecmp($module, 'run')==0) {
+					try {
+						Setup::exec();
+					} catch (Exception $e) {
+						Console::e('Setup fail', $e->getMessage(), $e);
+					}
+				}
 				$title = 'Setup';
 				$desc = 'Check and initialize the system';
 				break;
@@ -77,7 +86,7 @@
 	}
 
 	if (!Setup::isOk()) {
-		Console::e('CoreUtils.constructor', 'Please run the Setup in config/setup Menu');
+		Console::e('index.setup', 'Please run the Setup in config/setup Menu');
 	}
 
 /*******************************************************************************
@@ -117,6 +126,19 @@
 	function buildMenuSep() {
 		return '<li role="separator" class="divider"></li>';
 	}
+
+/*******************************************************************************
+* Build API URL
+*/
+	$fullUrl = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+	$exUrl = explode('?', $fullUrl);
+
+	if (count($exUrl) > 1)
+		$baseUrl = $exUrl[0];
+	else
+		$baseUrl = $fullUrl;
+
+	$baseApiUrl = "{$baseUrl}api.php?$target=$fullModule";
 
 /*******************************************************************************
 * DISPLAY

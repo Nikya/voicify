@@ -8,6 +8,9 @@ class Console {
 	/** To store console messages */
 	private static $aConsole = array();
 
+	/** To enable debug level */
+	private static $debug = false;
+
 	/***************************************************************************
 	* To add a message into the console output
 	*/
@@ -20,7 +23,8 @@ class Console {
 		));
 	}
 
-	public static function d ($tag, $msg, $mixed=null) {	self::trace('D', $tag, $msg, $mixed); }
+	public static function d ($tag, $msg, $mixed=null) { if(self::$debug)
+															self::trace('D', $tag, $msg, $mixed); }
 	public static function i ($tag, $msg, $mixed=null) {	self::trace('I', $tag, $msg, $mixed); }
 	public static function w ($tag, $msg, $mixed=null) {	self::trace('W', $tag, $msg, $mixed); }
 	public static function e ($tag, $msg, $mixed=null) {	self::trace('E', $tag, $msg, $mixed); }
@@ -31,16 +35,15 @@ class Console {
 	public static function toHtml() {
 		$out = '';
 		$lvl2Indicator = array(
-			'D' => 'ok',
+			'D' => 'd',
 			'I' => 'ok',
 			'W' => 'warn',
 			'E' => 'ko'
 		);
 
-		if (empty(self::$aConsole))
-			self::i('OK', 'OK. Everything is fine.', '');
+		$aCsl = self::getArrayConsole();
 
-		foreach (self::$aConsole as $entry) {
+		foreach ($aCsl as $entry) {
 			$mixed = $entry['mixed'];
 			$fMixed = $mixed != null ? print_r($mixed, true) : '';
 
@@ -59,14 +62,13 @@ class Console {
 EOE;
 		}
 
-		echo $out;
-		self::$aConsole = array();
+		return $out;
 	}
 
 	/***************************************************************************
 	* Get the global console indicator
 	*/
-	public static function Indicator() {
+	public static function indicator() {
 		$cptW = 0;
 
 		foreach (self::$aConsole as $entry) {
@@ -78,6 +80,22 @@ EOE;
 
 		return $cptW>0 ? 'warn' : 'ok';
 	}
+
+	/***************************************************************************
+	* Get the array stored console
+	*/
+	public static function getArrayConsole() {
+		if (empty(self::$aConsole))
+			self::i('OK', 'OK. Everything is fine.', '');
+
+		return self::$aConsole;
+	}
+
+	/***************************************************************************
+	* Get/set debug
+	*/
+	public static function isDebug() { return self::$debug; }
+	public static function setDebug($debugMode) { self::$debug = $debugMode===false ? false : true; }
 }
 
 

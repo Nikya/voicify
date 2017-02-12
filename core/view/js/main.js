@@ -1,64 +1,61 @@
 // To call the PHP API whith Javascript (Jquery)
 
-/** The API taget page */
-var apiUrl = 'api.php';
+
 
 /***************************************************************************
-* Document ready */
+* Document ready
+*/
 $(document).ready(function() {
 
-	/***************************************************************************
-	* Ajax Pay form
-	*/
-	$('#ajaxPlayForm').on('submit', function(e) {
-		$('#wait').show();
-		$('#consolePlay').html('. . .');
+	$('#calledUrl').click(openUrl);
+	$('#indicator').removeClass('wait');
+	$('#calledUrl').html(hightlightUrl($('#calledUrl').html()));
 
-		e.preventDefault(); // J'empêche le comportement par défaut du navigateur, c-à-d de soumettre le formulaire
+/*******************************************************************************
+* Intercept form submission to redirect to Ajax Submit
+*/
+	$('#playForm').on('submit', function(e) {
+		$('#indicator').removeClass().addClass('wait');
+		$('#console').html('. . .');
+		$('#say').html('. . .');
+
+		e.preventDefault(); // Empêche le comportement par défaut du navigateur, c-à-d de soumettre le formulaire
 		var $this = $(this);
 
 		$.ajax({
-			url: apiUrl,
+			url: $this.attr('action'),
 			type: $this.method,
 			data: $this.serialize(),
 			dataType: 'json', // JSON
 			success: function(response, textStatus, jqXHR){
-				var rawUrl = currentUrl+'/'+this.url;
-				$('#consolePlay').html(JSON.stringify(response, null, 2) + "\n\nurl: " + rawUrl);
+				var rawUrl = baseUrl+this.url;
+				$('#console').html(response.htmlConsole);
 				$('#calledUrl').html(hightlightUrl(rawUrl));
-				$('.phrase').html(response.text);
-				$('#wait').hide();
+				$('#say').html(response.say);
+				$('#indicator').addClass(response.status).removeClass('wait');
 			},
 			error: function(xhr, ajaxOptions, thrownError){
-				var rawUrl = currentUrl+'/'+this.url;
-				$('#consolePlay').html(xhr.status + " : " + thrownError);
+				var rawUrl = baseUrl+'/'+this.url;
+				$('#console').html(xhr.status + " : " + thrownError);
 				$('#calledUrl').html(rawUrl);
-				$('#wait').hide();
+				$('#indicator').addClass('ko').removeClass('wait');
 			}
 		});
 	});
-
-	$('#calledUrl').click(openUrl);
-
-	$('#wait').hide();
 });
 
 
 /*******************************************************************************
 * Hightlight the differnets parts of the called URL.
 *
-* Available css class in #calledUrl : base, target, param, value
+* Available css class in #calledUrl : param, value
 */
 function hightlightUrl(rawUrl) {
-	var clearUrl = '';
-	var rawUrl = rawUrl.replace(/%5B%5D/g, '[]');
-	var _urlBase = rawUrl.split(apiUrl+"?")[0];
-	var _urlParam = rawUrl.split(apiUrl+"?")[1];
+	rawUrl = rawUrl.replace(/%5B%5D/g, '[]');
+	var _urlBase = rawUrl.split("?")[0];
+	var _urlParam = rawUrl.split("?")[1];
 
-	// Base
-	clearUrl += '<span class="base">'+_urlBase+'</span>';
-	// Taget
-	clearUrl += '<span class="target">'+apiUrl+'</span>?';
+	var clearUrl = _urlBase+'?';
 
 	// Each param-value
 	_urlParam.split("&").forEach(function(paramPair){
@@ -68,6 +65,7 @@ function hightlightUrl(rawUrl) {
 			clearUrl += '<span class="param">'+paramArray[0]+'</span>=<span class="value">'+paramArray[1]+'</span>&';
 	});
 
+	clearUrl = clearUrl.replace(/&+$/, "");
 	return clearUrl;
 }
 
@@ -75,8 +73,6 @@ function hightlightUrl(rawUrl) {
 * Open external API URL
 */
 function openUrl () {
-	//window.open($('#calledUrl').text, '_blank');
-	console.log($('#calledUrl').text());
 	window.open($('#calledUrl').text(), '_blank');
 
 	return false;

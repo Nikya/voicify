@@ -46,25 +46,27 @@
 * To read modules information and format it to HTML
 */
 function modulesToHtml() {
-	$aModules = Config::getInstance()->getManifestMain();
 	$aHtml = array(
 		CoreUtils::MODULE_T_TTSENGINE => '',
 		CoreUtils::MODULE_T_FEATURE => ''
 	);
 
-	foreach ($aModules as $mId => $m) {
-		$aHtml[$m['type']] .= <<<EOM
-			<strong>{$m['name']}</strong>
-			<br/>
-			<em>{$m['desc']}</em>
-			<ul>
-				<li>Id : $mId</li>
-				<li>Version : {$m['version']}</li>
-				<li>Author : {$m['author']}</li>
-				<li><a href={$m['sourcelink']} >Origin</a></li>
-			</ul>
-			<hr/>
+	if (Setup::isOk()) {
+		$aModules = Config::getInstance()->getManifestMain();
+		foreach ($aModules as $mId => $m) {
+			$aHtml[$m['type']] .= <<<EOM
+				<strong>{$m['name']}</strong>
+				<br/>
+				<em>{$m['desc']}</em>
+				<ul>
+					<li>Id : $mId</li>
+					<li>Version : {$m['version']}</li>
+					<li>Author : {$m['author']}</li>
+					<li>Origin : <a href={$m['sourcelink']} >{$m['sourcelink']}</a></li>
+				</ul>
+				<hr/>
 EOM;
+		}
 	}
 
 	return $aHtml;

@@ -8,6 +8,9 @@ class CoreUtils {
 	/** Path to the config Dir */
 	const PATH_CONFIG = './config/';
 
+	/** Path to the temp Dir */
+	const PATH_TEMP = './temp/';
+
 	/** Path to modules */
 	const PATH_MODULE = './module/';
 

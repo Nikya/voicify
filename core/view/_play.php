@@ -24,7 +24,20 @@
 				<em><?php echo $subDesc ?></em>
 			</h3>
 			<div class="content">
-				<?php include($incPath) ?>
+				<!-- Play Form -->
+				<form id="playForm" method="get" action="api.php">
+					<input type="hidden" name="play" value="<?php echo $fullModule ?>">
+					<?php include($incPath) ?>
+
+					<hr id="formBottom" />
+
+					<button type="submit" class="btn btn-primary">Play</button>
+					<fieldset class="checkbox">
+						<label for="debugMode"><input type="checkbox" name="debugMode" value="1" id="debugMode">Debug mode</label>
+						<small class="text-muted">: To display more details in the speak result</small>
+					</fieldset>
+				</form>
+
 			</div>
 		</div>
 	</div>

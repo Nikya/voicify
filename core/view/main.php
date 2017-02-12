@@ -28,7 +28,7 @@
 
 	<!-- Liaison PHP/Javascript -->
 	<script>
-		var currentUrl = '<?php echo "http://$_SERVER[HTTP_HOST]/voicify" ?>';
+		var baseUrl = '<?php echo $baseUrl; ?>';
 	</script>
 </head>
 <body>

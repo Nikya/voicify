@@ -1,5 +1,7 @@
 ## Build TO-DO list
 * [ ] Avoir un module PLAY tout simple pour tester du text simple des différents moteurs
+	* [ ] Idéal pour mettre en place du fonctionnement d'une page play vers sont API
+	* [ ] Mettre en place un moteur TTS appelé DummyTSS : Logger dans un fichier les textes reçues
 * [x] Naviguer vers les pages du module
 * [x] Class Config : Avoir des sous methode de lecture du manafiest Main
 	* [x] Seulement les plays, seulement les config, ...

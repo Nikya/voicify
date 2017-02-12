@@ -1,0 +1,23 @@
+{
+	"type" : "FEATURE",
+	"name": "Base",
+	"desc": "Simple basics of the system",
+	"version": "1.0",
+	"author": "Nikya",
+	"sourcelink": "https://github.com/Nikya/voicify",
+	"play": {
+		"pMain": {
+			"name": "The base",
+			"desc": "The simplest player"
+		}
+	},
+	"config": {
+		"cMain": {
+			"name": "The base",
+			"desc": "The basic configuration"
+		}
+	},
+	"configfile": [
+		"main"
+	]
+}

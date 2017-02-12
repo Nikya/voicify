@@ -6,7 +6,7 @@
 class Setup {
 
 	/** Exluding path not a valid Module */
-	const EXEPTION_PATH = array(".", ".."/*, "_template"*/);
+	private static $exeptionPath = array(".", "..", "_template");
 
 	/** All Know Modules */
 	private static $manifestMain = array();
@@ -37,13 +37,22 @@ class Setup {
 		if (!is_writable(CoreUtils::PATH_CONFIG))
 			throw new Exception("Config folder is not writable : " . CoreUtils::PATH_CONFIG);
 
+		if (!is_dir(CoreUtils::PATH_TEMP))
+			throw new Exception("Temp folder not exists : " . CoreUtils::PATH_TEMP);
+
+		if (!is_writable(CoreUtils::PATH_TEMP))
+			throw new Exception("Temp folder is not writable : " . CoreUtils::PATH_TEMP);
+
 		@$dirContent = scandir(CoreUtils::PATH_MODULE);
 
 		if ($dirContent===false)
 			throw new Exception("Module folder not found : " . CoreUtils::PATH_MODULE);
 
+		if (!Console::isDebug())
+			array_push(self::$exeptionPath, 'moduleTemplate');
+
 		foreach ($dirContent as $c) {
-			if (!in_array($c, self::EXEPTION_PATH))
+			if (!in_array($c, self::$exeptionPath))
 				self::readModule($c, 'FEATURE');
 		}
 

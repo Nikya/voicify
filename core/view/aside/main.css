@@ -95,6 +95,10 @@ ul.dropdown-menu > li > a > em {
 	background-color: #AAA;
 }
 
+.lvld {
+	background-color: #999;
+}
+
 #indicator.ok,
 .lvlok {
 	background-color: #9fff82;
@@ -112,7 +116,7 @@ ul.dropdown-menu > li > a > em {
 
 #indicator.wait {
 	background-color: #0FF;
-	-webkit-animation: colorwait 1s;
+	-webkit-animation: colorwait 0.5s;
 	animation-direction: alternate;
 	animation-iteration-count:infinite;
 }
@@ -137,12 +141,10 @@ ul.dropdown-menu > li > a > em {
 	word-wrap:break-word;
 }
 /* Url hightlight */
-#calledUrl .base {color:#DE93FE;}
-#calledUrl .target {color:#8B01C5;}
-#calledUrl .param {color:#C58B00;}
+#calledUrl .param {color:#DE93FE;}
 #calledUrl .value {color:#00C58B;}
 
-.console {
+#console {
 	overflow: auto;
 	background-color: #000;
 	color: #c7ffe3;
@@ -152,15 +154,15 @@ ul.dropdown-menu > li > a > em {
 	padding: 1%;
 }
 
-.console li {
+#console li {
 	margin-top:10px;
 }
 
-.console p {
+#console p {
 	margin: 0;
 }
 
-.console pre {
+#console pre {
 	background-color: #000;
 	border: none;
 	overflow: visible;
@@ -174,14 +176,14 @@ ul.dropdown-menu > li > a > em {
 /*******************************************************************************
 * Say
 */
-blockquote {
+#say, blockquote {
 	border-left: 3px solid #a861ff;
 	color:#a861ff;
 	font-style: italic;
 	font-family: cursive;
 }
 
-blockquote.content {
+#say.content, blockquote.content {
 	border: none;
 	text-align: center;
 }
@@ -195,6 +197,13 @@ blockquote.content {
 
 .moduleDesc article {
 	border-bottom: 1px solid black;
+}
+
+/*******************************************************************************
+* Form
+*/
+#formBottom {
+	border-color: #ffa861;
 }
 
 /** TODO Css non revue aprés cette ligne */
