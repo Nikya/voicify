@@ -44,15 +44,8 @@ class Console {
 		$aCsl = self::getArrayConsole();
 
 		foreach ($aCsl as $entry) {
-			$mixed = $entry['mixed'];
-			$fMixed = $mixed != null ? print_r($mixed, true) : '';
+			$fMixed = self::mixedToString($entry['mixed']);
 
-			if (is_object($mixed))
-				if ($mixed instanceof Exception)
-					$fMixed = $mixed->getTraceAsString();
-
-
-			//$out .= "[${entry['lvl']} | ${entry['tag']}]\t${entry['msg']}$fMixed\n\n";
 			$out .= <<<EOE
 				<li>
 					<span class="lvl{$lvl2Indicator[$entry['lvl']]} lvl">{$entry['lvl']} - {$entry['tag']}</span>
@@ -63,6 +56,47 @@ EOE;
 		}
 
 		return $out;
+	}
+
+	/***************************************************************************
+	* To print the console into a log file
+	*/
+	public static function toLogFile() {
+		if (self::indicator() != 'ok') {
+			$out = '';
+			$ts = date('Y-m-d H:i:s');
+			$fileName = date('Ym').'.log';
+
+			$aCsl = self::getArrayConsole();
+
+			foreach ($aCsl as $entry) {
+				$fMixed = self::mixedToString($entry['mixed']);
+
+				$o = "[{$entry['lvl']} - {$entry['tag']}]\t\t{$entry['msg']} \t|\t $fMixed";
+				$out .= trim(preg_replace( "/\r|\n/", "", $o ))."\n";
+			}
+
+			$r = file_put_contents(
+					CoreUtils::PATH_TEMP.$fileName,
+					"--- $ts --------------------------------------------------------\n$out\n",
+					FILE_APPEND
+			);
+
+			if ($r===false) echo 'Fail to write into the log file';
+		}
+	}
+
+	/***************************************************************************
+	* Read a mixed value into a string
+	*/
+	private static function mixedToString($mixed) {
+		$fMixed = $mixed != null ? print_r($mixed, true) : '';
+
+		if (is_object($mixed))
+			if ($mixed instanceof Exception)
+				$fMixed = $mixed->getTraceAsString();
+
+		return $fMixed;
 	}
 
 	/***************************************************************************
@@ -86,7 +120,7 @@ EOE;
 	*/
 	public static function getArrayConsole() {
 		if (empty(self::$aConsole))
-			self::i('OK', 'OK. Everything is fine.', '');
+			self::i('OK', 'Everything is fine.', '');
 
 		return self::$aConsole;
 	}

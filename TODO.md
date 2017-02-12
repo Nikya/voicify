@@ -1,7 +1,11 @@
 ## Build TO-DO list
+* [ ] Avoir une page basique de config : Pour le module 'Base' pourvoir choisir juste le moteur par défaut
+	* [ ] Chaque page de play dois pouvoir changer le moteur à la volé
+	* [ ] Sauf pour les page de Playu des TTS engine qui eux serai masquer ou forcer avec le moteur courant
 * [ ] Avoir un module PLAY tout simple pour tester du text simple des différents moteurs
-	* [ ] Idéal pour mettre en place du fonctionnement d'une page play vers sont API
-	* [ ] Mettre en place un moteur TTS appelé DummyTSS : Logger dans un fichier les textes reçues
+	* [x] Idéal pour mettre en place du fonctionnement d'une page play vers sont API
+	* [x] Mettre en place un moteur TTS appelé DummyTSS : Logger dans un fichier les textes reçues
+	* [ ] Listing des TTS engine 
 * [x] Naviguer vers les pages du module
 * [x] Class Config : Avoir des sous methode de lecture du manafiest Main
 	* [x] Seulement les plays, seulement les config, ...
