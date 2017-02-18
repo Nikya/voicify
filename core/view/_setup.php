@@ -1,5 +1,5 @@
 <?php
-	$aHtml = modulesToHtml();
+
 ?>
 
 <div class="row" style="padding:2%;">
@@ -22,20 +22,20 @@
 			</div>
 		</div>
 
-		<?php if (Setup::isOk()) { ?>
-		<div class="ccc">
-			<h3>Feature Modules</h3>
-			<div class="content markdown-body moduleDesc">
-				<?php echo $aHtml[CoreUtils::MODULE_T_FEATURE]; ?>
+		<?php if (Setup::isOk()) { $aHtml = modulesToHtml(); ?>
+			<div class="ccc">
+				<h3>Feature Modules</h3>
+				<div class="content markdown-body moduleDesc">
+					<?php echo $aHtml[CoreUtils::MODULE_T_FEATURE]; ?>
+				</div>
 			</div>
-		</div>
 
-		<div class="ccc">
-			<h3>TTS Engine Modules</h3>
-			<div class="content markdown-body moduleDesc">
-				<?php echo $aHtml[CoreUtils::MODULE_T_TTSENGINE]; ?>
+			<div class="ccc">
+				<h3>TTS Engine Modules</h3>
+				<div class="content markdown-body moduleDesc">
+					<?php echo $aHtml[CoreUtils::MODULE_T_TTSENGINE]; ?>
+				</div>
 			</div>
-		</div>
 		<?php } ?>
 	</div>
 </div>
@@ -51,22 +51,20 @@ function modulesToHtml() {
 		CoreUtils::MODULE_T_FEATURE => ''
 	);
 
-	if (Setup::isOk()) {
-		$aModules = Config::getInstance()->getManifestMain();
-		foreach ($aModules as $mId => $m) {
-			$aHtml[$m['type']] .= <<<EOM
-				<strong>{$m['name']}</strong>
-				<br/>
-				<em>{$m['desc']}</em>
-				<ul>
-					<li>Id : $mId</li>
-					<li>Version : {$m['version']}</li>
-					<li>Author : {$m['author']}</li>
-					<li>Origin : <a href={$m['sourcelink']} >{$m['sourcelink']}</a></li>
-				</ul>
-				<hr/>
+	$aModules = Config::getInstance()->getManifestMain();
+	foreach ($aModules as $mId => $m) {
+		$aHtml[$m['type']] .= <<<EOM
+			<strong>{$m['name']}</strong>
+			<br/>
+			<em>{$m['desc']}</em>
+			<ul>
+				<li>Id : $mId</li>
+				<li>Version : {$m['version']}</li>
+				<li>Author : {$m['author']}</li>
+				<li>Origin : <a href={$m['sourcelink']} >{$m['sourcelink']}</a></li>
+			</ul>
+			<br/>
 EOM;
-		}
 	}
 
 	return $aHtml;

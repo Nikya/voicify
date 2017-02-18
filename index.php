@@ -17,7 +17,8 @@
 		$subDesc = null;
 		$readmeHtml = null;
 
-		Console::setDebug(false);
+		// DEBUG mode
+		Console::setDebug(true);
 		Console::d('Debug status', Console::isDebug() ? 'enable' : 'disable');
 
 		if (!empty($_GET)) {
@@ -86,7 +87,7 @@
 	}
 
 	if (!Setup::isOk()) {
-		Console::e('index.setup', 'Please run the Setup in config/setup Menu');
+		Console::e('index.setup', 'Please run the Setup. Go to the menu config>>setup');
 	}
 
 /*******************************************************************************
