@@ -8,9 +8,6 @@
 		<!-- CONSOLE -->
 		<?php include("./core/view/__console.php"); ?>
 
-		<!-- Say -->
-		<?php include("./core/view/__say.php"); ?>
-
 		<!-- README -->
 		<?php include("./core/view/__readme.php"); ?>
 	</div>

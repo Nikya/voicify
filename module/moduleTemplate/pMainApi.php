@@ -1,1 +1,4 @@
-<p>The main play API</p>
+<?php
+
+	Console::w('moduleTemplate.pMain', 'API not implemented');
+    $say = 'API not implemented';

@@ -8,7 +8,7 @@
 	"play": {
 		"pMain": {
 			"name": "Dummy",
-			"desc": "The only one dummy Player"
+			"desc": "The only one dummy player"
 		}
 	}
 }

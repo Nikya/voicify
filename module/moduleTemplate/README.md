@@ -1,2 +1,2 @@
 # The template
-_Un exemple de structure pour la création d'un module_
+_Un exemple de structure à dupliquer pour la création d'un module_

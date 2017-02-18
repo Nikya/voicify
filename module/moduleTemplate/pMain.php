@@ -1,1 +1,2 @@
-<p>The main play</p>
+<strong>The main play template</strong>
+<p>Not implemented</p>

@@ -1,1 +1,4 @@
-{ "specialconfig" : 0 }
+{
+    "specialLorem": "SAAA",
+    "specialLipsum": "sfoo"
+}

@@ -1,1 +1,3 @@
-<p>The main config API</p>
+<?php
+
+	Console::w('moduleTemplate.cMain', 'API not implemented');

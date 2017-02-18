@@ -1,23 +1,27 @@
 {
 	"type" : "FEATURE",
-	"name": "My name",
+	"name": "Template",
 	"desc": "A description of my function",
 	"version": "1.0",
 	"author": "It's Me",
 	"sourcelink": "https://github.com/Nikya/voicify",
 	"play": {
 		"pMain": {
-			"name": "My play",
-			"desc": "A description of my PLAY function"
+			"name": "The template player 1",
+			"desc": "A description of my PLAY1 function"
+		},
+		"pTwo": {
+			"name": "The template player 2",
+			"desc": "A description of my PLAY2 function"
 		}
 	},
 	"config": {
 		"cMain": {
-			"name": "My config name",
+			"name": "The template config name",
 			"desc": "A description of my CONFIG function"
 		},
 		"cSpecial": {
-			"name": "My special config name",
+			"name": "Thes special template config name",
 			"desc": "A description of my SPECIAL CONFIG function"
 		}
 	},

@@ -1,1 +1,3 @@
-<p>The special config API</p>
+<?php
+
+	Console::w('moduleTemplate.cSpecial', 'API not implemented');

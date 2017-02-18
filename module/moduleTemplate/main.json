@@ -1,1 +1,9 @@
-{ "mainconfig" : 1 }
+{
+    "lorem": "AAA",
+    "paramList": {
+        "param1": "2011",
+        "param2": "2022",
+        "param3": "2033"
+    },
+    "lipsum": "foo"
+}
