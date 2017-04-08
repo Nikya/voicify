@@ -1,1 +1,1 @@
-{ "mainconfig" : 1 }
+{ "defaultTtsEngine" : "dummyTts" }

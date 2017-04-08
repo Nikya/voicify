@@ -1,5 +1,3 @@
-<p>Not implemented</p>
+<?php
 
-<pre>
-    <?php print_r(JsonUtils::jFile2Array(CoreUtils::PATH_CONFIG.$module.'_main.json')); ?>
-</pre>
+	displayConfFile(CoreUtils::PATH_CONFIG.$module.'_main.json');

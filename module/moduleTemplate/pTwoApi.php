@@ -1,4 +1,4 @@
 <?php
 
-	Console::w('moduleTemplate.pTwo', 'API not implemented');
-    $say = 'API not implemented';
+	Console::w('noapi', 'API not implemented');
+	$say = 'API not implemented';

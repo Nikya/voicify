@@ -1,1 +1,3 @@
-<p>The special config API</p>
+<?php
+
+	Console::w('noapi', 'API not implemented');

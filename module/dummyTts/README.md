@@ -1,6 +1,6 @@
 # The Dummy TTS
 _**Un faux moteur de TTS**_
 
-Les textes prononcés sont justes écrits dans un fichier du repertoire temporaire.
+Les textes prononcés sont justes écrits dans un fichier du répertoire temporaire.
 
-Sont utilité est juste de tester la bonne réception de texte à prononcer.
+Son utilité est juste de tester la bonne réception des textes à prononcer.

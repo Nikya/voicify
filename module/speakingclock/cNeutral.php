@@ -1,1 +1,3 @@
-<p>The special config</p>
+<?php
+
+	displayConfFile(CoreUtils::PATH_CONFIG.$module.'_neutral.json');

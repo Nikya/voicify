@@ -6,6 +6,11 @@
 /*******************************************************************************
 * Check the TARGET
 */
+
+		// DEBUG mode
+		Console::setDebug(false);
+		Console::d('Debug status', Console::isDebug() ? 'enable' : 'disable');
+
 		// Mandatory vars
 		$target = CoreUtils::TARGET_T_HOME;
 		$fullModule = null;
@@ -16,10 +21,6 @@
 		$subTitle = null;
 		$subDesc = null;
 		$readmeHtml = null;
-
-		// DEBUG mode
-		Console::setDebug(true);
-		Console::d('Debug status', Console::isDebug() ? 'enable' : 'disable');
 
 		if (!empty($_GET)) {
 			if (isset($_GET[CoreUtils::TARGET_T_PLAY])) {

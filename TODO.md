@@ -35,7 +35,9 @@
 	* [ ] Les subvoicekey sont utilisable dans tous les autre foncitonalités
 
 ## TTS engine
+* [ ] Jarvis
+* [ ] Open karotz
 * [ ] Jeedom Say
-* [ ] Sarha
 * [ ] Amazon Echo
 * [ ] Google Home
+* [ ] Sarha

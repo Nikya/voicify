@@ -1,3 +1,3 @@
 <?php
 
-	Console::w('moduleTemplate.cMain', 'API not implemented');
+	Console::w('noapi', 'API not implemented');

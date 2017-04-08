@@ -1,1 +1,3 @@
-<p>The main config</p>
+<?php
+
+	Console::w('noapi', 'API not implemented');

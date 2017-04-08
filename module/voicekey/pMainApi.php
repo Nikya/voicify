@@ -1,1 +1,4 @@
-<p>The main play API</p>
+<?php
+
+	Console::w('noapi', 'API not implemented');
+	$say = 'API not implemented';

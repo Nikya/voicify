@@ -29,7 +29,10 @@ class Setup {
 		@unlink(CoreUtils::PATH_MANIFEST_MAIN);
 
 		if (!extension_loaded('intl'))
-			throw new Exception("Mandatory internationalization extension is not available. Install it. See http://php.net/manual/fr/intl.installation.php");
+			throw new Exception("Mandatory internationalization extension, named 'intl', is not available. Install it. See http://php.net/manual/intl.installation.php");
+
+		if (!extension_loaded('curl'))
+			throw new Exception("Mandatory libcurl extension, named 'curl', is not available. Install it. See http://php.net/manual/curl.setup.php");
 
 		if (!is_dir(CoreUtils::PATH_CONFIG))
 			throw new Exception("Config folder not exists : " . CoreUtils::PATH_CONFIG);

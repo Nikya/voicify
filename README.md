@@ -65,6 +65,12 @@ Droits suffisants de lecture/ecriture sur les dossiers suivants :
 
 ## Utilisation
 
+ Voir ICU http://site.icu-project.org/ !!!!!!!!!!!!!!!!!!!
+ http://userguide.icu-project.org/formatparse
+http://php.net/manual/fr/class.messageformatter.php
+http://icu-project.org/apiref/icu4c/classMessageFormat.html#details
+
+
 ### Les concepts
 
 #### Le *voicekey*
