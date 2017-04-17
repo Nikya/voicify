@@ -31,7 +31,7 @@ class Config {
 	/***************************************************************************
 	* Read the manifest file
 	*/
-	public function loadManifestMain() {
+	private function loadManifestMain() {
 		$this->manifestMain = JsonUtils::jFile2Array(CoreUtils::PATH_MANIFEST_MAIN);
 	}
 
@@ -57,7 +57,21 @@ class Config {
 	}
 
 	/***************************************************************************
-	* Return only a target typed and module typed manifest
+	* Return only a module typed module manifest
+	*/
+	public function getSubManifestMT($modulesType) {
+		$manifestSub = array();
+
+		foreach ($this->manifestMain as $mId => $module) {
+			if($module['type'] == $modulesType)
+				$manifestSub[$mId] = $module;
+		}
+
+		return $manifestSub;
+	}
+
+	/***************************************************************************
+	* Return a target typed and module typed manifest
 	*/
 	public function getSubManifestTT_MT($targetType, $modulesType) {
 		$manifestSub = array();
@@ -96,22 +110,30 @@ class Config {
 	}
 
 	/***************************************************************************
+	* Return true if the module existe
+	*
+	* @param $targetType
+	* @param $moduleId
+	* @param $subModuleId
+	*
+	*/
+	public function isTtsEngine($moduleId) {
+		$manifestSub = $this->getSubManifestMT(CoreUtils::MODULE_T_TTSENGINE);
+
+		return array_key_exists($moduleId, $manifestSub);
+	}
+
+	/***************************************************************************
 	* Return already readed module config file or load it
 	*/
-	public function getConfig($module, $confName='main') {
-		$key = $module . ($confName!=null ? '_'.$confName : '');
+	public function getModuleConfig($module, $submodule='main') {
+		$key = $module .'_'. $submodule;
 
-		if (!array_key_exists($key, $moduleConfig)) {
+		if (!array_key_exists($key, $this->getManifestMain())) {
 			$moduleConfig[$key] = JsonUtils::jFile2Array("./config/$key.json");
 		}
 
 		return $moduleConfig[$key];
 	}
 
-	/***************************************************************************
-	* Check if a module existe and is installed
-	*/
-	public function getFeatureModules() {
-		return array_key_exists($id, $modules['ttsengine']);
-	}
 }

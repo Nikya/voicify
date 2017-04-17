@@ -96,9 +96,6 @@
 */
 	$playMenuHtml = '';
 	$playMenuHtml .= buildMenu(CoreUtils::TARGET_T_PLAY, CoreUtils::MODULE_T_FEATURE);
-	$playMenuHtml .= buildMenuSep();
-	$playMenuHtml .= buildMenu(CoreUtils::TARGET_T_PLAY, CoreUtils::MODULE_T_TTSENGINE);
-
 	$configMenuHtml = '<li><a href="?setup" title="Execute the setup">Setup</a></li><li role="separator" class="divider"></li>';
 	$configMenuHtml .= buildMenu(CoreUtils::TARGET_T_CONFIG, CoreUtils::MODULE_T_FEATURE);
 	$configMenuHtml .= buildMenuSep();

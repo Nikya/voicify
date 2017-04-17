@@ -1,7 +1,7 @@
 {
 	"type" : "FEATURE",
-	"name": "Template",
-	"desc": "A description of my function",
+	"name": "A module name",
+	"desc": "A description of my feature",
 	"version": "1.0",
 	"author": "It's Me",
 	"sourcelink": "https://github.com/Nikya/voicify",

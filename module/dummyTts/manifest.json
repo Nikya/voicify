@@ -4,11 +4,5 @@
 	"desc": "A fake TTS engine",
 	"version": "1.0",
 	"author": "Nikya",
-	"sourcelink": "https://github.com/Nikya/voicify",
-	"play": {
-		"pMain": {
-			"name": "Dummy",
-			"desc": "The only one dummy player"
-		}
-	}
+	"sourcelink": "https://github.com/Nikya/voicify"
 }

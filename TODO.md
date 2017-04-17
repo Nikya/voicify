@@ -1,4 +1,8 @@
 ## Build TO-DO list
+* [x] Continuer dans playAPI pour avoir des page de play générique
+* [ ] Au setup verifier que les module type TTS en un pTtsEngineApi.php file CONTINUER ICI puis commit
+* [ ] Liste déroulante des TTSEngine disponibles
+
 * [x] Avoir un grand menu détaillé sur la home page rangé différament du menu : Par module
 * [ ] Avoir une page basique de config : Pour le module 'Base' pourvoir choisir juste le moteur par défaut
 	* [ ] Chaque page de play dois pouvoir changer le moteur à la volé

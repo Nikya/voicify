@@ -56,7 +56,7 @@ class Setup {
 
 		foreach ($dirContent as $c) {
 			if (!in_array($c, self::$exeptionPath))
-				self::readModule($c, 'FEATURE');
+				self::readModule($c);
 		}
 
 		//Console.d('setup', 'Final main manifest', self::$manifestMain);
@@ -89,6 +89,9 @@ class Setup {
 
 			$module = self::readManifest($id, $path);
 			$type = $module['type'];
+
+			if ($type == CoreUtils::MODULE_T_TTSENGINE and !file_exists("$path/pTtsEngineApi.php"))
+					throw new Exception("No 'pTtsEngineApi' found");
 
 			self::$manifestMain[$id] = $module;
 

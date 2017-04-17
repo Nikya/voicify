@@ -1,6 +1,6 @@
 <?php
 /*******************************************************************************
-* Special Configuration API
+* The TTS engine API
 *******************************************************************************/
 
-	Console::w('noapi', 'API not implemented');
+	throw new Exception ('TTS engine API not implemented');

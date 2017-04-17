@@ -1,11 +1,15 @@
 <?php
+/*******************************************************************************
+* The TTS engine API
+*******************************************************************************/
 
 if (!isset($_GET['tts']) or empty($_GET['tts'])) {
 	Console::e('dummy.playMain', 'No TTS to process');
 } else {
 	$say = $_GET['tts'];
-	dummyTrace($say);
 }
+
+dummyTrace($say);
 
 /***************************************************************************
 * To redirect the fake TTS to an output file
