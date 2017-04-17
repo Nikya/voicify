@@ -95,36 +95,11 @@
 * Build Menus
 */
 	$playMenuHtml = '';
-	$playMenuHtml .= buildMenu(CoreUtils::TARGET_T_PLAY, CoreUtils::MODULE_T_FEATURE);
+	$playMenuHtml .= ViewUtils::buildMenu(CoreUtils::TARGET_T_PLAY, CoreUtils::MODULE_T_FEATURE);
 	$configMenuHtml = '<li><a href="?setup" title="Execute the setup">Setup</a></li><li role="separator" class="divider"></li>';
-	$configMenuHtml .= buildMenu(CoreUtils::TARGET_T_CONFIG, CoreUtils::MODULE_T_FEATURE);
-	$configMenuHtml .= buildMenuSep();
-	$configMenuHtml .= buildMenu(CoreUtils::TARGET_T_CONFIG, CoreUtils::MODULE_T_TTSENGINE);
-
-	function buildMenu($targetT, $moduleT) {
-		if (!Setup::isOk()) return '';
-
-		$subManifest = Config::getInstance()->getSubManifestTT_MT($targetT, $moduleT);
-		$out = '';
-
-		$target = $targetT==CoreUtils::TARGET_T_PLAY ? 'play' : 'config';
-
-		foreach ($subManifest as $mId => $m) {
-			if (count($m[$targetT]) == 1) {
-				$out .= "<li><a href=\"?$target=$mId\" title=\"{$m['desc']}\">{$m['name']}</a></li>";
-			} else {
-				foreach ($m[$targetT] as $eId => $entry) {
-					$out .= "<li><a href=\"?$target={$mId}_$eId\" title=\"{$m['desc']} : {$entry['desc']}\">{$m['name']} : {$entry['name']}</a></li>";
-				}
-			}
-		}
-
-		return $out;
-	}
-
-	function buildMenuSep() {
-		return '<li role="separator" class="divider"></li>';
-	}
+	$configMenuHtml .= ViewUtils::buildMenu(CoreUtils::TARGET_T_CONFIG, CoreUtils::MODULE_T_FEATURE);
+	$configMenuHtml .= ViewUtils::buildMenuSep();
+	$configMenuHtml .= ViewUtils::buildMenu(CoreUtils::TARGET_T_CONFIG, CoreUtils::MODULE_T_TTSENGINE);
 
 /*******************************************************************************
 * Build API URL

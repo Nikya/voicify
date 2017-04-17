@@ -3,8 +3,7 @@
 	// Check TTS engine targeted
 	$tts = null;
 	if (!isset($_GET['ttsengine']) or empty($_GET['ttsengine'])) {
-		$conf = Config::getInstance()->getModuleConfig('base');
-		$tts = $conf['defaultTtsEngine'];
+		$tts = $Config::getInstance()->getDefaultTtsEngineId();
 		Console::d('playAPI', "Using the default TTS engine : $tts");
 	} else
 		$tts = $_GET['ttsengine'];

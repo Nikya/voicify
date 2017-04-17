@@ -1,5 +1,12 @@
 <?php
 	$incPath = CoreUtils::PATH_MODULE.$module.'/'.$subModule.'.php';
+
+	// TTS Engine dropdown
+	$config = Config::getInstance();
+	$selOption = ViewUtils::buildDropdownSelectOpt(
+		$config->getTtsEngineModuleIArray(),
+		$config->getDefaultTtsEngineId()
+	);
 ?>
 
 <div class="row" style="padding:2%;">
@@ -34,7 +41,6 @@
 						<label for="ttsengine">TTS engine</label><br/>
 						<small class="text-muted">The target TTS engine to use</small>
 						<select class="form-control" id="ttsengine" name="ttsengine">
-							<option value="">(Default)</option>
 							<?php echo $selOption; ?>
 						</select>
 					</fieldset>

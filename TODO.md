@@ -1,6 +1,6 @@
 ## Build TO-DO list
 * [x] Continuer dans playAPI pour avoir des page de play générique
-* [ ] Au setup verifier que les module type TTS en un pTtsEngineApi.php file CONTINUER ICI puis commit
+* [x] Au setup verifier que les module type TTS en un pTtsEngineApi.php file CONTINUER ICI puis commit
 * [ ] Liste déroulante des TTSEngine disponibles
 
 * [x] Avoir un grand menu détaillé sur la home page rangé différament du menu : Par module

@@ -7,62 +7,54 @@
 class ViewUtils {
 
 	/***************************************************************************
-	* Build the play Menu
+	* Build a Menu
 	*/
-	public static function buildPlayMenu() {
-		$manifestMain = CoreUtils::getManifestMain();
+	public static function buildMenu($targetT, $moduleT) {
+		if (!Setup::isOk()) return '';
 
-		$menu = '';
-		foreach ($manifestMain['FEATURE'] as $id => $manifest) {
-			foreach ($manifest['play'] as $playName) {
-				$playId = $id . ($playName != 'play' ? "_$playName" : '');
-				$menu .= <<<EOLI
-					<li><a href="?play=$playId" title="{$manifest['desc']}">{$manifest['name']} <em>$playId</em></a></li>
-EOLI;
+		$subManifest = Config::getInstance()->getSubManifestTT_MT($targetT, $moduleT);
+		$out = '';
+
+		$target = $targetT==CoreUtils::TARGET_T_PLAY ? 'play' : 'config';
+
+		foreach ($subManifest as $mId => $m) {
+			if (count($m[$targetT]) == 1) {
+				$out .= "<li><a href=\"?$target=$mId\" title=\"{$m['desc']}\">{$m['name']}</a></li>";
+			} else {
+				foreach ($m[$targetT] as $eId => $entry) {
+					$out .= "<li><a href=\"?$target={$mId}_$eId\" title=\"{$m['desc']} : {$entry['desc']}\">{$m['name']} : {$entry['name']}</a></li>";
+				}
 			}
 		}
 
-		$menu .= '<li role="separator" class="divider"></li>';
-
-		foreach ($manifestMain['TTSENGINE'] as $id => $manifest) {
-			foreach ($manifest['play'] as $playName) {
-				$playId = $id . ($playName != 'play' ? "_$playName" : '');
-				$menu .= <<<EOLI
-					<li><a href="?play=$playId" title="{$manifest['desc']}">{$manifest['name']} <em>$playId</em></a></li>
-EOLI;
-			}
-		}
-
-		return $menu;
+		return $out;
 	}
 
-	/*******************************************************************************
-	* Build the play Menu
+	/***************************************************************************
+	* Build a Menu separator
 	*/
-	function buildConfigMenu() {
-		$manifestMain = CoreUtils::getManifestMain();
+	public static function buildMenuSep() {
+		return '<li role="separator" class="divider"></li>';
+	}
 
-		$menu = '<li><a href="?config=setup" title="Recharger tous les modules">Recharger <em>setup</em></a></li><li role="separator" class="divider"></li>';
-		foreach ($manifestMain['FEATURE'] as $id => $manifest) {
-			foreach ($manifest['config'] as $configName) {
-				$configId = $id . ($configName != 'config' ? "_$configName" : '');
-				$menu .= <<<EOLI
-					<li><a href="?config=$configId" title="{$manifest['desc']}">{$manifest['name']} <em>$configId</em></a></li>
-EOLI;
+	/***************************************************************************
+	* Build dropdown select options
+	*/
+	public static function buildDropdownSelectOpt($iArray, $selected=null) {
+		$strOpt = '';
+
+		foreach ($iArray as $k => $v) {
+			if (strcmp($selected, $k)==0) {
+				$strOpt .= "<option value=\"$k\" selected>$v (Default)</option>";
+				$selected = true;
 			}
+			else
+				$strOpt .= "<option value=\"$k\">$v</option>";
 		}
 
-		$menu .= '<li role="separator" class="divider"></li>';
+		if ($selected!==null and $selected!==true)
+			$strOpt = "<option></option>" . $strOpt;
 
-		foreach ($manifestMain['TTSENGINE'] as $id => $manifest) {
-			foreach ($manifest['config'] as $configName) {
-				$configId = $id . ($configName != 'config' ? "_$configName" : '');
-				$menu .= <<<EOLI
-					<li><a href="?config=$configId" title="{$manifest['desc']}">{$manifest['name']} <em>$configId</em></a></li>
-EOLI;
-			}
-		}
-
-		return $menu;
+		return $strOpt;
 	}
 }

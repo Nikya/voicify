@@ -103,6 +103,32 @@ class Config {
 	}
 
 	/***************************************************************************
+	* To get the default TTS Engine Id
+	*
+	* @param $TtsEngine Id
+	*
+	*/
+	public function getDefaultTtsEngineId() {
+		$cBase = $this->getModuleConfig('base');
+
+		return $cBase['defaultTtsEngine'];
+	}
+
+	/***************************************************************************
+	* Return a indexed array of TTSENGINE module $id=>name
+	*/
+	public function getTtsEngineModuleIArray() {
+		$manifestSub = $this->getSubManifestMT(CoreUtils::MODULE_T_TTSENGINE);
+		$iArray = array();
+
+		foreach ($manifestSub as $id => $m) {
+			$iArray[$id] = $m['name'];
+		}
+
+		return $iArray;
+	}
+
+	/***************************************************************************
 	* Return a specific module manifest
 	*/
 	public function getModuleManifest($moduleId) {
