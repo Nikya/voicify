@@ -1,12 +1,7 @@
 <?php
+
 	$incPath = CoreUtils::PATH_MODULE.$module.'/'.$subModule.'.php';
 
-	function displayConfFile($confFilePath) {
-		$c = print_r(JsonUtils::jFile2Array($confFilePath), true);
-		//$c print_r(JsonUtils::jFile2Array(), true)
-
-		echo "<p>Edit manualy this file :</p> <pre><strong>$confFilePath</strong><hr/>$c</pre>";
-	}
 ?>
 
 <div class="row" style="padding:2%;">

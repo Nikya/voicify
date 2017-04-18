@@ -14,6 +14,9 @@ class Config {
 	/** To store the main manifest */
 	private $manifestMain = null;
 
+	/***************************************************************************
+	* Get the singleton instance
+	*/
 	public static function getInstance() {
 		if (self::$instance==null) {
 			self::$instance = new Config();
@@ -21,7 +24,7 @@ class Config {
 		return self::$instance;
 	}
 
-	/**
+	/***************************************************************************
 	* Private constructor
 	*/
 	private function __construct() {

@@ -1,6 +1,6 @@
 <?php
 /*******************************************************************************
-* Special Configuration View
+* Main Configuration API
 *******************************************************************************/
 
-	echo ViewUtils::displayConfFile(CoreUtils::PATH_CONFIG.$module.'_special.json');
+	Console::w('noapi', 'API not implemented');

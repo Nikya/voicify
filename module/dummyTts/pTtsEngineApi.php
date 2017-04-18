@@ -15,7 +15,7 @@ function dummySay() {
 	$ts = date('Y-m-d H:i:s');
 	$fileName = CoreUtils::PATH_TEMP.'dummyTts.txt';
 
-	$out = "$ts : $tts\n";
+	$out = "$ts : $say\n";
 
 	// Process
 	$r = file_put_contents($fileName, $out, FILE_APPEND);

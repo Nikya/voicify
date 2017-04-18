@@ -1,3 +1,3 @@
 <?php
 
-	displayConfFile(CoreUtils::PATH_CONFIG.$module.'_subvoicekey.json');
+	echo ViewUtils::displayConfFile(CoreUtils::PATH_CONFIG.$module.'_subvoicekey.json');

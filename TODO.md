@@ -43,9 +43,17 @@
 	* [ ] Les subvoicekey sont utilisable dans tous les autre foncitonalités
 
 ## TTS engine
+* [ ] Imperihome
 * [ ] Jarvis
 * [ ] Open karotz
-* [ ] Jeedom Say
 * [ ] Amazon Echo
 * [ ] Google Home
+* [ ] Jeedom Say (N'existe plus ?)
 * [ ] Sarha
+
+
+## ICU Doc
+Voir ICU http://site.icu-project.org/ !!!!!!!!!!!!!!!!!!!
+http://userguide.icu-project.org/formatparse
+http://php.net/manual/fr/class.messageformatter.php
+http://icu-project.org/apiref/icu4c/classMessageFormat.html#details

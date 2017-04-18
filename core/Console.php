@@ -5,17 +5,39 @@
 */
 class Console {
 
-	/** To store console messages */
-	private static $aConsole = array();
+	/** The unique one Singleton instance */
+	private static $instance = null;
+
+	/** To store all console traces */
+	private $aConsole = null;
 
 	/** To enable debug level */
-	private static $debug = false;
+	private $debug = false;
+
+	/***************************************************************************
+	* Get the singleton instance
+	*/
+	public static function getInstance() {
+		if (self::$instance==null) {
+			self::$instance = new Console();
+		}
+
+		return self::$instance;
+	}
+
+	/***************************************************************************
+	* Private constructor
+	*/
+	private function __construct() {
+		$this->aConsole = array();
+	}
 
 	/***************************************************************************
 	* To add a message into the console output
 	*/
-	public static function trace ($lvl, $tag, $msg, $mixed=null) {
-		array_push(self::$aConsole, array(
+	private function trace ($lvl, $tag, $msg, $mixed=null) {
+
+		array_push($this->aConsole, array(
 			'lvl' => $lvl,
 			'tag' => $tag,
 			'msg' => $msg,
@@ -23,16 +45,15 @@ class Console {
 		));
 	}
 
-	public static function d ($tag, $msg, $mixed=null) { if(self::$debug)
-															self::trace('D', $tag, $msg, $mixed); }
-	public static function i ($tag, $msg, $mixed=null) {	self::trace('I', $tag, $msg, $mixed); }
-	public static function w ($tag, $msg, $mixed=null) {	self::trace('W', $tag, $msg, $mixed); }
-	public static function e ($tag, $msg, $mixed=null) {	self::trace('E', $tag, $msg, $mixed); }
+	public static function i ($tag, $msg, $mixed=null) {	self::getInstance()->trace('I', $tag, $msg, $mixed); }
+	public static function w ($tag, $msg, $mixed=null) {	self::getInstance()->trace('W', $tag, $msg, $mixed); }
+	public static function e ($tag, $msg, $mixed=null) {	self::getInstance()->trace('E', $tag, $msg, $mixed); }
+	public static function d ($tag, $msg, $mixed=null) {if(self::isDebug()) self::getInstance()->trace('D', $tag, $msg, $mixed); }
 
 	/***************************************************************************
 	* To print the console into HTML LI
 	*/
-	public static function toHtml() {
+	public function toHtml() {
 		$out = '';
 		$lvl2Indicator = array(
 			'D' => 'd',
@@ -41,7 +62,7 @@ class Console {
 			'E' => 'ko'
 		);
 
-		$aCsl = self::getArrayConsole();
+		$aCsl = $this->aConsole;
 
 		foreach ($aCsl as $entry) {
 			$fMixed = self::mixedToString($entry['mixed']);
@@ -61,13 +82,15 @@ EOE;
 	/***************************************************************************
 	* To print the console into a log file
 	*/
-	public static function toLogFile() {
+	public function toLogFile() {
+
+
 		if (self::indicator() != 'ok') {
 			$out = '';
 			$ts = date('Y-m-d H:i:s');
 			$fileName = date('Ym').'.log';
 
-			$aCsl = self::getArrayConsole();
+			$aCsl = $this->aConsole;
 
 			foreach ($aCsl as $entry) {
 				$fMixed = self::mixedToString($entry['mixed']);
@@ -89,7 +112,7 @@ EOE;
 	/***************************************************************************
 	* Read a mixed value into a string
 	*/
-	private static function mixedToString($mixed) {
+	private function mixedToString($mixed) {
 		$fMixed = $mixed != null ? print_r($mixed, true) : '';
 
 		if (is_object($mixed))
@@ -102,10 +125,11 @@ EOE;
 	/***************************************************************************
 	* Get the global console indicator
 	*/
-	public static function indicator() {
+	public function indicator() {
+
 		$cptW = 0;
 
-		foreach (self::$aConsole as $entry) {
+		foreach ($this->aConsole as $entry) {
 			if ($entry['lvl'] == 'E')
 				return 'ko';
 			else if ($entry['lvl'] == 'W')
@@ -118,18 +142,20 @@ EOE;
 	/***************************************************************************
 	* Get the array stored console
 	*/
-	public static function getArrayConsole() {
-		if (empty(self::$aConsole))
+	public function getArrayConsole() {
+
+
+		if (empty($this->aConsole))
 			self::i('OK', 'Everything is fine.', '');
 
-		return self::$aConsole;
+		return $this->aConsole;
 	}
 
 	/***************************************************************************
 	* Get/set debug
 	*/
-	public static function isDebug() { return self::$debug; }
-	public static function setDebug($debugMode) { self::$debug = $debugMode===false ? false : true; }
+	public static function isDebug() { return self::getInstance()->debug; }
+	public static function setDebug($debugMode) { self::getInstance()->debug = $debugMode===false ? false : true; }
 }
 
 

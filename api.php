@@ -64,6 +64,7 @@ try {
 * Global Catch
 */
 } catch (Exception $e) {
+	$say = '?';
 	Console::w('api.target', 'target' , $_GET);
 	Console::w('api.module', 'module' , $module);
 	Console::w('api.subModule', 'subModule' , $subModule);
@@ -76,9 +77,9 @@ try {
 */
 header('Content-type: application/json; charset=utf-8');
 
-$output['status'] = Console::indicator();
+$output['status'] = Console::getInstance()->indicator();
 $output['say'] = $say;
-$output['console'] = Console::getArrayConsole();
-$output['htmlConsole'] = Console::toHtml();
+$output['console'] = Console::getInstance()->getArrayConsole();
+$output['htmlConsole'] = Console::getInstance()->toHtml();
 
 echo json_encode($output, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);

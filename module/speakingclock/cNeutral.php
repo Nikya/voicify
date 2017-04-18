@@ -1,3 +1,3 @@
 <?php
 
-	displayConfFile(CoreUtils::PATH_CONFIG.$module.'_neutral.json');
+	echo ViewUtils::displayConfFile(CoreUtils::PATH_CONFIG.$module.'_neutral.json');

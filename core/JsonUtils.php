@@ -91,30 +91,30 @@ class JsonUtils {
 
 		switch ($jErrorCode) {
 			case JSON_ERROR_NONE:
-				$jErrorMsg = 'Aucune erreur';
+				$jErrorMsg = 'No error';
 			break;
 			case JSON_ERROR_DEPTH:
-				$jErrorMsg = 'Profondeur maximale atteinte';
+				$jErrorMsg = 'Maximum depth reached';
 			break;
 			case JSON_ERROR_STATE_MISMATCH:
-				$jErrorMsg = 'Inadéquation des modes ou underflow';
+				$jErrorMsg = 'Inadequate modes or underflow';
 			break;
 			case JSON_ERROR_CTRL_CHAR:
-				$jErrorMsg = 'Erreur lors du contrôle des caractères';
+				$jErrorMsg = 'Error checking characters';
 			break;
 			case JSON_ERROR_SYNTAX:
-				$jErrorMsg = 'Erreur de syntaxe ; JSON malformé';
+				$jErrorMsg = 'Syntax error; JSON malformed';
 			break;
 			case JSON_ERROR_UTF8:
-				$jErrorMsg = 'Caractères UTF-8 malformés, probablement une erreur d\'encodage';
+				$jErrorMsg = 'UTF-8 characters malformed, probably an encoding error';
 			break;
 			default:
-				$jErrorMsg = 'Erreur inconnue';
+				$jErrorMsg = 'Unknown error';
 			break;
 		}
 
 		$mixedR = print_r($mixed, true);
 		if ($jErrorCode<>JSON_ERROR_NONE)
-			throw new Exception("$failMsg >>> Json error #$jErrorCode '$jErrorMsg'. Content : $mixedR");
+			throw new Exception("$failMsg. JsonError#$jErrorCode - '$jErrorMsg'. Content :\n $mixedR");
 	}
 }

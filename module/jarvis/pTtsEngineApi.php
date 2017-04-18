@@ -3,22 +3,21 @@
 * The TTS engine API
 *******************************************************************************/
 
-imperihomeSay();
+jarvisSay();
 
 /***************************************************************************
 * The TTS function
 */
-function imperihomeSay() {
+function jarvisSay() {
 	// Build
 	$config = Config::getInstance();
-	$cImperihome = $config->getModuleConfig('imperihome');
+	$cImperihome = $config->getModuleConfig('jarvis');
 
 	$host = $cImperihome['host'];
 	$port = $cImperihome['port'];
-	$vol = $cImperihome['vol'];
 	global $eSay;
 
-	$url = "http://{$host}:{$port}/api/rest/speech/tts?text={$eSay}&vol={$vol}";
+	$url = "http://{$host}:{$port}?say={$eSay}";
 
 	// Process
 	$ch = curl_init($url);
@@ -27,16 +26,15 @@ function imperihomeSay() {
 
 	// Debug
 	if (Console::isDebug()) {
-		Console::d('imperihomeSay', 'host', $host);
-		Console::d('imperihomeSay', 'port', $port);
-		Console::d('imperihomeSay', 'vol', $vol);
-		Console::d('imperihomeSay', 'url', $url);
+		Console::d('jarvisSay', 'host', $host);
+		Console::d('jarvisSay', 'port', $port);
+		Console::d('jarvisSay', 'url', $url);
 	}
 
 	// Manage error
 	if ($res===false) {
-		Console::w('imperihomeSay', 'curl.res', $res);
-		Console::w('imperihomeSay', 'curl.error', curl_error($ch));
-		throw new Exception("imperihomeSay fail to play $url");
+		Console::w('jarvisSay', 'curl.res', $res);
+		Console::w('jarvisSay', 'curl.error', curl_error($ch));
+		throw new Exception("jarvisSay fail to play $url");
 	}
 }

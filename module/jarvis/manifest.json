@@ -1,0 +1,15 @@
+{
+	"type" : "TTSENGINE",
+	"name": "Jarvis Say",
+	"desc": "Send a TTS to Jarvis voice assistant",
+	"version": "1.0",
+	"author": "Nikya",
+	"sourcelink": "https://github.com/Nikya/voicify",
+	"config": {
+		"cMain": {
+			"name": "RestAPI config",
+			"desc": "Lightweight RestAPI server to control Jarvis remotely"
+		}
+	},
+	"configfile": [ "main" ]
+}

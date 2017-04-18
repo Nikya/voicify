@@ -1,3 +1,3 @@
 <?php
 
-	displayConfFile(CoreUtils::PATH_CONFIG.$module.'_hour.json');
+	echo ViewUtils::displayConfFile(CoreUtils::PATH_CONFIG.$module.'_hour.json');

@@ -41,20 +41,29 @@ class ViewUtils {
 	* Build dropdown select options
 	*/
 	public static function buildDropdownSelectOpt($iArray, $selected=null) {
-		$strOpt = '';
+		$strOpt = '<option value="" selected>(Default)</option>';
 
 		foreach ($iArray as $k => $v) {
-			if (strcmp($selected, $k)==0) {
-				$strOpt .= "<option value=\"$k\" selected>$v (Default)</option>";
-				$selected = true;
-			}
-			else
-				$strOpt .= "<option value=\"$k\">$v</option>";
+			$strOpt .= "<option value=\"$k\">$v</option>";
 		}
 
-		if ($selected!==null and $selected!==true)
-			$strOpt = "<option></option>" . $strOpt;
-
 		return $strOpt;
+	}
+
+	/***************************************************************************
+	* Afficher un fichier de configuration au format brut
+	*/
+	public static function displayConfFile($confFilePath) {
+		$out = "<p>Edit manualy this file :</p> <pre><strong>$confFilePath</strong><hr/>";
+
+		try {
+			$c = print_r(JsonUtils::jFile2Array($confFilePath), true);
+			$out .= $c;
+		} catch (Exception $e) {
+			Console::i('ViewUtils::displayConfFile', "Fail to read the file $confFilePath", $e);
+			$out .= 'Invalid Json file ! ' . $e->getMessage();
+		}
+
+		return $out . "</pre>";
 	}
 }
