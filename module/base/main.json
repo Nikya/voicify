@@ -1,1 +1,4 @@
-{ "defaultTtsEngine" : "dummyTts" }
+{
+	"version": "1.0",
+	"defaultTtsEngine" : "dummyTts"
+}

@@ -1,17 +1,15 @@
 {
 	"type" : "TTSENGINE",
-	"name": "ImperiHome",
-	"desc": "Send TTS to ImperiHome",
+	"name": "ImperiHome Speech",
+	"desc": "Send a TTS to ImperiHome",
 	"version": "1.0",
 	"author": "Nikya",
 	"sourcelink": "https://github.com/Nikya/voicify",
 	"config": {
 		"cMain": {
-			"name": "Main",
-			"desc": "The main configuration"
+			"name": "Speech API ",
+			"desc": "ImperiHome Control API - Speech TTS"
 		}
 	},
-	"configfile": [
-		"main"
-	]
+	"configfile": [ "main" ]
 }

@@ -1,7 +1,7 @@
 {
 	"type" : "TTSENGINE",
-	"name": "The Dummy",
-	"desc": "A fake TTS engine",
+	"name": "The mute dummy",
+	"desc": "A false speaker",
 	"version": "1.0",
 	"author": "Nikya",
 	"sourcelink": "https://github.com/Nikya/voicify"

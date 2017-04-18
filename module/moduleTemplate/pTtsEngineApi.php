@@ -3,4 +3,29 @@
 * The TTS engine API
 *******************************************************************************/
 
-	throw new Exception ('TTS engine API not implemented');
+templateSay();
+throw new Exception ('TTS engine API not implemented');
+
+/***************************************************************************
+* The TTS function
+*/
+function templateSay() {
+	// Build
+	global $say;
+	global $eSay; // URL encoded
+
+	// Process
+	// $r = curl_exec($say);
+
+	// Debug
+	if (Console::isDebug()) {
+		Console::d('templateSay', 'eSay', $eSay);
+		// Console::d('templateSay', 'foo', $bar);
+	}
+
+	// Manage error
+	if ($r===false) {
+		Console::e('templateSay', 'Fail to process', $fileName);
+		throw new Exception("templateSay fail");
+	}
+}

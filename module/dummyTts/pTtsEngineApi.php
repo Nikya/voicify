@@ -3,29 +3,32 @@
 * The TTS engine API
 *******************************************************************************/
 
-if (!isset($_GET['tts']) or empty($_GET['tts'])) {
-	Console::e('dummy.playMain', 'No TTS to process');
-} else {
-	$say = $_GET['tts'];
-}
-
-dummyTrace($say);
+dummySay();
 
 /***************************************************************************
 * To redirect the fake TTS to an output file
 */
-function dummyTrace($tts) {
+function dummySay() {
+	// Build
+	global $say;
 	$out = '';
 	$ts = date('Y-m-d H:i:s');
 	$fileName = CoreUtils::PATH_TEMP.'dummyTts.txt';
 
 	$out = "$ts : $tts\n";
 
+	// Process
 	$r = file_put_contents($fileName, $out, FILE_APPEND);
 
-	if ($r===false)
-		Console::e('dummy', 'Fail to write into the file', $fileName);
+	// Debug
+	if (Console::isDebug()) {
+		Console::d('dummy', 'Output file', $fileName);
+		Console::d('dummy', 'Output', $out);
+	}
 
-	Console::d('dummy', 'Output file', $fileName);
-	Console::d('dummy', 'Output', $out);
+	// Manage error
+	if ($r===false) {
+		Console::e('dummy', 'Fail to write into the file', $fileName);
+		throw new Exception("dummyTrace fail");
+	}
 }

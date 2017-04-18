@@ -1,4 +1,5 @@
 {
-    "specialLorem": "SAAA",
-    "specialLipsum": "sfoo"
+	"version": "1.0",
+	"specialLorem": "SAAA",
+	"specialLipsum": "sfoo"
 }

@@ -15,6 +15,9 @@
 	$featureApiPath = CoreUtils::PATH_MODULE.$module.'/'.$subModule.'Api.php';
 	include($featureApiPath);
 
+	$eSay = urlencode($say);
+	Console::d('say', $say);
+
 	// Call the TTS engine
 	$ttEngineApiPath = CoreUtils::PATH_MODULE.$tts.'/pTtsEngineApi.php';
 	include($ttEngineApiPath);

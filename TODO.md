@@ -1,16 +1,20 @@
 ## Build TO-DO list
+* [ ] Build de certains TTS engine principaux
+* [ ] MàJ Doc MD
+* [ ] Go to prod
+* [ ] Publish Github
+* [ ] Rework coté eedomus
+
 * [x] Continuer dans playAPI pour avoir des page de play générique
 * [x] Au setup verifier que les module type TTS en un pTtsEngineApi.php file CONTINUER ICI puis commit
-* [ ] Liste déroulante des TTSEngine disponibles
+* [x] Liste déroulante des TTSEngine disponibles
 
 * [x] Avoir un grand menu détaillé sur la home page rangé différament du menu : Par module
 * [ ] Avoir une page basique de config : Pour le module 'Base' pourvoir choisir juste le moteur par défaut
-	* [ ] Chaque page de play dois pouvoir changer le moteur à la volé
-	* [ ] Sauf pour les page de Play des TTS engine qui eux serai masquer ou forcer avec le moteur courant
-* [ ] Avoir un module PLAY tout simple pour tester du text simple des différents moteurs
+* [x] Avoir un module PLAY tout simple pour tester du text simple des différents moteurs
 	* [x] Idéal pour mettre en place du fonctionnement d'une page play vers sont API
 	* [x] Mettre en place un moteur TTS appelé DummyTSS : Logger dans un fichier les textes reçues
-	* [ ] Listing des TTS engine
+	* [x] Listing des TTS engine
 * [x] Naviguer vers les pages du module
 * [x] Class Config : Avoir des sous methode de lecture du manafiest Main
 	* [x] Seulement les plays, seulement les config, ...
@@ -29,8 +33,8 @@
 
 ## Doc
 * [ ] Revoir le README general
-* [ ] REvoir tous les autre README
-* [ ] Créer un README pour la creation de MODULE
+* [ ] Revoir tous les autre README
+* [ ] Créer un README pour la creation de MODULE : CONTRIBUTE
 
 ## Feature list
 * [ ] Breaking news
