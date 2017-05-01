@@ -6,6 +6,9 @@ Il est possible ensuiet de selectionner un _Moteur de TTS_ spécifique ou laisse
 
 ## Paramétrage
 * defaultTtsEngine : Le _Moteur de TTS_ à utiliser si aucun n'est spécifié
+* Locale : Langue à utiliser
+	* pour afficher les README (Si disponible),
+	* pour le systéme de _message formater_ interne (Textify)
 
 ## Version
 Module 1.0 pour Voicify 1.x

@@ -9,7 +9,7 @@
 	<meta name="author" content="Nikya">
 	<link rel="icon" href="core/view/aside/favicon.png">
 
-	<title>Voicify : <?php echo $title ?></title>
+	<title>Home Voicify - <?php echo $title ?></title>
 
 	<!-- Bootstrap core CSS -->
 	<link href="core/view/aside/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -41,7 +41,7 @@
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href=".">Voicify</div>
+			<a class="navbar-brand" href=".">Home Voicify</div>
 		<div id="navbar" class="collapse navbar-collapse">
 			<ul class="nav navbar-nav">
 				<li class="dropdown">
@@ -67,10 +67,31 @@
 <!-- Content ------------------------------->
 		<h2>
 			<?php echo $title ?>
-			<em><?php echo $desc ?></em>
+			<em>- <?php echo $desc ?></em>
 		</h2>
 
-		<?php include("./core/view/_$target.php"); ?>
+		<div class="row" style="padding:1%;">
+			<!-- LEFT - README -->
+			<div class="col-sm-3">
+				<?php include("./core/view/__readme.php"); ?>
+			</div>
+
+			<!-- CENTER - ACTION -->
+			<div class="col-sm-6">
+				<?php include("./core/view/_$target.php"); ?>
+			</div>
+
+			<!-- RIGHT - CONSOLE -->
+			<div class="col-sm-3">
+				<?php
+					include("./core/view/__console.php");
+
+					if ($target == CoreUtils::TARGET_T_PLAY)
+						include("./core/view/__say.php");
+				 ?>
+			</div>
+
+		</div>
 
 <!-- Fin Content ------------------------------->
 	</div>

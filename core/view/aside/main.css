@@ -24,22 +24,19 @@ h2 {
 	color : #ffa861;
 	background-color: #222;
 	width: 100%;
-	padding: 2%;
-	margin-top: 0;
-	margin-bottom: : 40px;
+	padding: 1%;
+	margin: 0;
 	text-align: center;
 }
 
 h2 > em  {
 	margin-top: 1%;
-	display: block;
 	font-size: 0.5em;
 	color: #ffe3c7;
 }
 
 h3 > em  {
 	margin-top: 1%;
-	display: block;
 	font-size: 0.5em;
 }
 
@@ -71,26 +68,28 @@ ul.dropdown-menu > li > a > em {
 .ccc {
 	background-color: #FFFFFF;
 	margin-bottom: 40px;
-	border: 2px solid #FFF;
 }
 
 .ccc > h3 {
 	color : #ffa861;
-	padding: 2%;
+	padding: 10px;
 	border-bottom: 1px solid #ffa861;
 	margin: 0;
 }
 
 .ccc > .content {
-	margin-top: 3%;
-	padding: 2%;
+	padding: 10px;
+}
+
+.ccc hr {
+	border-color: #ffa861;
 }
 
 /*******************************************************************************
 * Console
 */
 #indicator {
-	border: 7px solid #000;
+	border: 10px solid #000;
 	line-height: 14px;
 	background-color: #AAA;
 }
@@ -136,7 +135,7 @@ ul.dropdown-menu > li > a > em {
 	width: 100%;
 	font-size: 0.8em;
 	font-family: monospace;
-	border: 7px solid #000;
+	border: 10px solid #000;
 	margin-bottom: 0;
 	word-wrap:break-word;
 }
@@ -151,7 +150,7 @@ ul.dropdown-menu > li > a > em {
 	font-family: monospace;
 	font-size: 0.8em;
 	list-style: none;
-	padding: 1%;
+	padding: 10px;
 }
 
 #console li {
@@ -197,13 +196,6 @@ ul.dropdown-menu > li > a > em {
 
 .moduleDesc article {
 	border-bottom: 1px solid black;
-}
-
-/*******************************************************************************
-* Form
-*/
-#formBottom {
-	border-color: #ffa861;
 }
 
 /** TODO Css non revue aprés cette ligne */

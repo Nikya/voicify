@@ -16,10 +16,10 @@ Grace à son plugin _Jarvis API_ il est possible de lui envoyer des textes à pr
 Module 1.0 for Jarvis 17.xx
 
 ## Paramétrage
-* host : URL/IP du serveur executant Jarvis
-* port : Port où écoute Jarvis (Défaut 8080)
+* **host** : URL/IP du serveur executant Jarvis
+* **port** : Port où écoute Jarvis (Défaut 8080)
 
-## Aperçue
+## Aperçu
 
 	>_ Jarvis
 

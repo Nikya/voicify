@@ -1,31 +1,31 @@
 # Home Voicify
 
-**Système de génération de _notification vocal variées_ pour les maisons domotisées**
+**Système de génération de _notification vocal variées_ pour les maisons domotisées**.
 
 * Version : `1.1`
 * Auteur : [Nikya](https://github.com/Nikya)
-* Projet : [GitHub/Nikya/Voicify](https://github.com/Nikya/voicify)
+* Origine du projet : [GitHub/Nikya/Voicify](https://github.com/Nikya/voicify)
 
 ## Présentation
 
 *Donner de la voix à votre maison domotisée !*
 
-Certaines actions de votre domotique méritent une notification vocale :
-
-> Bon retour chez vous Monsieur, la température intérieur est de 22°
+Certaines actions de votre domotique méritent une _notification vocale_ :
 
 > La porte du garage est restée ouverte !
+
+> Bon retour chez vous Monsieur, la température intérieure est de 22°
 
 > Armement de l'alarme, vous avez deux minutes pour évacuer les lieux.
 
 > Pensez à sortir la poubelle du tri sélectif pour demain.
 
-Home Voicify est un système qui permet de générer se genre de notification.
+**Home Voicify est un système qui permet de générer ce genre de notification mais avec des variations.**
 
 #### Variation des notifications
-Le principale avantage de _Home Voicify_ est que pour un même type de notificaion, il va générer des phrases qui varient : il **avite la lassitude** ou **évite de s'habituer** à une notification et donc à la longue ne plus y preter attention.
+Le principal avantage de _Home Voicify_ est que pour un même type de notification, il va générer des phrases qui varient : il **évite la lassitude** ou **évite de s'habituer** à une notification et donc à la longue un risque de ne plus y prêter attention.
 
-Avec une notificaiton qui serait `oublie de fermer la porte du garage`, il est possible de paramètrer des phrases différentes comme :
+Avec une notification qui serait "_oublie fermer porte garage_", il est possible de paramétrer des phrases différentes comme :
 
 > La porte du garage, est restée ouverte.
 
@@ -34,22 +34,22 @@ Avec une notificaiton qui serait `oublie de fermer la porte du garage`, il est p
 > Qui voudrait bien fermer la porte du garage ?
 
 
- _Home Voicify_ gére l'injection de variable dans le texte de la notification, par exemple un température qui peut varier :  
+ _Home Voicify_ gère l'injection de variables dans le texte de la notification, par exemple une température qui peut varier :  
 
-> Bon retour chez vous Monsieur, la température intérieur est de `22°`.
+> Bon retour chez vous Monsieur, la température intérieure est de `22°`.
 
-## Modules
+## Fonctionnalités
 
-Il est compatible avec plusieurs systémes de _génération de synthése vocal_ et posséde plusieurs _fonctionalités_ exploitant ce concept de '_notification vocale varié_'.
+Il est compatible avec plusieurs systèmes de _génération de synthèse vocale_ et posséde plusieurs _fonctionnalités_ exploitant ce concept de '_notification vocale variée_'.
 
-#### _FEATURE_
-Liste des foncitonalités déjà présentes :
+#### Modules _FEATURE_
+Liste des fonctionnalités déjà présentes :
 
-* [**Voicekey**](./module/voicekey/README.md) : Pour un certains mot clé, pouvoir définir desvariation de texte et leurs fréquences d'utilisation.
-* [**Speaking-Clock**](./module/speakingclock/README.md) : Une horloge parlante qui vous annoncera l'heure jamais de la même façon
+* [**Voicekey**](./module/voicekey/README.md) : Pour un certain mot clé, pouvoir définir des variations de texte.
+* [**Speaking-Clock**](./module/speakingclock/README.md) : Une horloge parlante qui annoncera l'heure mais jamais de la même façon
 
-#### _TTSENGINE_
-Liste des systéme de génération de synthése vocale compatible (TTS) :
+#### Modules _TTSENGINE_
+Liste des système de génération de synthèse vocale compatibles (TTS) :
 
 * [**Openkarotz**](./module/openkarotz/README.md) : Envoie de la notification vers un OpenKarotz
 * [**Jarvis**](./module/jarvis/README.md) : Envoie de la notification vers un système Jarvis
@@ -67,17 +67,17 @@ Liste des systéme de génération de synthése vocale compatible (TTS) :
 
 ### Installer
 
-Cloner le projet sur le serveur PHP.
+Cloner le projet dans un répertoire _web_ d'un serveur PHP.
 
 	git clone https://github.com/Nikya/voicify
 
 ### Vérifier
 
-Droits suffisants de _lecture/ecriture_ sur les dossiers de **configuration** et **temporaire** :
+Droits suffisants de _lecture/écriture_ sur les dossiers de **configuration** et **temporaire** :
 
 ```shell
-	sudo chmod 777 config
-	sudo chmod 777 temp
+sudo chmod 777 config
+sudo chmod 777 temp
 ```
 
 ### Initialiser
@@ -85,19 +85,34 @@ Droits suffisants de _lecture/ecriture_ sur les dossiers de **configuration** et
 * Aller sur l'URL du serveur Web-PHP où est installé _Home Voicify_.
 * Executer le `Setup` dans le menu `Config/setup` de  _Home Voicify_
 
-### Utiliser
+Une fois le `Setup` accomplie, utiliser les différents menu pour accéder aux fonctionnalités et les tester.
 
-Une fois le `Setup` accomplie, utiliser les différents menu pour accéder aux fonctionalités et les tester.
+## Utiliser
 
-Chaque utilisation de fonctionalité génére une URL d'API dans la _console_, il suffit ensuite de copier/coller cette URL vers un sytéme externe (Votre solution domotique) pour re-déclancher l'action testée.
+Chaque page est constituée de 3 parties :
+
+* **Read Me** : Contient la documentation
+* **Action** : Contient les éléments d'intération
+* **Console** : Affiche les résultats de l'intération
+	* **URL** : Contient l'URL appelée par l'intération
+	* **Indicateur** : LA couleur indique le bon déroulement ou non de l'intérration
+	* **Output** : Affiche un détail du bon déroulement ou non de l'intérration
+	* **Saying** : Affiche le texte final envoyé au systéme de notification vocale
+
+Chaque utilisation d'une fonctionalité génére une _**URL** d'API_ dans la _console_, il suffit ensuite de copier/coller cette URL vers un sytéme externe (Votre solution domotique) pour re-déclancher la même action.
+
+## Contribuer
+
+Vous pouvez contribuer à la vie du projet par l'utilisation classique de projet sur GitHub (issues, pull request, ...).  
+
+Vous pouvez proposer vos propores modules de _fonctionalité_ ou de _TTS engine_ : il existe un modules caché nommé `moduleTemplate` qui a vocation a être dupliqué pour servire de modèle de création.
 
 ## A venir
 
 - Général
-	- Page de configuration des modules
+	- Page de configuration des modules en mode éditable
 - Modules _FEATURE_
 	- **Breaking news / Report** : Génération d'un compte rendu ou d'un journal personalisé
-	- **Reminder** : Génération de rappels
 - Modules _TTSENGINE_
 	- **Amazon Echo**
 	- **Google Home**

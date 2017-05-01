@@ -62,7 +62,7 @@ class Console {
 			'E' => 'ko'
 		);
 
-		$aCsl = $this->aConsole;
+		$aCsl = $this->getArrayConsole();
 
 		foreach ($aCsl as $entry) {
 			$fMixed = self::mixedToString($entry['mixed']);
@@ -143,8 +143,6 @@ EOE;
 	* Get the array stored console
 	*/
 	public function getArrayConsole() {
-
-
 		if (empty($this->aConsole))
 			self::i('OK', 'Everything is fine.', '');
 

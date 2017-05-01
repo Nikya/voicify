@@ -14,8 +14,8 @@ Sed accumsan viverra lorem, non mollis mauris laoreet eu. Sed condimentum vulput
 Module 1.0 pour Template 1.x
 
 ## Paramétrage
-* host : URL/IP du serveur
+* **host** : URL/IP du serveur
 
-## Aperçue
+## Aperçu
 
 ![Logo of template](https://exemple.com/logo.png)

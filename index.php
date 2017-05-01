@@ -72,6 +72,7 @@
 				}
 				$title = 'Setup';
 				$desc = 'Check and initialize the system';
+				$readmeHtml = "To load, refresh or update all available <em>Modules</em>.";
 				break;
 
 			case 'home':
@@ -88,18 +89,14 @@
 	}
 
 	if (!Setup::isOk()) {
-		Console::e('index.setup', 'Please run the Setup. Go to the menu config>>setup');
+		Console::e('index.setup', 'Setup required.');
 	}
 
 /*******************************************************************************
 * Build Menus
 */
-	$playMenuHtml = '';
-	$playMenuHtml .= ViewUtils::buildMenu(CoreUtils::TARGET_T_PLAY, CoreUtils::MODULE_T_FEATURE);
-	$configMenuHtml = '<li><a href="?setup" title="Execute the setup">Setup</a></li><li role="separator" class="divider"></li>';
-	$configMenuHtml .= ViewUtils::buildMenu(CoreUtils::TARGET_T_CONFIG, CoreUtils::MODULE_T_FEATURE);
-	$configMenuHtml .= ViewUtils::buildMenuSep();
-	$configMenuHtml .= ViewUtils::buildMenu(CoreUtils::TARGET_T_CONFIG, CoreUtils::MODULE_T_TTSENGINE);
+	$playMenuHtml = ViewUtils::buildPlayMenu();
+	$configMenuHtml = ViewUtils::buildConfigMenu();
 
 /*******************************************************************************
 * Build API URL

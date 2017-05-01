@@ -1,7 +1,14 @@
 ## Build TO-DO list
+
+* [ ] Commit "REwork ergonomique"
 * [ ] Build de certains TTS engine principaux
-* [ ] MàJ Doc MD
+	* [ ] Openkarotz
+* [ ] Intégration focntionalités principales
+	* [ ] voicekey
+	* [ ] subvoicekey
+	* [ ] Speaking clock
 * [ ] Go to prod
+* [ ] MàJ Doc MD
 * [ ] Publish Github
 * [ ] Rework coté eedomus
 
