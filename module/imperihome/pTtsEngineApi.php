@@ -9,16 +9,15 @@ imperihomeSay();
 * The TTS function
 */
 function imperihomeSay() {
-	// Build
+	global $encSay;
 	$config = Config::getInstance();
 	$cImperihome = $config->getModuleConfig('imperihome');
-
 	$host = $cImperihome['host'];
 	$port = $cImperihome['port'];
 	$vol = $cImperihome['vol'];
-	global $eSay;
 
-	$url = "http://{$host}:{$port}/api/rest/speech/tts?text={$eSay}&vol={$vol}";
+	// Build
+	$url = "http://{$host}:{$port}/api/rest/speech/tts?text={$encSay}&vol={$vol}";
 
 	// Process
 	$ch = curl_init($url);

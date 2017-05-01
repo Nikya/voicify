@@ -51,7 +51,7 @@ Liste des fonctionnalités déjà présentes :
 #### Modules _TTSENGINE_
 Liste des système de génération de synthèse vocale compatibles (TTS) :
 
-* [**Openkarotz**](./module/openkarotz/README.md) : Envoie de la notification vers un OpenKarotz
+* [**Freerabbits**](./module/freerabbits/README.md) : Envoie de la notification vers un OpenKarotz sous FreeRabbits OS (Openkarotz)
 * [**Jarvis**](./module/jarvis/README.md) : Envoie de la notification vers un système Jarvis
 * [**ImperiHome**](./module/openkarotz/README.md) : Envoie de la notification vers une applciation ImperiHome
 

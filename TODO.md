@@ -1,5 +1,11 @@
 ## Build TO-DO list
 
+## setup
+* [ ] Suppr des fichier temporaires (save conf)
+* [ ] Mécanisme d'update
+* [ ] Lors d'un update : Sauvegarder les fichiers de conf
+
+# MISC 2
 * [ ] Commit "REwork ergonomique"
 * [ ] Build de certains TTS engine principaux
 	* [ ] Openkarotz
@@ -12,6 +18,7 @@
 * [ ] Publish Github
 * [ ] Rework coté eedomus
 
+## MISC 1
 * [x] Continuer dans playAPI pour avoir des page de play générique
 * [x] Au setup verifier que les module type TTS en un pTtsEngineApi.php file CONTINUER ICI puis commit
 * [x] Liste déroulante des TTSEngine disponibles

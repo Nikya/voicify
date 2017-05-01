@@ -96,7 +96,14 @@ class ViewUtils {
 	*/
 	public static function configureFile($module, $submodule='main') {
 		$confFilePath = CoreUtils::PATH_CONFIG.$module.'_'.$submodule.'.json';
-		$fContent = print_r(Config::getInstance()->getModuleConfig($module, $submodule), true);
+
+		try {
+			$fContent = print_r(Config::getInstance()->getModuleConfig($module, $submodule), true);
+		} catch (Exception $e) {
+			$msg = "Fail to read the content of the file '$confFilePath' - {$e->getMEssage()}";
+			$fContent = $msg;
+			Console::e('ViewUtils.configureFile', $msg, $e);
+		}
 
 		return <<<EED
 			<div class="ccc">

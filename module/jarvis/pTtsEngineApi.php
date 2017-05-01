@@ -15,9 +15,9 @@ function jarvisSay() {
 
 	$host = $cImperihome['host'];
 	$port = $cImperihome['port'];
-	global $eSay;
+	global $encSay;
 
-	$url = "http://{$host}:{$port}?say={$eSay}";
+	$url = "http://{$host}:{$port}?say={$encSay}";
 
 	// Process
 	$ch = curl_init($url);

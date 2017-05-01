@@ -1,0 +1,15 @@
+{
+	"type" : "TTSENGINE",
+	"name": "Free Rabbits TTS",
+	"desc": "Send a TTS to Karotz",
+	"version": "1.0",
+	"author": "Nikya",
+	"sourcelink": "https://github.com/Nikya/voicify",
+	"config": {
+		"cMain": {
+			"name": "The main configuration",
+			"desc": "Configure the Free Rabbits TTS"
+		}
+	},
+	"configfile": ["main"]
+}

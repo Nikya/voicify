@@ -12,14 +12,14 @@ throw new Exception ('TTS engine API not implemented');
 function templateSay() {
 	// Build
 	global $say;
-	global $eSay; // URL encoded
+	global $encSay; // URL encoded
 
 	// Process
 	// $r = curl_exec($say);
 
 	// Debug
 	if (Console::isDebug()) {
-		Console::d('templateSay', 'eSay', $eSay);
+		Console::d('templateSay', 'eSay', $encSay);
 		// Console::d('templateSay', 'foo', $bar);
 	}
 

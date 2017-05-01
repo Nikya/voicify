@@ -1,6 +1,6 @@
 <?php
 /*******************************************************************************
-* The TTS engine API
+* Main Configuration View
 *******************************************************************************/
 
-	throw new Exception ('TTS engine API not implemented');
+		echo ViewUtils::configureFile('freeRabbit');
