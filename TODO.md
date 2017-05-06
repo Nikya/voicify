@@ -1,42 +1,53 @@
-## Build TO-DO list
+# TODO list du projet
 
-## setup
-* [ ] Suppr des fichier temporaires (save conf)
-* [ ] Mécanisme d'update
-* [ ] Lors d'un update : Sauvegarder les fichiers de conf
+_Poid des fonctionalités en points Fibonacci : 1, 2, 3, 5, 8, 13, 21_
 
-# Misc 4
-* [ ] Documentation masquable ?
-* [ ] Revoir la sortie console : en provenance de PHP est au format Json : Mise en forme par Javascript
-* [ ] Commencer le mode textify !!!!!!!!!!!!
-
-# Misc 3
-* [ ] editeur de config basic minimum en mode texte
-* [ ] Revoir la sortie console : en provenance de PHP est au format Json : Mise en forme par Javascript
-* [ ] Commencer le mode textify !!!!!!!!!!!!
-
-# MISC 2
-* [ ] editeur de config basic minimum en mode texte
-* [ ] Commit "REwork ergonomique"
-* [ ] Build de certains TTS engine principaux
-	* [ ] Openkarotz
-* [ ] Intégration focntionalités principales
-	* [ ] voicekey
-	* [ ] subvoicekey
-	* [ ] Speaking clock
-* [ ] Go to prod
-* [ ] MàJ Doc MD
-* [ ] Publish Github
-* [ ] Rework coté eedomus
+## Prio 1 : Indispansable à la prochaine release
+* [ ] (13) Module textify
+* [ ] (8) Module Voicekey
+* [ ] (5) Doc à jours (+liens vers cette todo list)
+* [ ] (8) Module Speaking clock
+* [ ] (3) ICU Doc (voir Google Drive 'zelda' + lien en bas de page)
+* [ ] (3) Nettoyage Css et Javascrip non utilsés
 
 
-## MISC 1
+## Prio 2 : Souhaité pour la prochaine release
+* [ ] (5) Mécanisme d'update des fichier de conf en mode texte pure
+
+
+## Prio 3 : Apports sympatiques
+* [ ] (13) Mécanisme d'update des fichier de conf en mode formulaire complet
+* [ ] (2) Documentation masquable + option général pour toujours masquer
+
+
+## Prio 4 : Apports mineurs
+* [ ] (3) Setup : Fonction de nettoyage des fichier temp (et des sauvegardes de conf)
+* [ ] (13) Gestion des updates de modules : Mise à jour des fichier de configuration
+* [ ] (5) README pour la creation de MODULE : CONTRIBUTE
+
+--------------------------------------------------------------------------------
+# Modules
+## TTS engine
+* [ ] (3) Jeedom Say existe toujours ?
+* [ ] (3) eedomus say
+* [ ] (13) Google Home
+* [ ] (13) Amazon alexa
+* [ ] (3) Sarha
+
+## FEATURE
+* [ ] (13) Breaking news / Report
+
+--------------------------------------------------------------------------------
+# Effectué
+
+* [x] Revoir la sortie console : en provenance de PHP est au format Json : Mise en forme par Javascript
+* [x] Rework ergonomique
+* [x] Build des TTS engine principaux
 * [x] Continuer dans playAPI pour avoir des page de play générique
 * [x] Au setup verifier que les module type TTS en un pTtsEngineApi.php file CONTINUER ICI puis commit
 * [x] Liste déroulante des TTSEngine disponibles
-
 * [x] Avoir un grand menu détaillé sur la home page rangé différament du menu : Par module
-* [ ] Avoir une page basique de config : Pour le module 'Base' pourvoir choisir juste le moteur par défaut
+* [x] Avoir une page basique de config : Pour le module 'Base' pourvoir choisir juste le moteur par défaut
 * [x] Avoir un module PLAY tout simple pour tester du text simple des différents moteurs
 	* [x] Idéal pour mettre en place du fonctionnement d'une page play vers sont API
 	* [x] Mettre en place un moteur TTS appelé DummyTSS : Logger dans un fichier les textes reçues
@@ -56,27 +67,8 @@
 * [x] Un seul genre de module typé FEATURE ou TTS engine dans les manifest
 * [x] Tout mettr dans les manifest : voir le manifest du TEMPALATE
 * [x] Extraire pour mutualiser des composants de vue : Console, saying, README, ... : Créer des ccc (trouver un meilleur nom)
-
-## Doc
-* [ ] Revoir le README general
-* [ ] Revoir tous les autre README
-* [ ] Créer un README pour la creation de MODULE : CONTRIBUTE
-
-## Feature list
-* [ ] Breaking news
-* [ ] Reminder
-* [ ] Séparer les voicekey des subvoicekey
-	* [ ] Les subvoicekey sont utilisable dans tous les autre foncitonalités
-
-## TTS engine
-* [ ] Imperihome
-* [ ] Jarvis
-* [ ] Open karotz
-* [ ] Amazon Echo
-* [ ] Google Home
-* [ ] Jeedom Say (N'existe plus ?)
-* [ ] Sarha
-
+* [x] Revoir le README general
+* [x] Revoir tous les autre README
 
 ## ICU Doc
 Voir ICU http://site.icu-project.org/ !!!!!!!!!!!!!!!!!!!
