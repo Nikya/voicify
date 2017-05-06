@@ -4,8 +4,7 @@
 $output = array(
 	'status'=>null,
 	'say'=>null,
-	'console'=>null,
-	'htmlConsole'=>null
+	'console'=>null
 );
 
 try {
@@ -59,6 +58,8 @@ try {
 */
 	include("./core/{$target}API.php");
 
+	if (Console::isDebug())
+		Console::getInstance()->toLogFile();
 
 /*******************************************************************************
 * Global Catch
@@ -80,6 +81,5 @@ header('Content-type: application/json; charset=utf-8');
 $output['status'] = Console::getInstance()->indicator();
 $output['say'] = $say;
 $output['console'] = Console::getInstance()->getArrayConsole();
-$output['htmlConsole'] = Console::getInstance()->toHtml();
 
 echo json_encode($output, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);

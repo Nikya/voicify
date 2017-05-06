@@ -8,8 +8,11 @@
 $(document).ready(function() {
 
 	$('#calledUrl').click(openUrl);
-	$('#indicator').removeClass('wait');
 	$('#calledUrl').html(hightlightUrl($('#calledUrl').html()));
+	$('#console').html(fConsole(phpConsole, true));
+
+
+	$('#indicator').removeClass('wait');
 
 /*******************************************************************************
 * Intercept form submission to redirect to Ajax Submit
@@ -29,7 +32,7 @@ $(document).ready(function() {
 			dataType: 'json', // JSON
 			success: function(response, textStatus, jqXHR){
 				var rawUrl = baseUrl+this.url;
-				$('#console').html(response.htmlConsole);
+				$('#console').html(fConsole(response.console));
 				$('#calledUrl').html(hightlightUrl(rawUrl));
 				$('#say').html(response.say);
 				$('#indicator').addClass(response.status).removeClass('wait');
@@ -67,6 +70,64 @@ function hightlightUrl(rawUrl) {
 
 	clearUrl = clearUrl.replace(/&+$/, "");
 	return clearUrl;
+}
+
+/*******************************************************************************
+* Format a Json console Data to HTML elements
+*/
+function fConsole(consoleEntriesMixed, isString=false) {
+
+	if(!isString)
+		consoleEntries = consoleEntriesMixed;
+	else {
+		try {
+			consoleEntries = JSON.parse(consoleEntriesMixed);
+		} catch(e) {
+			return consoleEntriesMixed + ' <br/><br/><strong>'+e.message+'</strong>';
+		}
+	}
+
+
+	var out = '';
+	var lvl2Indicator = {
+		"D":	"d",
+		"I":	"ok",
+		"W":	"warn",
+		"E":	"ko"
+	};
+
+	var eConsole = document.createElement("UL");
+
+	for (var i = 0; i < consoleEntries.length; i++) {
+		var cEntry = consoleEntries[i];
+		var eEntry = document.createElement("LI");
+
+		// Tag + Lvl
+		var txtTag = document.createTextNode(cEntry.lvl + '| ' +cEntry.tag);
+		var eTag = document.createElement("SPAN")
+		eTag.className = 'lvl'+lvl2Indicator[cEntry.lvl]+ ' lvl';
+		eTag.appendChild(txtTag);
+		eEntry.appendChild(eTag);
+
+		// Message
+		var txtMsg = document.createTextNode(cEntry.msg);
+		var eMsg = document.createElement("P")
+		eMsg.appendChild(txtMsg);
+		eEntry.appendChild(eMsg);
+
+		// Mixed
+		if (cEntry.mixed!=null) {
+			var txtMixed = document.createTextNode(cEntry.mixed);
+			var eMixed = document.createElement("PRE");
+			eMixed.appendChild(txtMixed);
+			eEntry.appendChild(eMixed);
+		}
+
+		// Console full
+		eConsole.appendChild(eEntry);
+	}
+
+	return eConsole;
 }
 
 /*******************************************************************************

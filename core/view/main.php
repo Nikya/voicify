@@ -95,5 +95,9 @@
 
 <!-- Fin Content ------------------------------->
 	</div>
+
+	<script>
+		var phpConsole = '<?php echo json_encode(Console::getInstance()->getArrayConsole(), JSON_UNESCAPD_UNICODE | JSON_HEX_APOS); ?>';
+	</script>
 </body>
 </html>

@@ -5,7 +5,18 @@
 * [ ] Mécanisme d'update
 * [ ] Lors d'un update : Sauvegarder les fichiers de conf
 
+# Misc 4
+* [ ] Documentation masquable ?
+* [ ] Revoir la sortie console : en provenance de PHP est au format Json : Mise en forme par Javascript
+* [ ] Commencer le mode textify !!!!!!!!!!!!
+
+# Misc 3
+* [ ] editeur de config basic minimum en mode texte
+* [ ] Revoir la sortie console : en provenance de PHP est au format Json : Mise en forme par Javascript
+* [ ] Commencer le mode textify !!!!!!!!!!!!
+
 # MISC 2
+* [ ] editeur de config basic minimum en mode texte
 * [ ] Commit "REwork ergonomique"
 * [ ] Build de certains TTS engine principaux
 	* [ ] Openkarotz
@@ -17,6 +28,7 @@
 * [ ] MàJ Doc MD
 * [ ] Publish Github
 * [ ] Rework coté eedomus
+
 
 ## MISC 1
 * [x] Continuer dans playAPI pour avoir des page de play générique

@@ -149,10 +149,14 @@ ul.dropdown-menu > li > a > em {
 	color: #c7ffe3;
 	font-family: monospace;
 	font-size: 0.8em;
-	list-style: none;
 	padding: 10px;
 }
 
+#console ul {
+	padding: 0;
+	margin: 0;
+	list-style: none;
+}
 #console li {
 	margin-top:10px;
 }

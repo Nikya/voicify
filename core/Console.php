@@ -51,62 +51,29 @@ class Console {
 	public static function d ($tag, $msg, $mixed=null) {if(self::isDebug()) self::getInstance()->trace('D', $tag, $msg, $mixed); }
 
 	/***************************************************************************
-	* To print the console into HTML LI
+	* To print the console into a log file
 	*/
-	public function toHtml() {
+	public function toLogFile() {
 		$out = '';
-		$lvl2Indicator = array(
-			'D' => 'd',
-			'I' => 'ok',
-			'W' => 'warn',
-			'E' => 'ko'
-		);
+		$ts = date('Y-m-d H:i:s');
+		$fileName = date('Ym').'.log';
 
 		$aCsl = $this->getArrayConsole();
 
 		foreach ($aCsl as $entry) {
 			$fMixed = self::mixedToString($entry['mixed']);
 
-			$out .= <<<EOE
-				<li>
-					<span class="lvl{$lvl2Indicator[$entry['lvl']]} lvl">{$entry['lvl']} - {$entry['tag']}</span>
-					<p>{$entry['msg']}</p>
-					<pre>$fMixed</pre>
-				</li>
-EOE;
+			$o = "[{$entry['lvl']} - {$entry['tag']}]\t\t{$entry['msg']} \t|\t $fMixed";
+			$out .= trim(preg_replace( "/\r|\n/", "", $o ))."\n";
 		}
 
-		return $out;
-	}
+		$r = file_put_contents(
+				CoreUtils::PATH_TEMP.$fileName,
+				"--- $ts --------------------------------------------------------\n$out\n",
+				FILE_APPEND
+		);
 
-	/***************************************************************************
-	* To print the console into a log file
-	*/
-	public function toLogFile() {
-
-
-		if (self::indicator() != 'ok') {
-			$out = '';
-			$ts = date('Y-m-d H:i:s');
-			$fileName = date('Ym').'.log';
-
-			$aCsl = $this->aConsole;
-
-			foreach ($aCsl as $entry) {
-				$fMixed = self::mixedToString($entry['mixed']);
-
-				$o = "[{$entry['lvl']} - {$entry['tag']}]\t\t{$entry['msg']} \t|\t $fMixed";
-				$out .= trim(preg_replace( "/\r|\n/", "", $o ))."\n";
-			}
-
-			$r = file_put_contents(
-					CoreUtils::PATH_TEMP.$fileName,
-					"--- $ts --------------------------------------------------------\n$out\n",
-					FILE_APPEND
-			);
-
-			if ($r===false) echo 'Fail to write into the log file';
-		}
+		if ($r===false) echo 'Fail to write into the log file';
 	}
 
 	/***************************************************************************
