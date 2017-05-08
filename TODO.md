@@ -5,10 +5,10 @@ _Poid des fonctionalités en points Fibonacci : 1, 2, 3, 5, 8, 13, 21_
 ## Prio 1 : Indispansable à la prochaine release
 * [ ] (13) Module textify
 * [ ] (8) Module Voicekey
-* [ ] (5) Doc à jours (+liens vers cette todo list)
 * [ ] (8) Module Speaking clock
-* [ ] (3) ICU Doc (voir Google Drive 'zelda' + lien en bas de page)
 * [ ] (3) Nettoyage Css et Javascrip non utilsés
+* [ ] (3) ICU Doc (voir Google Drive 'zelda' + lien en bas de page)
+* [ ] (5) Doc à jours (+liens vers cette todo list + Contrib à part + Test lien sur GitHub et redirigé en local ?.)
 
 
 ## Prio 2 : Souhaité pour la prochaine release
@@ -17,7 +17,6 @@ _Poid des fonctionalités en points Fibonacci : 1, 2, 3, 5, 8, 13, 21_
 
 ## Prio 3 : Apports sympatiques
 * [ ] (13) Mécanisme d'update des fichier de conf en mode formulaire complet
-* [ ] (2) Documentation masquable + option général pour toujours masquer
 
 
 ## Prio 4 : Apports mineurs

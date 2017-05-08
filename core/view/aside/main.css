@@ -202,6 +202,26 @@ ul.dropdown-menu > li > a > em {
 	border-bottom: 1px solid black;
 }
 
+/*******************************************************************************
+* Forms
+*/
+small.text-muted {
+	display: block;
+}
+
+fieldset ul {
+	columns:2;
+	-webkit-columns:2;
+	-moz-columns:2;
+	font-size:0.85em;
+	list-style:none;
+	padding:0;
+	margin-top: 10px;
+}
+fieldset ul#hourvars li:first-child {
+	font-weight: bold;
+}
+
 /** TODO Css non revue aprés cette ligne */
 /** * ** * ** * ** * ** * ** * ** * ** * ** * ** * ** * ** * ** * ** * ** * ** */
 /********************

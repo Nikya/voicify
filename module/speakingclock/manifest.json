@@ -7,18 +7,18 @@
 	"sourcelink": "https://github.com/Nikya/voicify",
 	"play": {
 		"pMain": {
-			"name": "My play",
-			"desc": "A description of my PLAY function"
+			"name": "Tell the hour",
+			"desc": "To trigger the speaking clock"
 		}
 	},
 	"config": {
 		"cHour": {
 			"name": "Hour",
-			"desc": "Register specific hour"
+			"desc": "Register specific hour text"
 		},
 		"cNeutral": {
 			"name": "Neutral",
-			"desc": "Register neutral hour"
+			"desc": "Register neutral text for any hour"
 		}
 	},
 	"configfile": [

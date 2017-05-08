@@ -1,1 +1,88 @@
-{ "specialconfig" : 0 }
+{
+    "7": [
+    {
+        "text": "allez ! direction la douche !! il est sept heures.",
+        "frequency": 1
+    },
+    {
+        "text": "opopop ! allez ! C'est l'heure de sortir de sous la couette!.",
+        "frequency": 1
+    },
+    {
+        "text": "Sept heures, tartine au beurre ! ",
+        "frequency": 1
+    },
+    {
+        "frequency": 1,
+        "text": "Il est déja 7 heures, tu dois faire un choix maintenant ! Rester au lit, ou aller travailler ?"
+    },
+    {
+        "frequency": 1,
+        "text": "Tu dois vite te décider, il est 7 heures ! Boulot ou encore dodo ?"
+    }
+    ],
+    "10": [
+    {
+      "text": "10 heures ! pose café !",
+      "frequency": 1
+    }
+  ],
+  "11": [
+    {
+      "text": "Il est déjà 11 heures. Qua tu fait de ta matinée ?",
+      "frequency": 1
+    },
+    {
+      "text": "11 heures, c'est l'heure de l'apéro !",
+      "frequency": 1
+    }
+  ],
+  "12": [
+    {
+      "text": "C'est Midi on va bientot manger",
+      "frequency": 1
+    },
+    {
+      "text": "On viens d'atteindre, le milieu de cette journée.",
+      "frequency": 1
+    },
+    {
+      "text": "Il est midi. A table !",
+      "frequency": 1
+    }
+  ],
+  "14": [
+    {
+      "text": "Il est 14 heures. Fin de la sieste !",
+      "frequency": 1
+    }
+  ],
+  "15": [
+    {
+      "text": "15 heures la semaine, et 15 heures le week-end, c'est pas du tout pareil.",
+      "frequency": 1
+    }
+  ],
+  "16": [
+    {
+      "text": "16h ! c'est l'heure du thé ? non ?",
+      "frequency": 1
+    },
+    {
+      "text": "C'est l'heure du goûté !",
+      "frequency": 1
+    }
+  ],
+  "19": [
+    {
+      "text": "19h c'est l'heure de la soupe !",
+      "frequency": 1
+    }
+  ],
+  "23": [
+    {
+      "text": "Il est tard car il est déja 11 heure !",
+      "frequency": 1
+    }
+  ]
+}

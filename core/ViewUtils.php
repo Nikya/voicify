@@ -77,6 +77,9 @@ class ViewUtils {
 
 	/***************************************************************************
 	* Build dropdown select options
+	*
+	* @param $iArray Indexed Array for key+value
+	* @param $selected The value to be selected
 	*/
 	public static function buildDropdownSelectOpt($iArray, $selected=null) {
 		$strOpt = '';
