@@ -33,7 +33,7 @@ Avec une notification qui serait "_oublie fermer porte garage_", il est possible
 
  _Home Voicify_ gère l'injection de variables dans le texte de la notification, par exemple une température qui peut varier :  
 
-> Bon retour chez vous Monsieur, la température intérieure est de `22°`.
+> Bon retour chez vous Monsieur, la température intérieure est de _22°_.
 
 ## Fonctionnalités
 
@@ -125,3 +125,7 @@ Vous pouvez proposer vos propores modules de _fonctionalité_ ou de _TTS engine_
 	- **Sarha**
 
 Voir également : [TODO.md](TODO.md)
+
+## Remerciements
+
+* Système d'affichage des fichiers Markdown [**parsedown**](https://github.com/erusev/parsedown) par [erusev](https://github.com/erusev)
