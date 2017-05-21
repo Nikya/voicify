@@ -9,6 +9,6 @@ class Utils {
 	* Constructor
 	*/
 	private function __construct() {
-		
+
 	}
 }
