@@ -2,6 +2,9 @@
 
 _Poid des fonctionalités en points Fibonacci : 1, 2, 3, 5, 8, 13, 21_
 
+## Continuer Ici !!
+* [ ] Module textify puis utiliser dans voicekey et dans speaking clock
+
 ## Prio 1 : Indispansable à la prochaine release
 * [ ] (13) Module textify
 * [ ] (8) Module Voicekey
@@ -9,6 +12,7 @@ _Poid des fonctionalités en points Fibonacci : 1, 2, 3, 5, 8, 13, 21_
 * [ ] (3) Nettoyage Css et Javascrip non utilsés
 * [ ] (3) ICU Doc (voir Google Drive 'zelda' + lien en bas de page)
 * [ ] (5) Doc à jours (+liens vers cette todo list + Contrib à part + Test lien sur GitHub et redirigé en local ?.)
+* [ ] (8) Mettre en prod à la maison !
 
 
 ## Prio 2 : Souhaité pour la prochaine release
