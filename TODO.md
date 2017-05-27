@@ -4,23 +4,21 @@
 _Poid des fonctionalités en points Fibonacci : 1, 2, 3, 5, 8, 13, 21_
 
 ## Continuer Ici !!
-* [ ] Module textify utilisation progressive dans module/voicekey/pMaiApi.php
-* [ ] Affichage d'un appercue des text lorsqu'on selectionne un voicekey (Fond bleuté légé) : Pareille pour listing des subvoicekey
-* [ ] // TODO continuer ici : forcing d'un text
+* [ ]
 
 ## Prio 1 : Indispansable à la prochaine release
-* [-] (13) Module textify
-* [ ] (8) Module Voicekey
-* [ ] (8) Module Speaking clock
+* [x] (13) Module textify
+* [x] (8) Module Voicekey
+* [x] (8) Module Speaking clock
 * [x] (3) Nettoyage Css et Javascrip non utilsés
-* [ ] (3) ICU Doc (voir Google Drive 'zelda' + lien en bas de page)
-* [-] (5) Doc à jours (Test liens interne sur GitHub et à rediriger en local ?)
 * [ ] (8) Mettre en prod à la maison !
 
 
 ## Prio 2 : Souhaité pour la prochaine release
+* [-] (5) Doc à jours (Test liens interne sur GitHub et à rediriger en local ?)
 * [ ] (5) Mécanisme d'update des fichier de conf en mode texte pure
-* [ ] (1) Ou appliquer un Chmod() au fichier au moement de leur création (Config et Tmp)
+* [ ] (3) ICU Doc (voir Google Drive 'zelda' + lien en bas de page)
+* [x] (1) Appliquer un Chmod() au fichier au moment de leur création (Config / Tmp)
 
 
 ## Prio 3 : Apports sympatiques

@@ -202,6 +202,9 @@ class Setup {
 			@$res = copy($cFrom, $cTo);
 			if ($res===FALSE)
 				throw new Exception("Fail to load default config file FROM '$cFrom' TO '$cTo' ");
+			@$res = chmod($cTo, 0666);
+			if ($res===FALSE)
+				throw new Exception("Fail to load default config file FROM '$cFrom' TO '$cTo' ");
 		}
 	}
 

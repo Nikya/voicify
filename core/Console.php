@@ -88,6 +88,7 @@ class Console {
 					"--- $ts --------------------------------------------------------\n$out\n",
 					FILE_APPEND
 			);
+			chmod(CoreUtils::PATH_TEMP.$fileName, 0666);
 
 			if ($r===false) echo 'Fail to write into the log file';
 		}

@@ -31,4 +31,6 @@ function dummySay() {
 		Console::e('dummy', 'Fail to write into the file', $fileName);
 		throw new Exception("dummyTrace fail");
 	}
+	chmod($fileName, 0666);
+
 }
