@@ -101,7 +101,7 @@ class ViewUtils {
 		$confFilePath = CoreUtils::PATH_CONFIG.$module.'_'.$submodule.'.json';
 
 		try {
-			$fContent = print_r(Config::getInstance()->getModuleConfig($module, $submodule), true);
+			$fContent = json_encode(Config::getInstance()->getModuleConfig($module, $submodule), JSON_PRETTY_PRINT);
 		} catch (Exception $e) {
 			$msg = "/!\ Fail to read the content of the file '$confFilePath' !";
 			$fContent = $msg;
@@ -117,7 +117,7 @@ class ViewUtils {
 					<br/>
 					<br/>
 					<label>File content</label>
-					<pre>$fContent</pre>
+					<textarea style="width:100%; height:400px;">$fContent</textarea>
 				</div>
 			</div>
 EED;
