@@ -9,8 +9,7 @@ $(document).ready(function() {
 
 	$('#calledUrl').click(openUrl);
 	$('#calledUrl').html(hightlightUrl($('#calledUrl').html()));
-	$('#console').html(fConsole(phpConsole, true));
-
+	$('#console').html(fConsole(phpJsonConsole));
 
 	$('#indicator').removeClass('wait');
 
@@ -39,7 +38,13 @@ $(document).ready(function() {
 			},
 			error: function(xhr, ajaxOptions, thrownError){
 				var rawUrl = baseUrl+'/'+this.url;
-				$('#console').html(xhr.status + " : " + thrownError);
+				var c = xhr.status + " : " + thrownError + "<br/><br/>";
+				try {
+					c = fConsole(JSON.parse(xhr.responseText).console);
+				} catch (e) {
+					c += xhr.responseText;
+				}
+				$('#console').html(c);
 				$('#calledUrl').html(rawUrl);
 				$('#indicator').addClass('ko').removeClass('wait');
 			}
@@ -75,19 +80,7 @@ function hightlightUrl(rawUrl) {
 /*******************************************************************************
 * Format a Json console Data to HTML elements
 */
-function fConsole(consoleEntriesMixed, isString=false) {
-
-	if(!isString)
-		consoleEntries = consoleEntriesMixed;
-	else {
-		try {
-			consoleEntries = JSON.parse(consoleEntriesMixed);
-		} catch(e) {
-			return consoleEntriesMixed + ' <br/><br/><strong>'+e.message+'</strong>';
-		}
-	}
-
-
+function fConsole(consoleEntries) {
 	var out = '';
 	var lvl2Indicator = {
 		"D":	"d",
@@ -117,7 +110,11 @@ function fConsole(consoleEntriesMixed, isString=false) {
 
 		// Mixed
 		if (cEntry.mixed!=null) {
-			var txtMixed = document.createTextNode(cEntry.mixed);
+			if (typeof cEntry.mixed === 'object')
+				var txtMixed = document.createTextNode(JSON.stringify(cEntry.mixed, null, 2));
+			else
+				var txtMixed = document.createTextNode(String(cEntry.mixed));
+
 			var eMixed = document.createElement("PRE");
 			eMixed.appendChild(txtMixed);
 			eEntry.appendChild(eMixed);

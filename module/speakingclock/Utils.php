@@ -5,90 +5,88 @@
 */
 class Utils {
 
+	// The target hour to play with
+	private $hour;
+
+	// The target timestamp to play with
 	private $timestamp;
+
+	// All other data devived from the target hour
+	private $vars = null;
+
+	// All other data devived from the target hour
+	private $varsTexted = null;
+
+	/** To catch up with a slight time lag (in seconde) */
+	const SHIFTDELAY = 199;
 
 	/***************************************************************************
 	* Constructor
 	*/
-	public function __construct($timestamp=null) {
-		if ($timestamp!=null)
-			$this->timestamp = $timestamp;
+	public function __construct($hour=null) {
+		$this->timestamp = time()+SELF::SHIFTDELAY;
+
+		if ($hour!=null)
+			$this->hour = intval($hour);
 		else
-			$this->timestamp = time()+120;
+			$this->hour = intval(date("H", $this->timestamp));
+
+		$this->genVars();
 	}
 
 	/***************************************************************************
-	* Build vars
+	* Generate all vars for the current hour
 	*/
-	public function varToLis() {
-		$h = date("H",$this->timestamp);
-		$i=0;
-		$hi=$i;
-		$genVars = array ();
+	public function genVars() {
+		$h = $this->hour;
 
-		// 0
-		$genVars[$i] = array(
-			'val'=>$h,
-			'desc' => 'Current hour'
-		);
+		// Raw vars
+		$gVars = array();
+		$i = 0;
+		$gVars[$i] = $h;
+		$i=1;
+		for(; $h+$i<24; $i++)
+			$gVars[$i] = $h+$i;
+		for(; $i<24; $i++)
+			$gVars[$i] = $h-24+$i;
 
-		// 1...12 => +1...+12
-		for($i=1;$i<12; $i++) {
-			$hi=$i;
-			$h = date("H",$this->timestamp+(3600*$hi));
-			$genVars[$i] = array(
-				'val'=>$h+$i,
-				'desc' => "Current hour+".$hi
-			);
+		// Texted vars
+		$gVarsT = array();
+		for ($i=0; $i<24; $i++) {
+			$val = $gVars[$i];
+			if($i==0)
+				$desc = "Current hour";
+			else if ($i==12)
+				$desc = "Current hour±12";
+			else if ($i<12)
+				$desc = "Current hour+".$i;
+			else if ($i>12)
+				$desc = "Current hour-".(24-$i);
+			$gVarsT[$i] = array('val' => $val, 'desc' => $desc);
 		}
 
-		// +12
-		$hi=$i=12;
-		$h = date("H",$this->timestamp+(3600*$hi));
-		$genVars[$i] = array(
-			'val'=>$h+$i,
-			'desc' => "Current hour+-".$hi
-		);
+		// Special
+		$i=24;
+		$gVars[$i] = $h <= 12 ? $h : $h-12;
+		$gVarsT[$i] = array('val' => $gVars[$i] , 'desc' => 'Current hour (12h format)');
+		$i=25;
+		$gVars[$i] = $this->timestamp;
+		$gVarsT[$i] = array('val' => $gVars[$i] , 'desc' => 'Current timestamp');
 
-		// 13...24 => -12...0
-		for($i=$i+1;$i<24; $i++) {
-			$hi=24-$i;
-			$h = date("H",$this->timestamp-(3600*$i));
-			$genVars[$i] = array(
-				'val'=>$h+$i,
-				'desc' => "Current hour-".$hi
-			);
-		}
+		$this->vars = $gVars;
+		$this->varsTexted = $gVarsT;
+	}
 
-		// +24
-		$hi=$i=24;
-		$h = date("H",$this->timestamp+(3600*$hi));
-		$genVars[$i] = array(
-			'val'=>$h+$i,
-			'desc' => "Current hour"
-		);
-
-		// TS
-		$i = 25;
-		$genVars[$i] = array(
-			'val'=>$this->timestamp,
-			'desc' => "Current timestamp"
-		);
-
-		// vars list
+	/***************************************************************************
+	* Build vars LI for display
+	*/
+	public function varsToList() {
 		$strVars = '';
-		foreach ($genVars as $i => $var) {
+
+		foreach ($this->varsTexted as $i => $var)
 			$strVars .= "<li><code>&lbrace;$i&rbrace;</code>={$var['val']} : {$var['desc']}</li>";
-		}
 
 		return $strVars;
-	}
-
-	/***************************************************************************
-	* Build full current date
-	*/
-	public function timestampToStr() {
-		return MessageFormatter::formatMessage('fr_FR', ' {0,date,FULL} {0,time,MEDIUM}', array($this->timestamp));
 	}
 
 	/***************************************************************************
@@ -100,6 +98,12 @@ class Utils {
 		$cHour = $conf->getModuleConfig('speakingclock', 'hour');
 		$cNeutral = $conf->getModuleConfig('speakingclock', 'neutral');
 
+		$strTrgTxt .= '<optgroup label="Neutral">';
+		for ($i=0; $i<count($cNeutral); $i++) {
+			$nTxt = $cNeutral[$i];
+			$strTrgTxt .= "<option value=\"n.$i\">{$nTxt['text']}</option>";
+		}
+
 		foreach ($cHour as $hId => $hTxts) {
 			$strTrgTxt .= '<optgroup label="'.$hId.'">';
 			for ($i=0; $i<count($hTxts); $i++) {
@@ -107,12 +111,15 @@ class Utils {
 				$strTrgTxt .= "<option value=\"$hId.$i\">{$hTxt['text']}</option>";
 			}
 		}
-		$strTrgTxt .= '<optgroup label="Neutral">';
-		for ($i=0; $i<count($cNeutral); $i++) {
-			$nTxt = $cNeutral[$i];
-			$strTrgTxt .= "<option value=\"n.$i\">{$nTxt['text']}</option>";
-		}
 
 		return $strTrgTxt;
 	}
+
+	/***************************************************************************
+	* Getters
+	*/
+	public function getVars() { return $this->vars; }
+	public function getHour() {	return $this->hour; }
+	public function getTimestampToStr() { return MessageFormatter::formatMessage('fr_FR', ' {0,date,FULL} {0,time,MEDIUM}', array($this->timestamp)); }
+
 }

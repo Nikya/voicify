@@ -58,27 +58,30 @@ try {
 */
 	include("./core/{$target}API.php");
 
-	if (Console::isDebug())
-		Console::getInstance()->toLogFile();
+	Console::getInstance()->toLogFile();
 
 /*******************************************************************************
 * Global Catch
 */
 } catch (Exception $e) {
 	$say = '?';
-	Console::w('api.target', 'target' , $_GET);
-	Console::w('api.module', 'module' , $module);
-	Console::w('api.subModule', 'subModule' , $subModule);
-	Console::e('api.exception', $e->getMessage(), $e);
+	Console::w('api', 'target' , $_GET);
+	Console::w('api', 'module' , $module);
+	Console::w('api', 'subModule' , $subModule);
+	Console::e('api', 'Exeption', $e);
+	http_response_code (400);
 }
 
 
 /*******************************************************************************
 * Respond with Json
 */
-header('Content-type: application/json; charset=utf-8');
+$indicator = Console::getInstance()->indicator();
 
-$output['status'] = Console::getInstance()->indicator();
+header('Content-type: application/json; charset=utf-8');
+if ($indicator != 'ok') http_response_code (400);
+
+$output['status'] = $indicator;
 $output['say'] = $say;
 $output['console'] = Console::getInstance()->getArrayConsole();
 

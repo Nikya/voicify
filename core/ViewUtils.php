@@ -103,7 +103,7 @@ class ViewUtils {
 		try {
 			$fContent = print_r(Config::getInstance()->getModuleConfig($module, $submodule), true);
 		} catch (Exception $e) {
-			$msg = "Fail to read the content of the file '$confFilePath' - {$e->getMEssage()}";
+			$msg = "/!\ Fail to read the content of the file '$confFilePath' !";
 			$fContent = $msg;
 			Console::e('ViewUtils.configureFile', $msg, $e);
 		}

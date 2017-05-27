@@ -67,7 +67,7 @@
 					try {
 						Setup::exec();
 					} catch (Exception $e) {
-						Console::e('Setup fail', $e->getMessage(), $e);
+						Console::e('setup', 'Setup fail Exception', $e);
 					}
 				}
 				$title = 'Setup';
@@ -81,10 +81,10 @@
 				break;
 		}
 	} catch (Exception $e) {
-		Console::w('index.target', 'target' , $_GET);
-		Console::w('index.module', 'module' , $module);
-		Console::w('index.subModule', 'subModule' , $subModule);
-		Console::e('index.exception', $e->getMessage(), $e);
+		Console::w('index', 'target' , $_GET);
+		Console::w('index', 'module' , $module);
+		Console::w('index', 'subModule' , $subModule);
+		Console::e('index', 'exception', $e);
 		$target = CoreUtils::TARGET_T_HOME;
 	}
 
@@ -115,3 +115,5 @@
 * DISPLAY
 */
 	include('./core/view/main.php');
+
+	Console::getInstance()->toLogFile();

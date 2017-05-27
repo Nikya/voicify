@@ -5,4 +5,5 @@
 	require_once('./core/Console.php');
 	require_once('./core/Config.php');
 	require_once('./core/JsonUtils.php');
+	require_once('./core/Textify.php');
 	require_once('./core/vendors/erusev/parsedown/Parsedown.php');

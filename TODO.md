@@ -4,7 +4,9 @@
 _Poid des fonctionalités en points Fibonacci : 1, 2, 3, 5, 8, 13, 21_
 
 ## Continuer Ici !!
-* [ ] Module textify puis utiliser dans voicekey et dans speaking clock
+* [ ] Module textify utilisation progressive dans module/voicekey/pMaiApi.php
+* [ ] Affichage d'un appercue des text lorsqu'on selectionne un voicekey (Fond bleuté légé) : Pareille pour listing des subvoicekey
+* [ ] // TODO continuer ici : forcing d'un text
 
 ## Prio 1 : Indispansable à la prochaine release
 * [-] (13) Module textify
@@ -18,10 +20,12 @@ _Poid des fonctionalités en points Fibonacci : 1, 2, 3, 5, 8, 13, 21_
 
 ## Prio 2 : Souhaité pour la prochaine release
 * [ ] (5) Mécanisme d'update des fichier de conf en mode texte pure
+* [ ] (1) Ou appliquer un Chmod() au fichier au moement de leur création (Config et Tmp)
 
 
 ## Prio 3 : Apports sympatiques
 * [ ] (13) Mécanisme d'update des fichier de conf en mode formulaire complet
+* [ ] (8) Afficher la version courante de voicify et vérifier la dernière version en ligne
 
 
 ## Prio 4 : Apports mineurs

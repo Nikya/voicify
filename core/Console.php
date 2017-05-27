@@ -36,12 +36,27 @@ class Console {
 	* To add a message into the console output
 	*/
 	private function trace ($lvl, $tag, $msg, $mixed=null) {
+		$mMixed = $mixed;
+		// Managed the mixed if not null
+		if ($mixed != null) {
+			// Is an object
+			if (is_object($mixed)) {
+				// Is an Exception
+				if ($mixed instanceof Exception) {
+					$mMixed = $mixed->getTrace();
+					$msg .= ' - '.$mixed->getMessage();
+				} else {
+					// Object but not an exception
+					$mMixed = get_object_vars($mixed);
+				}
+			}
+		}
 
 		array_push($this->aConsole, array(
 			'lvl' => $lvl,
 			'tag' => $tag,
 			'msg' => $msg,
-			'mixed' => $mixed
+			'mixed' => $mMixed
 		));
 	}
 
@@ -51,43 +66,33 @@ class Console {
 	public static function d ($tag, $msg, $mixed=null) {if(self::isDebug()) self::getInstance()->trace('D', $tag, $msg, $mixed); }
 
 	/***************************************************************************
-	* To print the console into a log file
+	* To print the console into a log file if is debug or not Ok
 	*/
 	public function toLogFile() {
-		$out = '';
-		$ts = date('Y-m-d H:i:s');
-		$fileName = date('Ym').'.log';
+		if ($this->isDebug() or $this->indicator() != 'ok') {
+			$out = '';
+			$ts = date('Y-m-d H:i:s');
+			$fileName = date('Ym').'.log';
 
-		$aCsl = $this->getArrayConsole();
+			$aCsl = $this->getArrayConsole();
 
-		foreach ($aCsl as $entry) {
-			$fMixed = self::mixedToString($entry['mixed']);
+			foreach ($aCsl as $entry) {
+				$fMixed = substr(print_r($entry['mixed'], true),0, 255).' [...]';
 
-			$o = "[{$entry['lvl']} - {$entry['tag']}]\t\t{$entry['msg']} \t|\t $fMixed";
-			$out .= trim(preg_replace( "/\r|\n/", "", $o ))."\n";
+				$o = "[{$entry['lvl']} - {$entry['tag']}]\t\t{$entry['msg']} \t|\t $fMixed";
+				$out .= trim(preg_replace( "/\r|\n/", "", $o ))."\n";
+			}
+
+			$r = file_put_contents(
+					CoreUtils::PATH_TEMP.$fileName,
+					"--- $ts --------------------------------------------------------\n$out\n",
+					FILE_APPEND
+			);
+
+			if ($r===false) echo 'Fail to write into the log file';
 		}
-
-		$r = file_put_contents(
-				CoreUtils::PATH_TEMP.$fileName,
-				"--- $ts --------------------------------------------------------\n$out\n",
-				FILE_APPEND
-		);
-
-		if ($r===false) echo 'Fail to write into the log file';
 	}
 
-	/***************************************************************************
-	* Read a mixed value into a string
-	*/
-	private function mixedToString($mixed) {
-		$fMixed = $mixed != null ? print_r($mixed, true) : '';
-
-		if (is_object($mixed))
-			if ($mixed instanceof Exception)
-				$fMixed = $mixed->getTraceAsString();
-
-		return $fMixed;
-	}
 
 	/***************************************************************************
 	* Get the global console indicator

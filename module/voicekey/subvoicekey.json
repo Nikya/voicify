@@ -1,1 +1,58 @@
-{ "mainconfig" : 1 }
+{
+  "porteGarage": [
+    {
+      "text": "du garage",
+      "frequency": 5
+    },
+    {
+      "text": "du garage de ta belle voiture",
+      "frequency": 2
+    },
+    {
+      "text": "du garage de la bat-mobile",
+      "frequency": 1
+    }
+  ],
+  "tony": [
+    {
+      "text": "Maître",
+      "frequency": 1
+    },
+    {
+      "text": "Monsieur Stark",
+      "frequency": 2
+    },
+    {
+      "text": "Tony",
+      "frequency": 2
+    },
+    {
+      "text": "Votre majesté",
+      "frequency": 0
+    }
+  ],
+  "poubelleNoir": [
+    {
+      "text": "noir",
+      "frequency": 3
+    },
+    {
+      "text": "déchet ménagé",
+      "frequency": 1
+    }
+  ],
+  "poubelleJaune": [
+    {
+      "text": "Jaune",
+      "frequency": 3
+    },
+    {
+      "text": "trie selectif",
+      "frequency": 1
+    },
+    {
+      "text": "du recyclable",
+      "frequency": 1
+    }
+  ]
+}

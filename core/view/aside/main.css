@@ -209,15 +209,40 @@ small.text-muted {
 	display: block;
 }
 
-fieldset ul {
+.datadisp {
+	font-size:0.7em;
+	padding:3px;
+	margin-left: 10%;
+	margin-top: 10px;
+	font-family: monospace;
+	background-color: LemonChiffon;
+}
+
+ul.datadisp {
+	list-style-position: inside;
+}
+
+.datadisp#voicekeytexts {
+	height: 100px;
+	overflow: auto;
+}
+
+.datadisp#subvoicekeylist {
+	columns:3;
+	-webkit-columns:3;
+	-moz-columns:3;
+	max-height: 100px;
+	overflow: auto;
+}
+
+.datadisp#hourvars {
 	columns:2;
 	-webkit-columns:2;
 	-moz-columns:2;
-	font-size:0.85em;
-	list-style:none;
-	padding:0;
-	margin-top: 10px;
+	list-style: none;
 }
-fieldset ul#hourvars li:first-child {
+
+.datadisp#hourvars li:first-child {
 	font-weight: bold;
+	font-size: 1.2em;
 }

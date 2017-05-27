@@ -29,10 +29,10 @@ class JsonUtils {
 	public static function jString2JFile($dataStr, $jFilePath) {
 		// Check Json
 		$jDecode = json_decode($dataStr);
-		JsonUtils::throwLastJsonError("Can't jString2JFile.", $dataStr);
+		JsonUtils::throwLastJsonError(__FUNCTION__);
 
 		$dataStr2 = json_encode($jDecode, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
-		JsonUtils::throwLastJsonError("Can't jString2JFile.", $dataStr);
+		JsonUtils::throwLastJsonError(__FUNCTION__);
 
 		if (file_put_contents($jFilePath, $dataStr2)===false)
 			throw new Exception("Can't write the Json file $jFilePath");
@@ -47,7 +47,7 @@ class JsonUtils {
 	public static function jString2Array($jStringContent) {
 		$jDecode = json_decode($jStringContent, true);
 
-		JsonUtils::throwLastJsonError("Can't decode the Json String.", $jStringContent);
+		JsonUtils::throwLastJsonError(__FUNCTION__);
 
 		return $jDecode;
 	}
@@ -63,7 +63,7 @@ class JsonUtils {
 		$jString = json_encode($array, JSON_UNESCAPED_UNICODE);
 
 		if ($jString === false)
-			JsonUtils::throwLastJsonError("Can't encode array to Json String.", $array);
+			JsonUtils::throwLastJsonError(__FUNCTION__);
 
 		return $jString;
 	}
@@ -85,7 +85,7 @@ class JsonUtils {
 	* @param $array tableau à Convertir Json
 	* @return La représentation Json de ce tableau
 	*/
-	public static function throwLastJsonError($failMsg, $mixed) {
+	public static function throwLastJsonError($step) {
 		$jErrorMsg;
 		$jErrorCode=json_last_error();
 
@@ -113,8 +113,7 @@ class JsonUtils {
 			break;
 		}
 
-		$mixedR = print_r($mixed, true);
 		if ($jErrorCode<>JSON_ERROR_NONE)
-			throw new Exception("$failMsg. JsonError#$jErrorCode - '$jErrorMsg'. Content :\n $mixedR");
+			throw new Exception("JSON_ERROR_$jErrorCode at JsonUtils step $step. $jErrorMsg", $jErrorCode);
 	}
 }

@@ -22,8 +22,6 @@
 	<script src="core/view/js/jquery.min.js"></script>
 	<script>window.jQuery || document.write('<script src="core/view/js/jquery.min.js"><\/script>')</script>
 	<script src="core/view/aside/bootstrap/js/bootstrap.js"></script>
-	<script src="core/view/js/angular.min.js"></script>
-	<script src="core/view/js/angular-animate.min.js"></script>
 	<script src="core/view/js/main.js"></script>
 
 	<!-- Liaison PHP/Javascript -->
@@ -85,6 +83,7 @@
 			<div class="col-sm-3">
 				<?php
 					include("./core/view/__console.php");
+					$phpJsonConsole = json_encode(Console::getInstance()->getArrayConsole(), JSON_HEX_TAG);
 
 					if ($target == CoreUtils::TARGET_T_PLAY)
 						include("./core/view/__say.php");
@@ -97,7 +96,7 @@
 	</div>
 
 	<script>
-		var phpConsole = '<?php echo json_encode(Console::getInstance()->getArrayConsole(), JSON_UNESCAPD_UNICODE | JSON_HEX_APOS); ?>';
+		var phpJsonConsole  = <?php echo $phpJsonConsole ?>;
 	</script>
 </body>
 </html>
