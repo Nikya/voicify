@@ -68,13 +68,19 @@ Cloner [ce projet](https://github.com/Nikya/voicify) dans un répertoire _web_ d
 
 	git clone https://github.com/Nikya/voicify
 
-### Vérifier
+### Dossiers de configuration et temporire
 
-Droits de fichier suffisants de _lecture/écriture_ sur les dossiers de **configuration** et **temporaire** :
+Créer à la racine du dossier _voicify_ les dossier de **configuration** et **temporaire** :
+
+* `config`
+* `temp`
+*
+Donner les droits en _lecture/écriture_ sur ces dossiers de **configuration** et **temporaire** :
 
 ```shell
-sudo chmod 777 config
-sudo chmod 777 temp
+mkdir
+sudo chmod 666 config
+sudo chmod 666 temp
 ```
 
 ### Initialiser
