@@ -24,6 +24,8 @@ _Poid des fonctionalités en points Fibonacci : 1, 2, 3, 5, 8, 13, 21_
 ## Prio 3 : Apports sympatiques
 * [ ] (13) Mécanisme d'update des fichier de conf en mode formulaire complet
 * [ ] (8) Afficher la version courante de voicify et vérifier la dernière version en ligne
+* [ ] (5) Affichage de la log (La dernière seulkement) ?
+* [ ] Afficahge du contenue du Dummy TTS ?
 
 
 ## Prio 4 : Apports mineurs

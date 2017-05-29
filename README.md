@@ -70,11 +70,11 @@ Cloner [ce projet](https://github.com/Nikya/voicify) dans un répertoire _web_ d
 
 ### Dossiers de configuration et temporire
 
-Créer à la racine du dossier _voicify_ les dossier de **configuration** et **temporaire** :
+Créer à la racine du dossier _voicify_ les dossiers de **configuration** et **temporaire** :
 
 * `config`
 * `temp`
-*
+
 Donner les droits en _lecture/écriture_ sur ces dossiers de **configuration** et **temporaire** :
 
 ```shell

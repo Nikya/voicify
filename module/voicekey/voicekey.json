@@ -1,4 +1,5 @@
 {
+
   "welcome": {
     "cache": true,
     "prefix": "default",
@@ -12,7 +13,7 @@
         "frequency": 3
       },
       {
-        "text": "J'ai régulé la température à {1}°, en anticipation de votre retour {0} !",
+        "text": "J'ai régulé la température à environ {1,number,integer}°, en anticipation de votre retour {0} !",
         "frequency": 3
       },
       {
@@ -60,5 +61,14 @@
         "frequency": 0
       }
     ]
-  }
+  },"zDefault": {
+     "cache": false,
+     "prefix": "default",
+     "textList": [
+       {
+         "text": "Je ne sais pas quoi vous dire, à propos du voicekey : {0}.",
+         "frequency": 1
+       }
+     ]
+   }
 }
