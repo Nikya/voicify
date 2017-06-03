@@ -9,28 +9,35 @@ class ViewUtils {
 	/** A Bootstrap menu entries séparator */
 	const BOOTSTRAP_MENU_SEP = '<li role="separator" class="divider"></li>';
 
-	/** A Bootstrap menu entries séparator */
-	const SETUP_MENU_LINK = '<a href="?setup" title="Execute the setup">Setup</a>';
+	/** Special menu entries */
+	const SETUP_MENU_SETUP = '<a href="?setup" title="Execute the setup">Setup</a>';
+	const SETUP_MENU_LOG = '<a href="?log" title="Read log files">Log</a>';
 
 	/***************************************************************************
 	* Build the play Menu
 	*/
-	public static function buildPlayMenu($pageMenu=false) {
-		return self::buildMenu(CoreUtils::TARGET_T_PLAY, $pageMenu);
+	public static function buildPlayMenu($inPageMenu=false) {
+		return self::buildMenu(CoreUtils::TARGET_T_PLAY, $inPageMenu);
 	}
 
 	/***************************************************************************
 	* Build the config Menu
 	*/
-	public static function buildConfigMenu($pageMenu=false) {
-		$out = !$pageMenu ? '<li>'.self::SETUP_MENU_LINK.'</li>'.self::BOOTSTRAP_MENU_SEP : '';
-		return $out . self::buildMenu(CoreUtils::TARGET_T_CONFIG, $pageMenu);
+	public static function buildConfigMenu($inPageMenu=false) {
+		$out = '';
+		if (!$inPageMenu) {
+			$out = '<li>'.self::SETUP_MENU_SETUP.'</li>';
+			$out .= '<li>'.self::SETUP_MENU_LOG.'</li>';
+			$out .= self::BOOTSTRAP_MENU_SEP;
+		}
+
+		return $out . self::buildMenu(CoreUtils::TARGET_T_CONFIG, $inPageMenu);
 	}
 
 	/***************************************************************************
 	* Build a Menu
 	*/
-	private static function buildMenu($targetT, $pageMenu) {
+	private static function buildMenu($targetT, $inPageMenu) {
 		if (!Setup::isOk()) return '';
 
 		$out = '';
@@ -38,16 +45,16 @@ class ViewUtils {
 		$aManifestTtsengine = Config::getInstance()->getSubManifestTT_MT($targetT, CoreUtils::MODULE_T_TTSENGINE);
 
 		if (count($aManifestFeature)>0)
-			$out .= self::buildMenuEntries($targetT, $aManifestFeature, $pageMenu);
+			$out .= self::buildMenuEntries($targetT, $aManifestFeature, $inPageMenu);
 
 		if (count($aManifestFeature)>0 and count($aManifestTtsengine)>0)
-			if ($pageMenu)
+			if ($inPageMenu)
 				$out .= '</ul><hr/><ul>';
 			else
 				$out .= self::BOOTSTRAP_MENU_SEP;
 
 		if (count($aManifestTtsengine)>0)
-			$out .= self::buildMenuEntries($targetT, $aManifestTtsengine, $pageMenu);
+			$out .= self::buildMenuEntries($targetT, $aManifestTtsengine, $inPageMenu);
 
 		return $out;
 	}
@@ -55,13 +62,13 @@ class ViewUtils {
 	/***************************************************************************
 	* Build a Menu Entry from a manifest Array
 	*/
-	private static function buildMenuEntries($targetT, $aManifest, $pageMenu) {
+	private static function buildMenuEntries($targetT, $aManifest, $inPageMenu) {
 		$out = '';
 
 		$target = $targetT==CoreUtils::TARGET_T_PLAY ? 'play' : 'config';
 
 		foreach ($aManifest as $mId => $m) {
-			$d = $pageMenu ? ' - ' . $m['desc'] : '';
+			$d = $inPageMenu ? ' - ' . $m['desc'] : '';
 
 			if (count($m[$targetT]) == 1) {
 				$out .= "<li><a href=\"?$target=$mId\" title=\"{$m['desc']}\">{$m['name']}</a>$d</li>";

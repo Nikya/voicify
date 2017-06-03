@@ -152,6 +152,19 @@ ul.dropdown-menu > li > a > em {
 	padding: 10px;
 }
 
+#logTable {
+	background-color: #000;
+	color: #c7ffe3;
+	font-family: monospace;
+	font-size: 0.8em;
+}
+
+#logTable thead{
+	font-family: sans-serif;
+	font-size: 1.2em;
+	font-weight: bold;
+}
+
 #console ul {
 	padding: 0;
 	margin: 0;

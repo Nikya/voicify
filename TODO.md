@@ -1,5 +1,5 @@
 # TODO list du projet
-## Release 2.0
+## Release 2.1
 
 _Poid des fonctionalités en points Fibonacci : 1, 2, 3, 5, 8, 13, 21_
 
@@ -11,7 +11,8 @@ _Poid des fonctionalités en points Fibonacci : 1, 2, 3, 5, 8, 13, 21_
 * [x] (8) Module Voicekey
 * [x] (8) Module Speaking clock
 * [x] (3) Nettoyage Css et Javascrip non utilsés
-* [ ] (8) Mettre en prod à la maison !
+* [x] (8) Mettre en prod à la maison !
+* [x] (8) Log plus exploitables
 
 
 ## Prio 2 : Souhaité pour la prochaine release
@@ -24,14 +25,14 @@ _Poid des fonctionalités en points Fibonacci : 1, 2, 3, 5, 8, 13, 21_
 ## Prio 3 : Apports sympatiques
 * [ ] (13) Mécanisme d'update des fichier de conf en mode formulaire complet
 * [ ] (8) Afficher la version courante de voicify et vérifier la dernière version en ligne
-* [ ] (5) Affichage de la log (La dernière seulkement) ?
-* [ ] Afficahge du contenue du Dummy TTS ?
+* [x] (5) Affichage de la log (La dernière seulement) ?
+* [x] Affichage du contenue du Dummy TTS ?
 
 
 ## Prio 4 : Apports mineurs
 * [ ] (3) Setup : Fonction de nettoyage des fichier temp (et des sauvegardes de conf)
-* [ ] (13) Gestion des updates de modules : Mise à jour des fichier de configuration
-* [ ] (5) README pour la creation de MODULE : CONTRIBUTE
+* [ ] (21) Gestion des updates de modules : Mise à jour des fichier de configuration
+* [ ] (5) README pour la creation de MODULE : CONTRIBUTE.md
 
 --------------------------------------------------------------------------------
 # Modules

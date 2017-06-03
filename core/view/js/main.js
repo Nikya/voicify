@@ -36,14 +36,9 @@ $(document).ready(function() {
 				$('#say').html(response.say);
 				$('#indicator').addClass(response.status).removeClass('wait');
 			},
-			error: function(xhr, ajaxOptions, thrownError){
+			error: function(xhr, ajaxOptions, thrownError) {
 				var rawUrl = baseUrl+'/'+this.url;
 				var c = xhr.status + " : " + thrownError + "<br/><br/>";
-				try {
-					c = fConsole(JSON.parse(xhr.responseText).console);
-				} catch (e) {
-					c += xhr.responseText;
-				}
 				$('#console').html(c);
 				$('#calledUrl').html(rawUrl);
 				$('#indicator').addClass('ko').removeClass('wait');

@@ -13,9 +13,9 @@ function dummySay() {
 	global $say;
 	$out = '';
 	$ts = date('Y-m-d H:i:s');
-	$fileName = CoreUtils::PATH_TEMP.'dummyTts.txt';
+	$fileName = CoreUtils::PATH_TEMP.'log_dummyTts.csv';
 
-	$out = "$ts : $say\n";
+	$out .= "$ts;\t 0;\t I;\t dummySay;\t $say\n";
 
 	// Process
 	$r = file_put_contents($fileName, $out, FILE_APPEND);
@@ -23,7 +23,7 @@ function dummySay() {
 	// Debug
 	if (Console::isDebug()) {
 		Console::d('dummy', 'Output file', $fileName);
-		Console::d('dummy', 'Output', $out);
+		Console::d('dummy', 'Output', $say);
 	}
 
 	// Manage error

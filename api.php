@@ -79,7 +79,6 @@ try {
 $indicator = Console::getInstance()->indicator();
 
 header('Content-type: application/json; charset=utf-8');
-if ($indicator != 'ok') http_response_code (400);
 
 $output['status'] = $indicator;
 $output['say'] = $say;

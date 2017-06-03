@@ -95,7 +95,11 @@ class Textify {
 	*/
 	public static function sInjectData($t, $d) {
 		$l = 'fr_FR';
-		return MessageFormatter::formatMessage($l, $t, $d);
+		$ti = MessageFormatter::formatMessage($l, $t, $d);
+		if (preg_match('/\{\d*\}/', $ti))
+			Console::w('Textify.sInjectData', 'Some placeholder remained empty ! ', array('dataCount' => count($d), 'finalText' => $t));
+
+		return $ti;
 	}
 
 	/***************************************************************************

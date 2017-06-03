@@ -32,6 +32,9 @@
 			else if (isset($_GET[CoreUtils::TARGET_T_SETUP])) {
 				$target = CoreUtils::TARGET_T_SETUP;
 			}
+			else if (isset($_GET[CoreUtils::TARGET_T_LOG])) {
+				$target = CoreUtils::TARGET_T_LOG;
+			}
 			else {
 				throw new Exception('Unknow target');
 			}
@@ -62,7 +65,7 @@
 				break;
 
 			// SETUP
-			case 'setup':
+			case CoreUtils::TARGET_T_SETUP:
 				if (!empty($module) and strcasecmp($module, 'run')==0) {
 					try {
 						Setup::exec();
@@ -75,7 +78,21 @@
 				$readmeHtml = "To load, refresh or update all available <em>Modules</em>.";
 				break;
 
-			case 'home':
+			// LOG
+			case CoreUtils::TARGET_T_LOG:
+				if (!empty($module) and strcasecmp($module, 'run')==0) {
+					try {
+						Setup::exec();
+					} catch (Exception $e) {
+						Console::e('setup', 'Setup fail Exception', $e);
+					}
+				}
+				$title = 'Log';
+				$desc = 'See log contents';
+				$readmeHtml = "To read all generated log. Log are spread into files : one new file each month.";
+				break;
+
+			case CoreUtils::TARGET_T_HOME:
 			default:
 				$readmeHtml = CoreUtils::mdParse('README.md');
 				break;

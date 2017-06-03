@@ -71,29 +71,45 @@ class Console {
 	public function toLogFile() {
 		if ($this->isDebug() or $this->indicator() != 'ok') {
 			$out = '';
-			$ts = date('Y-m-d H:i:s');
-			$fileName = date('Ym').'.log';
+			$ts = time();
+			$fTS = date('Y-m-d H:i:s', $ts);
+			$fileName = CoreUtils::PATH_TEMP.'log_'.date('Ym', $ts).'.csv';
 
-			$aCsl = $this->getArrayConsole();
-
-			foreach ($aCsl as $entry) {
-				$fMixed = substr(print_r($entry['mixed'], true),0, 255).' [...]';
-
-				$o = "[{$entry['lvl']} - {$entry['tag']}]\t\t{$entry['msg']} \t|\t $fMixed";
-				$out .= trim(preg_replace( "/\r|\n/", "", $o ))."\n";
+			if(!file_exists($fileName)) {
+				$r = file_put_contents($fileName, '', FILE_APPEND);
+				chmod($fileName, 0666);
 			}
 
-			$r = file_put_contents(
-					CoreUtils::PATH_TEMP.$fileName,
-					"--- $ts --------------------------------------------------------\n$out\n",
-					FILE_APPEND
-			);
-			chmod(CoreUtils::PATH_TEMP.$fileName, 0666);
+			$o = 0; // Order
+			foreach ($this->getArrayConsole() as $entry) {
+				$o++;
+				$fLvl = self::sanitize($entry['lvl']);
+				$fTag = self::sanitize($entry['tag']);
+				$fMsg = self::sanitize($entry['msg']);
+				$fMixed = self::sanitize(print_r($entry['mixed'], true));
+
+				$out .= "$fTS;\t $o;\t $fLvl;\t $fTag;\t $fMsg;\t $fMixed \n";
+			}
+
+			$r = file_put_contents($fileName, "$out\n", FILE_APPEND);
 
 			if ($r===false) echo 'Fail to write into the log file';
 		}
 	}
 
+	/***************************************************************************
+	* To clear text to output into the log file : Remove new line and séparator
+	*/
+	private static function sanitize($string) {
+		$maxLenght = 250;
+		$string = trim($string);
+		$string = preg_replace( "/\r|\n|\t/", " ", $string);
+		$string = preg_replace( "/\s{2,}/", " ", $string);
+		$string = preg_replace( "/;/", ":", $string);
+		$string = strlen($string)<$maxLenght ? $string : substr($string, 0, $maxLenght).' [...]';
+
+		return $string;
+	}
 
 	/***************************************************************************
 	* Get the global console indicator

@@ -35,6 +35,9 @@ class CoreUtils {
 	/** Menu type */
 	const TARGET_T_HOME = 'home';
 
+	/** Menu type */
+	const TARGET_T_LOG = 'log';
+
 	/***************************************************************************
 	* Parse a Mardown file into a formated HTML
 	*/
