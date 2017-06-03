@@ -69,7 +69,6 @@ try {
 	Console::w('api', 'module' , $module);
 	Console::w('api', 'subModule' , $subModule);
 	Console::e('api', 'Exeption', $e);
-	http_response_code (400);
 }
 
 
