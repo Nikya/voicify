@@ -1,0 +1,266 @@
+{
+  "intro": [
+    {
+      "text": "Bonjour à tous ! Nous sommes {0, date, full}, et voici vos informations de la journée.",
+      "frequency": 1
+    },
+    {
+      "text": "Bonjour bonjour ! Et voici vos informations personalisées pour cette journée de {0, date, full}.",
+      "frequency": 1
+    },
+    {
+      "text": "Good Morning ! Je vous présente les breaking newses de ce {0, date, full}.",
+      "frequency": 1
+    },
+    {
+      "text": "Bienvenue en ce {0, date, full}, où j'ai l'honneur de vous présentez votre actualité.",
+      "frequency": 1
+    },
+    {
+      "text": "Messieurs, Bonjour. Permettez-moi de vous lire votre petit journal de ce {0, date, full}",
+      "frequency": 1
+    },
+    {
+      "text": "Messieurs, votre journal est de retour. Il est daté du {0, date, full}",
+      "frequency": 1
+    }
+  ],
+  "agendaIntro": [
+    {
+      "text": "Un coups d'oeil sur les emplois du temps",
+      "frequency": 1
+    },
+    {
+      "text": "Ouvrons les agendas.",
+      "frequency": 1
+    },
+    {
+      "text": "Saint google, donne moi les agendas de ce jours.",
+      "frequency": 1
+    }
+  ],
+  "agendaFirst": [
+    {
+      "text": "Commençons par l'emploi du temps de {0}. {1}",
+      "frequency": 1
+    }
+  ],
+  "agendaThen": [
+    {
+      "text": "Maintenant l'agenda de {0}. {1}",
+      "frequency": 1
+    },
+    {
+      "text": "Continuons avec celui de {0}. {1}",
+      "frequency": 1
+    }
+  ],
+  "agendaLast": [
+    {
+      "text": "Enfin l'agenda de {0}. {1}",
+      "frequency": 1
+    },
+    {
+      "text": "En terminant par l'agenda de {0}. {1}",
+      "frequency": 1
+    },
+    {
+      "text": "Enormément de suspense pour le dernier agenda, qui est donc celui de {0}. {1}",
+      "frequency": 1
+    }
+  ],
+  "agendaNo": [
+    {
+      "text": "C'est une page blanche pour l'agenda de {0} !",
+      "frequency": 1
+    },
+    {
+      "text": "{0} sera tranquille aujourd'hui !",
+      "frequency": 1
+    },
+    {
+      "text": "Aucun rendez-vous dans l'agenda de {0}.",
+      "frequency": 1
+    }
+  ],
+  "agendasNo": [
+    {
+      "text": "Ce sont des pages blanches pour les agendas de {0} !",
+      "frequency": 1
+    },
+    {
+      "text": "{0} seront tranquille aujourd'hui !",
+      "frequency": 1
+    },
+    {
+      "text": "Aucun rendez-vous dans les agendas de {0}.",
+      "frequency": 1
+    }
+  ],
+  "agendaError": [
+    {
+      "text": "Impossible de connaitre l'agenda de {0}.",
+      "frequency": 1
+    }
+  ],
+  "conclusion": [
+    {
+      "text": "C'est la fin de cette édition. Je vous souhaite une bonne journée.",
+      "frequency": 1
+    },
+    {
+      "text": "Merci de m'avoir écouté. Bonne journée, à ce soir.",
+      "frequency": 1
+    },
+    {
+      "text": "Il ne me reste plus qu'à vous souhaiter une bonne journée. Merci de votre attention.",
+      "frequency": 1
+    }
+  ],
+  "w_intro": [
+    {
+      "text": "Passons à présent à la météo...",
+      "frequency": 1
+    },
+    {
+      "text": "un coups d'oeil maintenant sur la météo...",
+      "frequency": 1
+    },
+    {
+      "text": "Quelle sera votre météo du jour ?..",
+      "frequency": 1
+    },
+    {
+      "text": "Comment devriez-vous vous habiller aujourd'hui ? Voyont la météo...",
+      "frequency": 1
+    }
+  ],
+  "w_sunrise_f": [
+    {
+      "text": "Le soleil se levera dans {0}.",
+      "frequency": 1
+    },
+    {
+      "text": "Le jour commencera dans {0}.",
+      "frequency": 1
+    },
+    {
+      "text": "La lumière percera dans {0}.",
+      "frequency": 1
+    },
+    {
+      "text": "La nuit cédera ça place au jour dans {0}.",
+      "frequency": 1
+    },
+    {
+      "text": "Il ne reste plus que {0} de nuit sombre.",
+      "frequency": 1
+    }
+  ],
+  "w_sunrise_p": [
+    {
+      "text": "Le soleil est levé depuis {0}.",
+      "frequency": 1
+    },
+    {
+      "text": "Le jour a commencé depuis {0}.",
+      "frequency": 1
+    },
+    {
+      "text": "La lumière a percé l'obscurité depuis {0}.",
+      "frequency": 1
+    },
+    {
+      "text": "La jour a pris la place de la nuit depuis {0}.",
+      "frequency": 1
+    },
+    {
+      "text": "Cela fait déja {0} que le jour à commencé.",
+      "frequency": 1
+    }
+  ],
+  "w_sunset": [
+    {
+      "text": "Le soleil se couchera à {0,time, short}.",
+      "frequency": 1
+    },
+    {
+      "text": "La nuit dévorera le jour vers {0,time, short}.",
+      "frequency": 1
+    },
+    {
+      "text": "Le soleil disparaitra à {0,time, short}.",
+      "frequency": 1
+    },
+    {
+      "text": "La journé s'achévera à {0,time, short}.",
+      "frequency": 1
+    },
+    {
+      "text": "La nuit reprendra le dessus à {0,time, short}.",
+      "frequency": 1
+    }
+  ],
+  "w_description_mono": [
+    {
+      "text": "Les conditions pour cette journée seront : {0}.",
+      "frequency": 1
+    },
+    {
+      "text": "{0}, sont les conditions a attendre de cette journée.",
+      "frequency": 1
+    },
+    {
+      "text": "Une journée placée sous un ciel de : {0}.",
+      "frequency": 1
+    },
+    {
+      "text": "Cette journée nous annonce : {0}.",
+      "frequency": 1
+    }
+  ],
+  "w_description_double": [
+    {
+      "text": "Les conditions pour cette matinée seront : {0}. puis {1}, pour cette après-midi.",
+      "frequency": 1
+    },
+    {
+      "text": "{0}, sont les conditions a attendre de cette matinée. {1}, pour cette après-midi",
+      "frequency": 1
+    },
+    {
+      "text": "Une matinée placée sous un ciel de : {0}. Une après-midi sous de : {1}",
+      "frequency": 1
+    },
+    {
+      "text": "La matinée nous annonce : {0}. L'après-midi, elle, {1}",
+      "frequency": 1
+    }
+  ],
+  "w_temperature": [
+    {
+      "text": "La température extérieur est de {0}°. Elles oscilleront entre {1} et {2}°.",
+      "frequency": 1
+    },
+    {
+      "text": "Ma sonde m'indique une température extérieur de {0}°. Je devrait mesurer des température entre {1} et {2}° aujourd'hui.",
+      "frequency": 1
+    },
+    {
+      "text": "Actuellement la température extérieur est de {0}°. La températures minimal attendue est de {1}, la maximal {2}°.",
+      "frequency": 1
+    },
+    {
+      "text": "Il fait actuellement {0}° dehors. Le mercure devrait partir de {1} pour aller jusqu'à {2}°.",
+      "frequency": 1
+    },
+    {
+      "text": "Je lis une température extérieur de {0}°. Les thermomètres à {1} seront stimulés jusquà {2}°.",
+      "frequency": 1
+    },
+    {
+      "text": "Les température iront de {1} à {2}°. Actuellement celle extérieur est de {0}.",
+      "frequency": 1
+    }
+  ]
+}

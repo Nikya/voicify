@@ -1,0 +1,32 @@
+{
+	"type" : "FEATURE",
+	"name": "Breaking News",
+	"desc": "Your personal news, in the form of a small audio newspaper.",
+	"version": "1.0",
+	"author": "Nikya",
+	"sourcelink": "https://github.com/Nikya/voicify",
+	"play": {
+		"pMain": {
+			"name": "Play audio news",
+			"desc": "To play the audio newspaper."
+		}
+	},
+	"config": {
+		"cDailytext": {
+			"name": "Daily texts",
+			"desc": "All texts use for the breaking news"
+		},
+		"cWeather": {
+			"name": "City for weather",
+			"desc": "The city to use for the wrther forecast"
+		},
+		"cGAgenda": {
+			"name": "Agenda",
+			"desc": "Select Google agendas to use"
+		}
+	},
+	"configfile": [
+		"dailytext",
+		"main"
+	]
+}

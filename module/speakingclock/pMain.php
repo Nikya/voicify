@@ -14,7 +14,7 @@
 		<small class="text-muted">By default, automatic operation: Simply call this functionality without additional parameters for the current hour to be announced.</small>
 		<input type="text" class="form-control" id="cts" value="<?php echo $fDate ?>" disabled/>
 		<br/>
-		<small class="text-muted"><a href="./?config=speakingclock_cHour">Edit hour</a> or <a href="./?config=speakingclock_cNeutral">edit neutral</a></small>
+		<small class="text-muted"><a href="./?config=speakingclock_cHour">Setup hour</a> or <a href="./?config=speakingclock_cNeutral">Setup neutral</a></small>
 	</fieldset>
 
 	<!-- Vars -->

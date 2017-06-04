@@ -53,7 +53,7 @@
 		<label for="voicekey">Voicekey*</label>
 		<small class="text-muted">
 			The keyword of the text to speak.
-			<br/><a href="./?config=voicekey_cVoicekey">Edit voicekey</a>
+			<br/><a href="./?config=voicekey_cVoicekey">Setup voicekey</a>
 		</small>
 		<select class="form-control" id="voicekey" name='voicekey' required>
 			<option></option>
@@ -82,7 +82,7 @@
 		<label for="subvoicekeylist">Subvoicekey</label>
 		<small class="text-muted">
 			Keywords that can be placed in the above fields to have variables derived from Subvoicekey.
-			<br/><a href="./?config=voicekey_cSubvoicekey">Edit subvoicekey</a>
+			<br/><a href="./?config=voicekey_cSubvoicekey">Setup subvoicekey</a>
 		</small>
 		<ul id="subvoicekeylist" class="datadisp">
 			<?php echo $strSubvoicekey ?>

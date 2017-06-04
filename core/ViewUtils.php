@@ -68,13 +68,11 @@ class ViewUtils {
 		$target = $targetT==CoreUtils::TARGET_T_PLAY ? 'play' : 'config';
 
 		foreach ($aManifest as $mId => $m) {
-			$d = $inPageMenu ? ' - ' . $m['desc'] : '';
-
 			if (count($m[$targetT]) == 1) {
-				$out .= "<li><a href=\"?$target=$mId\" title=\"{$m['desc']}\">{$m['name']}</a>$d</li>";
+				$out .= "<li><a href=\"?$target=$mId\" title=\"{$m['desc']}\">{$m['name']}</a></li>";
 			} else {
 				foreach ($m[$targetT] as $eId => $entry) {
-					$out .= "<li><a href=\"?$target={$mId}_$eId\" title=\"{$m['desc']} : {$entry['desc']}\">{$m['name']} : {$entry['name']}</a>$d</li>";
+					$out .= "<li><a href=\"?$target={$mId}_$eId\" title=\"{$m['desc']} : {$entry['desc']}\">{$m['name']} : {$entry['name']}</a></li>";
 				}
 			}
 		}
@@ -124,7 +122,7 @@ class ViewUtils {
 					<br/>
 					<br/>
 					<label>File content</label>
-					<textarea style="width:100%; height:400px;">$fContent</textarea>
+					<textarea style="width:100%; min-height:150px; max-height:400px;">$fContent</textarea>
 				</div>
 			</div>
 EED;
