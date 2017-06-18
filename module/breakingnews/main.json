@@ -1,5 +1,8 @@
 {
-	"version": "1.0",
-	"specialLorem": "SAAA",
-	"specialLipsum": "sfoo"
+	"wetherid": "150140",
+	"agendaList": {
+		"tony@gmail.com:::primary": "Tony perso",
+		"tony@gmail.com:::aabbccddeeff99@group.calendar.google.com": "Tony Sport",
+		"anthony-edward.stark@gmail.com:::primary": "Tony Pro"
+	}
 }

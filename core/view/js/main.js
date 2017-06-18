@@ -3,7 +3,7 @@
 
 
 /***************************************************************************
-* Document ready
+* Page loade : Document ready
 */
 $(document).ready(function() {
 
@@ -11,42 +11,46 @@ $(document).ready(function() {
 	$('#calledUrl').html(hightlightUrl($('#calledUrl').html()));
 	$('#console').html(fConsole(phpJsonConsole));
 
+	$('#playForm').submit(ajaxFormSubmit);
+	$('#configForm').submit(ajaxFormSubmit);
+
 	$('#indicator').removeClass('wait');
-
-/*******************************************************************************
-* Intercept form submission to redirect to Ajax Submit
-*/
-	$('#playForm').on('submit', function(e) {
-		$('#indicator').removeClass().addClass('wait');
-		$('#console').html('. . .');
-		$('#say').html('. . .');
-
-		e.preventDefault(); // Empêche le comportement par défaut du navigateur, c-à-d de soumettre le formulaire
-		var $this = $(this);
-
-		$.ajax({
-			url: $this.attr('action'),
-			type: $this.method,
-			data: $this.serialize(),
-			dataType: 'json', // JSON
-			success: function(response, textStatus, jqXHR){
-				var rawUrl = baseUrl+this.url;
-				$('#console').html(fConsole(response.console));
-				$('#calledUrl').html(hightlightUrl(rawUrl));
-				$('#say').html(response.say);
-				$('#indicator').addClass(response.status).removeClass('wait');
-			},
-			error: function(xhr, ajaxOptions, thrownError) {
-				var rawUrl = baseUrl+'/'+this.url;
-				var c = xhr.status + " : " + thrownError + "<br/><br/>";
-				$('#console').html(c);
-				$('#calledUrl').html(rawUrl);
-				$('#indicator').addClass('ko').removeClass('wait');
-			}
-		});
-	});
 });
 
+/*******************************************************************************
+* Form submission redirected to Ajax Submit
+*/
+function ajaxFormSubmit (e) {
+	e.preventDefault(); // Empêche le comportement par défaut du navigateur, c-à-d de soumettre le formulaire
+
+	$('#indicator').removeClass().addClass('wait');
+	$('#console').html('. . .');
+	$('#say').html('. . .');
+
+	var $this = $(this);
+	var data = $this.serialize();
+
+	$.ajax({
+		url: $this.attr('action'),
+		type: $this.method,
+		data: data,
+		dataType: 'json', // JSON
+		success: function(response, textStatus, jqXHR){
+			var rawUrl = baseUrl+this.url;
+			$('#console').html(fConsole(response.console));
+			$('#calledUrl').html(hightlightUrl(rawUrl));
+			$('#say').html(response.say);
+			$('#indicator').addClass(response.status).removeClass('wait');
+		},
+		error: function(xhr, ajaxOptions, thrownError) {
+			var rawUrl = baseUrl+'/'+this.url;
+			var c = xhr.status + " : " + thrownError + "<br/><br/>";
+			$('#console').html(c);
+			$('#calledUrl').html(rawUrl);
+			$('#indicator').addClass('ko').removeClass('wait');
+		}
+	});
+}
 
 /*******************************************************************************
 * Hightlight the differnets parts of the called URL.
@@ -127,6 +131,5 @@ function fConsole(consoleEntries) {
 */
 function openUrl () {
 	window.open($('#calledUrl').text(), '_blank');
-
 	return false;
 }

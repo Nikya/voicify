@@ -20,7 +20,7 @@ Annonce les informations suivantes :
 
 ## Liens utiles
 * [Météo France](http://www.meteo-france.mobi)
-* [Google Agendama](https://www.google.com/calendar/)
+* [Google Agenda](https://www.google.com/calendar/)
 
 ## Version
 Module 1.0

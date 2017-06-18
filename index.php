@@ -125,6 +125,7 @@
 		$baseUrl = $exUrl[0];
 	else
 		$baseUrl = $fullUrl;
+	$baseUrl = str_replace('index.php', '', $baseUrl);
 
 	$baseApiUrl = "{$baseUrl}api.php?$target=$fullModule";
 

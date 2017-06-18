@@ -7,19 +7,16 @@ _Poid des fonctionalités en points Fibonacci : 1, 2, 3, 5, 8, 13, 21_
 * [ ]
 
 ## Prio 1 : Indispansable à la prochaine release
-* [x] (13) Module textify
-* [x] (8) Module Voicekey
-* [x] (8) Module Speaking clock
-* [x] (3) Nettoyage Css et Javascrip non utilsés
-* [x] (8) Mettre en prod à la maison !
+* [ ] (13)Feature : Breaking new
 * [x] (8) Log plus exploitables
+* [x] (1) Appliquer un Chmod() au fichier au moment de leur création (Config / Tmp)
 
 
 ## Prio 2 : Souhaité pour la prochaine release
+* [ ] (13) Mécanisme de config polyvaland de text à fréquence
+* [ ] (13) Mécanisme de config générique
 * [-] (5) Doc à jours (Test liens interne sur GitHub et à rediriger en local ?)
-* [ ] (5) Mécanisme d'update des fichier de conf en mode texte pure
 * [ ] (3) ICU Doc (voir Google Drive 'zelda' + lien en bas de page)
-* [x] (1) Appliquer un Chmod() au fichier au moment de leur création (Config / Tmp)
 
 
 ## Prio 3 : Apports sympatiques

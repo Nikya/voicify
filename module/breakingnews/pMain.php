@@ -29,6 +29,6 @@
 	<small class="text-muted">
 		City use for the weather forcast
 		<br/><a href="./?config=breakingnews_cGAgenda">Setup city</a>
-		<br/><a href="http://www.meteofrance.com/accueil" class="external">See the weather map</a>
+		<br/><a href="http://www.meteo-france.mobi/home#!ville_synthese_150140" class="external">See the weather map</a>
 	</small>
 </fieldset>

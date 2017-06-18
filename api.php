@@ -36,11 +36,11 @@ try {
 		else {
 			throw new Exception('Unknow target');
 		}
-
 		$fullModule = $_GET[$target];
 		$exTargetV = explode('_', $fullModule);
 		$module = $exTargetV[0];
 		$subModule = count($exTargetV) > 1 ? $exTargetV[1] : substr($target, 0, 1) . 'Main';
+//var_dump($subModule); exit;
 	}
 
 /*******************************************************************************

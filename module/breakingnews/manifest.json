@@ -16,17 +16,18 @@
 			"name": "Daily texts",
 			"desc": "All texts use for the breaking news"
 		},
-		"cWeather": {
-			"name": "City for weather",
-			"desc": "The city to use for the wrther forecast"
+		"cMain": {
+			"name": "Global",
+			"desc": "The city to use, agenda listing."
 		},
 		"cGAgenda": {
-			"name": "Agenda",
-			"desc": "Select Google agendas to use"
+			"name": "Agenda permission",
+			"desc": "Autorize a Google agenda reading access."
 		}
 	},
 	"configfile": [
 		"dailytext",
-		"main"
+		"main",
+		"googleApiToken"
 	]
 }

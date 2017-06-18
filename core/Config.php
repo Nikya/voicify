@@ -9,7 +9,7 @@ class Config {
 	private static $instance = null;
 
 	/** To store already read module config */
-	private static $moduleConfig = array();
+	private $moduleConfig = array();
 
 	/** To store the main manifest */
 	private $manifestMain = null;
@@ -157,12 +157,49 @@ class Config {
 	*/
 	public function getModuleConfig($module, $submodule='main') {
 		$key = $module .'_'. $submodule;
+		$path = CoreUtils::PATH_CONFIG.$key.'.json';
 
-		if (!array_key_exists($key, $this->getManifestMain())) {
-			$moduleConfig[$key] = JsonUtils::jFile2Array("./config/$key.json");
+		if (!array_key_exists($key, $this->moduleConfig)) {
+			$this->moduleConfig[$key] = JsonUtils::jFile2Array($path);
 		}
 
-		return $moduleConfig[$key];
+		return $this->moduleConfig[$key];
 	}
 
+	/***************************************************************************
+	* Return already readed module config file or load it
+	*/
+	public function saveModuleConfig($module, $submodule='main', $aData) {
+		$key = $module .'_'. $submodule;
+		$path = CoreUtils::PATH_CONFIG.$key.'.json';
+
+		JsonUtils::array2JFile($aData, $path);
+
+		if (!array_key_exists($key, $this->moduleConfig[$key])) {
+			$this->moduleConfig[$key] = $aData;
+		}
+	}
+
+	/***************************************************************************
+	* Return a module config file in a raw format
+	*/
+	public function getModuleRawConfig($module, $fileId) {
+		$fileName = $module .'_'. $fileId;
+		$path = CoreUtils::PATH_CONFIG.$fileName;
+
+		return file_get_contents($path);
+	}
+
+	/***************************************************************************
+	* Return a module config file in a raw format
+	*/
+	public function saveModuleRawConfig($module, $fileId, $data) {
+		$fileName = $module .'_'. $fileId;
+		$path = CoreUtils::PATH_CONFIG.$fileName;
+
+		$r = file_put_contents($path, $data);
+		if ($r===false)
+			throw new Exception("File to write file $path");
+		chmod($path, 0666);
+	}
 }

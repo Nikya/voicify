@@ -1,4 +1,4 @@
-<?php
+<?php /** Common actions for play API */
 
 	// Check TTS engine targeted
 	$tts = null;

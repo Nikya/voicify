@@ -114,17 +114,12 @@ class ViewUtils {
 		}
 
 		return <<<EED
-			<div class="ccc">
-				<h3>Configuration file <em>- $submodule</em></h3>
-				<div class="content">
 					<label>Edit the file manually : </label>
 					<code>$confFilePath</code>
 					<br/>
 					<br/>
 					<label>File content</label>
 					<textarea style="width:100%; min-height:150px; max-height:400px;">$fContent</textarea>
-				</div>
-			</div>
 EED;
 	}
 }
