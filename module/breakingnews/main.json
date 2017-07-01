@@ -1,5 +1,10 @@
 {
-	"wetherid": "150140",
+	"wetherList": [
+		{
+			"wetherid": "150140",
+			"name": "Aurillac"
+		}
+	],
 	"agendaList": {
 		"tony@gmail.com:::primary": "Tony perso",
 		"tony@gmail.com:::aabbccddeeff99@group.calendar.google.com": "Tony Sport",

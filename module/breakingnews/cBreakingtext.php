@@ -3,4 +3,4 @@
 * Enouciate configuration View
 *******************************************************************************/
 
-	echo ViewUtils::configureFile('breakingnews', 'dailytext');
+	echo ViewUtils::configureFile('breakingnews', 'breakingtext');

@@ -1,19 +1,23 @@
 {
   "intro": [
     {
-      "text": "Bonjour à tous ! Nous sommes {0, date, full}, et voici vos informations de la journée.",
+      "text": "En ce jour {0, date, d} du mois {0, date, MMMM} de l'an de grace {0, date, YYYY}. Je vais procéder à la lecture de l'ordre du jour.",
       "frequency": 1
     },
     {
-      "text": "Bonjour bonjour ! Et voici vos informations personalisées pour cette journée de {0, date, full}.",
+      "text": "Bonjour à tous ! Nous sommes {0, date, full}, et voici vos informations de la journée ",
       "frequency": 1
     },
     {
-      "text": "Good Morning ! Je vous présente les breaking newses de ce {0, date, full}.",
+      "text": "Bonjour bonjour ! Et voici vos informations personalisées pour cette journée de {0, date, full}",
       "frequency": 1
     },
     {
-      "text": "Bienvenue en ce {0, date, full}, où j'ai l'honneur de vous présentez votre actualité.",
+      "text": "Good Morning ! Je vous présente les breaking newses de ce {0, date, full}",
+      "frequency": 1
+    },
+    {
+      "text": "Bienvenue en ce {0, date, full}, où j'ai l'honneur de vous présentez votre actualité",
       "frequency": 1
     },
     {
@@ -23,9 +27,13 @@
     {
       "text": "Messieurs, votre journal est de retour. Il est daté du {0, date, full}",
       "frequency": 1
+    },
+    {
+      "text": "En ce jour {0, date, d} du mois {0, date, MMMM} de l'an de grace {0, date, YYYY}. Je vais procéder à la lecture de l'ordre du jour.",
+      "frequency": 1
     }
   ],
-  "agendaIntro": [
+  "a_transition": [
     {
       "text": "Un coups d'oeil sur les emplois du temps",
       "frequency": 1
@@ -37,15 +45,19 @@
     {
       "text": "Saint google, donne moi les agendas de ce jours.",
       "frequency": 1
+    },
+    {
+      "text": "Quelles sont les quêtes à accomplir aujourd'hui ?",
+      "frequency": 111
     }
   ],
-  "agendaFirst": [
+  "a_first": [
     {
       "text": "Commençons par l'emploi du temps de {0}. {1}",
       "frequency": 1
     }
   ],
-  "agendaThen": [
+  "a_then": [
     {
       "text": "Maintenant l'agenda de {0}. {1}",
       "frequency": 1
@@ -55,51 +67,77 @@
       "frequency": 1
     }
   ],
-  "agendaLast": [
+  "a_last": [
     {
       "text": "Enfin l'agenda de {0}. {1}",
-      "frequency": 1
+      "frequency": 3
     },
     {
       "text": "En terminant par l'agenda de {0}. {1}",
-      "frequency": 1
+      "frequency": 3
     },
     {
       "text": "Enormément de suspense pour le dernier agenda, qui est donc celui de {0}. {1}",
       "frequency": 1
     }
   ],
-  "agendaNo": [
+  "a_no": [
     {
-      "text": "C'est une page blanche pour l'agenda de {0} !",
+      "text": "{1, plural, one{C'est une page blanche} other{Ce sont # pages blanches}} pour {1, plural, one{l'agenda de } other{les agendas : }} {0} !",
       "frequency": 1
     },
     {
-      "text": "{0} sera tranquille aujourd'hui !",
+      "text": "{0} {1, plural, one{sera tranquille} other{seront tranquilles}} aujourd'hui !",
       "frequency": 1
     },
     {
-      "text": "Aucun rendez-vous dans l'agenda de {0}.",
+      "text": "Aucun rendez-vous dans {1, plural, one{l'agenda} other{les agendas}} de {0}.",
       "frequency": 1
     }
   ],
-  "agendasNo": [
+  "a_error": [
     {
-      "text": "Ce sont des pages blanches pour les agendas de {0} !",
-      "frequency": 1
-    },
-    {
-      "text": "{0} seront tranquille aujourd'hui !",
-      "frequency": 1
-    },
-    {
-      "text": "Aucun rendez-vous dans les agendas de {0}.",
+      "text": "Impossible de connaitre le contenue de {1, plural, one{l'agenda} other{# agendas : }} {0}.",
       "frequency": 1
     }
   ],
-  "agendaError": [
+  "a_private": [
     {
-      "text": "Impossible de connaitre l'agenda de {0}.",
+      "text": "Evènement privé",
+      "frequency": 1
+  },
+    {
+      "text": "Occupation confidentiel",
+      "frequency": 1
+    }
+  ],
+  "a_allday": [
+    {
+      "text": "Toute la journée",
+      "frequency": 3
+  },
+    {
+      "text": "Durant toute cette journée",
+      "frequency": 1
+    }
+  ],
+  "a_inday": [
+    {
+      "text": "de {0, time, short} à {1, time, short}",
+      "frequency": 3
+  },
+    {
+      "text": "à partir de {0, time}, jusqu'à {1, time}",
+      "frequency": 1
+    }
+  ],
+  "a_bigduration": [
+    {
+      "text": "du {0, date, long} au {1, date, long}",
+      "frequency": 3
+  },
+    {
+      "text": "à partir du {0, date, long}, jusqu'au {1, date, long}",
       "frequency": 1
     }
   ],
@@ -117,7 +155,7 @@
       "frequency": 1
     }
   ],
-  "w_intro": [
+  "w_transition": [
     {
       "text": "Passons à présent à la météo...",
       "frequency": 1

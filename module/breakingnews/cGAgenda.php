@@ -7,11 +7,16 @@
 	$aURL = UtilsGoogleApi::getAuthorizeUrl();
 
 	// Agenda list
-	$agendaList = Config::getInstance()->getModuleConfig('breakingnews', 'main')['agendaList'];
+	$agendaList = array();
+	try {
+		$agendaBeanList = CalandarAccountBean::autoLoadList();
+	} catch (Exception $e) {
+		Console::w('cGAgenda', 'Fail to read agenda list config "breakingnews.main.agendaList"', $e);
+	}
+
 	$agendaOpt = '';
-	foreach ($agendaList as $aId => $aName) {
-		$exAId = UtilsGoogleApi::explodeALongId($aId);
-		$agendaOpt .= "<option value=\"$aId\">{$aName} | $exAId[0] | $exAId[1]</option>";
+	foreach ($agendaBeanList as $aBean) {
+		$agendaOpt .= "<option value=\"{$aBean->getLongId()}\">{$aBean->getName()} | {$aBean->getAccount()} | {$aBean->getId()}</option>";
 	}
 ?>
 
@@ -20,7 +25,7 @@
 	<label for="agendaId">Agenda</label>
 	<small class="text-muted">An agenda to autorize and test.</small>
 	<select id="agendaLongId" name="agendaLongId" required="required" class="form-control" >
-		<!--option></option-->
+		<option></option>
 		<?php echo $agendaOpt ?>
 	</select>
 </fieldset>

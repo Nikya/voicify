@@ -12,9 +12,8 @@ else {
 	if (!array_key_exists($aLongId, $aList))
 		Console::e('cGAgenda', 'Unknows Agenda Id', $aLongId);
 	else {
-		$aName = $aList[$aLongId];
-		$aLongName = "$aName | $aLongId";
-		$uGoogle = new UtilsGoogleApi($aLongId, $aName);
+		$calBean = new CalandarAccountBean($aLongId, $aList[$aLongId]);
+		$uGoogle = new UtilsGoogleApi($calBean->getAccount());
 
 		// Step 2
 		if(isset($_GET['stepId']) and strcmp($_GET['stepId'],'step2')==0 ) {
@@ -24,9 +23,9 @@ else {
 				$code = $_GET['code'];
 				try {
 					$uGoogle->connect($code);
-					Console::i('cGAgenda.step2', "Step 2 success for $aLongName");
+					Console::i('cGAgenda.step2', "Step 2 success for {$calBean->toString()}");
 				} catch (Exception $e) {
-					Console::e('cGAgenda.step2', "Fail to connect $aLongName", $e);
+					Console::e('cGAgenda.step2', "Fail to connect {$calBean->toString()}", $e);
 				}
 			}
 		}
@@ -34,10 +33,11 @@ else {
 		// Step 3
 		if(isset($_GET['stepId']) and strcmp($_GET['stepId'],'step3')==0 ) {
 			try {
-				$testRes = $uGoogle->test();
-				Console::i('cGAgenda.step3', "Step 3 success for $aLongName", $testRes);
+				$uCalendar = new UtilsGoogleAgenda($uGoogle->getServiceCalendar(), $calBean);
+				$testRes = $uCalendar->test();
+				Console::i('cGAgenda.step3', "Step 3 success for {$calBean->toString()}", $testRes);
 			} catch (Exception $e) {
-				Console::e('cGAgenda.step3', "Fail to test $aLongName", $e);
+				Console::e('cGAgenda.step3', "Fail to test {$calBean->toString()}", $e);
 			}
 		}
 
@@ -45,9 +45,9 @@ else {
 		if(isset($_GET['stepId']) and strcmp($_GET['stepId'],'delete')==0 ) {
 			try {
 				$testRes = $uGoogle->delete();
-				Console::i('cGAgenda.delete', "Step 3 success for $aLongName", $testRes);
+				Console::i('cGAgenda.delete', "Step 3 success for {$calBean->toString()}", $testRes);
 			} catch (Exception $e) {
-				Console::e('cGAgenda.delete', "Fail to test $aLongName", $e);
+				Console::e('cGAgenda.delete', "Fail to test {$calBean->toString()}", $e);
 			}
 		}
 	}

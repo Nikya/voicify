@@ -68,14 +68,16 @@ class Textify {
 	private function substituteSubvoicekey() {
 		$this->data = array();
 
-		$config = Config::getInstance();
-		$colSubvoicekey = $config->getModuleConfig('voicekey', 'subvoicekey');
+		if ($this->oData!=null) {
+			$config = Config::getInstance();
+			$colSubvoicekey = $config->getModuleConfig('voicekey', 'subvoicekey');
 
-		foreach ($this->oData as $od) {
-			if (array_key_exists($od, $colSubvoicekey))
-				array_push($this->data, $colSubvoicekey[$od][self::pickIndex($colSubvoicekey[$od])]['text']);
-			else
-				array_push($this->data, $od);
+			foreach ($this->oData as $od) {
+				if (array_key_exists($od, $colSubvoicekey))
+					array_push($this->data, $colSubvoicekey[$od][self::pickIndex($colSubvoicekey[$od])]['text']);
+				else
+					array_push($this->data, $od);
+			}
 		}
 	}
 
