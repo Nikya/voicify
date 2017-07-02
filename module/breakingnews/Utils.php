@@ -459,6 +459,7 @@ class BreakingnewsBuilder {
 	private function processAgenda() {
 		$fullAgenda = array();
 		$agendaBeanList = CalandarAccountBean::autoLoadList();
+		shuffle($agendaBeanList);
 
 		// Sauvegarder le contenue des agendas (Indexer par agenda Id)
 		$aaError = array();
