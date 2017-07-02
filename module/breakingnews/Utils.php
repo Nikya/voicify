@@ -370,8 +370,8 @@ class BreakingnewsBuilder {
 		$fullContent = array_merge($fullContent, $this->processIntro());
 		$fullContent = array_merge($fullContent, $this->processTransitionAgenda());
 		$fullContent = array_merge($fullContent, $this->processAgenda());
-		$fullContent = array_merge($fullContent, $this->processTransitionWeather());
-		$fullContent = array_merge($fullContent, $this->processWeather());
+		//$fullContent = array_merge($fullContent, $this->processTransitionWeather());
+		//$fullContent = array_merge($fullContent, $this->processWeather());
 		$fullContent = array_merge($fullContent, $this->processConclusion());
 
 		$this->fullContent = self::addDot($fullContent);
@@ -460,7 +460,7 @@ class BreakingnewsBuilder {
 		$fullAgenda = array();
 		$agendaBeanList = CalandarAccountBean::autoLoadList();
 
-		// Sauvegarder le contenue des ageendas (Indexer par agenda Id)
+		// Sauvegarder le contenue des agendas (Indexer par agenda Id)
 		$aaError = array();
 		$aaNo = array();
 		$aaYes = array();

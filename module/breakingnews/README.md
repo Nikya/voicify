@@ -11,12 +11,12 @@ Annonce les informations suivantes :
     * Les rendez-vous du jour
     * Plusieurs agendas possibles
 3. Météo
-    * heure de lever et de coucher du soleil
-    * Conditions pour la matinée puis pour l'aprés-midi
-    * Température
-        * Actuelement extérieur
+    * heure de levé et de couché du soleil
+    * Conditions pour la matinée puis pour l'après-midi
+    * Températures
+        * Actuellement extérieur
         * Matinée
-        * Aprés-midi
+        * Après-midi
 
 ## Liens utiles
 * [Météo France](http://www.meteo-france.mobi)
@@ -27,11 +27,29 @@ Module 1.0
 
 ## Paramétrage
 * **Breakingtext** : Les textes utilisés sont multiples et paramétrables
-* **Weather** : Configurer la ville utilisée pour la météo
-* **GAgenda** : Configuration des agendas Google à utiliser
+* **Main** : Configurer la ville utilisée pour la météo et lister les agendas voulues
+* **GAgenda** : Configuration des authorisation d'agendas par Google
+
+### Agendas Ids
+ Un agenda est référencé sous la forme suivante :
+
+Format et exemple :
+
+    "email@gmail.com:::agendaId": "Nom d'agenda"
+
+    "tony.stark@gmail.com:::primary": "Tony perso"
+
+* **Email** : L'adresse Gmail possédant l'agenda
+* **Séparateur** : Un séparateur `:::` :
+* **Agenda ID** : Identifiant de l'agneda dans le compte Gmail
+    * Si l'identifiant est le même que l'adresse email, il faut alors saisir `primary`
+    * Sinon l'identifiant est ressemble à : `aabbccddeeff123456789@group.calendar.google.com`
+    * Cette identifiant se trouve dans la configuration de celui ci coté Google : Google Agenda \ paramètres \ Agendas \ choisir un agenda \ Adresse URL de l'agenda \ Id de l'agenda
+* **Nom** : Un nom d'agenda libre uniquement utile pour l'affichage et la diction
+
+
 
 ### Detail des _Breakingtext_
-
 
 * Général
     * `intro` : Introduction avec date du jour
@@ -41,9 +59,8 @@ Module 1.0
     * `a_first` : Lecture premier agenda
     * `a_then` : Lecture agenda suivant
     * `a_last` : Lecture dernier agenda
-    * `a_no` : L'agenda est vide
-    * `a_nos` : Tous les agendas sont vides
-    * `a_error` : Erreur de lecture d'un agenda
+    * `a_no` : Annoncer les agendas vides
+    * `a_error` : Annoncer les agendas en erreur
 * Météo
     * `w_transition` : Introduction à la météo
     * `w_sunrise_f` : Lévée de soleil futur

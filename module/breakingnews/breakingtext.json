@@ -21,7 +21,7 @@
       "frequency": 1
     },
     {
-      "text": "Messieurs, Bonjour. Permettez-moi de vous lire votre petit journal de ce {0, date, full}",
+      "text": "Mesdames, Messieurs, Bonjour. Permettez-moi de vous lire votre petit journal de ce {0, date, full}",
       "frequency": 1
     },
     {
