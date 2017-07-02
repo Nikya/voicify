@@ -3,11 +3,14 @@
 		{
 			"wetherid": "150140",
 			"name": "Aurillac"
+		},
+		{
+			"wetherid": "750560",
+			"name": "Paris"
 		}
 	],
 	"agendaList": {
-		"tony@gmail.com:::primary": "Tony perso",
-		"tony@gmail.com:::aabbccddeeff99@group.calendar.google.com": "Tony Sport",
-		"anthony-edward.stark@gmail.com:::primary": "Tony Pro"
+		"severac.yannick@gmail.com:::primary": "Yannick Perso",
+		"severac.yannick@gmail.com:::aru86vbr9t558i6qktdr8c99qg@group.calendar.google.com": "Yannick Pro"
 	}
 }

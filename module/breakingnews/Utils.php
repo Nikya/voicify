@@ -370,8 +370,8 @@ class BreakingnewsBuilder {
 		$fullContent = array_merge($fullContent, $this->processIntro());
 		$fullContent = array_merge($fullContent, $this->processTransitionAgenda());
 		$fullContent = array_merge($fullContent, $this->processAgenda());
-		//$fullContent = array_merge($fullContent, $this->processTransitionWeather());
-		//$fullContent = array_merge($fullContent, $this->processWeather());
+		$fullContent = array_merge($fullContent, $this->processTransitionWeather());
+		$fullContent = array_merge($fullContent, $this->processWeather());
 		$fullContent = array_merge($fullContent, $this->processConclusion());
 
 		$this->fullContent = self::addDot($fullContent);
@@ -645,7 +645,58 @@ class BreakingnewsBuilder {
 	* La partie météo des BN
 	*
 	*/
-	private function buildWhether() {
+	private function processWeather() {
+		$full = array();
+
+		$meteo = new MeteoCore();
+		$weatherData = $meteo->getBreakingnewsWeatherData();
+
+		// Intro
+		array_push($txtArray, rand1FromArray($text['breakingnews']['w_intro']));
+		array_push($txtArray, 'SLEEP_2');
+
+		// sunrise
+		array_push($txtArray, buildWhether_sunrise($weatherData));
+		array_push($txtArray, ' ... ');
+
+		// Condition
+		$morningDescription = $weatherData['morning']['description'];
+		$afternoonDescription = $weatherData['afternoon']['description'];
+		// Si même condition pour le matin et l'apres midi
+		if (strcasecmp($morningDescription,$afternoonDescription)==0)
+			$phrase = rand1FromArray($text['breakingnews']['w_description_mono']);
+		//  ou si pas de condition trouvée pour la matinée
+		elseif (empty($morningDescription)) {
+			$phrase = rand1FromArray($text['breakingnews']['w_description_mono']);
+			$morningDescription = $afternoonDescription;
+		}
+		else
+			$phrase = rand1FromArray($text['breakingnews']['w_description_double']);
+
+		$phraseFormater = msgfmt_create('fr_FR', $phrase);
+		$phraseFinal = msgfmt_format($phraseFormater, array($morningDescription, $afternoonDescription));
+		array_push($txtArray, $phraseFinal);
+		array_push($txtArray, 'SLEEP_2');
+
+		// Temperature
+		$morningTemperature = $weatherData['morning']['temperature'];
+		$afternoonTemperature = $weatherData['afternoon']['temperature'];
+		$currentTemperature = $weatherData['temperature_exterieur'];
+		if (empty($morningTemperature))
+			$morningTemperature = $afternoonTemperature;
+
+		$phrase = rand1FromArray($text['breakingnews']['w_temperature']);
+		$phraseFormater = msgfmt_create('fr_FR', $phrase);
+		$phraseFinal = msgfmt_format($phraseFormater, array($currentTemperature, $morningTemperature, $afternoonTemperature));
+		array_push($txtArray, $phraseFinal);
+
+		// sunset
+		array_push($txtArray, ' ... ');
+		array_push($txtArray, buildWhether_sunset($weatherData));
+
+		return $txtArray;
+	}
+	private function buildWhether_old() {
 		global $text;
 		$txtArray = array();
 
@@ -742,5 +793,202 @@ class BreakingnewsBuilder {
 		$phraseFinal = msgfmt_format($phraseFormater, array($sunsetTS));
 
 		return $phraseFinal;
+	}
+}
+
+
+/*******************************************************************************
+********************************************************************************
+********************************************************************************
+* Class pour lire les informations Meteo
+*
+* Utilise : http://www.meteo-france.mobi/home#!ville_synthese_999999
+*/
+class UtilMeteoAPI {
+
+	/** Toute les donnée accumulées */
+	private $data = array();
+
+	/** Id de la ville  */
+	private $cityId;
+
+	/***************************************************************************
+	* Constructor
+	*/
+	public function __construct($cityId) {
+		$this->cityId = $cityId;
+	}
+
+	/***************************************************************************
+	* Charger les données
+	*/
+	public function process() {
+		$this->loadWeatherData();
+		$this->loadSunEphemeris();
+	}
+
+	/***************************************************************************
+	* Obtenir les donnée chargées
+	*/
+	public function getData() {
+		return $this->data();
+	}
+
+	/** Obetenir les donnée pour la météo du breakingnews en provenance de la meteo elle même */
+	public function loadWeatherData() {
+		$meteoBrowser = new MeteoFranceAPIBrowser($cityId);
+		//traceDebug(__FUNCTION__, $meteoBrowser->getRawData());
+
+		// Description forcast
+		$data['morning']['description'] = $meteoBrowser->get('previsions.0_matin.description');
+		$data['afternoon']['description'] = $meteoBrowser->get('previsions.0_midi.description');
+
+		// temperature
+		$data['morning']['temperature'] = $meteoBrowser->get('previsions.0_matin.temperatureCarte');
+		$data['afternoon']['temperature'] = $meteoBrowser->get('previsions.0_midi.temperatureCarte');
+
+		return $data;
+	}
+
+	/** Obtenir les information de levé et de couché du soleil
+	*
+	*/
+	public function getSunEphemeris() {
+		$data = array();
+		$latitude = 45.7;
+		$longitude = 3.1;
+		$zenith = 90+50/60;
+		$gmtoffset = ConfigCore::get("global.gmtoffset");
+
+		$data['ephemeris']['sunrise'] = date_sunrise(time(), SUNFUNCS_RET_TIMESTAMP, $latitude, $longitude, $zenith, $gmtoffset);
+		$data['ephemeris']['sunset'] = date_sunset(time(), SUNFUNCS_RET_TIMESTAMP, $latitude, $longitude, $zenith, $gmtoffset);
+
+		return $data;
+	}
+}
+
+/*******************************************************************************
+********************************************************************************
+********************************************************************************
+*  Class pour piloter l'API mobile de Meteo France
+*/
+class MeteoFranceAPIBrowser {
+
+	/** Base URL part of the online API */
+	const BASE_URL = 'http://www.meteo-france.mobi/ws/getDetail/france/{cityId}.json';
+
+	/** Current builded URL */
+	private $currentUrl;
+
+	/** cURL handler */
+	private $ch = null;
+
+	/** city name */
+	private $cityId;
+
+	/***************************************************************************
+	* Browser constructor
+	*
+	* @param $cityId The city Id
+	*/
+	public function __construct($cityId) {
+		$this->cityId = urlencode($cityId);
+		$this->readData();
+	}
+
+	/***************************************************************************
+	* Browser destructor
+	*/
+	public function __destruct() {
+		if(!is_null($this->ch))
+			curl_close($this->ch);
+	}
+
+	/***************************************************************************
+	* Execute the http request
+	*
+	* @return Array of result from the Json response
+	*
+	*/
+	private function readData() {
+		$this->ch = curl_init();
+
+		$this->currentUrl = str_replace('{cityId}', $this->cityId, SELF::BASE_URL);
+
+		curl_setopt($this->ch, CURLOPT_URL, $this->currentUrl);
+		curl_setopt($this->ch, CURLOPT_RETURNTRANSFER, true);
+
+		$curlRes = curl_exec($this->ch);
+		$this->assertSuccess($curlRes);
+
+		$this->data = json_decode($curlRes, true);
+	}
+
+	/***************************************************************************
+	* Check if returned result is a succes
+	*
+	* @throws Exception if is a fail
+	*
+	*/
+	private function assertSuccess($curlRes) {
+		// Check cURL success
+		if ($curlRes===false) {
+			$errorMsg = curl_error($this->ch);
+			throw new Exception(__CLASS__." \ncURL error : $errorMsg \nwith URL {$this->currentUrl}");
+		}
+
+		// Check HTTP success
+		$httpCode = curl_getinfo($this->ch, CURLINFO_HTTP_CODE);
+		if($httpCode/100 != 2) {
+			$errorMsg = print_r($curlRes,true);
+			throw new Exception(__CLASS__." \nHTTP error [$httpCode] \nfor $this->currentUrl. \n$errorMsg.");
+		}
+
+		// Check API success
+		$jsonObj = json_decode($curlRes);
+		if (is_object($jsonObj)) {
+			if( is_null($jsonObj->result->ville)) {
+				$errorMsg = print_r($curlRes,true);
+				throw new Exception(__CLASS__." \nAPI error \nfor $this->currentUrl. \n$errorMsg.");
+			}
+		} else {
+			$errorMsg = json_last_error_msg();
+			throw new Exception(__CLASS__." \nUnknow API return object \nfor $this->currentUrl. \n$errorMsg.");
+		}
+	}
+
+	/***************************************************************************
+	* To get the raw inner data
+	*/
+	public function getRawData() {
+		return $this->data;
+	}
+
+	/***************************************************************************
+	* To get a value from the API result
+	*
+	* @param $path A data path to read
+	*
+	* @return A value
+	*
+	*/
+	public function get($path) {
+		$iList = explode('.', $path);
+		$sData = $this->data['result'];
+
+		try {
+			foreach ($iList as $i) {
+				if (array_key_exists($i, $sData))
+					$sData = $sData[$i];
+				else
+					throw new Exception('GetMeteoFranceDataFail');
+			}
+		}
+		catch (Exception $e) {
+			traceWarn(__METHOD__, "GetMeteoFranceDataFail unknow [$path] in the data API");
+			return null;
+		}
+
+		return trim($sData);
 	}
 }
