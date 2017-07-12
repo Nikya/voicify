@@ -368,10 +368,10 @@ class BreakingnewsBuilder {
 		$fullContent = array();
 
 		$fullContent = array_merge($fullContent, $this->processIntro());
-		$fullContent = array_merge($fullContent, $this->processTransitionAgenda());
-		$fullContent = array_merge($fullContent, $this->processAgenda());
-		//$fullContent = array_merge($fullContent, $this->processTransitionWeather());
-		//$fullContent = array_merge($fullContent, $this->processWeather());
+		// $fullContent = array_merge($fullContent, $this->processTransitionAgenda());
+		// $fullContent = array_merge($fullContent, $this->processAgenda());
+		$fullContent = array_merge($fullContent, $this->processTransitionWeather());
+		$fullContent = array_merge($fullContent, $this->processWeather());
 		$fullContent = array_merge($fullContent, $this->processConclusion());
 
 		$this->fullContent = self::addDot($fullContent);
@@ -407,6 +407,13 @@ class BreakingnewsBuilder {
 	*/
 	private function getBreakingtext($colName) {
 		return $this->config->getModuleConfig('breakingnews', 'breakingtext')[$colName];
+	}
+
+	/***************************************************************************
+	* Get a frequenced text collection from configuration file Breakingtext
+	*/
+	private function getWeatherList() {
+		return $this->config->getModuleConfig('breakingnews', 'main')['wetherList'];
 	}
 
 	/***************************************************************************
@@ -627,7 +634,6 @@ class BreakingnewsBuilder {
 		return $range;
 	}
 
-
 	/***************************************************************************
 	* Verifie si une DateTime est aujourd'hui
 	*
@@ -649,11 +655,14 @@ class BreakingnewsBuilder {
 	private function processWeather() {
 		$full = array();
 
-		$meteo = new MeteoCore();
-		$weatherData = $meteo->getBreakingnewsWeatherData();
+		$weatheData = $this->loadCityWeather();
+		$ephemerisData = $this->loadSunEphemeris();
 
-		// Intro
-		array_push($txtArray, rand1FromArray($text['breakingnews']['w_intro']));
+		$full += processSunrise($ephemerisData[sunrise]))
+
+
+		var_dump($full); exit;
+/*
 		array_push($txtArray, 'SLEEP_2');
 
 		// sunrise
@@ -696,10 +705,69 @@ class BreakingnewsBuilder {
 		array_push($txtArray, buildWhether_sunset($weatherData));
 
 		return $txtArray;
+	*/
 	}
+
+	/***************************************************************************
+	* Obtenir les météo de chaque ville
+	*/
+	private function loadCityWeather() {
+		$data = array();
+		$weatherList = $this->getWeatherList();
+
+		foreach ($weatherList as $weatherId => $weatherName) {
+			$meteoBrowser = new MeteoFranceAPIBrowser($weatherId);
+
+			$data[$weatherId]['morning']['description'] = $meteoBrowser->get('previsions.0_matin.description');
+			$data[$weatherId]['afternoon']['description'] = $meteoBrowser->get('previsions.0_midi.description');
+			$data[$weatherId]['morning']['temperature'] = $meteoBrowser->get('previsions.0_matin.temperatureCarte');
+			$data[$weatherId]['afternoon']['temperature'] = $meteoBrowser->get('previsions.0_midi.temperatureCarte');
+		}
+
+		return $data;
+	}
+
+	/***************************************************************************
+	* Obtenir les information de levé et de couché du soleil
+	* (seulemnt pour la première ville)
+	*/
+	private function loadSunEphemeris() {
+		$data = array();
+
+		$data['ephemeris']['sunrise'] = date_sunrise(time(), SUNFUNCS_RET_TIMESTAMP); //, $latitude, $longitude, $zenith, $gmtoffset);
+		$data['ephemeris']['sunset'] = date_sunset(time(), SUNFUNCS_RET_TIMESTAMP); //, $latitude, $longitude, $zenith, $gmtoffset);
+
+		return $data;
+	}
+
+	/***************************************************************************
+	* Textify Sunrise
+	*/
+	private function processSunrise ($sunriseTS) {
+		// Calcule de l'interval entre maintenant et le sunrise
+		$sunriseDT = new DateTime();
+		$sunriseDT->setTimestamp($sunriseTS);
+		$nowDT = new DateTime('now');
+		$interval = $sunriseDT->diff($nowDT);
+		$data = array($interval->h, $interval->m);
+
+		// événement passé
+		if ($interval->invert == 1)
+			$col = $this->getBreakingtext('w_sunrise_p');
+		// événement futur
+		else
+			$col = $this->getBreakingtext('w_sunrise_f');
+
+		$tfy = new Textify($col, $data);
+		$tfy->process();
+
+// TODO continuer ici : A tester et adpater les TEXTE pour prendre en compte l'absence ou non d'heure
+		return array ($tfy->getFinalText());
+	}
+
+/*
 	private function buildWhether_old() {
-		global $text;
-		$txtArray = array();
+
 
 		$meteo = new MeteoCore();
 		$weatherData = $meteo->getBreakingnewsWeatherData();
@@ -750,7 +818,7 @@ class BreakingnewsBuilder {
 		return $txtArray;
 	}
 
-	/** Returne une phrase pour decrire le levé du soleil */
+	/** Returne une phrase pour decrire le levé du soleil
 	private function buildWhether_sunrise ($weatherData) {
 		global $text;
 
@@ -794,77 +862,6 @@ class BreakingnewsBuilder {
 		$phraseFinal = msgfmt_format($phraseFormater, array($sunsetTS));
 
 		return $phraseFinal;
-	}
-}
-
-
-/*******************************************************************************
-********************************************************************************
-********************************************************************************
-* Class pour lire les informations Meteo
-*
-* Utilise : http://www.meteo-france.mobi/home#!ville_synthese_999999
-*/
-class UtilMeteoAPI {
-
-	/** Toute les donnée accumulées */
-	private $data = array();
-
-	/** Id de la ville  */
-	private $cityId;
-
-	/***************************************************************************
-	* Constructor
-	*/
-	public function __construct($cityId) {
-		$this->cityId = $cityId;
-	}
-
-	/***************************************************************************
-	* Charger les données
-	*/
-	public function process() {
-		$this->loadWeatherData();
-		$this->loadSunEphemeris();
-	}
-
-	/***************************************************************************
-	* Obtenir les donnée chargées
-	*/
-	public function getData() {
-		return $this->data();
-	}
-
-	/** Obetenir les donnée pour la météo du breakingnews en provenance de la meteo elle même */
-	public function loadWeatherData() {
-		$meteoBrowser = new MeteoFranceAPIBrowser($cityId);
-		//traceDebug(__FUNCTION__, $meteoBrowser->getRawData());
-
-		// Description forcast
-		$data['morning']['description'] = $meteoBrowser->get('previsions.0_matin.description');
-		$data['afternoon']['description'] = $meteoBrowser->get('previsions.0_midi.description');
-
-		// temperature
-		$data['morning']['temperature'] = $meteoBrowser->get('previsions.0_matin.temperatureCarte');
-		$data['afternoon']['temperature'] = $meteoBrowser->get('previsions.0_midi.temperatureCarte');
-
-		return $data;
-	}
-
-	/** Obtenir les information de levé et de couché du soleil
-	*
-	*/
-	public function getSunEphemeris() {
-		$data = array();
-		$latitude = 45.7;
-		$longitude = 3.1;
-		$zenith = 90+50/60;
-		$gmtoffset = ConfigCore::get("global.gmtoffset");
-
-		$data['ephemeris']['sunrise'] = date_sunrise(time(), SUNFUNCS_RET_TIMESTAMP, $latitude, $longitude, $zenith, $gmtoffset);
-		$data['ephemeris']['sunset'] = date_sunset(time(), SUNFUNCS_RET_TIMESTAMP, $latitude, $longitude, $zenith, $gmtoffset);
-
-		return $data;
 	}
 }
 
@@ -935,14 +932,14 @@ class MeteoFranceAPIBrowser {
 		// Check cURL success
 		if ($curlRes===false) {
 			$errorMsg = curl_error($this->ch);
-			throw new Exception(__CLASS__." \ncURL error : $errorMsg \nwith URL {$this->currentUrl}");
+			throw new Exception(__CLASS__." cURL error : $errorMsg with URL {$this->currentUrl}");
 		}
 
 		// Check HTTP success
 		$httpCode = curl_getinfo($this->ch, CURLINFO_HTTP_CODE);
-		if($httpCode/100 != 2) {
+		if(intval($httpCode/100) != 2) {
 			$errorMsg = print_r($curlRes,true);
-			throw new Exception(__CLASS__." \nHTTP error [$httpCode] \nfor $this->currentUrl. \n$errorMsg.");
+			throw new Exception(__CLASS__." HTTP error [$httpCode] for {$this->currentUrl}. $errorMsg.");
 		}
 
 		// Check API success
@@ -950,11 +947,11 @@ class MeteoFranceAPIBrowser {
 		if (is_object($jsonObj)) {
 			if( is_null($jsonObj->result->ville)) {
 				$errorMsg = print_r($curlRes,true);
-				throw new Exception(__CLASS__." \nAPI error \nfor $this->currentUrl. \n$errorMsg.");
+				throw new Exception(__CLASS__." API error for {$this->currentUrl}. $errorMsg.");
 			}
 		} else {
 			$errorMsg = json_last_error_msg();
-			throw new Exception(__CLASS__." \nUnknow API return object \nfor $this->currentUrl. \n$errorMsg.");
+			throw new Exception(__CLASS__." Unknow API return content for $this->currentUrl. $errorMsg :  Content=$curlRes");
 		}
 	}
 
@@ -986,7 +983,6 @@ class MeteoFranceAPIBrowser {
 			}
 		}
 		catch (Exception $e) {
-			traceWarn(__METHOD__, "GetMeteoFranceDataFail unknow [$path] in the data API");
 			return null;
 		}
 

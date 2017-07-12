@@ -31,22 +31,19 @@ Module 1.0
 * **GAgenda** : Configuration des authorisation d'agendas par Google
 
 ### Agendas Ids
- Un agenda est référencé sous la forme suivante :
-
-Format et exemple :
+ Un agenda est référencé sous la forme suivante (format et exemple) :
 
     "email@gmail.com:::agendaId": "Nom d'agenda"
 
     "tony.stark@gmail.com:::primary": "Tony perso"
 
-* **Email** : L'adresse Gmail possédant l'agenda
+* **Email** : L'adresse Gmail du compte à utiliser
 * **Séparateur** : Un séparateur `:::` :
 * **Agenda ID** : Identifiant de l'agneda dans le compte Gmail
-    * Si l'identifiant est le même que l'adresse email, il faut alors saisir `primary`
-    * Sinon l'identifiant est ressemble à : `aabbccddeeff123456789@group.calendar.google.com`
-    * Cette identifiant se trouve dans la configuration de celui ci coté Google : Google Agenda \ paramètres \ Agendas \ choisir un agenda \ Adresse URL de l'agenda \ Id de l'agenda
-* **Nom** : Un nom d'agenda libre uniquement utile pour l'affichage et la diction
-
+    * Si l'identifiant est le même que l'adresse email du compte utilisateur, il faut alors saisir `primary`
+    * Sinon l'identifiant est l'adresse email d'un autre propriétaire ou alors sous la forme : `aabbccddeeff123456789@group.calendar.google.com`
+    * Cette identifiant se trouve dans la configuration des agendas côté Google : Google Agenda \ paramètres \ Agendas \ choisir un agenda \ Adresse URL de l'agenda \ Id de l'agenda
+* **Nom** : Un nom d'agenda libre, uniquement utile pour l'affichage et la diction
 
 
 ### Detail des _Breakingtext_

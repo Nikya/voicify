@@ -1,14 +1,8 @@
 {
-	"wetherList": [
-		{
-			"wetherid": "150140",
-			"name": "Aurillac"
-		},
-		{
-			"wetherid": "750560",
-			"name": "Paris"
-		}
-	],
+	"wetherList": {
+		"150140" : "Aurillac",
+		"750560" : "Paris"
+	},
 	"agendaList": {
 		"tony.stark@gmail.com:::primary": "Tony perso",
 		"tony.stark@gmail.com:::aabbccddeeff123456789@group.calendar.google.com": "Fondation Maria Stark",
