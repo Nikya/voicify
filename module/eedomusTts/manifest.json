@@ -1,0 +1,15 @@
+{
+	"type" : "TTSENGINE",
+	"name": "eedomus TTS",
+	"desc": "Use the TTS functionality from the eesomus box",
+	"version": "1.0",
+	"author": "Nikya",
+	"sourcelink": "https://github.com/Nikya/voicify",
+	"config": {
+		"cMain": {
+			"name": "eedomus toolbox",
+			"desc": "Configure eedomus TTS toolbox"
+		}
+	},
+	"configfile": [ "main" ]
+}
