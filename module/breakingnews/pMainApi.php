@@ -4,7 +4,8 @@
 if (!isset($_GET['extTemperature']) or empty($_GET['extTemperature']))
 	Console::e('breakingnews.pMainApi', 'Missing mandatory external temperature', $_GET);
 else {
-	$bnb = new BreakingnewsBuilder();
+	$oT = $_GET['extTemperature'];
+	$bnb = new BreakingnewsBuilder($oT);
 	$bnb->process();
 	$bnbRes = $bnb->getResult();
 
