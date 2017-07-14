@@ -24,8 +24,6 @@ _Poid des fonctionalités en points Fibonacci : 1, 2, 3, 5, 8, 13, 21_
 * [ ] (8) Afficher la version courante de voicify et vérifier la dernière version en ligne
 * [x] (5) Affichage de la log (La dernière seulement) ?
 * [x] Affichage du contenue du Dummy TTS ?
-* [ ] Générateur d'URL d'API pour tout les voicekey
-* [ ] Afficher et centraliser le num de version
 
 
 ## Prio 4 : Apports mineurs

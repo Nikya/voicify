@@ -68,7 +68,7 @@ Cloner [ce projet](https://github.com/Nikya/voicify) dans un répertoire _web_ d
 
 	git clone https://github.com/Nikya/voicify
 
-### Dossiers de configuration et temporire
+### Dossiers de configuration et temporaire
 
 Créer à la racine du dossier _voicify_ les dossiers de **configuration** et **temporaire** :
 
@@ -112,6 +112,10 @@ Il suffit ensuite :
 1. de _copier_ cette URL
 2. de la _coller_ dans un composant de votre sytéme de domotique qui est capable d'appeler des URL externes.
 3. De _programmer_ dans votre domotique un appel vers cette URL au moments opportun.
+
+### Edition des textes
+
+Les textes utilisés suivent une syntaxe particulière nommée _Textify_ : Voir la [documentation en ligne](https://github.com/Nikya/voicify/wiki/Syntaxe-Textify) pour exploiter au mieux cette syntaxe.
 
 ## Contribuer
 
