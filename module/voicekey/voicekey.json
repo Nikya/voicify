@@ -1,74 +1,58 @@
 {
-
-  "welcome": {
-    "cache": true,
-    "prefix": "default",
-    "textList": [
-      {
-        "text": "Salutation {0}.",
-        "frequency": 5
-      },
-      {
-        "text": "Bien le bonjour {0} ! La température intérieur est de {1}°.",
-        "frequency": 3
-      },
-      {
-        "text": "J'ai régulé la température à environ {1,number,integer}°, en anticipation de votre retour {0} !",
-        "frequency": 3
-      },
-      {
-        "text": "Bon retour chez vous {0}, où il y fait {1}°.",
-        "frequency": 3
-      }
-    ]
-  },
-  "rappelPoubelle": {
-    "cache": true,
-    "prefix": "default",
-    "textList": [
-      {
-        "text": "Pensez à sortir la poubelle {0} pour demain.",
-        "frequency": 1
-      },
-      {
-        "text": "Demain c'est le jour de collecte pour la poubelle {0}.",
-        "frequency": 1
-      },
-      {
-        "text": "Pensez à sortir la poubelle.",
-        "frequency": 3
-      }
-    ]
-  },
-  "porteOubliee": {
-    "cache": true,
-    "prefix": "default",
-    "textList": [
-      {
-        "text": "Un oublie de la porte {0}.",
-        "frequency": 5
-      },
-      {
-        "text": "La porte {0}, est restée ouverte.",
-        "frequency": 3
-      },
-      {
-        "text": "Qui voudrait bien fermer la porte {0} ? Il faudra bien que quelqu'un le fasse de toute façon !",
-        "frequency": 1
-      },
-      {
-        "text": "La porte {0} c'est comme ta gueule, elle se ferme !",
-        "frequency": 0
-      }
-    ]
-  },"zDefault": {
-     "cache": false,
-     "prefix": "default",
-     "textList": [
-       {
-         "text": "Je ne sais pas quoi vous dire, à propos du voicekey : {0}.",
-         "frequency": 1
-       }
-     ]
-   }
+  "welcome": [
+    {
+      "text": "Salutation {0}.",
+      "frequency": 5
+    },
+    {
+      "text": "Bien le bonjour {0} ! La température intérieur est de {1}°.",
+      "frequency": 3
+    },
+    {
+      "text": "J'ai régulé la température à environ {1,number,integer}°, en anticipation de votre retour {0} !",
+      "frequency": 3
+    },
+    {
+      "text": "Bon retour chez vous {0}, où il y fait {1}°.",
+      "frequency": 3
+    }
+  ],
+  "rappelPoubelle": [
+    {
+      "text": "Pensez à sortir la poubelle {0} pour demain.",
+      "frequency": 1
+    },
+    {
+      "text": "Demain c'est le jour de collecte pour la poubelle {0}.",
+      "frequency": 1
+    },
+    {
+      "text": "Pensez à sortir la poubelle.",
+      "frequency": 3
+    }
+  ],
+  "porteOubliee": [
+    {
+      "text": "Un oublie de la porte {0}.",
+      "frequency": 5
+    },
+    {
+      "text": "La porte {0}, est restée ouverte.",
+      "frequency": 3
+    },
+    {
+      "text": "Qui voudrait bien fermer la porte {0} ? Il faudra bien que quelqu'un le fasse de toute façon !",
+      "frequency": 1
+    },
+    {
+      "text": "La porte {0} c'est comme ta gueule, elle se ferme !",
+      "frequency": 0
+    }
+  ],
+  "zDefault": [
+    {
+      "text": "Je ne sais pas quoi vous dire, à propos du voicekey : [0}.",
+      "frequency": 1
+    }
+  ]
 }

@@ -94,7 +94,6 @@ class Config {
 	* @param $targetType
 	* @param $moduleId
 	* @param $subModuleId
-	*
 	*/
 	public function isValidModule($targetType, $moduleId, $subModuleId) {
 		$manifestSub = $this->getSubManifestTT($targetType);
@@ -107,14 +106,30 @@ class Config {
 
 	/***************************************************************************
 	* To get the default TTS Engine Id
-	*
-	* @param $TtsEngine Id
-	*
 	*/
 	public function getDefaultTtsEngineId() {
 		$cBase = $this->getModuleConfig('base');
 
 		return $cBase['defaultTtsEngine'];
+	}
+
+	/***************************************************************************
+	* To get the the prefix
+	*/
+	public function getPrefix($ttsEngine, $module, $submodule) {
+		$prefixSwitch = $cBase = $this->getModuleConfig('base')['prefixSwitch'];
+
+		$key111 = "$ttsEngine.$module.$submodule";
+		$key110 = "$ttsEngine.$module.*";
+		$key100 = "$ttsEngine.*.*";
+		if (array_key_exists($key111, $prefixSwitch))
+			return $prefixSwitch[$key111];
+		elseif (array_key_exists($key110, $prefixSwitch))
+			return $prefixSwitch[$key110];
+		elseif (array_key_exists($key100, $prefixSwitch))
+			return $prefixSwitch[$key100];
+		else
+			return $this->getModuleConfig('base')['defaultPrefix'];
 	}
 
 	/***************************************************************************

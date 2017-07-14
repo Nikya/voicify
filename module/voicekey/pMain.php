@@ -25,7 +25,7 @@
 
 			// Data disp
 			$aText = array();
-			foreach ($voicekeyConf['textList'] as $t) {
+			foreach ($voicekeyConf as $t) {
 				array_push($aText, "[x{$t['frequency']}]  {$t['text']}");
 			}
 			$voicekeyDatadisp[$voicekey] = $aText;

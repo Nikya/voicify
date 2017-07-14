@@ -19,6 +19,7 @@ try {
 	$module = null;
 	$subModule = null;
 	$say = null;
+	$prefix = null;
 
 	Console::setDebug(isset($_GET['debugMode']));
 	Console::d('Debug status', Console::isDebug() ? 'enable' : 'disable');
@@ -40,7 +41,6 @@ try {
 		$exTargetV = explode('_', $fullModule);
 		$module = $exTargetV[0];
 		$subModule = count($exTargetV) > 1 ? $exTargetV[1] : substr($target, 0, 1) . 'Main';
-//var_dump($subModule); exit;
 	}
 
 /*******************************************************************************

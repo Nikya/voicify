@@ -27,7 +27,7 @@ else {
 	}
 
 	// Call Textify process
-	$tfy = new Textify($colVoicekey[$voicekey]['textList'], $data);
+	$tfy = new Textify($colVoicekey[$voicekey], $data);
 	$tfy->process();
 	$say = $tfy->getFinalText();
 

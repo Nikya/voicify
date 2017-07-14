@@ -2,7 +2,7 @@
 	"type" : "FEATURE",
 	"name": "The base",
 	"desc": "Simple basics of the system",
-	"version": "1.0",
+	"version": "1.1",
 	"author": "Nikya",
 	"sourcelink": "https://github.com/Nikya/voicify",
 	"play": {
