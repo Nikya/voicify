@@ -325,26 +325,6 @@ class CalandarEntryBean extends stdClass {
 ********************************************************************************
 ********************************************************************************
 * Le constructeur des brealing news
-*
-* Général
-	* `intro` : Introduction avec date du jour
-	* `conclusion` : Conclusion
-* Agenda
-	* `a_transition` : Introduction aux agendas
-	* `a_first` : Lecture premier agenda
-	* `a_then` : Lecture agenda suivant
-	* `a_last` : Lecture dernier agenda
-	* `a_no` : L'agenda est vide
-	* `a_nos` : Tous les agendas sont vides
-	* `a_error` : Erreur de lecture d'un agenda
-* Météo
-	* `w_transition` : Introduction à la météo
-	* `w_sunrise_f` : Lévée de soleil futur
-	* `w_sunrise_p` : Lévée de soleil passé
-	* `w_sunset` : Couché de soleil
-	* `w_description_mono` : Conditions de la journée
-	* `w_description_double` : Conditions matin puis après-midi
-	* `w_temperature` : Température actuel, min puis max
 */
 class BreakingnewsBuilder {
 
@@ -354,11 +334,18 @@ class BreakingnewsBuilder {
 	/** L'instance de l'utilitaire des configurations */
 	private $config;
 
+	/** La temperature actuel extérieur */
+	private $temperatureOutside;
+
+	/** FAire marquer une pause dans la lecture */
+	const PAUSE_TAG = " . . . ";
+
 	/***************************************************************************
 	* Le contructeur de la class
 	*/
-	public function __construct() {
+	public function __construct($temperatureOutside) {
 		$this->config = Config::getInstance();
+		$this->temperatureOutside = $temperatureOutside;
 	}
 
 	/***************************************************************************
@@ -368,10 +355,13 @@ class BreakingnewsBuilder {
 		$fullContent = array();
 
 		$fullContent = array_merge($fullContent, $this->processIntro());
-		// $fullContent = array_merge($fullContent, $this->processTransitionAgenda());
-		// $fullContent = array_merge($fullContent, $this->processAgenda());
+		$fullContent = array_merge($fullContent, $this->processTransitionAgenda());
+		array_push($fullContent, self::PAUSE_TAG);
+		$fullContent = array_merge($fullContent, $this->processAgenda());
 		$fullContent = array_merge($fullContent, $this->processTransitionWeather());
+		array_push($fullContent, self::PAUSE_TAG);
 		$fullContent = array_merge($fullContent, $this->processWeather());
+		array_push($fullContent, self::PAUSE_TAG);
 		$fullContent = array_merge($fullContent, $this->processConclusion());
 
 		$this->fullContent = self::addDot($fullContent);
@@ -393,7 +383,7 @@ class BreakingnewsBuilder {
 		foreach ($fullContent as $c) {
 			$newC = trim($c);
 
-			if (!preg_match('/[\!\?\.]$/', $newC))
+			if (strlen($newC)>0 and !preg_match('/[\!\?\.]$/', $newC))
 				$newC .= '.';
 
 			array_push($newFullContent, $newC);
@@ -432,8 +422,9 @@ class BreakingnewsBuilder {
 	* Sub Process */
 	private function processConclusion() {
 		$col = $this->getBreakingtext('conclusion');
+		$data = array(time());
 
-		$tfy = new Textify($col, array());
+		$tfy = new Textify($col, $data);
 		$tfy->process();
 
 		return array ($tfy->getFinalText());
@@ -650,70 +641,29 @@ class BreakingnewsBuilder {
 
 	/***************************************************************************
 	* La partie météo des BN
-	*
 	*/
 	private function processWeather() {
 		$full = array();
-
-		$weatheData = $this->loadCityWeather();
+		$weatherList = $this->getWeatherList();
+		$weatheData = $this->loadCityWeather($weatherList);
 		$ephemerisData = $this->loadSunEphemeris();
 
-		$full += processSunrise($ephemerisData[sunrise]))
-
-
-		var_dump($full); exit;
-/*
-		array_push($txtArray, 'SLEEP_2');
-
-		// sunrise
-		array_push($txtArray, buildWhether_sunrise($weatherData));
-		array_push($txtArray, ' ... ');
-
-		// Condition
-		$morningDescription = $weatherData['morning']['description'];
-		$afternoonDescription = $weatherData['afternoon']['description'];
-		// Si même condition pour le matin et l'apres midi
-		if (strcasecmp($morningDescription,$afternoonDescription)==0)
-			$phrase = rand1FromArray($text['breakingnews']['w_description_mono']);
-		//  ou si pas de condition trouvée pour la matinée
-		elseif (empty($morningDescription)) {
-			$phrase = rand1FromArray($text['breakingnews']['w_description_mono']);
-			$morningDescription = $afternoonDescription;
+		$full = array_merge($full, $this->processSunrise($ephemerisData['sunrise']));
+		foreach ($weatherList as $weatherId => $weatherName) {
+			$full = array_merge($full, $this->processCondition($weatheData[$weatherId], $weatherName));
+			$full = array_merge($full, $this->processTemperature($weatheData[$weatherId]));
 		}
-		else
-			$phrase = rand1FromArray($text['breakingnews']['w_description_double']);
+		$full = array_merge($full, $this->processTemperatureOutside());
+		$full = array_merge($full, $this->processSunset($ephemerisData['sunset']));
 
-		$phraseFormater = msgfmt_create('fr_FR', $phrase);
-		$phraseFinal = msgfmt_format($phraseFormater, array($morningDescription, $afternoonDescription));
-		array_push($txtArray, $phraseFinal);
-		array_push($txtArray, 'SLEEP_2');
-
-		// Temperature
-		$morningTemperature = $weatherData['morning']['temperature'];
-		$afternoonTemperature = $weatherData['afternoon']['temperature'];
-		$currentTemperature = $weatherData['temperature_exterieur'];
-		if (empty($morningTemperature))
-			$morningTemperature = $afternoonTemperature;
-
-		$phrase = rand1FromArray($text['breakingnews']['w_temperature']);
-		$phraseFormater = msgfmt_create('fr_FR', $phrase);
-		$phraseFinal = msgfmt_format($phraseFormater, array($currentTemperature, $morningTemperature, $afternoonTemperature));
-		array_push($txtArray, $phraseFinal);
-
-		// sunset
-		array_push($txtArray, ' ... ');
-		array_push($txtArray, buildWhether_sunset($weatherData));
-
-		return $txtArray;
-	*/
+		return $full;
 	}
 
 	/***************************************************************************
 	* Obtenir les météo de chaque ville
 	*/
-	private function loadCityWeather() {
+	private function loadCityWeather($weatherList) {
 		$data = array();
-		$weatherList = $this->getWeatherList();
 
 		foreach ($weatherList as $weatherId => $weatherName) {
 			$meteoBrowser = new MeteoFranceAPIBrowser($weatherId);
@@ -734,8 +684,8 @@ class BreakingnewsBuilder {
 	private function loadSunEphemeris() {
 		$data = array();
 
-		$data['ephemeris']['sunrise'] = date_sunrise(time(), SUNFUNCS_RET_TIMESTAMP); //, $latitude, $longitude, $zenith, $gmtoffset);
-		$data['ephemeris']['sunset'] = date_sunset(time(), SUNFUNCS_RET_TIMESTAMP); //, $latitude, $longitude, $zenith, $gmtoffset);
+		$data['sunrise'] = date_sunrise(time(), SUNFUNCS_RET_TIMESTAMP); //, $latitude, $longitude, $zenith, $gmtoffset);
+		$data['sunset'] = date_sunset(time(), SUNFUNCS_RET_TIMESTAMP); //, $latitude, $longitude, $zenith, $gmtoffset);
 
 		return $data;
 	}
@@ -748,8 +698,9 @@ class BreakingnewsBuilder {
 		$sunriseDT = new DateTime();
 		$sunriseDT->setTimestamp($sunriseTS);
 		$nowDT = new DateTime('now');
-		$interval = $sunriseDT->diff($nowDT);
-		$data = array($interval->h, $interval->m);
+
+		$interval = $nowDT->diff($sunriseDT);
+		$data = array($interval->h, $interval->i);
 
 		// événement passé
 		if ($interval->invert == 1)
@@ -761,107 +712,85 @@ class BreakingnewsBuilder {
 		$tfy = new Textify($col, $data);
 		$tfy->process();
 
-// TODO continuer ici : A tester et adpater les TEXTE pour prendre en compte l'absence ou non d'heure
 		return array ($tfy->getFinalText());
 	}
 
-/*
-	private function buildWhether_old() {
+	/***************************************************************************
+	* Textify Sunset
+	*/
+	private function processSunset ($sunsetTS) {
+		$data = array();
+		$col = $this->getBreakingtext('w_sunset');
+		$data[0] = $sunsetTS;
 
+		$tfy = new Textify($col, $data);
+		$tfy->process();
 
-		$meteo = new MeteoCore();
-		$weatherData = $meteo->getBreakingnewsWeatherData();
+		return array ($tfy->getFinalText());
+	}
 
-		// Intro
-		array_push($txtArray, rand1FromArray($text['breakingnews']['w_intro']));
-		array_push($txtArray, 'SLEEP_2');
+	/***************************************************************************
+	* Textify Condition
+	*/
+	private function processCondition($weatherData, $weatherName) {
+		$mDesc = $weatherData['morning']['description'];
+		$aDesc = $weatherData['afternoon']['description'];
+		$col = null;
+		$data = array($weatherName, $mDesc, $aDesc);
 
-		// sunrise
-		array_push($txtArray, buildWhether_sunrise($weatherData));
-		array_push($txtArray, ' ... ');
-
-		// Condition
-		$morningDescription = $weatherData['morning']['description'];
-		$afternoonDescription = $weatherData['afternoon']['description'];
-		// Si même condition pour le matin et l'apres midi
-		if (strcasecmp($morningDescription,$afternoonDescription)==0)
-			$phrase = rand1FromArray($text['breakingnews']['w_description_mono']);
-		//  ou si pas de condition trouvée pour la matinée
-		elseif (empty($morningDescription)) {
-			$phrase = rand1FromArray($text['breakingnews']['w_description_mono']);
-			$morningDescription = $afternoonDescription;
+		// Si aucune condition trouvée
+		if ($mDesc==null and $aDesc==null)
+			return array('');
+		// Si pas de condition trouvée pour la matinée
+		// Ou condition identiques
+		elseif ($mDesc == null or strcasecmp($mDesc, $aDesc)==0) {
+			$col = $this->getBreakingtext('w_description_mono');
+			$data = array($weatherName, $aDesc, $aDesc);
 		}
+		// Sinon description double
 		else
-			$phrase = rand1FromArray($text['breakingnews']['w_description_double']);
+			$col = $this->getBreakingtext('w_description_double');
 
-		$phraseFormater = msgfmt_create('fr_FR', $phrase);
-		$phraseFinal = msgfmt_format($phraseFormater, array($morningDescription, $afternoonDescription));
-		array_push($txtArray, $phraseFinal);
-		array_push($txtArray, 'SLEEP_2');
+		$tfy = new Textify($col, $data);
+		$tfy->process();
 
-		// Temperature
-		$morningTemperature = $weatherData['morning']['temperature'];
-		$afternoonTemperature = $weatherData['afternoon']['temperature'];
-		$currentTemperature = $weatherData['temperature_exterieur'];
-		if (empty($morningTemperature))
-			$morningTemperature = $afternoonTemperature;
-
-		$phrase = rand1FromArray($text['breakingnews']['w_temperature']);
-		$phraseFormater = msgfmt_create('fr_FR', $phrase);
-		$phraseFinal = msgfmt_format($phraseFormater, array($currentTemperature, $morningTemperature, $afternoonTemperature));
-		array_push($txtArray, $phraseFinal);
-
-		// sunset
-		array_push($txtArray, ' ... ');
-		array_push($txtArray, buildWhether_sunset($weatherData));
-
-		return $txtArray;
+		return array ($tfy->getFinalText());
 	}
 
-	/** Returne une phrase pour decrire le levé du soleil
-	private function buildWhether_sunrise ($weatherData) {
-		global $text;
+	/***************************************************************************
+	* Textify Condition
+	*/
+	private function processTemperature($weatherData) {
+		$mT = $weatherData['morning']['temperature'];
+		$aT = $weatherData['afternoon']['temperature'];
+		$col = $this->getBreakingtext('w_temperature_double');
+		$data = array($mT, $aT);
 
-		// Création des dateTime
-		$sunriseDT = new DateTime();
-		$sunriseDT->setTimestamp($weatherData['ephemeris']['sunrise']);
-		$nowDT = new DateTime('now');
+		// Si aucune trouvée
+		if ($mT==null and $aT==null)
+			return array('');
+		// Si pas trouvée pour la matinée
+		elseif ($mT == null) {
+			$data = array($aT, $aT);
+		}
 
-		// Calcule de l'interval
-		$interval = $sunriseDT->diff($nowDT);
+		$tfy = new Textify($col, $data);
+		$tfy->process();
 
-		// Si interval est supérieur à l'heure
-		$intervalStrFinal = null;
-		if (intval($interval->format('%h') > 0))
-			$intervalStrFinal = $interval->format('%h heures %i minutes');
-		else
-			$intervalStrFinal = $interval->format('%i minutes');
-
-		// Si l'évènement ne sais pas encore produit
-		$phrase = null;
-		if (intval($interval->format('%R1') < 0))
-			$phrase = rand1FromArray($text['breakingnews']['w_sunrise_f']);
-		else
-			$phrase = rand1FromArray($text['breakingnews']['w_sunrise_p']);
-
-		$phraseFormater = msgfmt_create('fr_FR', $phrase);
-		$phraseFinal = msgfmt_format($phraseFormater, array($intervalStrFinal));
-
-		return $phraseFinal;
+		return array ($tfy->getFinalText());
 	}
 
-	/** Returne une phrase pour decrire le levé du soleil */
-	private function buildWhether_sunset ($weatherData) {
-		global $text;
+	/***************************************************************************
+	* Textify Condition
+	*/
+	private function processTemperatureOutside() {
+		$col = $this->getBreakingtext('w_temperature_outside');
+		$data = array($this->temperatureOutside);
 
-		$sunsetTS = $weatherData['ephemeris']['sunset'];
+		$tfy = new Textify($col, $data);
+		$tfy->process();
 
-		$phrase = rand1FromArray($text['breakingnews']['w_sunset']);
-
-		$phraseFormater = msgfmt_create('fr_FR', $phrase);
-		$phraseFinal = msgfmt_format($phraseFormater, array($sunsetTS));
-
-		return $phraseFinal;
+		return array ($tfy->getFinalText());
 	}
 }
 

@@ -119,7 +119,7 @@ class ViewUtils {
 					<br/>
 					<br/>
 					<label>File content</label>
-					<textarea style="width:100%; min-height:150px; max-height:400px;">$fContent</textarea>
+					<textarea style="width:100%; height:32em; font-family:monospace">$fContent</textarea>
 EED;
 	}
 }

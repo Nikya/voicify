@@ -1,16 +1,16 @@
 {
   "intro": [
     {
-      "text": "En ce jour {0, date, d} du mois {0, date, MMMM} de l'an de grace {0, date, YYYY}. Je vais procéder à la lecture de l'ordre du jour.",
+      "text": "En ce jour {0, date, d} du mois {0, date, MMMM} de l'an de grace {0, date, YYYY}. Je vais procéder à la lecture de votre quotidien.",
       "frequency": 1
     },
     {
       "text": "Bonjour à tous ! Nous sommes {0, date, full}, et voici vos informations de la journée ",
-      "frequency": 1
+      "frequency": 2
     },
     {
       "text": "Bonjour bonjour ! Et voici vos informations personalisées pour cette journée de {0, date, full}",
-      "frequency": 1
+      "frequency": 2
     },
     {
       "text": "Good Morning ! Je vous présente les breaking newses de ce {0, date, full}",
@@ -18,18 +18,52 @@
     },
     {
       "text": "Bienvenue en ce {0, date, full}, où j'ai l'honneur de vous présentez votre actualité",
-      "frequency": 1
+      "frequency": 21
     },
     {
       "text": "Mesdames, Messieurs, Bonjour. Permettez-moi de vous lire votre petit journal de ce {0, date, full}",
       "frequency": 1
     },
     {
-      "text": "Messieurs, votre journal est de retour. Il est daté du {0, date, full}",
+      "text": "Mesdames, Messieurs, votre journal est de retour. Il est daté du {0, date, full}",
       "frequency": 1
     },
     {
-      "text": "En ce jour {0, date, d} du mois {0, date, MMMM} de l'an de grace {0, date, YYYY}. Je vais procéder à la lecture de l'ordre du jour.",
+      "text": "Salut ! Comment ça va bien aujourd'hui ? Moi comme un {0, date, EEEE} ! Allé jte lis ton vieux journal du {0, date, d} {0, date, MMMM}.",
+      "frequency": 1
+    },
+    {
+      "text": "Bon {0, date,EEEE} à tous. Je vais vous lire ce journal N°{0, date, d} de {0, date, MMMM}.",
+      "frequency": 1
+    }
+  ],
+  "conclusion": [
+    {
+      "text": "C'est la fin de cette édition. Je vous souhaite une bonne journée.",
+      "frequency": 1
+    },
+    {
+      "text": "Merci de m'avoir écouté. Bonne journée, à ce soir.",
+      "frequency": 1
+    },
+    {
+      "text": "Il ne me reste plus qu'à vous souhaiter une bonne journée. Merci de votre attention.",
+      "frequency": 1
+    },
+    {
+      "text": "Bon {0, date,EEEE} à tous maintenant !",
+      "frequency": 1
+    },
+    {
+      "text": "C'est la fin de votre journal, bon {0, date,EEEE}.",
+      "frequency": 5
+    },
+    {
+      "text": "Je viens d'atteindre le bout de ce journal. Bon courage pour cette journeé. Je reste à votre service.",
+      "frequency": 1
+  },
+    {
+      "text": "Il est maintenant {0, time, short}, bonne journée.",
       "frequency": 1
     }
   ],
@@ -48,7 +82,7 @@
     },
     {
       "text": "Quelles sont les quêtes à accomplir aujourd'hui ?",
-      "frequency": 111
+      "frequency": 1
     }
   ],
   "a_first": [
@@ -141,27 +175,13 @@
       "frequency": 1
     }
   ],
-  "conclusion": [
-    {
-      "text": "C'est la fin de cette édition. Je vous souhaite une bonne journée.",
-      "frequency": 1
-    },
-    {
-      "text": "Merci de m'avoir écouté. Bonne journée, à ce soir.",
-      "frequency": 1
-    },
-    {
-      "text": "Il ne me reste plus qu'à vous souhaiter une bonne journée. Merci de votre attention.",
-      "frequency": 1
-    }
-  ],
   "w_transition": [
     {
-      "text": "Passons à présent à la météo...",
+      "text": "Passons à présent à la météo.",
       "frequency": 1
     },
     {
-      "text": "un coups d'oeil maintenant sur la météo...",
+      "text": "un coups d'oeil maintenant sur la météo.",
       "frequency": 1
     },
     {
@@ -169,58 +189,58 @@
       "frequency": 1
     },
     {
-      "text": "Comment devriez-vous vous habiller aujourd'hui ? Voyont la météo...",
+      "text": "Comment devriez-vous vous habiller aujourd'hui ? Voyont la météo.",
       "frequency": 1
     }
   ],
   "w_sunrise_f": [
     {
-      "text": "Le soleil se levera dans {0}.",
+      "text": "Le soleil se levera dans {0, plural, =0 {} other {# heures et }} {1} minutes.",
+      "frequency": 3
+    },
+    {
+      "text": "Le jour commencera dans {0, plural, =0 {} other {# heures et }} {1} minutes.",
       "frequency": 1
     },
     {
-      "text": "Le jour commencera dans {0}.",
+      "text": "La lumière percera dans {0, plural, =0 {} other {# heures et }} {1} minutes.",
       "frequency": 1
     },
     {
-      "text": "La lumière percera dans {0}.",
+      "text": "La nuit cédera ça place au jour dans {0, plural, =0 {} other {# heures et }} {1} minutes.",
       "frequency": 1
     },
     {
-      "text": "La nuit cédera ça place au jour dans {0}.",
-      "frequency": 1
-    },
-    {
-      "text": "Il ne reste plus que {0} de nuit sombre.",
+      "text": "Il ne reste plus que {0, plural, =0 {} other {# heures et }} {1} minutes de nuit sombre.",
       "frequency": 1
     }
   ],
   "w_sunrise_p": [
     {
-      "text": "Le soleil est levé depuis {0}.",
+      "text": "Le soleil est levé depuis {0, plural, =0 {} other {# heures et }} {1} minutes.",
+      "frequency": 3
+    },
+    {
+      "text": "Le jour a commencé depuis {0, plural, =0 {} other {# heures et }} {1} minutes.",
       "frequency": 1
     },
     {
-      "text": "Le jour a commencé depuis {0}.",
+      "text": "La lumière a percé l'obscurité depuis {0, plural, =0 {} other {# heures et }} {1} minutes.",
       "frequency": 1
     },
     {
-      "text": "La lumière a percé l'obscurité depuis {0}.",
+      "text": "La jour a pris la place de la nuit depuis {0, plural, =0 {} other {# heures et }} {1} minutes.",
       "frequency": 1
     },
     {
-      "text": "La jour a pris la place de la nuit depuis {0}.",
-      "frequency": 1
-    },
-    {
-      "text": "Cela fait déja {0} que le jour à commencé.",
+      "text": "Cela fait déja {0, plural, =0 {} other {# heures et }} {1} minutes que le jour à commencé.",
       "frequency": 1
     }
   ],
   "w_sunset": [
     {
       "text": "Le soleil se couchera à {0,time, short}.",
-      "frequency": 1
+      "frequency": 3
     },
     {
       "text": "La nuit dévorera le jour vers {0,time, short}.",
@@ -241,63 +261,89 @@
   ],
   "w_description_mono": [
     {
-      "text": "Les conditions pour cette journée seront : {0}.",
+      "text": "Les conditions pour cette journée à {0}, seront : {1}.",
       "frequency": 1
     },
     {
-      "text": "{0}, sont les conditions a attendre de cette journée.",
+      "text": "{1}, sont les conditions a attendre de cette journée à {0}.",
       "frequency": 1
     },
     {
-      "text": "Une journée placée sous un ciel de : {0}.",
+      "text": "Une journée à {0}, placée sous un ciel de : {1}.",
       "frequency": 1
     },
     {
-      "text": "Cette journée nous annonce : {0}.",
+      "text": "A {0}, cette journée nous annonce : {1}.",
       "frequency": 1
     }
   ],
   "w_description_double": [
     {
-      "text": "Les conditions pour cette matinée seront : {0}. puis {1}, pour cette après-midi.",
+      "text": "Les conditions à {0}, pour cette matinée seront : {1}. puis {2}, pour cette après-midi.",
       "frequency": 1
     },
     {
-      "text": "{0}, sont les conditions a attendre de cette matinée. {1}, pour cette après-midi",
+      "text": "{1}, sont les conditions a attendre de cette matinée à {0}. {2}, pour cette après-midi",
       "frequency": 1
     },
     {
-      "text": "Une matinée placée sous un ciel de : {0}. Une après-midi sous de : {1}",
+      "text": "A {0}, une matinée placée sous un ciel de : {1}. Une après-midi sous de : {2}",
       "frequency": 1
     },
     {
-      "text": "La matinée nous annonce : {0}. L'après-midi, elle, {1}",
+      "text": "La matinée nous annonce : {1}. L'après-midi, elle, {2}, à {0}",
       "frequency": 1
     }
   ],
-  "w_temperature": [
+  "w_temperature_double": [
     {
-      "text": "La température extérieur est de {0}°. Elles oscilleront entre {1} et {2}°.",
+      "text": "Les températures oscilleront entre {0} et {1}°.",
       "frequency": 1
     },
     {
-      "text": "Ma sonde m'indique une température extérieur de {0}°. Je devrait mesurer des température entre {1} et {2}° aujourd'hui.",
+      "text": "Je devrait mesurer des températures entre {0} et {1}° aujourd'hui.",
       "frequency": 1
     },
     {
-      "text": "Actuellement la température extérieur est de {0}°. La températures minimal attendue est de {1}, la maximal {2}°.",
+      "text": "La températures minimal attendue est de {0}, la maximal {1}°.",
       "frequency": 1
     },
     {
-      "text": "Il fait actuellement {0}° dehors. Le mercure devrait partir de {1} pour aller jusqu'à {2}°.",
+      "text": "Le mercure devrait partir de {0} pour aller jusqu'à {1}°.",
       "frequency": 1
     },
     {
-      "text": "Je lis une température extérieur de {0}°. Les thermomètres à {1} seront stimulés jusquà {2}°.",
+      "text": "Les thermomètres à {0} seront stimulés jusquà {1}°.",
       "frequency": 1
     },
     {
-      "text": "Les température iront de {1} à {2}°. Actuellement celle extérieur est de {0}.",
+      "text": "Les température iront de {0} à {1}°.",
+      "frequency": 1
+    }
+],
+  "w_temperature_outside": [
+    {
+      "text": "La température extérieur est de {0}°.",
+      "frequency": 1
+    },
+    {
+      "text": "Ma sonde m'indique une température extérieur de {0}°.",
+      "frequency": 1
+    },
+    {
+      "text": "Actuellement la température extérieur est de {0}°.",
+      "frequency": 1
+    },
+    {
+      "text": "Il fait actuellement {0}° dehors.",
+      "frequency": 1
+    },
+    {
+      "text": "Je lis une température extérieur de {0}°.",
+      "frequency": 1
+    },
+    {
+      "text": "Actuellement celle extérieur est de {0}°.",
       "frequency": 1
     }
   ]

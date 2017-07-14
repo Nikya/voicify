@@ -13,12 +13,12 @@
 	},
 	"config": {
 		"cBreakingtext": {
-			"name": "Daily texts",
-			"desc": "All texts use for the breaking news"
+			"name": "Breaking texts",
+			"desc": "All texts use for the breakingnews"
 		},
 		"cMain": {
-			"name": "Global",
-			"desc": "The city to use, agenda listing."
+			"name": "Main",
+			"desc": "Main configuration for wether cities, agenda listing."
 		},
 		"cGAgenda": {
 			"name": "Agenda permission",
