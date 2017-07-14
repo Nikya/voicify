@@ -76,7 +76,11 @@
 
 			<!-- CENTER - ACTION -->
 			<div class="col-sm-6">
-				<?php include("./core/view/_$target.php"); ?>
+				<?php try {
+					include("./core/view/_$target.php");
+				 } catch (Exception $e) {
+					echo "<p>Fail to build content part : {$e->getMessage()} </p>"; 
+				 }?>
 			</div>
 
 			<!-- RIGHT - CONSOLE -->

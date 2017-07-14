@@ -170,12 +170,31 @@ class Config {
 	/***************************************************************************
 	* Return already readed module config file or load it
 	*/
+	public function checkConfigVersion($module, $aData, $path) {
+		$manifestVersion = $this->getModuleManifest($module)['version'];
+		$configFileVersion = '';
+		if (array_key_exists('version', $aData)) {
+			$configFileVersion = $aData['version'];
+			unset($aData['version']);
+		}
+
+		if (strcasecmp($manifestVersion, $configFileVersion)!=0)
+			Console::w('checkConfigVersion', "A configuration file for '$module' need to be manualy updated from version '$configFileVersion' to '$manifestVersion'.", $path);
+
+		return $aData;
+	}
+
+	/***************************************************************************
+	* Return already readed module config file or load it
+	*/
 	public function getModuleConfig($module, $submodule='main') {
 		$key = $module .'_'. $submodule;
 		$path = CoreUtils::PATH_CONFIG.$key.'.json';
 
+		$aData = JsonUtils::jFile2Array($path);
+		$aData = $this->checkConfigVersion($module, $aData, $path);
 		if (!array_key_exists($key, $this->moduleConfig)) {
-			$this->moduleConfig[$key] = JsonUtils::jFile2Array($path);
+			$this->moduleConfig[$key] = $aData;
 		}
 
 		return $this->moduleConfig[$key];

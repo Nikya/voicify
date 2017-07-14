@@ -6,7 +6,7 @@
 	<div class="content">
 		<form action="." >
 			<input type="hidden" name="setup" value="run"/>
-			<input type="submit" value="Run setup" class="btn btn-default navbar-btn btn-success" title="Execute the setup"/>
+			<input type="submit" value="Run setup / update" class="btn btn-default navbar-btn btn-success" title="Execute the setup"/>
 		</form>
 	</div>
 </div>

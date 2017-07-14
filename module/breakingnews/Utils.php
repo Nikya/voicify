@@ -176,7 +176,7 @@ class UtilsGoogleApi {
 	* Save the token into the config token file
 	*/
 	public function saveToken($token) {
-		$allToken = Config::getInstance()->getModuleConfig('breakingnews', 'googleApiToken');
+		$allToken = Config::getInstance()->getModuleConfig('breakingnews', 'googleApiToken', false);
 		$allToken[$this->gAccount] = $token;
 		Config::getInstance()->saveModuleConfig('breakingnews', 'googleApiToken', $allToken);
 	}
@@ -185,7 +185,7 @@ class UtilsGoogleApi {
 	* Read the token from the config token file
 	*/
 	public function readToken() {
-		$allToken = Config::getInstance()->getModuleConfig('breakingnews', 'googleApiToken');
+		$allToken = Config::getInstance()->getModuleConfig('breakingnews', 'googleApiToken', false);
 
 		if(!array_key_exists($this->gAccount, $allToken))
 			throw new Exception("No Agenda access permission for {$this->gAccount}", 1);
@@ -197,7 +197,7 @@ class UtilsGoogleApi {
 	* Test to read some agenda entries
 	*/
 	public function delete() {
-		$allToken = Config::getInstance()->getModuleConfig('breakingnews', 'googleApiToken');
+		$allToken = Config::getInstance()->getModuleConfig('breakingnews', 'googleApiToken', false);
 		unset($allToken[$this->gAccount]);
 		Config::getInstance()->saveModuleConfig('breakingnews', 'googleApiToken', $allToken);
 	}

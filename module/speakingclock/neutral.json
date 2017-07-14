@@ -1,4 +1,6 @@
-[
+{
+	"version" : "1.0",
+	"neutral": [
 		{
 			"text": "C'est la {0}eme heures de ce jour.",
 			"frequency": 2
@@ -236,3 +238,4 @@
 			"text": "Il est {0} heures. Et autant que je te le dise, tout de suite. Dans une heure, il sera {1} heure."
 		}
 ]
+}

@@ -96,7 +96,7 @@ class Utils {
 		$strTrgTxt = '';
 		$conf = Config::getInstance();
 		$cHour = $conf->getModuleConfig('speakingclock', 'hour');
-		$cNeutral = $conf->getModuleConfig('speakingclock', 'neutral');
+		$cNeutral = $conf->getModuleConfig('speakingclock', 'neutral')['neutral'];
 
 		$strTrgTxt .= '<optgroup label="Neutral">';
 		for ($i=0; $i<count($cNeutral); $i++) {

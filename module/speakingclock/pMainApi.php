@@ -8,7 +8,7 @@ else
 
 $config = Config::getInstance();
 $colHour = $config->getModuleConfig('speakingclock', 'hour');
-$colNeutral = $config->getModuleConfig('speakingclock', 'neutral');
+$colNeutral = $config->getModuleConfig('speakingclock', 'neutral')['neutral'];
 
 
 // Choice a text collection

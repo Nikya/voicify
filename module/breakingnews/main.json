@@ -1,4 +1,5 @@
 {
+	"version" : "1.0",
 	"wetherList": {
 		"150140" : "Aurillac",
 		"750560" : "Paris"

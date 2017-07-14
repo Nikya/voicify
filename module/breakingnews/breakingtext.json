@@ -1,4 +1,5 @@
 {
+  "version" : "1.0",
   "intro": [
     {
       "text": "En ce jour {0, date, d} du mois {0, date, MMMM} de l'an de grace {0, date, YYYY}. Je vais procéder à la lecture de votre quotidien.",
