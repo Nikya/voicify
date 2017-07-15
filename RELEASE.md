@@ -2,7 +2,7 @@
 
 Voir [TODO](TODO.md) pour le contenue à venir.
 
-## 2.1
+## 2.1.0
 
 ### Feature
 * [NEW] [**breakingnews**](./module/breakingnews/README.md) : Un journal quotidien
