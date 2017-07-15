@@ -197,12 +197,14 @@ class Config {
 	/***************************************************************************
 	* Return already readed module config file or load it
 	*/
-	public function getModuleConfig($module, $submodule='main') {
+	public function getModuleConfig($module, $submodule='main', $checkVersion=true) {
 		$key = $module .'_'. $submodule;
 		$path = CoreUtils::PATH_CONFIG.$key.'.json';
 
 		$aData = JsonUtils::jFile2Array($path);
-		$aData = $this->checkConfigVersion($module, $aData, $path);
+		if ($checkVersion)
+			$aData = $this->checkConfigVersion($module, $aData, $path);
+			
 		if (!array_key_exists($key, $this->moduleConfig)) {
 			$this->moduleConfig[$key] = $aData;
 		}

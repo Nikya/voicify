@@ -3,4 +3,4 @@
 * Main Configuration View
 *******************************************************************************/
 
-		echo ViewUtils::configureFile('freeRabbit');
+		echo ViewUtils::configureFile('freerabbit');

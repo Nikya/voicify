@@ -2,7 +2,7 @@
 	"type" : "FEATURE",
 	"name": "Voicekey",
 	"desc": "Say a notification for a specific Keyword",
-	"version": "2.0",
+	"version": "2.1",
 	"author": "Nikya",
 	"sourcelink": "https://github.com/Nikya/voicify",
 	"play": {
