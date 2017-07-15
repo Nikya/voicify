@@ -92,7 +92,7 @@ function filesToLogTable($fId) {
 						$cssLvl = 'lvlko'; break;
 				}
 
-				$tHtml .= <<<EOR
+				$tHtml = <<<EOR
 					<tr>
 						<td>{$eLine[0]}</td>
 						<td>{$eLine[1]}</td>
@@ -100,12 +100,12 @@ function filesToLogTable($fId) {
 						<td>{$eLine[3]}</td>
 						<td>{$eLine[4]}</td>
 						<td>$mixed</td>
-					</tr>
+					</tr>$tHtml
 EOR;
 			}
 			// Unknow format
 			else {
-				$tHtml .= '<tr><td colspan="6">'.$line.'</td></tr>';
+				$tHtml = '<tr><td colspan="6">'.$line.'</td></tr>'.$tHtml;
 			}
 		}
 		fclose($file);

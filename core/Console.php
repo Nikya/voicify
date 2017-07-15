@@ -88,7 +88,7 @@ class Console {
 				$fMsg = self::sanitize($entry['msg']);
 				$fMixed = self::sanitize(print_r($entry['mixed'], true));
 
-				$out .= "$fTS;\t $o;\t $fLvl;\t $fTag;\t $fMsg;\t $fMixed \n";
+				$out .= "$fTS;\t #$o;\t $fLvl;\t $fTag;\t $fMsg;\t $fMixed \n";
 			}
 
 			$r = file_put_contents($fileName, "$out\n", FILE_APPEND);

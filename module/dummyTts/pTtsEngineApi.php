@@ -16,7 +16,7 @@ function dummySay() {
 	$ts = date('Y-m-d H:i:s');
 	$fileName = CoreUtils::PATH_TEMP.'log_dummyTts.csv';
 
-	$out .= "$ts;\t 0;\t I;\t dummySay.$prefix;\t $say\n";
+	$out .= "$ts;\t #0;\t I;\t dummySay.$prefix;\t $say\n";
 
 	// Process
 	$r = file_put_contents($fileName, $out, FILE_APPEND);
