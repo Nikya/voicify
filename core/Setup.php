@@ -18,7 +18,18 @@ class Setup {
 	* To check if the full modules already exits : Setup already done
 	*/
 	public static function isOk() {
-		return file_exists(CoreUtils::PATH_MANIFEST_MAIN);
+		if (!file_exists(CoreUtils::PATH_MANIFEST_MAIN))
+			return false;
+		else {
+			$mmVersion = Config::getInstance()->getManifestMainVersion();
+			if (strcasecmp($mmVersion, CoreUtils::VERSION)==0)
+				return true;
+			else {
+				Console::e('setup.isOk', "Manifest Version '$mmVersion' is different than expected CORE version '".CoreUtils::VERSION."'");
+				return false;
+			}
+		}
+
 	}
 
 	/***************************************************************************
@@ -63,6 +74,7 @@ class Setup {
 		$cntTotal = count(self::$manifestMain);
 
 		if (self::$runOk and $cntTotal>0) {
+			self::$manifestMain['version'] = CoreUtils::VERSION;
 			self::save();
 			Console::i('setup', "Setup sucessful ! x$cntTotal modules found and loaded.");
 		}

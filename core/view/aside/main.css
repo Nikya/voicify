@@ -62,6 +62,14 @@ ul.dropdown-menu > li > a > em {
 	font-family: monospace;
 }
 
+#version {
+	color: #ffe3c7;
+	float: right;
+	text-align: center;
+	padding: 1%;
+	font-size: 0.7em;
+}
+
 /*******************************************************************************
 * Content div : ccc
 */

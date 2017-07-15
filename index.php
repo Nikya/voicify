@@ -106,7 +106,7 @@
 	}
 
 	if (!Setup::isOk()) {
-		Console::e('index.setup', 'Setup required.');
+		Console::e('index.setup', 'Setup or system update is required.');
 	}
 
 /*******************************************************************************

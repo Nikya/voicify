@@ -53,7 +53,8 @@
 function modulesToHtml() {
 	$aHtml = array(
 		CoreUtils::MODULE_T_TTSENGINE => '',
-		CoreUtils::MODULE_T_FEATURE => ''
+		CoreUtils::MODULE_T_FEATURE => '',
+		CoreUtils::MODULE_T_CORE => ''
 	);
 
 	$aModules = Config::getInstance()->getManifestMain();

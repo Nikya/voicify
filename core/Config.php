@@ -42,7 +42,17 @@ class Config {
 	* Return the full manifest file
 	*/
 	public function getManifestMain() {
-		return $this->manifestMain;
+		$mm = $this->manifestMain;
+		unset($mm['version']);
+
+		return $mm;
+	}
+
+	/***************************************************************************
+	* Return the version of the main manifest file
+	*/
+	public function getManifestMainVersion() {
+		return $this->manifestMain['version'];
 	}
 
 	/***************************************************************************
@@ -51,7 +61,7 @@ class Config {
 	public function getSubManifestTT($targetType) {
 		$manifestSub = array();
 
-		foreach ($this->manifestMain as $mId => $module) {
+		foreach ($this->getManifestMain() as $mId => $module) {
 			if(count($module[$targetType])>0)
 				$manifestSub[$mId] = $module;
 		}
@@ -65,7 +75,7 @@ class Config {
 	public function getSubManifestMT($modulesType) {
 		$manifestSub = array();
 
-		foreach ($this->manifestMain as $mId => $module) {
+		foreach ($this->getManifestMain() as $mId => $module) {
 			if($module['type'] == $modulesType)
 				$manifestSub[$mId] = $module;
 		}
@@ -79,7 +89,7 @@ class Config {
 	public function getSubManifestTT_MT($targetType, $modulesType) {
 		$manifestSub = array();
 
-		foreach ($this->manifestMain as $mId => $module) {
+		foreach ($this->getManifestMain() as $mId => $module) {
 			if($module['type'] == $modulesType)
 				if(count($module[$targetType])>0)
 					$manifestSub[$mId] = $module;
@@ -150,7 +160,7 @@ class Config {
 	* Return a specific module manifest
 	*/
 	public function getModuleManifest($moduleId) {
-		return $this->manifestMain[$moduleId];
+		return $this->getManifestMain()[$moduleId];
 	}
 
 	/***************************************************************************

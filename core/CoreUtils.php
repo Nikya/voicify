@@ -5,6 +5,9 @@
 */
 class CoreUtils {
 
+	/** Core version */
+	const VERSION = '2.1';
+
 	/** Path to the config Dir */
 	const PATH_CONFIG = './config/';
 
@@ -22,6 +25,9 @@ class CoreUtils {
 
 	/** Module type */
 	const MODULE_T_TTSENGINE = 'TTSENGINE';
+
+	/** Module type */
+	const MODULE_T_CORE = 'CORE';
 
 	/** Menu type */
 	const TARGET_T_PLAY = 'play';
