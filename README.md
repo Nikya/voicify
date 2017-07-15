@@ -1,15 +1,14 @@
 # Home Voicify
-## Donner de la voix à votre maison domotisée !
 
-**Est un système de génération de _notification vocal variées_ pour les maisons domotisées**.
+_**Donner de la voix à votre maison domotisée !**_
 
-* Version : `2.0`
-* Auteur : [Nikya](https://github.com/Nikya)
-* Origine : [GitHub/Nikya/Voicify](https://github.com/Nikya/voicify)
+Origine du projet : [GitHub/Nikya/Voicify](https://github.com/Nikya/voicify)
 
 ## Présentation
 
-Certaines actions de votre domotique **méritent une _notification vocale_ **:
+**_Home Voicify_ est un système de génération de _notification vocal varable_ pour les maisons domotisées**.
+
+Certaines actions de votre domotique **méritent une _notification vocale_**:
 
 > La porte du garage est restée ouverte !
 
@@ -41,16 +40,18 @@ Avec une notification qui serait "_oublie fermer porte garage_", il est possible
 
 Plusieurs _fonctionnalités_ exploitent ce concept de _notification vocale variée_ :
 
-* [**Voicekey**](./module/voicekey/README.md) : Pour un certain mot clé, pouvoir définir des variations de texte.
-* [**Speaking-Clock**](./module/speakingclock/README.md) : Une horloge parlante qui annoncera l'heure toujours de façon différente.
+* [**voicekey**](./module/voicekey/README.md) : Pour un certain mot clé, pouvoir définir des variations de texte.
+* [**speakingclock**](./module/speakingclock/README.md) : Une horloge parlante qui annoncera l'heure toujours de façon différente.
+* [**breakingnews**](./module/breakingnews/README.md) : Un journal quotidien personalisé (météo, agenda, ...)
 
 #### Module type _TTSENGINE_
 
 Compatible avec plusieurs systèmes de _génération de synthèse vocale_ (TTS) :
 
-* [**Freerabbits**](./module/freerabbits/README.md) : Envoie de la notification vers un OpenKarotz sous FreeRabbits OS (Openkarotz)
-* [**Jarvis**](./module/jarvis/README.md) : Envoie de la notification vers un système Jarvis
-* [**ImperiHome**](./module/openkarotz/README.md) : Envoie de la notification vers une applciation ImperiHome
+* [**eedomusTts**](./module/eedomusTts/README.md) : La box domotique eedomus
+* [**freerabbit**](./module/freerabbit/README.md) : Un OpenKarotz sous FreeRabbits OS
+* [**jarvis**](./module/jarvis/README.md) :Un système Jarvis
+* [**imperihome**](./module/imperihome/README.md) : L'applciation ImperiHome
 
 ## Mise en service
 
@@ -64,21 +65,17 @@ Compatible avec plusieurs systèmes de _génération de synthèse vocale_ (TTS) 
 
 ### Installer
 
-Cloner [ce projet](https://github.com/Nikya/voicify) dans un répertoire _web_ du serveur PHP.
+Cloner le projet dans un répertoire _web_ du serveur PHP.
 
 	git clone https://github.com/Nikya/voicify
 
-### Dossiers de configuration et temporaire
+### Dossiers d'échanges
 
-Créer à la racine du dossier _voicify_ les dossiers de **configuration** et **temporaire** :
-
-* `config`
-* `temp`
-
-Donner les droits en _lecture/écriture_ sur ces dossiers de **configuration** et **temporaire** :
+Créer à la racine du dossier _voicify_, 2 dossiers d'échanges : **configuration** et **temporaire**, puis leur donner des droits en _lecture/écriture_ :
 
 ```shell
-mkdir
+mkdir config
+mkdir temp
 sudo chmod 666 config
 sudo chmod 666 temp
 ```
@@ -87,7 +84,7 @@ sudo chmod 666 temp
 
 1. Aller sur l'URL du serveur Web-PHP où est installé _Home Voicify_.
 1. Aller sur l'interface web de _Home Voicify_
-1. Comme demandé, executer le `Setup`
+1. Puis comme demandé, **executer le `Setup`**
 1. Une fois le `Setup` accomplie, il ne reste plus qu'à utiliser ce système
 
 ## Utiliser
@@ -95,9 +92,9 @@ sudo chmod 666 temp
 ### Tester
 Tester et jouer avec les fonctionalités du système grace au menu `Play`.
 
-Chaque page est constituée de 3 parties :
+Chaque page _play_ est constituée de 3 parties :
 
-* **Read Me** : Contient la documentation
+* **Read Me** : Contient la documentation contextuel
 * **Action** : Contient les éléments d'intérations
 * **Console** : Affiche les résultats de l'intération :
 	* **URL** : Contient l'URL appelée par l'intération
@@ -111,7 +108,7 @@ Chaque utilisation d'une fonctionalité génére une _**URL** d'API_ dans la _co
 Il suffit ensuite :
 1. de _copier_ cette URL
 2. de la _coller_ dans un composant de votre sytéme de domotique qui est capable d'appeler des URL externes.
-3. De _programmer_ dans votre domotique un appel vers cette URL au moments opportun.
+3. De _programmer_ dans votre domotique un appel au moments opportun vers ce composant.
 
 ### Edition des textes
 
@@ -119,22 +116,15 @@ Les textes utilisés suivent une syntaxe particulière nommée _Textify_ : Voir 
 
 ## Contribuer
 
-Vous pouvez contribuer à la vie du projet par l'utilisation classique de GitHub (issues, pull request, ...).  
+Vous pouvez contribuer à la vie du projet par l'utilisation classique de GitHub.
 
 Vous pouvez proposer vos propores modules de _fonctionalité_ ou de _TTS engine_ : il existe dans les fichiers du projet un modules caché nommé `moduleTemplate` qui a vocation a être dupliqué pour servire de modèle de création pour de nouveaux modules.
 
-## A venir
+## Release
 
-- Général
-	- Page de configuration des modules en mode éditable
-- Modules _FEATURE_
-	- **Breaking news / Report** : Génération d'un compte rendu ou d'un journal personalisé
-- Modules _TTSENGINE_
-	- **Amazon Echo**
-	- **Google Home**
-	- **Sarha**
-
-Voir également : [TODO.md](TODO.md)
+* [Release](RELEASE.md) : Détails et contenues des releases précédentes
+* [ToDo](TODO.md) : Nouveau contenues à venir
+* [Contributing](CONTRIBUTING.md) : Contribuer au projet ou proposer de nouveau modules.
 
 ## Remerciements
 

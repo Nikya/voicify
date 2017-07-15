@@ -1,51 +1,33 @@
-# TODO list du projet
-## Release 2.1
+# Home Voicify - Release notes
 
-_Poid des fonctionalités en points Fibonacci : 1, 2, 3, 5, 8, 13, 21_
+Voir [TODO](TODO.md) pour le contenue à venir.
 
-## Continuer Ici !!
-* [ ]
+## 2.1
 
-## Prio 1 : Indispansable à la prochaine release
-* [ ] (13)Feature : Breaking new
-* [x] (8) Log plus exploitables
-* [x] (1) Appliquer un Chmod() au fichier au moment de leur création (Config / Tmp)
+### Feature
+* [NEW] [**breakingnews**](./module/breakingnews/README.md) : Un journal quotidien
 
+### TTS Engine
+* [NEW] [**eedomusTts**](./module/eedomusTts/README.md) : La box domotique eedomus
+* [NEW] PREFIX : Possibilité d'ajouter un prefix avant la génération d'un TTS
 
-## Prio 2 : Souhaité pour la prochaine release
-* [ ] (13) Mécanisme de config polyvaland de text à fréquence
-* [ ] (13) Mécanisme de config générique
-* [-] (5) Doc à jours (Test liens interne sur GitHub et à rediriger en local ?)
-* [ ] (3) ICU Doc (voir Google Drive 'zelda' + lien en bas de page)
+### Other
+* Check version beetwen a module and his configs files
+* Check CORE version
+* Add log reading page
+* Apply CHMOD on file creation
+* Other minor fixes ...
 
+# 2.0
 
-## Prio 3 : Apports sympatiques
-* [ ] (13) Mécanisme d'update des fichier de conf en mode formulaire complet
-* [ ] (8) Afficher la version courante de voicify et vérifier la dernière version en ligne
-* [x] (5) Affichage de la log (La dernière seulement) ?
-* [x] Affichage du contenue du Dummy TTS ?
+* Deep re-engineering of the system
 
+# 1.x
 
-## Prio 4 : Apports mineurs
-* [ ] (3) Setup : Fonction de nettoyage des fichier temp (et des sauvegardes de conf)
-* [ ] (21) Gestion des updates de modules : Mise à jour des fichier de configuration
-* [ ] (5) README pour la creation de MODULE : CONTRIBUTE.md
+* First attempt of the project
 
---------------------------------------------------------------------------------
-# Modules
-## TTS engine
-* [ ] (3) Jeedom Say existe toujours ?
-* [ ] (3) eedomus say
-* [ ] (13) Google Home
-* [ ] (13) Amazon alexa
-* [ ] (3) Sarha
+# Gen note
 
-## FEATURE
-* [ ] (13) Breaking news / Report
+Technique de génération de la release note :
 
-
-## ICU Doc
-Voir ICU http://site.icu-project.org/ !!!!!!!!!!!!!!!!!!!
-http://userguide.icu-project.org/formatparse
-http://php.net/manual/fr/class.messageformatter.php
-http://icu-project.org/apiref/icu4c/classMessageFormat.html#details
+	git log `git describe --tags --abbrev=0`..HEAD --oneline
