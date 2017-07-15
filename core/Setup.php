@@ -110,7 +110,7 @@ class Setup {
 			Console::i('setup.readModule', "The $type module '$id' is loaded and installed");
 		} catch (Exception $e) {
 			self::$runOk = false;
-			Console::w('setup.readModule', "Fail to load the module '$id' : in '$path$id' ", $e);
+			Console::w('setup.readModule', "Fail to load the module '$id' : in '$path' ", $e);
 		}
 	}
 
@@ -213,10 +213,10 @@ class Setup {
 		if(!file_exists($cTo)) {
 			@$res = copy($cFrom, $cTo);
 			if ($res===FALSE)
-				throw new Exception("Fail to load default config file FROM '$cFrom' TO '$cTo' ");
+				throw new Exception("Fail to copy default config file FROM '$cFrom' TO '$cTo' ");
 			@$res = chmod($cTo, 0666);
 			if ($res===FALSE)
-				throw new Exception("Fail to load default config file FROM '$cFrom' TO '$cTo' ");
+				throw new Exception("Fail to CHMOD config file '$cTo' ");
 		}
 	}
 

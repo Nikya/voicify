@@ -76,8 +76,8 @@ Créer à la racine du dossier _voicify_, 2 dossiers d'échanges : **configurati
 ```shell
 mkdir config
 mkdir temp
-sudo chmod 666 config
-sudo chmod 666 temp
+sudo chmod 777 config
+sudo chmod 777 temp
 ```
 
 ### Initialiser
