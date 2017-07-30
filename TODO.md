@@ -1,13 +1,16 @@
 # Home Voicify - ToDo
 
-Voir [RELEASE](RELEASE.md) pour le contenue disponible.
+Voir [Release](https://github.com/Nikya/voicify/releases) pour le contenue disponible.
 
 ###### Poid des fonctionalités en points Fibonacci : 1, 2, 3, 5, 8, 13, 21
+
+## Ready to release
 
 ## Continuer Ici
 * [ ] ??
 
 ## Prio 1 : Indispensable à la prochaine release
+* [ ] (13) Breaking news avec sections de texte libre (Temp extérieur, trafic, qualité air, ...)
 * [ ] (13) Mécanisme de configuration générique pour les fichier Json
 
 
@@ -45,3 +48,8 @@ Voir ICU http://site.icu-project.org/ !!!!!!!!!!!!!!!!!!!
 http://userguide.icu-project.org/formatparse
 http://php.net/manual/fr/class.messageformatter.php
 http://icu-project.org/apiref/icu4c/classMessageFormat.html#details
+
+## Realease Gen
+Technique de génération de la release note :
+
+	git log `git describe --tags --abbrev=0`..HEAD --oneline

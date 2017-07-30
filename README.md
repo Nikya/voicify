@@ -6,7 +6,8 @@ Origine du projet : [GitHub/Nikya/Voicify](https://github.com/Nikya/voicify)
 
 ## Présentation
 
-**_Home Voicify_ est un système de génération de _notification vocal varable_ pour les maisons domotisées**.
+**_Home Voicify_ est un système de génération de _notification vocal variable_ pour les maisons domotisées**.  
+(Il génére des textes qui doivent être envoyés à un systéme TTS externe)
 
 Certaines actions de votre domotique **méritent une _notification vocale_**:
 
@@ -40,7 +41,7 @@ Avec une notification qui serait "_oublie fermer porte garage_", il est possible
 
 Plusieurs _fonctionnalités_ exploitent ce concept de _notification vocale variée_ :
 
-* [**voicekey**](./module/voicekey/README.md) : Pour un certain mot clé, pouvoir définir des variations de texte.
+* [**voicekey**](./module/voicekey/README.md) : Pour un certain mot clé déclancheur, obtenir une notificaiton vacale variante.
 * [**speakingclock**](./module/speakingclock/README.md) : Une horloge parlante qui annoncera l'heure toujours de façon différente.
 * [**breakingnews**](./module/breakingnews/README.md) : Un journal quotidien personalisé (météo, agenda, ...)
 
@@ -57,7 +58,6 @@ Compatible avec plusieurs systèmes de _génération de synthèse vocale_ (TTS) 
 
 ### Prerequis
 
-- Avoir installé _git_
 - Avoir un serveur Web _PHP_
 	- Version >5.6
 	- Extension `intl` : [Internationalization](http://php.net/manual/intl.installation.php)
@@ -65,9 +65,10 @@ Compatible avec plusieurs systèmes de _génération de synthèse vocale_ (TTS) 
 
 ### Installer
 
-Cloner le projet dans un répertoire _web_ du serveur PHP.
+Dans un _répertoire web_ du serveur PHP :
 
-	git clone https://github.com/Nikya/voicify
+* Télécharger la [dernière realease](https://github.com/Nikya/voicify/releases/latest)
+* ou [git-cloner](https://github.com/Nikya/voicify.git) le projet `git clone https://github.com/Nikya/voicify.git`
 
 ### Dossiers d'échanges
 
@@ -97,34 +98,29 @@ Chaque page _play_ est constituée de 3 parties :
 * **Read Me** : Contient la documentation contextuel
 * **Action** : Contient les éléments d'intérations
 * **Console** : Affiche les résultats de l'intération :
-	* **URL** : Contient l'URL appelée par l'intération
+	* **URL** : Contient l'URL d'API appelée par l'intération
 	* **Indicateur** : La couleur indique le bon déroulement ou non de l'intérration
 	* **Output** : Affiche un détail du bon déroulement ou non de l'intérration
 	* **Saying** : Affiche le texte final envoyé au systéme de notification vocale
 
 ### Liaison domotique
-Chaque utilisation d'une fonctionalité génére une _**URL** d'API_ dans la _console_.
+Chaque utilisation d'une fonctionalité génére une _**URL d'API**_ dans la _console_.
 
 Il suffit ensuite :
 1. de _copier_ cette URL
 2. de la _coller_ dans un composant de votre sytéme de domotique qui est capable d'appeler des URL externes.
-3. De _programmer_ dans votre domotique un appel au moments opportun vers ce composant.
+3. De _programmer_ dans votre sytéme de domotique, un appel au moments opportun vers ce composant.
 
 ### Edition des textes
 
 Les textes utilisés suivent une syntaxe particulière nommée _Textify_ : Voir la [documentation en ligne](https://github.com/Nikya/voicify/wiki/Syntaxe-Textify) pour exploiter au mieux cette syntaxe.
 
-## Contribuer
+## Releasing
 
-Vous pouvez contribuer à la vie du projet par l'utilisation classique de GitHub.
-
-Vous pouvez proposer vos propores modules de _fonctionalité_ ou de _TTS engine_ : il existe dans les fichiers du projet un modules caché nommé `moduleTemplate` qui a vocation a être dupliqué pour servire de modèle de création pour de nouveaux modules.
-
-## Release
-
-* [Release](RELEASE.md) : Détails et contenues des releases précédentes
+* [Release](https://github.com/Nikya/voicify/releases) : Détails et contenues des releases précédentes
 * [ToDo](TODO.md) : Nouveau contenues à venir
-* [Contributing](CONTRIBUTING.md) : Contribuer au projet ou proposer de nouveau modules.
+* [Contributing](CONTRIBUTING.md) : Comment contribuer au projet
+* [Licence](LICENSE) : GNU GENERAL PUBLIC LICENSE
 
 ## Remerciements
 
