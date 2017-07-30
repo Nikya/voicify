@@ -5,13 +5,16 @@ Voir [Release](https://github.com/Nikya/voicify/releases) pour le contenue dispo
 ###### Poid des fonctionalités en points Fibonacci : 1, 2, 3, 5, 8, 13, 21
 
 ## Ready to release
+* [x] (5) Breaking news avec sections de texte libre (Temp extérieur, trafic, qualité air, ...)
+
 
 ## Continuer Ici
 * [ ] ??
 
+
 ## Prio 1 : Indispensable à la prochaine release
-* [ ] (13) Breaking news avec sections de texte libre (Temp extérieur, trafic, qualité air, ...)
 * [ ] (13) Mécanisme de configuration générique pour les fichier Json
+* [ ] (8) Imperihome : Prendre en compte le sytéme de prefix intégré
 
 
 ## Prio 2 : Souhaité pour la prochaine release

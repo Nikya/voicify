@@ -9,13 +9,6 @@
 		$agendaUl .= "<li>{$aBean->getName()}</li>";
 ?>
 
-<!-- Temperature -->
-<fieldset class="form-group">
-	<label for="extTemperature">Temperature *</label></small>
-	<small class="text-muted">The current outside temperature</small>
-	<input type="number" class="form-control" id="extTemperature" name="extTemperature" value="80" min="-99" max="99" required/>
-</fieldset>
-
 <!-- Agendas -->
 <fieldset class="form-group">
 	<label for="extTemperature">Agendas</label></small>
@@ -36,4 +29,18 @@
 		<br/><a href="./?config=breakingnews_cMain">Setup city</a>
 		<br/><a href="http://www.meteo-france.mobi/home#!ville_synthese_150140" class="external">See the weather map</a>
 	</small>
+</fieldset>
+
+<!-- Vars -->
+<fieldset class="form-group">
+	<label for="var0">Free vars</label>
+	<small class="text-muted">The variables to be injected into the placeholders <code>{9}</code> of <strong>Free breaking texts</strong>.</small>
+	<small class="text-muted">They are optional, their number is unlimited.</small>
+
+	<input type="text" class="form-control" id="var0" name="vars[]" placeholder="{0}" value=""/>
+	<input type="text" class="form-control" id="var1" name="vars[]" placeholder="{1}" value=""/>
+	<input type="text" class="form-control" id="var2" name="vars[]" placeholder="{2}" value=""/>
+	<input type="text" class="form-control" id="var3" name="vars[]" placeholder="{3}" value=""/>
+	<input type="text" class="form-control" id="var4" name="vars[]" placeholder="{4}" value=""/>
+	<input type="text" class="form-control" id="var5" name="vars[]" placeholder="{5}" value=""/>
 </fieldset>

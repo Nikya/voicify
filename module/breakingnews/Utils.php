@@ -334,8 +334,8 @@ class BreakingnewsBuilder {
 	/** L'instance de l'utilitaire des configurations */
 	private $config;
 
-	/** La temperature actuel extérieur */
-	private $temperatureOutside;
+	/** Donnée suplémentaires pour les BreakingFree */
+	private $freeData;
 
 	/** FAire marquer une pause dans la lecture */
 	const PAUSE_TAG = " . . . ";
@@ -343,9 +343,9 @@ class BreakingnewsBuilder {
 	/***************************************************************************
 	* Le contructeur de la class
 	*/
-	public function __construct($temperatureOutside) {
+	public function __construct($freeData) {
 		$this->config = Config::getInstance();
-		$this->temperatureOutside = $temperatureOutside;
+		$this->freeData = $freeData;
 	}
 
 	/***************************************************************************
@@ -361,6 +361,8 @@ class BreakingnewsBuilder {
 		$fullContent = array_merge($fullContent, $this->processTransitionWeather());
 		array_push($fullContent, self::PAUSE_TAG);
 		$fullContent = array_merge($fullContent, $this->processWeather());
+		array_push($fullContent, self::PAUSE_TAG);
+		$fullContent = array_merge($fullContent, $this->processFree());
 		array_push($fullContent, self::PAUSE_TAG);
 		$fullContent = array_merge($fullContent, $this->processConclusion());
 
@@ -396,7 +398,11 @@ class BreakingnewsBuilder {
 	* Get a frequenced text collection from configuration file Breakingtext
 	*/
 	private function getBreakingtext($colName) {
-		return $this->config->getModuleConfig('breakingnews', 'breakingtext')[$colName];
+		if (array_key_exists($colName, $this->config->getModuleConfig('breakingnews', 'breakingtext')))
+			return $this->config->getModuleConfig('breakingnews', 'breakingtext')[$colName];
+		else
+			throw new Exception("Unknow text collection '$colName' in the breakingtext collection");
+
 	}
 
 	/***************************************************************************
@@ -407,7 +413,8 @@ class BreakingnewsBuilder {
 	}
 
 	/***************************************************************************
-	* Sub Process */
+	* A sub process
+	*/
 	private function processIntro() {
 		$col = $this->getBreakingtext('intro');
 		$data = array(time());
@@ -419,7 +426,8 @@ class BreakingnewsBuilder {
 	}
 
 	/***************************************************************************
-	* Sub Process */
+	* A sub process
+	*/
 	private function processConclusion() {
 		$col = $this->getBreakingtext('conclusion');
 		$data = array(time());
@@ -431,7 +439,8 @@ class BreakingnewsBuilder {
 	}
 
 	/***************************************************************************
-	* Sub Process */
+	* A sub process
+	*/
 	private function processTransitionAgenda() {
 		$col = $this->getBreakingtext('a_transition');
 
@@ -442,7 +451,8 @@ class BreakingnewsBuilder {
 	}
 
 	/***************************************************************************
-	* Sub Process */
+	* A sub process
+	*/
 	private function processTransitionWeather() {
 		$col = $this->getBreakingtext('w_transition');
 
@@ -453,7 +463,8 @@ class BreakingnewsBuilder {
 	}
 
 	/***************************************************************************
-	* Sub Process */
+	* A sub process
+	*/
 	private function processAgenda() {
 		$fullAgenda = array();
 		$agendaBeanList = CalandarAccountBean::autoLoadList();
@@ -493,7 +504,8 @@ class BreakingnewsBuilder {
 	}
 
 	/***************************************************************************
-	* Sub Process */
+	* A sub process
+	*/
 	private function processAgendaYes($agendaArray) {
 		$aCount = count($agendaArray);
 		$full = array();
@@ -525,7 +537,8 @@ class BreakingnewsBuilder {
 	}
 
 	/***************************************************************************
-	* Sub Process */
+	* A sub process
+	*/
 	private function processAgendaNoContent($agendaArray, $colType) {
 		$aCount = count($agendaArray);
 		$full = array();
@@ -653,7 +666,7 @@ class BreakingnewsBuilder {
 			$full = array_merge($full, $this->processCondition($weatheData[$weatherId], $weatherName));
 			$full = array_merge($full, $this->processTemperature($weatheData[$weatherId]));
 		}
-		$full = array_merge($full, $this->processTemperatureOutside());
+
 		$full = array_merge($full, $this->processSunset($ephemerisData['sunset']));
 
 		return $full;
@@ -691,7 +704,7 @@ class BreakingnewsBuilder {
 	}
 
 	/***************************************************************************
-	* Textify Sunrise
+	* A sub process : Sunrise
 	*/
 	private function processSunrise ($sunriseTS) {
 		// Calcule de l'interval entre maintenant et le sunrise
@@ -716,7 +729,7 @@ class BreakingnewsBuilder {
 	}
 
 	/***************************************************************************
-	* Textify Sunset
+	* A sub process : Sunset
 	*/
 	private function processSunset ($sunsetTS) {
 		$data = array();
@@ -730,7 +743,7 @@ class BreakingnewsBuilder {
 	}
 
 	/***************************************************************************
-	* Textify Condition
+	* A sub process
 	*/
 	private function processCondition($weatherData, $weatherName) {
 		$mDesc = $weatherData['morning']['description'];
@@ -758,7 +771,7 @@ class BreakingnewsBuilder {
 	}
 
 	/***************************************************************************
-	* Textify Condition
+	* A sub process
 	*/
 	private function processTemperature($weatherData) {
 		$mT = $weatherData['morning']['temperature'];
@@ -781,16 +794,24 @@ class BreakingnewsBuilder {
 	}
 
 	/***************************************************************************
-	* Textify Condition
+	* A sub process
 	*/
-	private function processTemperatureOutside() {
-		$col = $this->getBreakingtext('w_temperature_outside');
-		$data = array($this->temperatureOutside);
+	private function processFree() {
+		$full = array();
 
-		$tfy = new Textify($col, $data);
-		$tfy->process();
+		for ($i=1; true; $i++) {
+			try {
+				$col = $this->getBreakingtext("free_$i");
+				$tfy = new Textify($col, $this->freeData);
+				$tfy->process();
+				array_push($full, $tfy->getFinalText());
+			} catch (Exception $e) {
+				Console::d(__CLASS__, __FUNCTION__, $e);
+				break;
+			}
+		}
 
-		return array ($tfy->getFinalText());
+		return $full;
 	}
 }
 

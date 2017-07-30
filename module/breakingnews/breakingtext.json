@@ -1,5 +1,5 @@
 {
-  "version" : "1.0",
+  "version" : "1.1",
   "intro": [
     {
       "text": "En ce jour {0, date, d} du mois {0, date, MMMM} de l'an de grace {0, date, YYYY}. Je vais procéder à la lecture de votre quotidien.",
@@ -322,29 +322,41 @@
       "frequency": 1
     }
 ],
-  "w_temperature_outside": [
+  "free_1": [
     {
-      "text": "La température extérieur est de {0}°.",
+      "text": "La température extérieur est de {0,number,integer}°.",
+      "frequency": 3
+    },
+    {
+      "text": "Ma sonde m'indique une température extérieur de {0,number,integer}°.",
       "frequency": 1
     },
     {
-      "text": "Ma sonde m'indique une température extérieur de {0}°.",
+      "text": "Actuellement la température extérieur est de {0,number,integer}°.",
+      "frequency": 3
+    },
+    {
+      "text": "Il fait actuellement {0,number,integer}° dehors.",
+      "frequency": 3
+    },
+    {
+      "text": "Je lis une température extérieur de {0,number,integer}°.",
+      "frequency": 1
+    }
+],
+  "free_2": [
+    {
+      "text": "La qualité de l'air intérieur est : {1}, celle extérieur est {2}.",
+      "frequency": 1
+    }
+],
+  "free_3": [
+    {
+      "text": "Le temp de trajet vers le travail de {3} est estimé à {4}.",
       "frequency": 1
     },
     {
-      "text": "Actuellement la température extérieur est de {0}°.",
-      "frequency": 1
-    },
-    {
-      "text": "Il fait actuellement {0}° dehors.",
-      "frequency": 1
-    },
-    {
-      "text": "Je lis une température extérieur de {0}°.",
-      "frequency": 1
-    },
-    {
-      "text": "Actuellement celle extérieur est de {0}°.",
+      "text": "La circulation vers le travail de {3} est de {4}.",
       "frequency": 1
     }
   ]

@@ -1,20 +1,19 @@
 <?php
 
-// The temperature is mandatory
-if (!isset($_GET['extTemperature']) or empty($_GET['extTemperature']))
-	Console::e('breakingnews.pMainApi', 'Missing mandatory external temperature', $_GET);
-else {
-	$oT = $_GET['extTemperature'];
-	$bnb = new BreakingnewsBuilder($oT);
-	$bnb->process();
-	$bnbRes = $bnb->getResult();
+// Extract Vars into data
+$data = array();
+if (isset($_GET['vars']))
+	$data = array_filter($_GET['vars']);
 
-	foreach ($bnbRes as $b) {
-		$say .= "$b ";
-	}
+$bnb = new BreakingnewsBuilder($data);
+$bnb->process();
+$bnbRes = $bnb->getResult();
 
-	// Debug
-	if (Console::isDebug()) {
-		Console::d('breakingnews', 'All breaking news part', $bnbRes);
-	}
+foreach ($bnbRes as $b) {
+	$say .= "$b ";
+}
+
+// Debug
+if (Console::isDebug()) {
+	Console::d('breakingnews', 'All breaking news part', $bnbRes);
 }

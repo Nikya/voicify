@@ -14,14 +14,14 @@ Annonce les informations suivantes :
     * Heure de levé et de couché du soleil
     * Conditions météo
     * Températures prévisionnelles
-    * Température actuelle
+4. Autres textes libres
 
 ## Liens utiles
 * [Météo France Mobile](http://www.meteo-france.mobi)
 * [Google Agenda](https://www.google.com/calendar/)
 
 ## Version
-Module 1.0
+Module 1.1
 
 ## Paramétrage
 * **Breakingtext** : Les textes utilisés sont multiples et paramétrables
@@ -90,3 +90,9 @@ Elle est énnoncée pour une liste de ville à définir dans la _wetherList Ids_
     * `w_description_double` : Conditions matin puis après-midi
     * `w_temperature_double` : Températures min puis max
     * `w_temperature_outside` : Température actuel extérieur
+
+#### Les _Free Breakingtext_ et les champs vars
+
+Il est possible d'ajouter des textes personalisés `free_99`.  
+Ces textes _libres_ seront ajoutés en fin de journal.  
+Les _vars_ y seront injectés.
