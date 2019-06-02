@@ -360,7 +360,8 @@ class BreakingnewsBuilder {
 		$fullContent = array_merge($fullContent, $this->processAgenda());
 		$fullContent = array_merge($fullContent, $this->processTransitionWeather());
 		array_push($fullContent, self::PAUSE_TAG);
-		$fullContent = array_merge($fullContent, $this->processWeather());
+		// FIXME $fullContent = array_merge($fullContent, $this->processWeather());
+		$fullContent = array_merge($fullContent, array("Pas de météo disponible.") );
 		array_push($fullContent, self::PAUSE_TAG);
 		$fullContent = array_merge($fullContent, $this->processFree());
 		array_push($fullContent, self::PAUSE_TAG);
