@@ -189,7 +189,7 @@ class Config {
 		}
 
 		if (strcasecmp($manifestVersion, $configFileVersion)!=0)
-			Console::w('checkConfigVersion', "A configuration file for '$module' need to be manualy updated from version '$configFileVersion' to '$manifestVersion'.", $path);
+			Console::e('checkConfigVersion', "A configuration file for '$module' need to be manualy updated from version '$configFileVersion' to '$manifestVersion'.", $path);
 
 		return $aData;
 	}
@@ -204,7 +204,7 @@ class Config {
 		$aData = JsonUtils::jFile2Array($path);
 		if ($checkVersion)
 			$aData = $this->checkConfigVersion($module, $aData, $path);
-			
+
 		if (!array_key_exists($key, $this->moduleConfig)) {
 			$this->moduleConfig[$key] = $aData;
 		}

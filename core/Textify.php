@@ -73,7 +73,7 @@ class Textify {
 			$colSubvoicekey = $config->getModuleConfig('voicekey', 'subvoicekey');
 
 			foreach ($this->oData as $od) {
-				if (array_key_exists($od, $colSubvoicekey))
+				if (is_string($od) and array_key_exists($od, $colSubvoicekey))
 					array_push($this->data, $colSubvoicekey[$od][self::pickIndex($colSubvoicekey[$od])]['text']);
 				else
 					array_push($this->data, $od);
@@ -87,7 +87,6 @@ class Textify {
 	private function injectData() {
 		$t = $this->getSelectedText();
 		$d = $this->data;
-		$l = 'fr_FR';
 
 		$this->finalText = SELF::sInjectData($t, $d);
 	}
@@ -96,10 +95,15 @@ class Textify {
 	* Static version of inject data
 	*/
 	public static function sInjectData($t, $d) {
-		$l = 'fr_FR';
+		$l = 'fr_FR'; // TODO rendre parametrable
 		$ti = MessageFormatter::formatMessage($l, $t, $d);
-		if (preg_match('/\{\d*\}/', $ti))
-			Console::w('Textify.sInjectData', 'Some placeholder remained empty ! ', array('dataCount' => count($d), 'finalText' => $t));
+
+		// Check if parsing is correctly done
+		if ($ti===false) {
+			Console::e('Textify.sInjectData', 'Fail to format the message ! ', array('dataCount' => count($d), 'text' => $t));
+			$ti = $t; // Reset to not formated message.
+		} elseif (preg_match('/\{\d*\}/', $ti))
+			Console::w('Textify.sInjectData', 'Some placeholder remained empty ! ', array('dataCount' => count($d), 'finalText' => $ti));
 
 		return $ti;
 	}

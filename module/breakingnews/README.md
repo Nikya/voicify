@@ -17,16 +17,16 @@ Annonce les informations suivantes :
 4. Autres textes libres
 
 ## Liens utiles
-* [Météo France Mobile](http://www.meteo-france.mobi)
+* [apixu.com](https://www.apixu.com)
 * [Google Agenda](https://www.google.com/calendar/)
 
 ## Version
-Module 1.1
+Module 1.2
 
 ## Paramétrage
 * **Breakingtext** : Les textes utilisés sont multiples et paramétrables
 * **Main** :
-    * Configurer les villes utilisées pour la météo
+    * Configurer les localisations utilisées pour la météo
     * lister les agendas à énoncer
 * **Agendas Permission** : Configuration des authorisation d'agendas Google
 
@@ -48,20 +48,8 @@ Un agenda est référencé par un _Agenda Id_ sous la forme suivante (format pui
 
 ### Listing des villes
 
-La météo est extraite de l'API mobile de Météo France.
-Elle est énnoncée pour une liste de ville à définir dans la _wetherList Ids_ qui est composé de la manière suivante (format puis exemple) :
-
-    "cityID" : "Nom de ville"
-
-    "150140" : "Aurillac"
-
-* **Nom de ville** : Un nom libre pour la ville, uniquement utile pour l'affichage et la diction.
-* **cityID** : Un identifiant à extraire du site mobile de Météo france
-    1. Se rendre sur le site mobile de Météo France (Voir la section précédente _Liens utiles_)
-    2. Rechercher la ville souhaitée
-    3. Extraire de l'URL atteinte, l'identifiant de la ville : Les chiffres qui suivent l'information `ville_synthese_`
-
-[![Météo France Site Web Mobile](./module/breakingnews/meteo-france.mobi.jpg)](./module/breakingnews/meteo-france.mobi.jpg)
+La météo est extraite de l'API de [apixu.com](https://www.apixu.com)  
+Elle est énnoncée pour une liste de ville à définir dans la _weatherList Ids_
 
 ### Detail des _Breakingtext_
 
@@ -87,7 +75,7 @@ Elle est énnoncée pour une liste de ville à définir dans la _wetherList Ids_
     * `w_sunrise_p` : Lévée de soleil passé
     * `w_sunset` : Couché de soleil
     * `w_description_mono` : Conditions de la journée
-    * `w_description_double` : Conditions matin puis après-midi
+    * `w_description_double` : Conditions matin puis après-midi (Pas utilisé avec l'API de météo actuelle)
     * `w_temperature_double` : Températures min puis max
     * `w_temperature_outside` : Température actuel extérieur
 

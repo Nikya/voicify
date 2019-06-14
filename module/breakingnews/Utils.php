@@ -360,8 +360,7 @@ class BreakingnewsBuilder {
 		$fullContent = array_merge($fullContent, $this->processAgenda());
 		$fullContent = array_merge($fullContent, $this->processTransitionWeather());
 		array_push($fullContent, self::PAUSE_TAG);
-		// FIXME $fullContent = array_merge($fullContent, $this->processWeather());
-		$fullContent = array_merge($fullContent, array("Pas de météo disponible.") );
+		$fullContent = array_merge($fullContent, $this->processWeather());
 		array_push($fullContent, self::PAUSE_TAG);
 		$fullContent = array_merge($fullContent, $this->processFree());
 		array_push($fullContent, self::PAUSE_TAG);
@@ -407,10 +406,17 @@ class BreakingnewsBuilder {
 	}
 
 	/***************************************************************************
-	* Get a frequenced text collection from configuration file Breakingtext
+	* Get list of location to process into weather side
 	*/
 	private function getWeatherList() {
-		return $this->config->getModuleConfig('breakingnews', 'main')['wetherList'];
+		return $this->config->getModuleConfig('breakingnews', 'main')['weatherList'];
+	}
+
+	/***************************************************************************
+	* Get lang Code to translate conditions
+	*/
+	private function getLangCode() {
+		return $this->config->getModuleConfig('breakingnews', 'main')['langCode'];
 	}
 
 	/***************************************************************************
@@ -659,83 +665,67 @@ class BreakingnewsBuilder {
 	private function processWeather() {
 		$full = array();
 		$weatherList = $this->getWeatherList();
-		$weatheData = $this->loadCityWeather($weatherList);
-		$ephemerisData = $this->loadSunEphemeris();
+		$langCode = $this->getLangCode();
 
-		$full = array_merge($full, $this->processSunrise($ephemerisData['sunrise']));
-		foreach ($weatherList as $weatherId => $weatherName) {
-			$full = array_merge($full, $this->processCondition($weatheData[$weatherId], $weatherName));
-			$full = array_merge($full, $this->processTemperature($weatheData[$weatherId]));
+		foreach ($this->getWeatherList() as $weatherName) {
+			$weatherBrowser = new WeatherAPIBrowser($weatherName, $langCode);
+
+			try {
+				$weatherData = $weatherBrowser->process();
+				$full = array_merge($full, $this->processSunphases($weatherData->locationName, $weatherData->sunrise, $weatherData->sunset));
+				$full = array_merge($full, $this->processCondition($weatherData->condition));
+				$full = array_merge($full, $this->processTemperature($weatherData->temperatureMin, $weatherData->temperatureMax));
+			} catch (Exception $e) {
+				Console::w(__FUNCTION__, "Fail to get Weather data for '$weatherName', {$e->getMessage()}", $e);
+				$full = array_merge($full, $this->processNoData($weatherName));
+			}
 		}
-
-		$full = array_merge($full, $this->processSunset($ephemerisData['sunset']));
 
 		return $full;
 	}
 
 	/***************************************************************************
-	* Obtenir les météo de chaque ville
+	* A sub process when no data found
 	*/
-	private function loadCityWeather($weatherList) {
-		$data = array();
+	private function processNoData($weatherName) {
+		$col = $this->getBreakingtext('w_none');
+		$data = array($weatherName);
 
-		foreach ($weatherList as $weatherId => $weatherName) {
-			$meteoBrowser = new MeteoFranceAPIBrowser($weatherId);
+		$tfy = new Textify($col, $data);
+		$tfy->process();
 
-			$data[$weatherId]['morning']['description'] = $meteoBrowser->get('previsions.0_matin.description');
-			$data[$weatherId]['afternoon']['description'] = $meteoBrowser->get('previsions.0_midi.description');
-			$data[$weatherId]['morning']['temperature'] = $meteoBrowser->get('previsions.0_matin.temperatureCarte');
-			$data[$weatherId]['afternoon']['temperature'] = $meteoBrowser->get('previsions.0_midi.temperatureCarte');
-		}
-
-		return $data;
-	}
-
-	/***************************************************************************
-	* Obtenir les information de levé et de couché du soleil
-	* (seulemnt pour la première ville)
-	*/
-	private function loadSunEphemeris() {
-		$data = array();
-
-		$data['sunrise'] = date_sunrise(time(), SUNFUNCS_RET_TIMESTAMP); //, $latitude, $longitude, $zenith, $gmtoffset);
-		$data['sunset'] = date_sunset(time(), SUNFUNCS_RET_TIMESTAMP); //, $latitude, $longitude, $zenith, $gmtoffset);
-
-		return $data;
+		return array ($tfy->getFinalText());
 	}
 
 	/***************************************************************************
 	* A sub process : Sunrise
 	*/
-	private function processSunrise ($sunriseTS) {
+	private function processSunphases($weatherName, $sunriseDt, $sunsetDt) {
 		// Calcule de l'interval entre maintenant et le sunrise
-		$sunriseDT = new DateTime();
-		$sunriseDT->setTimestamp($sunriseTS);
-		$nowDT = new DateTime('now');
+		$nowDt = new DateTime('now');
+		$interval = $nowDt->diff($sunriseDt);
 
-		$interval = $nowDT->diff($sunriseDT);
-		$data = array($interval->h, $interval->i);
+		// Data : Location name, sunrise interval in hours, sunrise interval in minute, sunset timestamp
+		$data = array($weatherName, $interval->h, $interval->i, $sunsetDt->getTimestamp());
 
-		// événement passé
+		// Collecte des phrases en fonction que l'événement soit passé ou à venir
 		if ($interval->invert == 1)
-			$col = $this->getBreakingtext('w_sunrise_p');
-		// événement futur
+			$col = $this->getBreakingtext('w_sunphase_p');
 		else
-			$col = $this->getBreakingtext('w_sunrise_f');
+			$col = $this->getBreakingtext('w_sunphase_f');
 
 		$tfy = new Textify($col, $data);
 		$tfy->process();
 
-		return array ($tfy->getFinalText());
+		return array($tfy->getFinalText());
 	}
 
 	/***************************************************************************
-	* A sub process : Sunset
+	* A sub process
 	*/
-	private function processSunset ($sunsetTS) {
-		$data = array();
-		$col = $this->getBreakingtext('w_sunset');
-		$data[0] = $sunsetTS;
+	private function processCondition($condition) {
+		$col = $this->getBreakingtext('w_description_mono');
+		$data = array($condition);
 
 		$tfy = new Textify($col, $data);
 		$tfy->process();
@@ -746,47 +736,9 @@ class BreakingnewsBuilder {
 	/***************************************************************************
 	* A sub process
 	*/
-	private function processCondition($weatherData, $weatherName) {
-		$mDesc = $weatherData['morning']['description'];
-		$aDesc = $weatherData['afternoon']['description'];
-		$col = null;
-		$data = array($weatherName, $mDesc, $aDesc);
-
-		// Si aucune condition trouvée
-		if ($mDesc==null and $aDesc==null)
-			return array('');
-		// Si pas de condition trouvée pour la matinée
-		// Ou condition identiques
-		elseif ($mDesc == null or strcasecmp($mDesc, $aDesc)==0) {
-			$col = $this->getBreakingtext('w_description_mono');
-			$data = array($weatherName, $aDesc, $aDesc);
-		}
-		// Sinon description double
-		else
-			$col = $this->getBreakingtext('w_description_double');
-
-		$tfy = new Textify($col, $data);
-		$tfy->process();
-
-		return array ($tfy->getFinalText());
-	}
-
-	/***************************************************************************
-	* A sub process
-	*/
-	private function processTemperature($weatherData) {
-		$mT = $weatherData['morning']['temperature'];
-		$aT = $weatherData['afternoon']['temperature'];
+	private function processTemperature($temperatureMin, $temperatureMax) {
 		$col = $this->getBreakingtext('w_temperature_double');
-		$data = array($mT, $aT);
-
-		// Si aucune trouvée
-		if ($mT==null and $aT==null)
-			return array('');
-		// Si pas trouvée pour la matinée
-		elseif ($mT == null) {
-			$data = array($aT, $aT);
-		}
+		$data = array($temperatureMin, $temperatureMax);
 
 		$tfy = new Textify($col, $data);
 		$tfy->process();
@@ -819,12 +771,16 @@ class BreakingnewsBuilder {
 /*******************************************************************************
 ********************************************************************************
 ********************************************************************************
-*  Class pour piloter l'API mobile de Meteo France
+*  Class pour piloter l'API Météo
+*
+* https://www.apixu.com/doc/
 */
-class MeteoFranceAPIBrowser {
+class WeatherAPIBrowser {
+
+	const API_KEY = 'dafea656e3fe4a8389f131009171906';
 
 	/** Base URL part of the online API */
-	const BASE_URL = 'http://www.meteo-france.mobi/ws/getDetail/france/{cityId}.json';
+	const BASE_URL = "https://api.apixu.com/v1/forecast.json";
 
 	/** Current builded URL */
 	private $currentUrl;
@@ -832,17 +788,21 @@ class MeteoFranceAPIBrowser {
 	/** cURL handler */
 	private $ch = null;
 
-	/** city name */
-	private $cityId;
+	/** Location name requested */
+	private $q;
+
+	/** Language code to translate condition text */
+	private $langCode;
 
 	/***************************************************************************
 	* Browser constructor
 	*
-	* @param $cityId The city Id
+	* @param $LocationNAme as query location
 	*/
-	public function __construct($cityId) {
-		$this->cityId = urlencode($cityId);
-		$this->readData();
+	public function __construct($LocationName, $langCode) {
+		$this->q = urlencode($LocationName);
+		$this->currentUrl = SELF::BASE_URL.'?key='.SELF::API_KEY.'&days=1&q='.$this->q;
+		$this->langCode = $langCode;
 	}
 
 	/***************************************************************************
@@ -859,18 +819,15 @@ class MeteoFranceAPIBrowser {
 	* @return Array of result from the Json response
 	*
 	*/
-	private function readData() {
+	public function process() {
 		$this->ch = curl_init();
-
-		$this->currentUrl = str_replace('{cityId}', $this->cityId, SELF::BASE_URL);
-
 		curl_setopt($this->ch, CURLOPT_URL, $this->currentUrl);
 		curl_setopt($this->ch, CURLOPT_RETURNTRANSFER, true);
 
 		$curlRes = curl_exec($this->ch);
 		$this->assertSuccess($curlRes);
 
-		$this->data = json_decode($curlRes, true);
+		return $this->buildWeatherData(json_decode($curlRes, true));
 	}
 
 	/***************************************************************************
@@ -896,7 +853,7 @@ class MeteoFranceAPIBrowser {
 		// Check API success
 		$jsonObj = json_decode($curlRes);
 		if (is_object($jsonObj)) {
-			if( is_null($jsonObj->result->ville)) {
+			if(is_null($jsonObj->forecast->forecastday)) {
 				$errorMsg = print_r($curlRes,true);
 				throw new Exception(__CLASS__." API error for {$this->currentUrl}. $errorMsg.");
 			}
@@ -907,13 +864,6 @@ class MeteoFranceAPIBrowser {
 	}
 
 	/***************************************************************************
-	* To get the raw inner data
-	*/
-	public function getRawData() {
-		return $this->data;
-	}
-
-	/***************************************************************************
 	* To get a value from the API result
 	*
 	* @param $path A data path to read
@@ -921,22 +871,47 @@ class MeteoFranceAPIBrowser {
 	* @return A value
 	*
 	*/
-	public function get($path) {
-		$iList = explode('.', $path);
-		$sData = $this->data['result'];
+	private function buildWeatherData($aData) {
+		$format = "h:i A";
 
-		try {
-			foreach ($iList as $i) {
-				if (array_key_exists($i, $sData))
-					$sData = $sData[$i];
-				else
-					throw new Exception('GetMeteoFranceDataFail');
+		$dayData = $aData['forecast']['forecastday'][0]['day'];
+		$astroData = $aData['forecast']['forecastday'][0]['astro'];
+
+		return new WeatherData(
+			/* locationName */ $aData['location']['name'],
+			/* sunrise */ DateTime::createFromFormat($format, $astroData['sunrise']),
+			/* sunset */ DateTime::createFromFormat($format, $astroData['sunset']),
+			/* condition */ $this->conditionCodeToText($dayData['condition']['text'], $dayData['condition']['code']),
+			/* temperatureMin */ intval($dayData['mintemp_c']),
+			/* temperatureMax */ intval($dayData['maxtemp_c'])
+		);
+	}
+
+	/***************************************************************************
+	* Translate weather condition code into a text message
+	*/
+	private function conditionCodeToText($defaultText, $conditionCode) {
+		$conditions = Config::getInstance()->getModuleConfig('breakingnews', 'conditions', false);
+		$conditionTxt = $defaultText;
+
+		foreach ($conditions as $condition) {
+			if ($condition['code'] == $conditionCode) {
+				if (array_key_exists($this->langCode, $condition['languages']))
+					$conditionTxt = $condition['languages'][$this->langCode]["day_text"];
 			}
 		}
-		catch (Exception $e) {
-			return null;
-		}
 
-		return trim($sData);
+		return $conditionTxt;
+	}
+}
+
+class WeatherData extends stdClass {
+	public function __construct($locationName, $sunrise, $sunset, $condition, $temperatureMin, $temperatureMax) {
+		$this->locationName = $locationName;
+		$this->sunrise = $sunrise;
+		$this->sunset = $sunset;
+		$this->condition = $condition;
+		$this->temperatureMin = $temperatureMin;
+		$this->temperatureMax = $temperatureMax;
 	}
 }
