@@ -3,13 +3,11 @@
 * The TTS engine API
 *******************************************************************************/
 
-imperihomeSay();
-
 /***************************************************************************
 * The TTS function
 */
-function imperihomeSay() {
-	global $encSay;
+function say($ttSay) {
+	$encSay = urlencode($ttSay);
 	$config = Config::getInstance();
 	$cImperihome = $config->getModuleConfig('imperihome');
 	$host = $cImperihome['host'];

@@ -2,7 +2,7 @@
 	"type" : "FEATURE",
 	"name": "Breaking News",
 	"desc": "Your personal news, in the form of a small audio newspaper.",
-	"version": "1.2",
+	"version": "2.0.1",
 	"author": "Nikya",
 	"sourcelink": "https://github.com/Nikya/voicify",
 	"play": {

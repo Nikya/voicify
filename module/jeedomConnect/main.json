@@ -1,0 +1,8 @@
+{
+	"version": "1.1",
+	"host": "192.168.1.99",
+	"port": 8080,
+	"jeedomApikey": "AAAAAAAAAAAAAAAAAAAA",
+	"commandId": "99999",
+	"volume": 100
+}

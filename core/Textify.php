@@ -58,6 +58,10 @@ class Textify {
 				array_push($freqIndexList, $i);
 		}
 
+		if (count($freqIndexList)==0) {
+			throw new Exception("Not enought texts, there are missing or with too low frequency.");
+		}
+
 		// Select randomly the index in the frequenced index List
 		return $freqIndexList[array_rand($freqIndexList, 1)];
 	}

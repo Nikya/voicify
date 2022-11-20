@@ -11,3 +11,10 @@ Il existe dans le projet un module _caché_ nommé `moduleTemplate`. Il a vocati
 ## Description des composants d'un modules
 
 Documentation à venir ...
+
+## Versions
+
+### Versions 
+
+- En cas d'évolution du coeur de vocify, merci d'incrémenter la constante relative dans `CoreUtils::VERSION`
+- En cas d'évolution de modules, merci de mettre à jour leur propres version dans leurs fichier _Manifest_ respectifs.

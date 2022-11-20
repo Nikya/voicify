@@ -3,19 +3,17 @@
 * The TTS engine API
 *******************************************************************************/
 
-jarvisSay();
-
 /***************************************************************************
 * The TTS function
 */
-function jarvisSay() {
+function say($ttSay) {
 	// Build
 	$config = Config::getInstance();
 	$cImperihome = $config->getModuleConfig('jarvis');
 
 	$host = $cImperihome['host'];
 	$port = $cImperihome['port'];
-	global $encSay;
+	$encSay = urlencode($ttSay);
 
 	$url = "http://{$host}:{$port}?say={$encSay}";
 

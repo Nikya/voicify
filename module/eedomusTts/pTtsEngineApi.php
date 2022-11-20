@@ -3,13 +3,11 @@
 * The TTS engine API
 *******************************************************************************/
 
-eedomusTts();
-
 /***************************************************************************
 * The TTS function
 */
-function eedomusTts() {
-	global $encSay;
+function say($ttSay) {
+	$encSay = urlencode($ttSay);
 	$config = Config::getInstance();
 	$cEedomus = $config->getModuleConfig('eedomusTts');
 	$host = $cEedomus['host'];

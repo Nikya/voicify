@@ -1,11 +1,9 @@
 {
-	"version" : "1.2",
-	"weatherList": [
+	"version" : "2.0.1",
+	"locations": [
 		"Aurillac",
-		"Paris"
+		"Cournon d'Auvergne"
 	],
-	"langCode": 8,
-	"weatherConditionLanguageCode" : 8,
 	"agendaList": {
 		"tony.stark@gmail.com:::primary": "Tony perso",
 		"tony.stark@gmail.com:::aabbccddeeff123456789@group.calendar.google.com": "Fondation Maria Stark",

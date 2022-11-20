@@ -23,9 +23,9 @@
 	if (file_exists($incUPath)) require_once($incUPath);
 	include($featureApiPath);
 
-	$encSay = urlencode($say);
 	Console::d('say', $say);
 
 	// Call the TTS engine
 	$ttEngineApiPath = CoreUtils::PATH_MODULE.$ttsEngine.'/pTtsEngineApi.php';
 	include($ttEngineApiPath);
+	say($say);

@@ -1,12 +1,15 @@
 # Le lecteur de base
+
 _Permet de jouer des textes brutes et tester les différents TTS_.
 Ce module contient également des paramètres de base et commun à tout _Home Voicify_
 
 ## Play
+
 Le texte à saisir est un simple texte brut.
 Il est possible ensuite de selectionner un _Moteur de TTS_ spécifique ou laisser celui par défaut.
 
 ## Paramétrage
+
 * **defaultTtsEngine** : Le _Moteur de TTS_ à utiliser si aucun n'est spécifié
 * **Locale** : Langue à utiliser
 	* pour afficher les README (Si disponible),
@@ -22,4 +25,5 @@ Il est possible ensuite de selectionner un _Moteur de TTS_ spécifique ou laisse
 			* nom d'un sous module
 
 ## Version
+
 Module 1.1 pour Voicify 2.

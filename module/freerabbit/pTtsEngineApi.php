@@ -3,13 +3,11 @@
 * The TTS engine API
 *******************************************************************************/
 
-freerabbitSay();
-
 /***************************************************************************
 * The TTS function
 */
-function freerabbitSay() {
-	global $encSay;
+function say($ttSay) {
+	$encSay = urlencode($ttSay);
 	$config = Config::getInstance();
 	$c = $config->getModuleConfig('freerabbit');
 	$host = $c['host'];

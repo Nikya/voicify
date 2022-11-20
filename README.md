@@ -49,10 +49,12 @@ Plusieurs _fonctionnalités_ exploitent ce concept de _notification vocale vari�
 
 Compatible avec plusieurs systèmes de _génération de synthèse vocale_ (TTS) :
 
+* [**JPI**](./module/jpi/README.md) : Un serveur domotique sous Android
 * [**eedomusTts**](./module/eedomusTts/README.md) : La box domotique eedomus
 * [**freerabbit**](./module/freerabbit/README.md) : Un OpenKarotz sous FreeRabbits OS
 * [**jarvis**](./module/jarvis/README.md) :Un système Jarvis
 * [**imperihome**](./module/imperihome/README.md) : L'applciation ImperiHome
+* [**jeedomConnect**](./module/jeedomConnect/README.md) : L'applciation/plugin pour Jeedom
 
 ## Mise en service
 
@@ -62,6 +64,8 @@ Compatible avec plusieurs systèmes de _génération de synthèse vocale_ (TTS) 
 	- Version >5.6
 	- Extension `intl` : [Internationalization](http://php.net/manual/intl.installation.php)
 	- Extension `curl` : [lib curl](http://php.net/manual/curl.setup.php)
+	- Extension `mbstring` : [lib curl](http://php.net/manual/mbstring.setup.php)
+	- Activer les extensions, voir le fichier `php.ini` ou équivalent 
 
 ### Installer
 
@@ -77,8 +81,8 @@ Créer à la racine du dossier _voicify_, 2 dossiers d'échanges : **configurati
 ```shell
 mkdir config
 mkdir temp
-sudo chmod 777 config
-sudo chmod 777 temp
+sudo chmod 770 config
+sudo chmod 770 temp
 ```
 
 ### Initialiser

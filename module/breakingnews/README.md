@@ -17,7 +17,7 @@ Annonce les informations suivantes :
 4. Autres textes libres
 
 ## Liens utiles
-* [apixu.com](https://www.apixu.com)
+* [meteo concept](https://api.meteo-concept.com)
 * [Google Agenda](https://www.google.com/calendar/)
 
 ## Version
@@ -48,8 +48,8 @@ Un agenda est référencé par un _Agenda Id_ sous la forme suivante (format pui
 
 ### Listing des villes
 
-La météo est extraite de l'API de [apixu.com](https://www.apixu.com)  
-Elle est énnoncée pour une liste de ville à définir dans la _weatherList Ids_
+La météo est extraite de l'API de [meteo concept](https://api.meteo-concept.com)
+Elle est énnoncée pour une liste de ville à définir dans le parametre _locations_
 
 ### Detail des _Breakingtext_
 
